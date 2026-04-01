@@ -1,0 +1,151 @@
+{
+  "report_id": "08add11e-75d5-4efa-b14a-9ec93c5ac301",
+  "contract_id": "68d33c73-bbe7-5068-8dfd-a531e0f73ef6",
+  "contract_file": "generated_contracts\\week1_intent_records.yaml",
+  "data_file": "outputs\\week1\\intent_records.jsonl",
+  "snapshot_id": "f9b244684796a992f494f49ae1b4a0be097891fbdf42f0e76caec122e97d6931",
+  "run_timestamp": "2026-04-01T18:17:41.139137+00:00",
+  "total_records": 2,
+  "total_checks": 11,
+  "passed": 10,
+  "failed": 1,
+  "warned": 0,
+  "errored": 0,
+  "overall_status": "FAIL",
+  "results": [
+    {
+      "check_id": "week1_intent_records.created_at.not_null",
+      "column_name": "created_at",
+      "check_type": "not_null",
+      "status": "PASS",
+      "actual_value": "0/2 null",
+      "expected": "IS NOT NULL",
+      "severity": "CRITICAL",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "'created_at' has no nulls \u2014 contract satisfied."
+    },
+    {
+      "check_id": "week1_intent_records.description.not_null",
+      "column_name": "description",
+      "check_type": "not_null",
+      "status": "PASS",
+      "actual_value": "0/2 null",
+      "expected": "IS NOT NULL",
+      "severity": "CRITICAL",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "'description' has no nulls \u2014 contract satisfied."
+    },
+    {
+      "check_id": "week1_intent_records.intent_id.not_null",
+      "column_name": "intent_id",
+      "check_type": "not_null",
+      "status": "PASS",
+      "actual_value": "0/2 null",
+      "expected": "IS NOT NULL",
+      "severity": "CRITICAL",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "'intent_id' has no nulls \u2014 contract satisfied."
+    },
+    {
+      "check_id": "week1_intent_records.intent_id.unique",
+      "column_name": "intent_id",
+      "check_type": "unique",
+      "status": "FAIL",
+      "actual_value": "1 duplicates in 2 values",
+      "expected": "UNIQUE",
+      "severity": "CRITICAL",
+      "records_failing": 1,
+      "sample_failing": [
+        "INT-001"
+      ],
+      "message": "'intent_id' has 1 duplicate values. Duplicates indicate an idempotency violation in the pipeline."
+    },
+    {
+      "check_id": "week1_intent_records.schema_version.accepted_values",
+      "column_name": "schema_version",
+      "check_type": "accepted_values",
+      "status": "PASS",
+      "actual_value": "all values valid",
+      "expected": "IN ^\\d+\\.\\d+$",
+      "severity": "HIGH",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "'schema_version' contains only accepted values."
+    },
+    {
+      "check_id": "week1_intent_records.created_at_not_future",
+      "column_name": "*",
+      "check_type": "custom",
+      "status": "PASS",
+      "actual_value": "rule not automatically executable",
+      "expected": "created_at <= NOW()",
+      "severity": "MEDIUM",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "Rule 'created_at <= NOW()' requires semantic evaluation; marked PASS (manual review needed)."
+    },
+    {
+      "check_id": "week1_intent_records.array_fields_non_empty.code_refs",
+      "column_name": "code_refs",
+      "check_type": "custom",
+      "status": "PASS",
+      "actual_value": "all satisfy len(value) >= 1",
+      "expected": "len(value) >= 1",
+      "severity": "CRITICAL",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "'code_refs' all values satisfy length constraint."
+    },
+    {
+      "check_id": "week1_intent_records.array_fields_non_empty.governance_tags",
+      "column_name": "governance_tags",
+      "check_type": "custom",
+      "status": "PASS",
+      "actual_value": "all satisfy len(value) >= 1",
+      "expected": "len(value) >= 1",
+      "severity": "CRITICAL",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "'governance_tags' all values satisfy length constraint."
+    },
+    {
+      "check_id": "week1_intent_records.timestamp_iso8601_format.created_at",
+      "column_name": "created_at",
+      "check_type": "custom",
+      "status": "PASS",
+      "actual_value": "all match",
+      "expected": "regex: ^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.*$",
+      "severity": "CRITICAL",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "'created_at' matches pattern '^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}.*$'."
+    },
+    {
+      "check_id": "week1_intent_records.minimum_record_count_6",
+      "column_name": "*",
+      "check_type": "custom",
+      "status": "PASS",
+      "actual_value": "COUNT(*)=2",
+      "expected": "COUNT(*)>=1",
+      "severity": "CRITICAL",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "Dataset has 2 records \u2265 required 1."
+    },
+    {
+      "check_id": "week1_intent_records.minimum_record_count_7",
+      "column_name": "*",
+      "check_type": "custom",
+      "status": "PASS",
+      "actual_value": "COUNT(*)=2",
+      "expected": "COUNT(*)>=1",
+      "severity": "CRITICAL",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "Dataset has 2 records \u2265 required 1."
+    }
+  ]
+}

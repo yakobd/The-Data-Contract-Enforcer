@@ -1,0 +1,190 @@
+{
+  "report_id": "d45ee3a2-f8a3-486f-ab61-b26cf31f12a6",
+  "contract_id": "ea609135-913c-51f3-861f-33272d40246f",
+  "contract_file": "generated_contracts\\week3_extractions.yaml",
+  "data_file": "outputs\\week3\\extractions.jsonl",
+  "snapshot_id": "05ff8b85f14ed9b19bd5cb660d33eef54c6dded036dcf519e437b4a4892f10da",
+  "run_timestamp": "2026-04-01T18:17:43.321875+00:00",
+  "total_records": 50,
+  "total_checks": 14,
+  "passed": 10,
+  "failed": 2,
+  "warned": 2,
+  "errored": 0,
+  "overall_status": "FAIL",
+  "results": [
+    {
+      "check_id": "week3_extractions.doc_id.not_null",
+      "column_name": "doc_id",
+      "check_type": "not_null",
+      "status": "PASS",
+      "actual_value": "0/50 null",
+      "expected": "IS NOT NULL",
+      "severity": "CRITICAL",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "'doc_id' has no nulls \u2014 contract satisfied."
+    },
+    {
+      "check_id": "week3_extractions.extracted_facts.not_null",
+      "column_name": "extracted_facts",
+      "check_type": "not_null",
+      "status": "PASS",
+      "actual_value": "0/50 null",
+      "expected": "IS NOT NULL",
+      "severity": "CRITICAL",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "'extracted_facts' has no nulls \u2014 contract satisfied."
+    },
+    {
+      "check_id": "week3_extractions.extraction_model.not_null",
+      "column_name": "extraction_model",
+      "check_type": "not_null",
+      "status": "PASS",
+      "actual_value": "0/50 null",
+      "expected": "IS NOT NULL",
+      "severity": "CRITICAL",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "'extraction_model' has no nulls \u2014 contract satisfied."
+    },
+    {
+      "check_id": "week3_extractions.doc_id.unique",
+      "column_name": "doc_id",
+      "check_type": "unique",
+      "status": "PASS",
+      "actual_value": "50 distinct / 50 records",
+      "expected": "UNIQUE",
+      "severity": "CRITICAL",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "'doc_id' has no duplicates \u2014 primary key constraint satisfied."
+    },
+    {
+      "check_id": "week3_extractions.schema_version.accepted_values",
+      "column_name": "schema_version",
+      "check_type": "accepted_values",
+      "status": "PASS",
+      "actual_value": "all values valid",
+      "expected": "IN ^\\d+\\.\\d+$",
+      "severity": "HIGH",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "'schema_version' contains only accepted values."
+    },
+    {
+      "check_id": "week3_extractions.created_at_not_future",
+      "column_name": "*",
+      "check_type": "custom",
+      "status": "PASS",
+      "actual_value": "rule not automatically executable",
+      "expected": "created_at <= NOW()",
+      "severity": "MEDIUM",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "Rule 'created_at <= NOW()' requires semantic evaluation; marked PASS (manual review needed)."
+    },
+    {
+      "check_id": "week3_extractions.statistical_bounds_processing_time_ms",
+      "column_name": "processing_time_ms",
+      "check_type": "statistical",
+      "status": "FAIL",
+      "actual_value": "mean=15558.26, stddev=48391.3262",
+      "expected": "mean\u00b13\u03c3=[-128156.6466, 159273.1666]",
+      "severity": "MEDIUM",
+      "records_failing": 2,
+      "sample_failing": [
+        "20191010_Pharmaceutical-Manufacturing-Opportunites-in-Ethiopia_VF",
+        "Consumer Price Index May 2025"
+      ],
+      "message": "'processing_time_ms' has 2 values beyond 3\u03c3 baseline."
+    },
+    {
+      "check_id": "week3_extractions.statistical_bounds_token_count_input",
+      "column_name": "token_count.input",
+      "check_type": "statistical",
+      "status": "FAIL",
+      "actual_value": "mean=1768.48, stddev=6957.7002",
+      "expected": "mean\u00b13\u03c3=[-18894.8352, 22431.7952]",
+      "severity": "MEDIUM",
+      "records_failing": 1,
+      "sample_failing": [
+        "fta_performance_survey_final_report_2022"
+      ],
+      "message": "'token_count.input' has 1 values beyond 3\u03c3 baseline."
+    },
+    {
+      "check_id": "week3_extractions.llm_output_schema_enforcement",
+      "column_name": "outputs",
+      "check_type": "ai_extension",
+      "status": "WARN",
+      "actual_value": "missing keys: facts_extracted:50, avg_confidence:50, extraction_model:50",
+      "expected": "required: ['facts_extracted', 'avg_confidence', 'extraction_model']",
+      "severity": "WARNING",
+      "records_failing": 50,
+      "sample_failing": [],
+      "message": "Some LLM outputs missing required keys: facts_extracted:50, avg_confidence:50, extraction_model:50. May indicate model output format drift."
+    },
+    {
+      "check_id": "week3_extractions.prompt_input_validation",
+      "column_name": "inputs",
+      "check_type": "ai_extension",
+      "status": "WARN",
+      "actual_value": "missing: {'doc_id': 50, 'source_path': 50}",
+      "expected": "required: ['doc_id', 'source_path']",
+      "severity": "WARNING",
+      "records_failing": 50,
+      "sample_failing": [],
+      "message": "Prompt inputs missing or empty: {'doc_id': 50, 'source_path': 50}."
+    },
+    {
+      "check_id": "week3_extractions._source.ldu_count.drift",
+      "column_name": "_source.ldu_count",
+      "check_type": "drift",
+      "status": "PASS",
+      "actual_value": "baseline established: mean=220.615385, stddev=451.018761",
+      "expected": "baseline",
+      "severity": "MEDIUM",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "Statistical baseline established for '_source.ldu_count'. Future runs will compare against mean=220.615385 \u00b1 \u03c3=451.018761."
+    },
+    {
+      "check_id": "week3_extractions.processing_time_ms.drift",
+      "column_name": "processing_time_ms",
+      "check_type": "drift",
+      "status": "PASS",
+      "actual_value": "baseline established: mean=15558.26, stddev=48391.326204",
+      "expected": "baseline",
+      "severity": "MEDIUM",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "Statistical baseline established for 'processing_time_ms'. Future runs will compare against mean=15558.26 \u00b1 \u03c3=48391.326204."
+    },
+    {
+      "check_id": "week3_extractions.token_count.input.drift",
+      "column_name": "token_count.input",
+      "check_type": "drift",
+      "status": "PASS",
+      "actual_value": "baseline established: mean=1768.48, stddev=6957.700154",
+      "expected": "baseline",
+      "severity": "MEDIUM",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "Statistical baseline established for 'token_count.input'. Future runs will compare against mean=1768.48 \u00b1 \u03c3=6957.700154."
+    },
+    {
+      "check_id": "week3_extractions.token_count.output.drift",
+      "column_name": "token_count.output",
+      "check_type": "drift",
+      "status": "PASS",
+      "actual_value": "baseline established: mean=1543.16, stddev=6065.571435",
+      "expected": "baseline",
+      "severity": "MEDIUM",
+      "records_failing": 0,
+      "sample_failing": [],
+      "message": "Statistical baseline established for 'token_count.output'. Future runs will compare against mean=1543.16 \u00b1 \u03c3=6065.571435."
+    }
+  ]
+}
