@@ -1,0 +1,2438 @@
+kind: DataContract
+apiVersion: v3.0.0
+id: 1c73fe05-0e07-5737-bebc-0e89d65b369d
+info:
+  title: Week 7 — Events Data Contract
+  version: 1.0.0
+  owner: yakob@10academy.org
+  description: 'One record per events entry. Generated from 100 records on 2026-04-01.
+    Quality floor: 100.0%.'
+servers:
+  local:
+    type: local
+    path: outputs/week5/events.jsonl
+    format: jsonl
+terms:
+  usage: Internal inter-system data contract. Do not publish.
+  limitations: confidence must remain in 0.0–1.0 float range.
+generatedAt: '2026-04-01T17:43:00.829913+00:00'
+generatedBy: contracts/generator.py
+recordCount: 100
+qualityFloor: 100.0
+tenant: 10academy
+domain: event-ledger
+status: active
+schema:
+  fields:
+  - name: aggregate_id
+    type: string (uuid)
+    description: The aggregate_id column stores a universally unique identifier (UUID)
+      for each event.
+    required: true
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 13
+    sample_values:
+    - a8d67f8d-1332-53fc-a6b1-69659c6b02b1
+    - fe5e522e-4996-5e08-9fd7-d5bd1f3b094c
+    - 29b74a4d-87d8-5db2-915c-121d4c85b6ab
+    - d9a5ee3a-ee8a-5be0-98b8-35baa32cc092
+    - 13564ede-3a34-5b06-b6f8-013cc439074a
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    - events (via FK aggregate_id → aggregate_id)
+    char_pattern: uuid-v4
+    profiler: ydata-profiling
+  - name: aggregate_type
+    type: string
+    description: The `aggregate_type` column stores high-level categorization of events
+      in the system.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 3
+    sample_values:
+    - LoanApplication
+    - Document
+    - Agent
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: PascalCase
+    enum: &id001
+    - LoanApplication
+    - Document
+    - CreditAnalysis
+    - FraudCheck
+    - LoanDecision
+    profiler: ydata-profiling
+  - name: event_id
+    type: string (uuid)
+    description: Unique identifier (UUIDv4) for this immutable event record.
+    required: true
+    primaryKey: true
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 100
+    sample_values:
+    - 4a142cc8-f53c-4b1e-bae3-4aa4334bcb62
+    - b0d0be15-f176-404d-b4ca-05a92365aacf
+    - 40d70901-2d74-4593-8a8b-bc549f944329
+    - 8b85b001-4d13-4995-9401-3818bc3ee410
+    - b6589aa9-579b-43fc-b8e9-8bbc8e738034
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: uuid-v4
+    profiler: ydata-profiling
+  - name: event_type
+    type: string
+    description: PascalCase domain event type registered in the event schema registry.
+    required: true
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 15
+    sample_values:
+    - ApplicationSubmitted
+    - DocumentUploadRequested
+    - PackageCreated
+    - DocumentUploaded
+    - DocumentAdded
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: PascalCase
+    profiler: ydata-profiling
+  - name: metadata.causation_id
+    type: string (uuid)
+    description: The causation_id column stores a unique identifier for the event
+      that caused the current event.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.13
+    cardinality: 87
+    sample_values:
+    - 892b5d27-d794-4d45-9322-0525dae67ec5
+    - 3a09f75b-cf8e-4d11-b058-763409b496d1
+    - 92d4dfdc-0c74-44da-bb3d-3c426f6c9b6f
+    - 2b75c8ac-567f-4a89-aa0b-1491d9a7bd0c
+    - c050a9cf-f62c-482f-8ff7-9e38e1df9eed
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: uuid-v4
+    profiler: ydata-profiling
+  - name: metadata.correlation_id
+    type: string (uuid)
+    description: A unique identifier to connect events related to the same user action.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 13
+    sample_values:
+    - 1ee7f528-560a-5d0f-a7bc-1b09e1122ab5
+    - 9f8c0d9e-f5bb-5ece-8613-7245ca29aded
+    - adf7f9a7-ab0d-5fc9-86e7-7808a807e524
+    - c60b3f4f-1b3c-5967-990b-4454fa26bf86
+    - bc86e574-5e27-5fa9-a0c9-b643aa478335
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: uuid-v4
+    profiler: ydata-profiling
+  - name: metadata.source_service
+    type: string
+    description: The source_service column indicates the service that generated the
+      event.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 4
+    sample_values:
+    - week5-ledger-intake
+    - week5-ledger
+    - week5-ledger-processor
+    - week3-document-refinery
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: metadata.user_id
+    type: string
+    description: The user_id column should contain a unique identifier for each user.
+    required: false
+    primaryKey: false
+    pii: true
+    classification: confidential
+    null_fraction: 0.0
+    cardinality: 13
+    sample_values:
+    - COMP-074
+    - system
+    - COMP-041
+    - COMP-031
+    - COMP-015
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: snake_case
+    profiler: ydata-profiling
+  - name: occurred_at
+    type: string
+    description: ISO 8601 UTC timestamp when the domain event occurred (business time).
+    required: true
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 100
+    sample_values:
+    - '2026-03-05T06:47:02.526789'
+    - '2026-03-05T06:47:02.525789'
+    - '2026-03-05T06:47:22.524789'
+    - '2026-03-11T06:48:02.533791'
+    - '2026-03-11T06:48:02.532791'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: payload.added_at
+    type: string
+    description: The added_at column represents the timestamp when the event was created.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.76
+    cardinality: 24
+    sample_values:
+    - '2026-02-28T06:54:22.552022'
+    - '2026-02-28T07:03:22.552022'
+    - '2026-02-28T07:04:22.552022'
+    - '2026-02-28T07:05:22.552022'
+    - '2026-03-11T17:46:22.559097'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: payload.agent_id
+    type: string
+    description: The agent_id column should be a non-null string value without leading
+      or trailing whitespace.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - doc-agent-1
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: payload.agent_type
+    type: string
+    description: Ensure the 'agent_type' field in the 'events' table is 'document_processing'.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.92
+    cardinality: 1
+    sample_values:
+    - document_processing
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: snake_case
+    profiler: ydata-profiling
+  - name: payload.anomalies
+    type: array
+    description: The payload.anomalies column should be an array with at least one
+      element.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 0
+    sample_values:
+    - '[]'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    profiler: ydata-profiling
+  - name: payload.applicant_id
+    type: string
+    description: Ensure the applicant_id column contains a valid COMP-XXX format string.
+    required: false
+    primaryKey: false
+    pii: true
+    classification: confidential
+    null_fraction: 0.88
+    cardinality: 12
+    sample_values:
+    - COMP-074
+    - COMP-041
+    - COMP-031
+    - COMP-015
+    - COMP-057
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: payload.application_id
+    type: string
+    description: Ensure the application ID follows the pattern 'APEX-xxxx' where xxxx
+      is a 4-digit number.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.36
+    cardinality: 12
+    sample_values:
+    - APEX-0001
+    - APEX-0002
+    - APEX-0003
+    - APEX-0004
+    - APEX-0005
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: payload.application_reference
+    type: string
+    description: The application_reference column contains unique identifiers for
+      APEX application records.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.88
+    cardinality: 12
+    sample_values:
+    - APEX-0001
+    - APEX-0002
+    - APEX-0003
+    - APEX-0004
+    - APEX-0005
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: payload.assessed_at
+    type: string
+    description: The 'assessed_at' column represents the timestamp when an event was
+      assessed, in ISO 8601 format.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - '2026-03-14T14:38:01.572437'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: payload.auditor_notes
+    type: string
+    description: The auditor notes field should contain a summary of the audit findings
+      in plain language.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - Financial statements appear internally consistent. Balance sheet balances. Revenue
+      consistent with prior year trajectory.
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: free-text
+    profiler: ydata-profiling
+  - name: payload.called_at
+    type: string
+    description: The 'called_at' column represents the timestamp of when an event
+      was called.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.98
+    cardinality: 2
+    sample_values:
+    - '2026-03-14T14:35:33.572437'
+    - '2026-03-14T14:36:57.572437'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: payload.completed_at
+    type: string
+    description: The completed_at column represents the timestamp when an event was
+      completed.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.98
+    cardinality: 2
+    sample_values:
+    - '2026-03-14T14:36:02.572437'
+    - '2026-03-14T14:37:30.572437'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: payload.contact_email
+    type: string
+    description: The contact_email column should contain a valid email address for
+      each event.
+    required: false
+    primaryKey: false
+    pii: true
+    classification: confidential
+    null_fraction: 0.88
+    cardinality: 12
+    sample_values:
+    - qhughes@example.net
+    - molly71@example.net
+    - charlesharrington@example.com
+    - melissa86@example.com
+    - williamsonjimmy@example.net
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: free-text
+    profiler: ydata-profiling
+  - name: payload.contact_name
+    type: string
+    description: The contact_name column should contain only valid names, without
+      any special characters or numbers.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.88
+    cardinality: 12
+    sample_values:
+    - Mrs. Amanda Shaw
+    - Alexis Thomas
+    - Michael Santos
+    - Stacy Freeman
+    - Yolanda Francis
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: free-text
+    profiler: ydata-profiling
+  - name: payload.context_source
+    type: string
+    description: The context_source column contains the source of the event context,
+      which is a string value.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - fresh
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: snake_case
+    profiler: ydata-profiling
+  - name: payload.context_token_count
+    type: integer
+    description: The number of tokens in the context of the event.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - '1459'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 1459
+      max: 1459
+      mean: 1459.0
+      p25: 1459.0
+      p50: 1459.0
+      p75: 1459.0
+      p95: 1459.0
+      p99: 1459.0
+      stddev: 0.0
+    profiler: ydata-profiling
+  - name: payload.created_at
+    type: string
+    description: ISO 8601 UTC timestamp when this record was created.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.88
+    cardinality: 12
+    sample_values:
+    - '2026-03-05T06:47:22.527789'
+    - '2026-03-11T06:48:22.534791'
+    - '2026-03-18T06:46:22.536793'
+    - '2026-02-28T06:45:22.539024'
+    - '2026-02-24T06:46:22.540024'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: payload.critical_missing_fields
+    type: array
+    description: Array of critical missing fields in an event payload.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 0
+    sample_values:
+    - '[]'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    profiler: ydata-profiling
+  - name: payload.deadline
+    type: string
+    description: Ensure the 'deadline' field is a valid ISO 8601 datetime string with
+      time zone information.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.88
+    cardinality: 12
+    sample_values:
+    - '2026-03-12T06:47:02.527789'
+    - '2026-03-18T06:48:02.534791'
+    - '2026-03-25T06:46:02.536793'
+    - '2026-03-07T06:45:02.539024'
+    - '2026-03-03T06:46:02.540024'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: payload.detected_format
+    type: string
+    description: The 'detected_format' field should be 'pdf' and match the 'document_format'
+      field.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.98
+    cardinality: 1
+    sample_values:
+    - pdf
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: snake_case
+    profiler: ydata-profiling
+  - name: payload.document_format
+    type: string
+    description: Validate that the document format is either 'pdf' or 'xlsx'.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.52
+    cardinality: 2
+    sample_values:
+    - pdf
+    - xlsx
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: snake_case
+    profiler: ydata-profiling
+  - name: payload.document_id
+    type: string
+    description: Ensure the document_id column is a valid string format with no duplicates.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.45
+    cardinality: 27
+    sample_values:
+    - doc-9821ce4e
+    - doc-7dd5df3b
+    - doc-92012f64
+    - doc-6a1744c0
+    - doc-3892e306
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: payload.document_type
+    type: string
+    description: The payload.document_type column stores the type of document, such
+      as application proposal, income statement, or balance sheet.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.46
+    cardinality: 3
+    sample_values:
+    - application_proposal
+    - income_statement
+    - balance_sheet
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: snake_case
+    profiler: ydata-profiling
+  - name: payload.documents_processed
+    type: integer
+    description: The number of documents processed in the event payload.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - '3'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 3
+      max: 3
+      mean: 3.0
+      p25: 3.0
+      p50: 3.0
+      p75: 3.0
+      p95: 3.0
+      p99: 3.0
+      stddev: 0.0
+    profiler: ydata-profiling
+  - name: payload.duration_ms
+    type: integer
+    description: The duration in milliseconds of an event, which should be a positive
+      integer.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.97
+    cardinality: 3
+    sample_values:
+    - '320'
+    - '145'
+    - '9646'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 145
+      max: 9646
+      mean: 3370.333333
+      p25: 232.5
+      p50: 320.0
+      p75: 4983.0
+      p95: 8713.4
+      p99: 9459.48
+      stddev: 4438.141528
+    profiler: ydata-profiling
+  - name: payload.events_written
+    type: array
+    description: An array of event metadata, including stream ID, event type, and
+      stream position.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 0
+    sample_values:
+    - '[{''stream_id'': ''docpkg-APEX-0012'', ''event_type'': ''PackageReadyForAnalysis'',
+      ''stream_position'': 13}]'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    profiler: ydata-profiling
+  - name: payload.executed_at
+    type: string
+    description: The executed_at column contains ISO 8601 formatted timestamps indicating
+      when an event occurred.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.97
+    cardinality: 3
+    sample_values:
+    - '2026-03-14T14:34:29.572437'
+    - '2026-03-14T14:37:32.572437'
+    - '2026-03-14T14:37:46.572437'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: payload.extraction_model
+    type: string
+    description: Name of the AI model used to extract facts from the document.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.98
+    cardinality: 1
+    sample_values:
+    - mineru-1.0
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: payload.facts
+    type: object
+    description: Field 'payload.facts' of type object.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.98
+    cardinality: 0
+    sample_values:
+    - '{''total_revenue'': ''4642102.67'', ''gross_profit'': ''1502655.89'', ''operating_expenses'':
+      None, ''operating_income'': ''496011.59'', ''ebitda'': ''588877.28'', ''depreciation_amortization'':
+      ''92865.69'', ''interest_expense'': ''115806.82'', ''income_before_tax'': None,
+      ''tax_expense'': None, ''net_income'': ''283885.74'', ''total_assets'': ''6701703.19'',
+      ''current_assets'': ''2862193.12'', ''cash_and_equivalents'': ''547738.61'',
+      ''accounts_receivable'': ''1099926.15'', ''inventory'': ''1184380.81'', ''total_liabilities'':
+      ''2101445.05'', ''current_liabilities'': ''1551312.65'', ''long_term_debt'':
+      ''1561409.38'', ''total_equity'': ''4600258.14'', ''operating_cash_flow'': ''248127.17'',
+      ''investing_cash_flow'': None, ''financing_cash_flow'': None, ''free_cash_flow'':
+      None, ''debt_to_equity'': 0.46, ''current_ratio'': 1.85, ''debt_to_ebitda'':
+      3.57, ''interest_coverage'': 4.28, ''gross_margin'': 0.32, ''net_margin'': 0.06,
+      ''fiscal_year_end'': ''2024-12-31'', ''currency'': ''USD'', ''gaap_compliant'':
+      True, ''field_confidence'': {''total_revenue'': 0.9058052765673857, ''net_income'':
+      0.8672484149111062, ''total_assets'': 0.8965017764491239}, ''page_references'':
+      {''total_revenue'': ''page 1, table 1, row 1'', ''net_income'': ''page 1, table
+      1, row 9''}, ''extraction_notes'': [], ''balance_sheet_balances'': True, ''balance_discrepancy_usd'':
+      None}'
+    - '{''total_revenue'': ''4642102.67'', ''gross_profit'': ''1502655.89'', ''operating_expenses'':
+      None, ''operating_income'': ''496011.59'', ''ebitda'': None, ''depreciation_amortization'':
+      ''92865.69'', ''interest_expense'': ''115806.82'', ''income_before_tax'': None,
+      ''tax_expense'': None, ''net_income'': ''283885.74'', ''total_assets'': ''6701703.19'',
+      ''current_assets'': ''2862193.12'', ''cash_and_equivalents'': ''547738.61'',
+      ''accounts_receivable'': ''1099926.15'', ''inventory'': ''1184380.81'', ''total_liabilities'':
+      ''2101445.05'', ''current_liabilities'': ''1551312.65'', ''long_term_debt'':
+      ''1561409.38'', ''total_equity'': ''4600258.14'', ''operating_cash_flow'': ''248127.17'',
+      ''investing_cash_flow'': None, ''financing_cash_flow'': None, ''free_cash_flow'':
+      None, ''debt_to_equity'': 0.46, ''current_ratio'': 1.85, ''debt_to_ebitda'':
+      3.57, ''interest_coverage'': 4.28, ''gross_margin'': 0.32, ''net_margin'': 0.06,
+      ''fiscal_year_end'': ''2024-12-31'', ''currency'': ''USD'', ''gaap_compliant'':
+      True, ''field_confidence'': {''total_revenue'': 0.8912887057300216, ''net_income'':
+      0.8822247711566196, ''total_assets'': 0.9561189636243294}, ''page_references'':
+      {''total_revenue'': ''page 1, table 1, row 1'', ''net_income'': ''page 1, table
+      1, row 9''}, ''extraction_notes'': [], ''balance_sheet_balances'': True, ''balance_discrepancy_usd'':
+      None}'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    profiler: ydata-profiling
+  - name: payload.file_hash
+    type: string
+    description: The file_hash column contains a unique identifier for each file in
+      the events table.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.52
+    cardinality: 4
+    sample_values:
+    - 8eb66e9cbdaaa5ba
+    - d794b166001141a2
+    - a86210f5fdceb84f
+    - 3a3a2439911766f6
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: payload.file_path
+    type: string
+    description: The file path column contains file paths for financial documents
+      related to a company.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.76
+    cardinality: 24
+    sample_values:
+    - documents/COMP-019/APEX-0007_proposal.pdf
+    - documents/COMP-019/APEX-0007_income_stmt_2024.pdf
+    - documents/COMP-019/APEX-0007_balance_sheet_2024.pdf
+    - documents/COMP-019/APEX-0007_financials.xlsx
+    - documents/COMP-078/APEX-0008_proposal.pdf
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: payload.file_size_bytes
+    type: integer
+    description: The file size in bytes should be a positive integer.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.76
+    cardinality: 24
+    sample_values:
+    - '64164'
+    - '248207'
+    - '105731'
+    - '208043'
+    - '208829'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 52998
+      max: 379941
+      mean: 217365.166667
+      p25: 120989.75
+      p50: 211031.0
+      p75: 289496.25
+      p95: 365177.95
+      p99: 376855.55
+      stddev: 99621.845254
+    profiler: ydata-profiling
+  - name: payload.filename
+    type: string
+    description: The filename should follow the pattern 'APEX-XXXX_<file_type>.<extension>'.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.76
+    cardinality: 24
+    sample_values:
+    - APEX-0007_proposal.pdf
+    - APEX-0007_income_stmt_2024.pdf
+    - APEX-0007_balance_sheet_2024.pdf
+    - APEX-0007_financials.xlsx
+    - APEX-0008_proposal.pdf
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: payload.fiscal_year
+    type: integer
+    description: The fiscal year should be a positive integer representing the calendar
+      year.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.82
+    cardinality: 1
+    sample_values:
+    - '2024'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 2024
+      max: 2024
+      mean: 2024.0
+      p25: 2024.0
+      p50: 2024.0
+      p75: 2024.0
+      p95: 2024.0
+      p99: 2024.0
+      stddev: 0.0
+    profiler: ydata-profiling
+  - name: payload.has_quality_flags
+    type: boolean
+    description: The 'has_quality_flags' column indicates whether the event payload
+      has quality flags enabled.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - 'False'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    profiler: ydata-profiling
+  - name: payload.input_keys
+    type: array
+    description: The input_keys column contains an array of keys that describe the
+      input data.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.97
+    cardinality: 0
+    sample_values:
+    - '[''application_id'', ''documents'']'
+    - '[''document_paths'']'
+    - '[''raw_facts'', ''company_profile'']'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    profiler: ydata-profiling
+  - name: payload.inputs_validated
+    type: array
+    description: Ensure that the 'inputs_validated' array contains required data fields
+      for processing the event payload.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 0
+    sample_values:
+    - '[''application_id'', ''document_ids'', ''applicant_registry_access'']'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    profiler: ydata-profiling
+  - name: payload.is_coherent
+    type: boolean
+    description: The is_coherent field indicates whether the input data is valid and
+      coherent.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - 'True'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    profiler: ydata-profiling
+  - name: payload.langgraph_graph_version
+    type: string
+    description: The langgraph_graph_version column represents the version of the
+      language graph used for the event.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - 1.0.0-sim
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: payload.llm_called
+    type: boolean
+    description: The 'llm_called' column indicates whether a large language model
+      was used for the event.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.97
+    cardinality: 2
+    sample_values:
+    - 'False'
+    - 'True'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    profiler: ydata-profiling
+  - name: payload.llm_cost_usd
+    type: number
+    description: The 'llm_cost_usd' column represents the cost of the language model
+      in USD for a given event.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - '0.013215'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 0.013215
+      max: 0.013215
+      mean: 0.013215
+      p25: 0.013215
+      p50: 0.013215
+      p75: 0.013215
+      p95: 0.013215
+      p99: 0.013215
+      stddev: 0.0
+    profiler: ydata-profiling
+  - name: payload.llm_tokens_input
+    type: integer
+    description: The number of tokens input to the large language model for this event.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - '2880'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 2880
+      max: 2880
+      mean: 2880.0
+      p25: 2880.0
+      p50: 2880.0
+      p75: 2880.0
+      p95: 2880.0
+      p99: 2880.0
+      stddev: 0.0
+    profiler: ydata-profiling
+  - name: payload.llm_tokens_output
+    type: integer
+    description: The number of output tokens generated by the language model in the
+      event.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - '305'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 305
+      max: 305
+      mean: 305.0
+      p25: 305.0
+      p50: 305.0
+      p75: 305.0
+      p95: 305.0
+      p99: 305.0
+      stddev: 0.0
+    profiler: ydata-profiling
+  - name: payload.loan_purpose
+    type: string
+    description: The 'loan_purpose' column contains the purpose of the loan, with
+      valid values such as 'working_capital', 'acquisition', 'real_estate', and 'expansion'.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.88
+    cardinality: 4
+    sample_values:
+    - working_capital
+    - acquisition
+    - real_estate
+    - expansion
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: snake_case
+    profiler: ydata-profiling
+  - name: payload.loan_term_months
+    type: integer
+    description: The loan term in months must be a positive integer value.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.88
+    cardinality: 4
+    sample_values:
+    - '24'
+    - '48'
+    - '36'
+    - '60'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 24
+      max: 60
+      mean: 40.0
+      p25: 33.0
+      p50: 36.0
+      p75: 48.0
+      p95: 60.0
+      p99: 60.0
+      stddev: 12.328828
+    profiler: ydata-profiling
+  - name: payload.model_version
+    type: string
+    description: The model version should be a string in the format 'claude-sonnet-4-YYYYMMDD'.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - claude-sonnet-4-20250514
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: payload.node_name
+    type: string
+    description: The node_name column represents the name of a data processing step
+      in the events pipeline.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.97
+    cardinality: 3
+    sample_values:
+    - validate_inputs
+    - run_extraction
+    - assess_quality
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: snake_case
+    profiler: ydata-profiling
+  - name: payload.node_sequence
+    type: integer
+    description: The node_sequence column represents the order of nodes in a sequence.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.97
+    cardinality: 3
+    sample_values:
+    - '1'
+    - '2'
+    - '3'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 1
+      max: 3
+      mean: 2.0
+      p25: 1.5
+      p50: 2.0
+      p75: 2.5
+      p95: 2.9
+      p99: 2.98
+      stddev: 0.816497
+    profiler: ydata-profiling
+  - name: payload.output_keys
+    type: array
+    description: The payload.output_keys column contains an array of output keys for
+      each event.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.97
+    cardinality: 0
+    sample_values:
+    - '[''validated_inputs'', ''document_paths'']'
+    - '[''raw_facts'', ''page_refs'']'
+    - '[''quality_assessment'']'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    profiler: ydata-profiling
+  - name: payload.output_summary
+    type: string
+    description: Summarizes the output of a document processing step in a credit analysis
+      workflow.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - 3 documents processed, high confidence. Package ready for credit analysis.
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: free-text
+    profiler: ydata-profiling
+  - name: payload.overall_confidence
+    type: number
+    description: The overall confidence score for the event, a number between 0 and
+      1.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - '0.8521391565276979'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 0.8521391565276979
+      max: 0.8521391565276979
+      mean: 0.852139
+      p25: 0.852139
+      p50: 0.852139
+      p75: 0.852139
+      p95: 0.852139
+      p99: 0.852139
+      stddev: 0.0
+    confidenceRangeOk: true
+    profiler: ydata-profiling
+  - name: payload.package_id
+    type: string
+    description: The package_id column contains unique identifiers for each package
+      processed by the system.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.56
+    cardinality: 12
+    sample_values:
+    - APEX-0001
+    - APEX-0002
+    - APEX-0003
+    - APEX-0004
+    - APEX-0005
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: payload.page_count
+    type: integer
+    description: The page_count column represents the number of pages in the event
+      payload.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.98
+    cardinality: 2
+    sample_values:
+    - '3'
+    - '5'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 3
+      max: 5
+      mean: 4.0
+      p25: 3.5
+      p50: 4.0
+      p75: 4.5
+      p95: 4.9
+      p99: 4.98
+      stddev: 1.0
+    profiler: ydata-profiling
+  - name: payload.pipeline_version
+    type: string
+    description: Validates that the pipeline version is in the format 'week{number}-v{version
+      number}.{patch number}'.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.98
+    cardinality: 1
+    sample_values:
+    - week3-v1.0
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: payload.processing_ms
+    type: integer
+    description: The processing time in milliseconds for the event payload.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.98
+    cardinality: 2
+    sample_values:
+    - '4660'
+    - '6951'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 4660
+      max: 6951
+      mean: 5805.5
+      p25: 5232.75
+      p50: 5805.5
+      p75: 6378.25
+      p95: 6836.45
+      p99: 6928.09
+      stddev: 1145.5
+    profiler: ydata-profiling
+  - name: payload.quality_flag_count
+    type: integer
+    description: The quality_flag_count field represents the number of quality flags
+      detected in the event payload.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - '0'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 0
+      max: 0
+      mean: 0.0
+      p25: 0.0
+      p50: 0.0
+      p75: 0.0
+      p95: 0.0
+      p99: 0.0
+      stddev: 0.0
+    profiler: ydata-profiling
+  - name: payload.raw_text_length
+    type: integer
+    description: The raw text length of an event should be a positive integer.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.98
+    cardinality: 2
+    sample_values:
+    - '5757'
+    - '3156'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 3156
+      max: 5757
+      mean: 4456.5
+      p25: 3806.25
+      p50: 4456.5
+      p75: 5106.75
+      p95: 5626.95
+      p99: 5730.99
+      stddev: 1300.5
+    profiler: ydata-profiling
+  - name: payload.ready_at
+    type: string
+    description: The payload.ready_at column represents the timestamp when the event
+      was ready to be processed.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - '2026-03-14T14:38:01.572437'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: payload.reextraction_recommended
+    type: boolean
+    description: The reextraction_recommended flag indicates whether the event payload
+      should be reextracted.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - 'False'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    profiler: ydata-profiling
+  - name: payload.requested_amount_usd
+    type: string
+    description: The requested amount should be a valid decimal value in USD.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.88
+    cardinality: 12
+    sample_values:
+    - '2679000.0'
+    - '2388000.0'
+    - '1017000.0'
+    - '877000.0'
+    - '1479000.0'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: semver-like
+    profiler: ydata-profiling
+  - name: payload.requested_by
+    type: string
+    description: The 'requested_by' column should be a string with the value 'system'.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.88
+    cardinality: 1
+    sample_values:
+    - system
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: snake_case
+    profiler: ydata-profiling
+  - name: payload.required_document_types
+    type: array
+    description: The 'required_document_types' array must contain valid document types
+      for the financial request.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.88
+    cardinality: 0
+    sample_values:
+    - '[''application_proposal'', ''income_statement'', ''balance_sheet'']'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    profiler: ydata-profiling
+  - name: payload.required_documents
+    type: array
+    description: The 'required_documents' field must contain at least one valid document
+      type.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.88
+    cardinality: 0
+    sample_values:
+    - '[''application_proposal'', ''income_statement'', ''balance_sheet'']'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    profiler: ydata-profiling
+  - name: payload.session_id
+    type: string
+    description: A unique identifier for each run session of a data processing job.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.92
+    cardinality: 1
+    sample_values:
+    - sess-doc-e095e6fe
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    - runs (via FK session_id → session_id)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: payload.started_at
+    type: string
+    description: The 'started_at' column represents the timestamp when an event was
+      initiated.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.97
+    cardinality: 3
+    sample_values:
+    - '2026-03-14T14:34:25.572437'
+    - '2026-03-14T14:34:34.572437'
+    - '2026-03-14T14:36:07.572437'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: payload.submission_channel
+    type: string
+    description: The 'submission_channel' column indicates the source of the event
+      submission.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.88
+    cardinality: 4
+    sample_values:
+    - branch
+    - web
+    - mobile
+    - agent
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: snake_case
+    profiler: ydata-profiling
+  - name: payload.submitted_at
+    type: string
+    description: The submitted_at column represents the timestamp when an event was
+      submitted.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.88
+    cardinality: 12
+    sample_values:
+    - '2026-03-05T06:47:02.527789'
+    - '2026-03-11T06:48:02.534791'
+    - '2026-03-18T06:46:02.536793'
+    - '2026-02-28T06:45:02.539024'
+    - '2026-02-24T06:46:02.540024'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: payload.tables_extracted
+    type: integer
+    description: The number of tables extracted during an event.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.98
+    cardinality: 1
+    sample_values:
+    - '4'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 4
+      max: 4
+      mean: 4.0
+      p25: 4.0
+      p50: 4.0
+      p75: 4.0
+      p95: 4.0
+      p99: 4.0
+      stddev: 0.0
+    profiler: ydata-profiling
+  - name: payload.tool_duration_ms
+    type: integer
+    description: The tool duration in milliseconds for the event payload.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.98
+    cardinality: 2
+    sample_values:
+    - '3177'
+    - '2535'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 2535
+      max: 3177
+      mean: 2856.0
+      p25: 2695.5
+      p50: 2856.0
+      p75: 3016.5
+      p95: 3144.9
+      p99: 3170.58
+      stddev: 321.0
+    profiler: ydata-profiling
+  - name: payload.tool_input_summary
+    type: string
+    description: The 'tool_input_summary' column contains a summary of the input data
+      for a tool used in the event.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.98
+    cardinality: 2
+    sample_values:
+    - 'PDF extraction: income_statement'
+    - 'PDF extraction: balance_sheet'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: free-text
+    profiler: ydata-profiling
+  - name: payload.tool_name
+    type: string
+    description: The tool_name column represents the name of the tool used in the
+      data processing pipeline.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.98
+    cardinality: 1
+    sample_values:
+    - week3_extraction_pipeline
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: snake_case
+    profiler: ydata-profiling
+  - name: payload.tool_output_summary
+    type: string
+    description: The 'payload.tool_output_summary' column contains a summary of the
+      financial line items extracted by a tool.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.98
+    cardinality: 2
+    sample_values:
+    - Extracted 9 financial line items
+    - Extracted 8 financial line items
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: free-text
+    profiler: ydata-profiling
+  - name: payload.uploaded_at
+    type: string
+    description: Field 'payload.uploaded_at' of type string.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.76
+    cardinality: 24
+    sample_values:
+    - '2026-02-28T06:54:22.552022'
+    - '2026-02-28T07:03:22.552022'
+    - '2026-02-28T07:04:22.552022'
+    - '2026-02-28T07:05:22.552022'
+    - '2026-03-11T17:46:22.559097'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: payload.uploaded_by
+    type: string
+    description: The 'uploaded_by' column should only contain the value 'applicant'.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.76
+    cardinality: 1
+    sample_values:
+    - applicant
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: snake_case
+    profiler: ydata-profiling
+  - name: payload.validated_at
+    type: string
+    description: Ensure the 'validated_at' timestamp is a valid ISO 8601 format date
+      and time.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.97
+    cardinality: 3
+    sample_values:
+    - '2026-03-14T14:34:27.572437'
+    - '2026-03-14T14:34:34.572437'
+    - '2026-03-14T14:36:07.572437'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: payload.validation_duration_ms
+    type: integer
+    description: The validation_duration_ms column represents the time in milliseconds
+      for the event validation process.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - '169'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 169
+      max: 169
+      mean: 169.0
+      p25: 169.0
+      p50: 169.0
+      p75: 169.0
+      p95: 169.0
+      p99: 169.0
+      stddev: 0.0
+    profiler: ydata-profiling
+  - name: payload.written_at
+    type: string
+    description: The 'written_at' column represents the timestamp when the event was
+      written to the database.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.99
+    cardinality: 1
+    sample_values:
+    - '2026-03-14T14:38:01.572437'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: recorded_at
+    type: string
+    description: ISO 8601 UTC timestamp when the event was written to the store.
+    required: true
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 60
+    sample_values:
+    - '2026-03-05T06:47:02.527789'
+    - '2026-03-05T06:47:22.527789'
+    - '2026-03-11T06:48:02.534791'
+    - '2026-03-11T06:48:22.534791'
+    - '2026-03-18T06:46:02.536793'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: schema_version
+    type: string
+    description: The schema_version column stores the version of the data schema used
+      for the event.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 1
+    sample_values:
+    - '1.0'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    char_pattern: semver-like
+    profiler: ydata-profiling
+  - name: sequence_number
+    type: integer
+    description: Monotonically increasing integer per aggregate_id ensuring strict
+      ordering.
+    required: true
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 19
+    sample_values:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - enforcer_report/ (EnforcerReport)
+    statistics:
+      min: 1
+      max: 19
+      mean: 5.92
+      p25: 2.0
+      p50: 5.0
+      p75: 9.0
+      p95: 14.05
+      p99: 18.01
+      stddev: 4.222985
+    profiler: ydata-profiling
+quality:
+  type: SodaChecks
+  specification:
+    checks for events:
+    - missing_count(event_id) = 0
+    - duplicate_count(event_id) = 0
+    - min(payload.overall_confidence) >= 0.0
+    - max(payload.overall_confidence) <= 1.0
+    - row_count >= 1
+    - missing_count(aggregate_id) = 0
+    - missing_count(event_type) = 0
+quality_extended:
+- type: not_null
+  description: Required fields must never be null. Nulls indicate a failed or partial
+    migration.
+  fields:
+  - aggregate_id
+  - event_id
+  - event_type
+  - occurred_at
+  - recorded_at
+  - sequence_number
+- type: unique
+  description: Primary key fields must be unique. Duplicates indicate an idempotency
+    violation.
+  fields:
+  - event_id
+- type: accepted_values
+  description: '''aggregate_type'' must only contain registered enum values. Unregistered
+    values indicate schema drift.'
+  field: aggregate_type
+  values: *id001
+- type: accepted_values
+  description: schema_version must follow MAJOR.MINOR semantic versioning.
+  field: schema_version
+  pattern: ^\d+\.\d+$
+- type: custom
+  name: confidence_range_invariant
+  description: All confidence scores must be in [0.0, 1.0]. Values > 1.0 indicate
+    the 0-100 scale bug (DOMAIN_NOTES.md §Q2).
+  fields:
+  - payload.overall_confidence
+  rule: 0.0 <= value <= 1.0
+  breaking_if_violated: true
+  observed_violation: false
+- type: custom
+  name: temporal_ordering
+  description: recorded_at must be >= occurred_at. The store cannot record an event
+    before it occurs.
+  rule: recorded_at >= occurred_at
+  breaking_if_violated: true
+- type: custom
+  name: monotonic_sequence_per_aggregate
+  description: sequence_number must be monotonically increasing per aggregate_id with
+    no gaps.
+  rule: sequence_number = ROW_NUMBER() OVER (PARTITION BY aggregate_id ORDER BY occurred_at)
+  breaking_if_violated: true
+- type: custom
+  name: event_type_registry_compliance
+  description: event_type must be PascalCase and registered in the event schema registry.
+  field: event_type
+  rule: 'regex: ^[A-Z][a-zA-Z0-9]*$'
+  registered_types:
+  - ApplicationSubmitted
+  - DocumentAdded
+  - DocumentFormatValidated
+  - ExtractionCompleted
+  - CreditAnalysisCompleted
+  - FraudCheckCompleted
+  - LoanDecisionMade
+  - RegulatoryPackageGenerated
+  breaking_if_violated: true
+- type: custom
+  name: statistical_bounds_payload_context_token_count
+  description: 'Statistical profile for ''payload.context_token_count'': mean=1459.0,
+    p95=1459.0, p99=1459.0, stddev=0.0. Values beyond mean ± 3σ trigger an anomaly
+    alert.'
+  field: payload.context_token_count
+  observed_profile:
+    min: 1459
+    max: 1459
+    mean: 1459.0
+    p25: 1459.0
+    p50: 1459.0
+    p75: 1459.0
+    p95: 1459.0
+    p99: 1459.0
+    stddev: 0.0
+  rule: mean - 3*stddev <= value <= mean + 3*stddev
+- type: custom
+  name: statistical_bounds_payload_documents_processed
+  description: 'Statistical profile for ''payload.documents_processed'': mean=3.0,
+    p95=3.0, p99=3.0, stddev=0.0. Values beyond mean ± 3σ trigger an anomaly alert.'
+  field: payload.documents_processed
+  observed_profile:
+    min: 3
+    max: 3
+    mean: 3.0
+    p25: 3.0
+    p50: 3.0
+    p75: 3.0
+    p95: 3.0
+    p99: 3.0
+    stddev: 0.0
+  rule: mean - 3*stddev <= value <= mean + 3*stddev
+llm_annotations:
+- column: aggregate_id
+  description: The aggregate_id column stores a universally unique identifier (UUID)
+    for each event.
+  business_rule: aggregate_id MUST be a valid UUID format and UNIQUE across the entire
+    table.
+  cross_column_relationship: The aggregate_id is associated with the aggregate_type
+    and event_id columns, which provide additional context about the event.
+- column: aggregate_type
+  description: The `aggregate_type` column stores high-level categorization of events
+    in the system.
+  business_rule: 'The `aggregate_type` column must contain one of the following values:
+    ''LoanApplication'', ''Document'', ''Agent'''
+  cross_column_relationship: The `aggregate_id`, `event_id`, and `event_type` columns
+    are related to the `aggregate_type` column and provide additional context about
+    the event.
+- column: event_id
+  description: Unique identifier (UUIDv4) for this immutable event record.
+  business_rule: IS NOT NULL AND UNIQUE AND matches UUID-v4
+  cross_column_relationship: event_id is referenced by metadata.causation_id in child
+    events
+- column: event_type
+  description: PascalCase domain event type registered in the event schema registry.
+  business_rule: matches regex ^[A-Z][a-zA-Z0-9]*$
+  cross_column_relationship: event_type determines the expected shape of the payload
+    object
+- column: metadata.causation_id
+  description: The causation_id column stores a unique identifier for the event that
+    caused the current event.
+  business_rule: causation_id MUST be a valid UUID string that is unique within the
+    events table
+  cross_column_relationship: The causation_id column is related to the event_id column,
+    as the causation_id of one event may be the event_id of another event.
+- column: metadata.correlation_id
+  description: A unique identifier to connect events related to the same user action.
+  business_rule: metadata.correlation_id IS NOT NULL AND LEN(metadata.correlation_id)
+    = 36 AND ISNUMERIC(REPLACE(REPLACE(REPLACE(metadata.correlation_id, '-', ''),
+    'a', ''), 'b', '')) = 1
+  cross_column_relationship: metadata.causation_id, metadata.source_service, metadata.user_id
+- column: metadata.source_service
+  description: The source_service column indicates the service that generated the
+    event.
+  business_rule: metadata.source_service IN ('week5-ledger-intake', 'week5-ledger',
+    'week5-ledger-processor', 'week3-document-refinery')
+  cross_column_relationship: The metadata.causation_id, metadata.correlation_id, and
+    metadata.user_id columns are related to the metadata.source_service column.
+- column: metadata.user_id
+  description: The user_id column should contain a unique identifier for each user.
+  business_rule: metadata.user_id IS NOT NULL AND metadata.user_id <> 'system'
+  cross_column_relationship: None
+- column: occurred_at
+  description: ISO 8601 UTC timestamp when the domain event occurred (business time).
+  business_rule: occurred_at <= recorded_at
+  cross_column_relationship: occurred_at < recorded_at indicates latency in event
+    capture
+- column: payload.added_at
+  description: The added_at column represents the timestamp when the event was created.
+  business_rule: payload.added_at should be a valid timestamp in the format 'YYYY-MM-DDTHH:mm:ss.ffffffZ'
+  cross_column_relationship: payload.added_at should be less than or equal to occurred_at
+- column: payload.agent_id
+  description: The agent_id column should be a non-null string value without leading
+    or trailing whitespace.
+  business_rule: payload.agent_id IS NOT NULL AND TRIM(payload.agent_id) = payload.agent_id
+  cross_column_relationship: None
+- column: payload.agent_type
+  description: Ensure the 'agent_type' field in the 'events' table is 'document_processing'.
+  business_rule: payload.agent_type = 'document_processing'
+  cross_column_relationship: None
+- column: payload.anomalies
+  description: The payload.anomalies column should be an array with at least one element.
+  business_rule: length(payload.anomalies) > 0
+  cross_column_relationship: None
+- column: payload.applicant_id
+  description: Ensure the applicant_id column contains a valid COMP-XXX format string.
+  business_rule: REGEXP_MATCH(payload.applicant_id, '^COMP-[0-9]{3}$')
+  cross_column_relationship: None
+- column: payload.application_id
+  description: Ensure the application ID follows the pattern 'APEX-xxxx' where xxxx
+    is a 4-digit number.
+  business_rule: REGEXP_MATCH(payload.application_id, '^APEX-[0-9]{4}$')
+  cross_column_relationship: None
+- column: payload.application_reference
+  description: The application_reference column contains unique identifiers for APEX
+    application records.
+  business_rule: payload.application_reference LIKE 'APEX-%' AND LENGTH(payload.application_reference)
+    = 10
+  cross_column_relationship: None
+- column: payload.assessed_at
+  description: The 'assessed_at' column represents the timestamp when an event was
+    assessed, in ISO 8601 format.
+  business_rule: assessed_at IS NOT NULL AND assessed_at <= CURRENT_TIMESTAMP
+  cross_column_relationship: None
+- column: payload.auditor_notes
+  description: The auditor notes field should contain a summary of the audit findings
+    in plain language.
+  business_rule: LENGTH(payload.auditor_notes) > 0 AND LENGTH(payload.auditor_notes)
+    < 201
+  cross_column_relationship: None
+- column: payload.called_at
+  description: The 'called_at' column represents the timestamp of when an event was
+    called.
+  business_rule: payload.called_at MUST be a valid ISO 8601 timestamp in the format
+    'YYYY-MM-DDTHH:MM:SS.mmmmmm'
+  cross_column_relationship: None
+- column: payload.completed_at
+  description: The completed_at column represents the timestamp when an event was
+    completed.
+  business_rule: payload.completed_at must be a valid ISO 8601 timestamp in the format
+    YYYY-MM-DDTHH:mm:ss.SSSSSS
+  cross_column_relationship: None
+- column: payload.contact_email
+  description: The contact_email column should contain a valid email address for each
+    event.
+  business_rule: payload.contact_email LIKE '%@%.%'
+  cross_column_relationship: None
+- column: payload.contact_name
+  description: The contact_name column should contain only valid names, without any
+    special characters or numbers.
+  business_rule: payload.contact_name REGEXP '^[A-Za-z\s]+$'
+  cross_column_relationship: None
+- column: payload.context_source
+  description: The context_source column contains the source of the event context,
+    which is a string value.
+  business_rule: payload.context_source IS NOT NULL AND payload.context_source <>
+    ''
+  cross_column_relationship: None
+- column: payload.context_token_count
+  description: The number of tokens in the context of the event.
+  business_rule: payload.context_token_count >= 0 AND payload.context_token_count
+    IS NOT NULL
+  cross_column_relationship: None
+- column: payload.created_at
+  description: ISO 8601 UTC timestamp when this record was created.
+  business_rule: IS NOT NULL AND created_at <= NOW()
+  cross_column_relationship: created_at must be <= recorded_at for event records
+- column: payload.critical_missing_fields
+  description: Array of critical missing fields in an event payload.
+  business_rule: payload.critical_missing_fields.length = 0
+  cross_column_relationship: None
+- column: payload.deadline
+  description: Ensure the 'deadline' field is a valid ISO 8601 datetime string with
+    time zone information.
+  business_rule: CAST(payload.deadline AS TIMESTAMP) IS NOT NULL AND payload.deadline
+    LIKE '%Z'
+  cross_column_relationship: None
+- column: payload.detected_format
+  description: The 'detected_format' field should be 'pdf' and match the 'document_format'
+    field.
+  business_rule: payload.detected_format = 'pdf'
+  cross_column_relationship: payload.detected_format should match payload.document_format
+- column: payload.document_format
+  description: Validate that the document format is either 'pdf' or 'xlsx'.
+  business_rule: payload.document_format IN ('pdf', 'xlsx')
+  cross_column_relationship: None
+- column: payload.document_id
+  description: Ensure the document_id column is a valid string format with no duplicates.
+  business_rule: payload.document_id IS NOT NULL AND payload.document_id NOT IN (SELECT
+    DISTINCT payload.document_id FROM events)
+  cross_column_relationship: None
+- column: payload.document_type
+  description: The payload.document_type column stores the type of document, such
+    as application proposal, income statement, or balance sheet.
+  business_rule: payload.document_type IN ('application_proposal', 'income_statement',
+    'balance_sheet')
+  cross_column_relationship: None
+- column: payload.documents_processed
+  description: The number of documents processed in the event payload.
+  business_rule: payload.documents_processed >= 0 AND payload.documents_processed
+    IS NOT NULL
+  cross_column_relationship: The number of documents processed should be related to
+    the number of events written in the payload.events_written column.
+- column: payload.duration_ms
+  description: The duration in milliseconds of an event, which should be a positive
+    integer.
+  business_rule: payload.duration_ms >= 0
+  cross_column_relationship: None
+- column: payload.events_written
+  description: An array of event metadata, including stream ID, event type, and stream
+    position.
+  business_rule: payload.events_written IS NOT NULL AND payload.events_written.length
+    > 0 AND EVERY(payload.events_written, event -> event.stream_id IS NOT NULL AND
+    event.event_type IS NOT NULL AND event.stream_position IS NOT NULL)
+  cross_column_relationship: payload.documents_processed, payload.duration_ms, payload.executed_at,
+    and payload.extraction_model are all related to the events represented in payload.events_written
+- column: payload.executed_at
+  description: The executed_at column contains ISO 8601 formatted timestamps indicating
+    when an event occurred.
+  business_rule: payload.executed_at SHOULD be a valid ISO 8601 timestamp in the format
+    'YYYY-MM-DDThh:mm:ss.ssssss'
+  cross_column_relationship: None
+- column: payload.extraction_model
+  description: Name of the AI model used to extract facts from the document.
+  business_rule: matches pattern ^(claude|gpt)-
+  cross_column_relationship: extraction_model determines the valid range of confidence
+    scores
+- column: payload.facts
+  description: Field 'payload.facts' of type object.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
+- column: payload.file_hash
+  description: The file_hash column contains a unique identifier for each file in
+    the events table.
+  business_rule: payload.file_hash LIKE '[a-f0-9]{16}'
+  cross_column_relationship: None
+- column: payload.file_path
+  description: The file path column contains file paths for financial documents related
+    to a company.
+  business_rule: payload.file_path LIKE 'documents/COMP-[0-9]{3}/APEX-[0-9]{4}_%.pdf'
+    OR payload.file_path LIKE 'documents/COMP-[0-9]{3}/APEX-[0-9]{4}_%.xlsx'
+  cross_column_relationship: None
+- column: payload.file_size_bytes
+  description: The file size in bytes should be a positive integer.
+  business_rule: payload.file_size_bytes >= 0
+  cross_column_relationship: None
+- column: payload.filename
+  description: The filename should follow the pattern 'APEX-XXXX_<file_type>.<extension>'.
+  business_rule: REGEXP_MATCH(payload.filename, '^APEX-[0-9]{4}_[a-zA-Z_]+\.(?:pdf|xlsx)$')
+  cross_column_relationship: None
+- column: payload.fiscal_year
+  description: The fiscal year should be a positive integer representing the calendar
+    year.
+  business_rule: payload.fiscal_year > 0
+  cross_column_relationship: None
+- column: payload.has_quality_flags
+  description: The 'has_quality_flags' column indicates whether the event payload
+    has quality flags enabled.
+  business_rule: payload.has_quality_flags = true
+  cross_column_relationship: None
+- column: payload.input_keys
+  description: The input_keys column contains an array of keys that describe the input
+    data.
+  business_rule: payload.input_keys IS NOT EMPTY AND payload.input_keys ELEMENT_OF
+    ['application_id', 'documents', 'document_paths', 'raw_facts', 'company_profile']
+  cross_column_relationship: None
+- column: payload.inputs_validated
+  description: Ensure that the 'inputs_validated' array contains required data fields
+    for processing the event payload.
+  business_rule: payload.inputs_validated IS NOT NULL AND ARRAY_LENGTH(payload.inputs_validated)
+    > 0 AND ALL(item IN payload.inputs_validated WHERE item IN ('application_id',
+    'document_ids', 'applicant_registry_access'))
+  cross_column_relationship: None
+- column: payload.is_coherent
+  description: The is_coherent field indicates whether the input data is valid and
+    coherent.
+  business_rule: payload.is_coherent = TRUE
+  cross_column_relationship: payload.inputs_validated
+- column: payload.langgraph_graph_version
+  description: The langgraph_graph_version column represents the version of the language
+    graph used for the event.
+  business_rule: langgraph_graph_version MUST be a valid semantic version string (e.g.,
+    '1.0.0-sim')
+  cross_column_relationship: None
+- column: payload.llm_called
+  description: The 'llm_called' column indicates whether a large language model was
+    used for the event.
+  business_rule: payload.llm_called IS NOT NULL
+  cross_column_relationship: None
+- column: payload.llm_cost_usd
+  description: The 'llm_cost_usd' column represents the cost of the language model
+    in USD for a given event.
+  business_rule: llm_cost_usd >= 0 AND llm_cost_usd <= 100
+  cross_column_relationship: None
+- column: payload.llm_tokens_input
+  description: The number of tokens input to the large language model for this event.
+  business_rule: payload.llm_tokens_input >= 0
+  cross_column_relationship: None
+- column: payload.llm_tokens_output
+  description: The number of output tokens generated by the language model in the
+    event.
+  business_rule: payload.llm_tokens_output >= 0
+  cross_column_relationship: payload.llm_tokens_input
+- column: payload.loan_purpose
+  description: The 'loan_purpose' column contains the purpose of the loan, with valid
+    values such as 'working_capital', 'acquisition', 'real_estate', and 'expansion'.
+  business_rule: payload.loan_purpose IN ('working_capital', 'acquisition', 'real_estate',
+    'expansion')
+  cross_column_relationship: None
+- column: payload.loan_term_months
+  description: The loan term in months must be a positive integer value.
+  business_rule: payload.loan_term_months >= 1 AND payload.loan_term_months IS NOT
+    NULL
+  cross_column_relationship: None
+- column: payload.model_version
+  description: The model version should be a string in the format 'claude-sonnet-4-YYYYMMDD'.
+  business_rule: payload.model_version LIKE 'claude-sonnet-4-[0-9]{8}'
+  cross_column_relationship: None
+- column: payload.node_name
+  description: The node_name column represents the name of a data processing step
+    in the events pipeline.
+  business_rule: payload.node_name IN ('validate_inputs', 'run_extraction', 'assess_quality')
+  cross_column_relationship: None
+- column: payload.node_sequence
+  description: The node_sequence column represents the order of nodes in a sequence.
+  business_rule: payload.node_sequence MUST be a positive integer and unique within
+    the same payload.
+  cross_column_relationship: The node_sequence column is related to the payload.model_version,
+    payload.node_name, payload.output_keys, and payload.output_summary columns, as
+    they all describe the same sequence of nodes.
+- column: payload.output_keys
+  description: The payload.output_keys column contains an array of output keys for
+    each event.
+  business_rule: payload.output_keys should be an array with at least one element
+    and all elements should be non-empty strings.
+  cross_column_relationship: The payload.output_keys array should be related to the
+    other payload columns (payload.node_name, payload.node_sequence, payload.output_summary,
+    payload.overall_confidence) to provide context for the event.
+- column: payload.output_summary
+  description: Summarizes the output of a document processing step in a credit analysis
+    workflow.
+  business_rule: payload.output_summary IS NOT NULL AND LENGTH(payload.output_summary)
+    > 0
+  cross_column_relationship: payload.output_summary is related to payload.overall_confidence,
+    payload.package_id, and payload.node_sequence which provide additional context
+    about the credit analysis process.
+- column: payload.overall_confidence
+  description: The overall confidence score for the event, a number between 0 and
+    1.
+  business_rule: payload.overall_confidence >= 0 AND payload.overall_confidence <=
+    1
+  cross_column_relationship: None
+- column: payload.package_id
+  description: The package_id column contains unique identifiers for each package
+    processed by the system.
+  business_rule: payload.package_id REGEXP '^APEX-[0-9]{4}$'
+  cross_column_relationship: None
+- column: payload.page_count
+  description: The page_count column represents the number of pages in the event payload.
+  business_rule: payload.page_count >= 1
+  cross_column_relationship: None
+- column: payload.pipeline_version
+  description: Validates that the pipeline version is in the format 'week{number}-v{version
+    number}.{patch number}'.
+  business_rule: REGEXP_MATCH(payload.pipeline_version, '^week\d+-v\d+\.\d+$')
+  cross_column_relationship: None
+- column: payload.processing_ms
+  description: The processing time in milliseconds for the event payload.
+  business_rule: payload.processing_ms >= 0
+  cross_column_relationship: None
+- column: payload.quality_flag_count
+  description: The quality_flag_count field represents the number of quality flags
+    detected in the event payload.
+  business_rule: quality_flag_count >= 0
+  cross_column_relationship: None
+- column: payload.raw_text_length
+  description: The raw text length of an event should be a positive integer.
+  business_rule: payload.raw_text_length >= 0
+  cross_column_relationship: None
+- column: payload.ready_at
+  description: The payload.ready_at column represents the timestamp when the event
+    was ready to be processed.
+  business_rule: payload.ready_at should be a valid ISO-8601 formatted timestamp
+  cross_column_relationship: None
+- column: payload.reextraction_recommended
+  description: The reextraction_recommended flag indicates whether the event payload
+    should be reextracted.
+  business_rule: payload.reextraction_recommended IS TRUE
+  cross_column_relationship: None
+- column: payload.requested_amount_usd
+  description: The requested amount should be a valid decimal value in USD.
+  business_rule: CAST(payload.requested_amount_usd AS DECIMAL) >= 0
+  cross_column_relationship: None
+- column: payload.requested_by
+  description: The 'requested_by' column should be a string with the value 'system'.
+  business_rule: payload.requested_by = 'system'
+  cross_column_relationship: None
+- column: payload.required_document_types
+  description: The 'required_document_types' array must contain valid document types
+    for the financial request.
+  business_rule: ARRAY_CONTAINS(payload.required_document_types, ['application_proposal',
+    'income_statement', 'balance_sheet'])
+  cross_column_relationship: None
+- column: payload.required_documents
+  description: The 'required_documents' field must contain at least one valid document
+    type.
+  business_rule: payload.required_documents IS NOT NULL AND payload.required_documents
+    <> '[]'
+  cross_column_relationship: None
+- column: payload.session_id
+  description: A unique identifier for each run session of a data processing job.
+  business_rule: session_id MUST be a valid UUID format
+  cross_column_relationship: None
+- column: payload.started_at
+  description: The 'started_at' column represents the timestamp when an event was
+    initiated.
+  business_rule: payload.started_at MUST be a valid ISO 8601 timestamp in the format
+    'YYYY-MM-DDThh:mm:ss.ffffffZ'
+  cross_column_relationship: payload.submitted_at MUST be greater than payload.started_at
+- column: payload.submission_channel
+  description: The 'submission_channel' column indicates the source of the event submission.
+  business_rule: payload.submission_channel IN ('branch', 'web', 'mobile', 'agent')
+  cross_column_relationship: None
+- column: payload.submitted_at
+  description: The submitted_at column represents the timestamp when an event was
+    submitted.
+  business_rule: submitted_at must be a valid ISO-8601 datetime string in the format
+    YYYY-MM-DDThh:mm:ss.fffZ
+  cross_column_relationship: None
+- column: payload.tables_extracted
+  description: The number of tables extracted during an event.
+  business_rule: payload.tables_extracted >= 1
+  cross_column_relationship: None
+- column: payload.tool_duration_ms
+  description: The tool duration in milliseconds for the event payload.
+  business_rule: payload.tool_duration_ms >= 0 AND payload.tool_duration_ms IS NOT
+    NULL
+  cross_column_relationship: None
+- column: payload.tool_input_summary
+  description: The 'tool_input_summary' column contains a summary of the input data
+    for a tool used in the event.
+  business_rule: 'REGEXP_MATCH(payload.tool_input_summary, ''^PDF extraction: [a-zA-Z_]+$'')'
+  cross_column_relationship: The 'tool_name' column should indicate the tool that
+    processed the input data summarized in 'tool_input_summary'.
+- column: payload.tool_name
+  description: The tool_name column represents the name of the tool used in the data
+    processing pipeline.
+  business_rule: payload.tool_name IS NOT NULL AND payload.tool_name <> ''
+  cross_column_relationship: None
+- column: payload.tool_output_summary
+  description: The 'payload.tool_output_summary' column contains a summary of the
+    financial line items extracted by a tool.
+  business_rule: LENGTH(TRIM(payload.tool_output_summary)) > 0 AND payload.tool_output_summary
+    LIKE 'Extracted % financial line items'
+  cross_column_relationship: payload.tool_name, payload.uploaded_at, payload.uploaded_by
+- column: payload.uploaded_at
+  description: Field 'payload.uploaded_at' of type string.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
+- column: payload.uploaded_by
+  description: The 'uploaded_by' column should only contain the value 'applicant'.
+  business_rule: payload.uploaded_by = 'applicant'
+  cross_column_relationship: None
+- column: payload.validated_at
+  description: Ensure the 'validated_at' timestamp is a valid ISO 8601 format date
+    and time.
+  business_rule: CAST(payload.validated_at AS TIMESTAMP) IS NOT NULL
+  cross_column_relationship: None
+- column: payload.validation_duration_ms
+  description: The validation_duration_ms column represents the time in milliseconds
+    for the event validation process.
+  business_rule: validation_duration_ms >= 0
+  cross_column_relationship: The validation_duration_ms should be less than or equal
+    to the time difference between payload.validated_at and payload.written_at.
+- column: payload.written_at
+  description: The 'written_at' column represents the timestamp when the event was
+    written to the database.
+  business_rule: payload.written_at MUST be a valid ISO 8601 timestamp format
+  cross_column_relationship: None
+- column: recorded_at
+  description: ISO 8601 UTC timestamp when the event was written to the store.
+  business_rule: recorded_at >= occurred_at
+  cross_column_relationship: recorded_at - occurred_at measures event capture latency
+- column: schema_version
+  description: The schema_version column stores the version of the data schema used
+    for the event.
+  business_rule: schema_version SHOULD BE a valid semantic version (e.g., '1.0', '2.3.1')
+  cross_column_relationship: None
+- column: sequence_number
+  description: Monotonically increasing integer per aggregate_id ensuring strict ordering.
+  business_rule: sequence_number = ROW_NUMBER() OVER (PARTITION BY aggregate_id ORDER
+    BY occurred_at)
+  cross_column_relationship: sequence_number gaps indicate missing events; duplicates
+    indicate replay errors
+lineage:
+  upstream:
+  - outputs/week5/seed_events.jsonl (Week 5 Event Ledger)
+  downstream:
+  - id: contracts-runner-py
+    description: contracts/runner.py (ValidationRunner)
+    fields_consumed:
+    - event_id
+    - occurred_at
+    - sequence_number
+    - event_type
+    - aggregate_id
+    breaking_if_changed:
+    - event_id
+  - id: enforcer-report
+    description: enforcer_report/ (EnforcerReport)
+    fields_consumed:
+    - event_id
+    - occurred_at
+    - sequence_number
+    - event_type
+    - aggregate_id
+    breaking_if_changed:
+    - event_id
+contacts:
+  owner: Yakob
+  team: 10 Academy TenX Week 7
+  email: yakob@10academy.org
+  channel: week7-data-contracts
+tags:
+- week7
+- data-contract
+- event-ledger
+- events

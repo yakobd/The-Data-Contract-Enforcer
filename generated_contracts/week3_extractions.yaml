@@ -1,0 +1,1930 @@
+kind: DataContract
+apiVersion: v3.0.0
+id: ea609135-913c-51f3-861f-33272d40246f
+info:
+  title: Week 7 — Extractions Data Contract
+  version: 1.0.0
+  owner: yakob@10academy.org
+  description: 'One record per extractions entry. Generated from 50 records on 2026-04-01.
+    Quality floor: 100.0%.'
+servers:
+  local:
+    type: local
+    path: outputs/week3/extractions.jsonl
+    format: jsonl
+terms:
+  usage: Internal inter-system data contract. Do not publish.
+  limitations: All required fields must remain non-null across schema versions.
+generatedAt: '2026-04-01T17:42:37.284596+00:00'
+generatedBy: contracts/generator.py
+recordCount: 50
+qualityFloor: 100.0
+tenant: 10academy
+domain: document-extraction
+status: active
+schema:
+  fields:
+  - name: doc_id
+    type: string
+    description: Unique identifier for the source document being processed.
+    required: true
+    primaryKey: true
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 50
+    sample_values:
+    - 2018_Audited_Financial_Statement_Report
+    - 20191010_Pharmaceutical-Manufacturing-Opportunites-in-Ethiopia_VF
+    - Audit Report - 2023
+    - CBE Annual Report 2009-10
+    - CBE Annual Report 2015-16_1
+    downstream_consumers:
+    - outputs/traces/runs.jsonl (LangSmith traces)
+    - contracts/runner.py (ValidationRunner)
+    - extractions (via FK doc_id → doc_id)
+    char_pattern: uuid-v4
+    profiler: ydata-profiling
+  - name: entities
+    type: array
+    description: The 'entities' column contains an array of named entities extracted
+      from text data.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 0
+    sample_values:
+    - '[]'
+    - '[{''entity_id'': ''7fdbdfc5-1519-49dd-aa2d-b8c3bb7b8f50'', ''name'': ''Investment'',
+      ''type'': ''OTHER'', ''canonical_value'': ''investment''}, {''entity_id'': ''be40134f-6e82-4787-afee-83d9235417a8'',
+      ''name'': ''Promotion'', ''type'': ''PERSON'', ''canonical_value'': ''promotion''},
+      {''entity_id'': ''59697276-3c50-4a45-a73c-ccab2e3a4b31'', ''name'': ''Objectives'',
+      ''type'': ''PERSON'', ''canonical_value'': ''objectives''}, {''entity_id'':
+      ''d759a5b7-605c-4db6-a9b6-0fe8e8ccad24'', ''name'': ''Ethiopia'', ''type'':
+      ''PERSON'', ''canonical_value'': ''ethiopia''}, {''entity_id'': ''38df8d4c-b1e8-4733-8900-4f8d32307ab0'',
+      ''name'': ''Industrial'', ''type'': ''OTHER'', ''canonical_value'': ''industrial''},
+      {''entity_id'': ''d9a9d377-3a3a-4f6b-84f8-ba84d07bbdcc'', ''name'': ''Park'',
+      ''type'': ''PERSON'', ''canonical_value'': ''park''}, {''entity_id'': ''3d886877-1721-413e-a11d-10a575689229'',
+      ''name'': ''Incentives'', ''type'': ''ORG'', ''canonical_value'': ''incentives''},
+      {''entity_id'': ''04068267-a07d-448e-9e7c-56aa843a480f'', ''name'': ''Addis'',
+      ''type'': ''PERSON'', ''canonical_value'': ''addis''}, {''entity_id'': ''cec3490d-c1b1-42a1-bdeb-04fb7177aa1e'',
+      ''name'': ''Ababa'', ''type'': ''PERSON'', ''canonical_value'': ''ababa''},
+      {''entity_id'': ''b58e862a-eac4-4869-b5ee-82201b9fd43c'', ''name'': ''International'',
+      ''type'': ''PERSON'', ''canonical_value'': ''international''}, {''entity_id'':
+      ''b9d3628d-d2db-40f9-9388-f8dd098fafb8'', ''name'': ''FDIs'', ''type'': ''OTHER'',
+      ''canonical_value'': ''fdis''}, {''entity_id'': ''0b647443-05e6-42df-a2ed-774e6651c1ca'',
+      ''name'': ''Africa'', ''type'': ''PERSON'', ''canonical_value'': ''africa''},
+      {''entity_id'': ''cbce3388-dafd-405f-a149-d792e4612b26'', ''name'': ''COMESA'',
+      ''type'': ''OTHER'', ''canonical_value'': ''comesa''}, {''entity_id'': ''76d76a40-c230-4a6d-935e-7c8e4006acbb'',
+      ''name'': ''AGOA'', ''type'': ''OTHER'', ''canonical_value'': ''agoa''}, {''entity_id'':
+      ''80517cf7-d4e6-4680-bab7-44be99762036'', ''name'': ''Strategic'', ''type'':
+      ''OTHER'', ''canonical_value'': ''strategic''}, {''entity_id'': ''2a4063c3-f622-4ccd-be50-1629f7a98a0f'',
+      ''name'': ''Economy'', ''type'': ''OTHER'', ''canonical_value'': ''economy''},
+      {''entity_id'': ''8b48cbf3-b1a7-4ab5-9410-53ac2662c209'', ''name'': ''East'',
+      ''type'': ''PERSON'', ''canonical_value'': ''east''}, {''entity_id'': ''b5a9c6f6-ee64-40cd-81d6-9b816582fad2'',
+      ''name'': ''African'', ''type'': ''PERSON'', ''canonical_value'': ''african''},
+      {''entity_id'': ''fa310f29-352f-46a9-9741-4cddf2057620'', ''name'': ''Pharmaceutical'',
+      ''type'': ''OTHER'', ''canonical_value'': ''pharmaceutical''}, {''entity_id'':
+      ''9be50caf-3af4-43c5-a322-abd06ee545a7'', ''name'': ''Mainly'', ''type'': ''OTHER'',
+      ''canonical_value'': ''mainly''}]'
+    - '[{''entity_id'': ''40aa0950-94a2-41f3-b7d7-f57d94720e9d'', ''name'': ''REPORT'',
+      ''type'': ''OTHER'', ''canonical_value'': ''report''}, {''entity_id'': ''1160138f-7bc6-404a-8530-8dee690a3cbd'',
+      ''name'': ''FINANCIAL'', ''type'': ''OTHER'', ''canonical_value'': ''financial''},
+      {''entity_id'': ''4c52721d-6826-4e5a-a77a-c6bfa1a480e6'', ''name'': ''STATEMENTS'',
+      ''type'': ''OTHER'', ''canonical_value'': ''statements''}, {''entity_id'': ''7d2324e8-45a5-4ba0-ae83-d8fad4a292bd'',
+      ''name'': ''JUNE'', ''type'': ''OTHER'', ''canonical_value'': ''june''}, {''entity_id'':
+      ''0f99d341-a677-4848-af65-001587df6225'', ''name'': ''BANK'', ''type'': ''ORG'',
+      ''canonical_value'': ''bank''}, {''entity_id'': ''81c49002-a489-44aa-8465-16f7849793d7'',
+      ''name'': ''ETHIOPIA'', ''type'': ''OTHER'', ''canonical_value'': ''ethiopia''},
+      {''entity_id'': ''06e29125-d7d8-4a6f-ab73-a30b16383983'', ''name'': ''Development'',
+      ''type'': ''OTHER'', ''canonical_value'': ''development''}]'
+    - '[{''entity_id'': ''16db3df4-0091-4b89-9e44-fd7d27f66a3d'', ''name'': ''VISION'',
+      ''type'': ''OTHER'', ''canonical_value'': ''vision''}, {''entity_id'': ''4dbd345a-1ec1-45f9-9249-10b753077b56'',
+      ''name'': ''MISSION'', ''type'': ''OTHER'', ''canonical_value'': ''mission''},
+      {''entity_id'': ''a2b0233e-c6a5-4fc4-b63e-98372034ab8e'', ''name'': ''MOTTO'',
+      ''type'': ''OTHER'', ''canonical_value'': ''motto''}, {''entity_id'': ''3fd3e867-b9ae-49a1-8440-2dba2d2b2852'',
+      ''name'': ''MESSAGE'', ''type'': ''OTHER'', ''canonical_value'': ''message''},
+      {''entity_id'': ''dc797ce0-7763-4772-8a8d-58dc0e3e3438'', ''name'': ''ADVISORY'',
+      ''type'': ''OTHER'', ''canonical_value'': ''advisory''}, {''entity_id'': ''9db41735-9ad1-4329-9a1d-d52f9f0b2830'',
+      ''name'': ''COMMITTEE'', ''type'': ''OTHER'', ''canonical_value'': ''committee''},
+      {''entity_id'': ''18ae26ef-c138-45ac-8f51-69d60adefbf2'', ''name'': ''STATEMENT'',
+      ''type'': ''OTHER'', ''canonical_value'': ''statement''}, {''entity_id'': ''19edb78b-874e-41c7-a348-1ae35676ca74'',
+      ''name'': ''HIGHLIGHTS'', ''type'': ''OTHER'', ''canonical_value'': ''highlights''},
+      {''entity_id'': ''891617e6-aafd-4eaa-ae61-2c86fdac3b36'', ''name'': ''GLOBAL'',
+      ''type'': ''OTHER'', ''canonical_value'': ''global''}, {''entity_id'': ''cb2d4850-e408-4d8b-8f3f-93fa668a28b4'',
+      ''name'': ''DOMESTIC'', ''type'': ''OTHER'', ''canonical_value'': ''domestic''},
+      {''entity_id'': ''7d88c737-1736-4057-b536-579f775b4ee3'', ''name'': ''Economy'',
+      ''type'': ''PERSON'', ''canonical_value'': ''economy''}, {''entity_id'': ''33e329df-1f00-4d01-9a9d-7b7d641eb98d'',
+      ''name'': ''Ethiopian'', ''type'': ''PERSON'', ''canonical_value'': ''ethiopian''},
+      {''entity_id'': ''59923878-6586-4e1b-b49e-30f4f5eaffd4'', ''name'': ''FINANCIAL'',
+      ''type'': ''OTHER'', ''canonical_value'': ''financial''}, {''entity_id'': ''d302ebe4-2288-4b9f-afc9-6c347cd60956'',
+      ''name'': ''STATEMENTS'', ''type'': ''OTHER'', ''canonical_value'': ''statements''},
+      {''entity_id'': ''ae2e7bd1-6afd-4941-ada2-64494e116806'', ''name'': ''Income'',
+      ''type'': ''ORG'', ''canonical_value'': ''income''}, {''entity_id'': ''b614c6da-e76b-478b-bbd4-b1291dcb49c2'',
+      ''name'': ''Expense'', ''type'': ''OTHER'', ''canonical_value'': ''expense''},
+      {''entity_id'': ''923cb9a1-3415-4851-831f-bed921741a84'', ''name'': ''Profit'',
+      ''type'': ''OTHER'', ''canonical_value'': ''profit''}, {''entity_id'': ''5c1c17a1-93f2-4a26-a28b-1728fd159705'',
+      ''name'': ''Balance'', ''type'': ''OTHER'', ''canonical_value'': ''balance''},
+      {''entity_id'': ''f466ef2d-6c43-4f59-b5c6-56948a837788'', ''name'': ''Sheet'',
+      ''type'': ''PERSON'', ''canonical_value'': ''sheet''}, {''entity_id'': ''cf3f8c0d-dade-4bcf-8a87-d9df69038df5'',
+      ''name'': ''Assets'', ''type'': ''OTHER'', ''canonical_value'': ''assets''}]'
+    - '[{''entity_id'': ''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'', ''name'': ''STATISTICAL'',
+      ''type'': ''OTHER'', ''canonical_value'': ''statistical''}, {''entity_id'':
+      ''a81637b0-0b55-4887-b8ce-81e14181ce10'', ''name'': ''SERVICE'', ''type'': ''OTHER'',
+      ''canonical_value'': ''service''}, {''entity_id'': ''c5eebd7e-9c8f-48ba-a543-81285a743164'',
+      ''name'': ''Bulletin'', ''type'': ''OTHER'', ''canonical_value'': ''bulletin''},
+      {''entity_id'': ''f138eb3a-60f1-4e7a-baa8-d2ad977d9c51'', ''name'': ''NEWS'',
+      ''type'': ''OTHER'', ''canonical_value'': ''news''}, {''entity_id'': ''8054e1b3-730e-4ef1-9abd-e918fd245e03'',
+      ''name'': ''RELEASE'', ''type'': ''OTHER'', ''canonical_value'': ''release''},
+      {''entity_id'': ''5c42e1cb-7fff-4cf0-b23e-a693c5e09ce2'', ''name'': ''INFLATION'',
+      ''type'': ''OTHER'', ''canonical_value'': ''inflation''}, {''entity_id'': ''ba53a069-db07-48db-b315-0c93f9328baf'',
+      ''name'': ''Summary'', ''type'': ''OTHER'', ''canonical_value'': ''summary''},
+      {''entity_id'': ''6b9d4b6b-d366-449d-b616-414ef4153f6b'', ''name'': ''Food'',
+      ''type'': ''OTHER'', ''canonical_value'': ''food''}, {''entity_id'': ''e6470984-ee75-4686-8020-1e5fb4d8b8f5'',
+      ''name'': ''Beverages'', ''type'': ''PERSON'', ''canonical_value'': ''beverages''},
+      {''entity_id'': ''94a626ff-e24f-4a0d-959b-de58a35620de'', ''name'': ''Year'',
+      ''type'': ''PERSON'', ''canonical_value'': ''year''}, {''entity_id'': ''888e99af-acd6-4f8e-b955-34fb2b4ac1bc'',
+      ''name'': ''Alcoholic'', ''type'': ''PERSON'', ''canonical_value'': ''alcoholic''},
+      {''entity_id'': ''4724d719-bf96-4c19-97dc-bc45c21ae222'', ''name'': ''Rate'',
+      ''type'': ''PERSON'', ''canonical_value'': ''rate''}, {''entity_id'': ''cf121e7d-32e9-4f12-a622-1d006a0275d1'',
+      ''name'': ''Moving'', ''type'': ''PERSON'', ''canonical_value'': ''moving''},
+      {''entity_id'': ''9c1bdc1b-9ad1-4688-a4af-cd4b4fccb1b5'', ''name'': ''Average'',
+      ''type'': ''PERSON'', ''canonical_value'': ''average''}, {''entity_id'': ''db785bbb-2420-484b-81f9-e4e851befa89'',
+      ''name'': ''General'', ''type'': ''PERSON'', ''canonical_value'': ''general''},
+      {''entity_id'': ''27418ff8-1b5c-40c1-9428-5b49754b528b'', ''name'': ''Annual'',
+      ''type'': ''OTHER'', ''canonical_value'': ''annual''}, {''entity_id'': ''25bd4e80-e06c-4bbb-98d1-26dd4dcbb8ee'',
+      ''name'': ''GLOSSARY'', ''type'': ''OTHER'', ''canonical_value'': ''glossary''},
+      {''entity_id'': ''59de2e6b-e12a-490d-97ed-3966664da0af'', ''name'': ''Content'',
+      ''type'': ''OTHER'', ''canonical_value'': ''content''}, {''entity_id'': ''8f03ea8c-26e6-4ae5-b206-e1fe9fac8887'',
+      ''name'': ''ETHIOPIAN'', ''type'': ''OTHER'', ''canonical_value'': ''ethiopian''},
+      {''entity_id'': ''40fb4403-c604-46b0-82fa-f9b41f089351'', ''name'': ''MONTHLY'',
+      ''type'': ''OTHER'', ''canonical_value'': ''monthly''}]'
+    downstream_consumers:
+    - outputs/traces/runs.jsonl (LangSmith traces)
+    - contracts/runner.py (ValidationRunner)
+    profiler: ydata-profiling
+  - name: extracted_at
+    type: string (timestamp)
+    description: The extracted_at column contains timestamps of when the document
+      extractions occurred.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 50
+    sample_values:
+    - '2026-04-01T11:09:25.699160+00:00'
+    - '2026-04-01T11:09:25.742097+00:00'
+    - '2026-04-01T11:09:25.769093+00:00'
+    - '2026-03-07T13:55:17.327698+00:00'
+    - '2026-04-01T11:09:25.806114+00:00'
+    downstream_consumers:
+    - outputs/traces/runs.jsonl (LangSmith traces)
+    - contracts/runner.py (ValidationRunner)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: extracted_facts
+    type: array
+    description: Array of fact objects extracted from the document, each with text,
+      entities, and confidence.
+    required: true
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 0
+    sample_values:
+    - '[]'
+    - '[{''fact_id'': ''6438f6ad-243c-40c2-92e3-c553a2d56e0a'', ''text'': ''Our Investment
+      Promotion Objectives are:'', ''entity_refs'': [''7fdbdfc5-1519-49dd-aa2d-b8c3bb7b8f50'',
+      ''be40134f-6e82-4787-afee-83d9235417a8'', ''59697276-3c50-4a45-a73c-ccab2e3a4b31''],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Our Investment Promotion
+      Objectives are:''}, {''fact_id'': ''ede90c05-2cab-4d00-800c-d9b008a161d2'',
+      ''text'': ''Investment - Why do business in Ethiopia?'', ''entity_refs'': [],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Investment - Why
+      do business in Ethiopia?''}, {''fact_id'': ''decc7b96-f524-4523-bdd6-23cc8fceefd9'',
+      ''text'': ''Ethiopia has a clear vision for industrialization that builds off
+      of its rapid growth'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''Ethiopia has a clear vision for industrialization that
+      builds off of its rapid growth''}, {''fact_id'': ''db91a19e-34d0-4261-8a90-7266fb806481'',
+      ''text'': ''Strategic sectors have been identified for investment including
+      pharmaceutical and textile manufacturing'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Strategic sectors have been identified
+      for investment including pharmaceutical and textile manufacturing''}, {''fact_id'':
+      ''77bf88a2-491f-490a-89d3-0814bab91b9f'', ''text'': ''Investment - Why do business
+      in Ethiopia?'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Investment - Why do business in Ethiopia?''}, {''fact_id'': ''521dd1fb-ea98-4579-96b6-90f72de42d1c'',
+      ''text'': ''Pharmaceutical manufacturing sectors is nascent with a potential
+      for growth'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Pharmaceutical manufacturing sectors is nascent with a potential for growth''},
+      {''fact_id'': ''350fc92d-5b4c-42c1-b767-da4b22ed0f6f'', ''text'': ''Mainly driven
+      by:'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Mainly driven by:''}, {''fact_id'': ''a62a9d90-7b46-41b9-800e-8ec1ac21a284'',
+      ''text'': ''Ethiopian pharmaceutical market has been growing at 15% per year
+      and is predicted to reach $905 million by 2020'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Ethiopian pharmaceutical market
+      has been growing at 15% per year and is predicted to reach $905 million by 2020''},
+      {''fact_id'': ''9b95c4f1-82cf-46b1-b985-45e50ce2fcf6'', ''text'': ''Pharmaceutical
+      market in Ethiopia'', ''entity_refs'': [''d759a5b7-605c-4db6-a9b6-0fe8e8ccad24''],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Pharmaceutical market
+      in Ethiopia''}, {''fact_id'': ''72193d6c-795a-481e-9d0e-a9d65af7a25f'', ''text'':
+      ''Large & growing population and rising health care coverage make pharmaceutical
+      manufacturing an attractive endeavor'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Large & growing population and rising
+      health care coverage make pharmaceutical manufacturing an attractive endeavor''},
+      {''fact_id'': ''e9b6a243-1453-47ac-9ed4-68e10ecb4e20'', ''text'': ''Key drivers
+      of pharmaceutical demand in Ethiopia'', ''entity_refs'': [''d759a5b7-605c-4db6-a9b6-0fe8e8ccad24''],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Key drivers of pharmaceutical
+      demand in Ethiopia''}, {''fact_id'': ''9607a80d-08ba-4330-840f-29ab97cceceb'',
+      ''text'': ''Growing population'', ''entity_refs'': [], ''confidence'': 0.9,
+      ''page_ref'': 1, ''source_excerpt'': ''Growing population''}, {''fact_id'':
+      ''5f109769-e676-4e3a-9003-e93fab948945'', ''text'': "Ethiopia''s textile and
+      garment industry presents unique opportunities to investors", ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': "Ethiopia''s textile
+      and garment industry presents unique opportunities to investors"}, {''fact_id'':
+      ''df111907-1930-456b-a6bc-ad60973fd349'', ''text'': ''Investment - Why do business
+      in Ethiopia?'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Investment - Why do business in Ethiopia?''}, {''fact_id'': ''7da2f38f-db7a-4d59-88ef-0d10270b857b'',
+      ''text'': ''Kilinto Industrial Park is the first IP specializing in pharmaceuticals'',
+      ''entity_refs'': [''38df8d4c-b1e8-4733-8900-4f8d32307ab0'', ''d9a9d377-3a3a-4f6b-84f8-ba84d07bbdcc''],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Kilinto Industrial
+      Park is the first IP specializing in pharmaceuticals''}, {''fact_id'': ''7f65ee19-9468-4f4d-8340-c8db00b0b734'',
+      ''text'': ''Location'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''Location''}, {''fact_id'': ''071bc742-12ed-4b5d-8559-e78212f4b064'',
+      ''text'': ''Population and employment'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Population and employment''}, {''fact_id'':
+      ''1f336cb4-ff29-4f4c-9f5d-53071a04aebb'', ''text'': ''Industrial park area'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Industrial park area''}, {''fact_id'': ''ccc1ff0b-098c-4fbc-b27c-80cb6f9e4ef2'',
+      ''text'': ''Industrial park facilities'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Industrial park facilities''}, {''fact_id'':
+      ''e4711336-912c-42d0-b55d-e4eba8cb68ef'', ''text'': ''Industrial park key characteristics'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Industrial park key characteristics''}, {''fact_id'': ''3a2db748-2d71-4fa7-8049-ac90e6b1150e'',
+      ''text'': ''Proactive business environment - tailored incentives and support'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Proactive business environment - tailored incentives and support''}, {''fact_id'':
+      ''7d6e2d62-fb60-4aee-99d9-58e2da60f392'', ''text'': ''Fiscal Incentives tailored
+      to investment'', ''entity_refs'': [''3d886877-1721-413e-a11d-10a575689229''],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Fiscal Incentives
+      tailored to investment''}, {''fact_id'': ''20ba2520-eed2-4b46-893b-42bea8ace697'',
+      ''text'': ''Non-fiscal Incentives tailored to investment'', ''entity_refs'':
+      [''3d886877-1721-413e-a11d-10a575689229''], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''Non-fiscal Incentives tailored to investment''}, {''fact_id'':
+      ''7ed8f2cd-083b-461d-a771-c70d750124c2'', ''text'': ''Industry support targeting
+      manufacturers'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1,
+      ''source_excerpt'': ''Industry support targeting manufacturers''}, {''fact_id'':
+      ''d6ecc630-9d4c-4476-9899-a41de25263b5'', ''text'': ''10 minutes drive from
+      Addis Ababa International Airport.'', ''entity_refs'': [''04068267-a07d-448e-9e7c-56aa843a480f'',
+      ''cec3490d-c1b1-42a1-bdeb-04fb7177aa1e'', ''b58e862a-eac4-4869-b5ee-82201b9fd43c''],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''10 minutes drive
+      from Addis Ababa International Airport.''}, {''fact_id'': ''1966d70d-e3a5-4fae-8628-c4b2963217a6'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''dbcc9c73-181f-4275-878e-46c636aef615'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''c2304bc3-0509-4553-bcbe-443e0ae7dfad'',
+      ''text'': ''## Our Investment Promotion Objectives are:'', ''entity_refs'':
+      [''7fdbdfc5-1519-49dd-aa2d-b8c3bb7b8f50'', ''be40134f-6e82-4787-afee-83d9235417a8'',
+      ''59697276-3c50-4a45-a73c-ccab2e3a4b31''], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''## Our Investment Promotion Objectives are:''}, {''fact_id'':
+      ''0d1567a9-41c7-41c6-a76f-1eab2d9fa481'', ''text'': ''<!-- image -->'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''<!-- image -->''},
+      {''fact_id'': ''eea984a9-6604-4157-9e82-bc8c92f6259b'', ''text'': ''Coordination
+      and collaboration to attract FDIs  to Ethiopia'', ''entity_refs'': [''b9d3628d-d2db-40f9-9388-f8dd098fafb8'',
+      ''d759a5b7-605c-4db6-a9b6-0fe8e8ccad24''], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''Coordination and collaboration to attract FDIs  to
+      Ethiopia''}, {''fact_id'': ''7c2b4f0b-2182-4216-8c43-4a9ad0cd8c6c'', ''text'':
+      ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''756e8bc8-cb0e-402f-97ca-9799b895a2a1'',
+      ''text'': ''人'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1,
+      ''source_excerpt'': ''人''}, {''fact_id'': ''572a27b7-fa5f-4d09-ab46-9f7eb97f1c95'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''7f257621-0a6d-443c-b520-f45153a4cd68'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''46e6a024-b3f6-49d4-9ba7-02cf6c00450f'',
+      ''text'': ''Link up and network with the international community for soliciting
+      support'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Link up and network with the international community for soliciting support''},
+      {''fact_id'': ''c26cc3d0-8a50-4514-ac52-27037980e3d3'', ''text'': ''Pitch potential
+      manufacturing opportunities in Ethiopia &amp; enablers'', ''entity_refs'': [''d759a5b7-605c-4db6-a9b6-0fe8e8ccad24''],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Pitch potential
+      manufacturing opportunities in Ethiopia &amp; enablers''}, {''fact_id'': ''f4da2c9a-1743-4846-af32-4c621d41707f'',
+      ''text'': "Learn Ethiopia''s effort in developing the manufacturing sector in
+      general", ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      "Learn Ethiopia''s effort in developing the manufacturing sector in general"},
+      {''fact_id'': ''9d656fcb-254c-43a4-bae4-8a6b3a9449cb'', ''text'': ''<!-- image
+      -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''f555dda2-f753-406e-9acb-c2e0742d8134'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''696dfde6-319a-4908-a698-56c754e039b6'',
+      ''text'': ''## Investment - Why do business in Ethiopia?'', ''entity_refs'':
+      [''7fdbdfc5-1519-49dd-aa2d-b8c3bb7b8f50''], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''## Investment - Why do business in Ethiopia?''}, {''fact_id'':
+      ''b8bbd667-d45c-4071-97fa-77f92bc682bf'', ''text'': ''<!-- image -->'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''<!-- image -->''},
+      {''fact_id'': ''cf884f1f-c848-4d42-92d1-1791c937ebb6'', ''text'': ''<!-- image
+      -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''142123ef-03d2-41aa-a6cd-5db77d8a640b'',
+      ''text'': ''Opportunities to invest in high value pharmaceutical sector'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Opportunities
+      to invest in high value pharmaceutical sector''}, {''fact_id'': ''de1e63cc-c7dc-4e01-af16-7fdf12dfa594'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''8d04c3f1-8f72-43e6-b96f-54ff7d50aab8'',
+      ''text'': ''Benefit based on tailored enabling environment including specialized
+      parks'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Benefit based on tailored enabling environment including specialized parks''},
+      {''fact_id'': ''c4a7991e-f543-495c-aa50-5e2c8f4ba9db'', ''text'': ''3'', ''entity_refs'':
+      [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''3''}, {''fact_id'':
+      ''c7c486c1-b123-4798-8c42-10bd74ae2710'', ''text'': ''<!-- image -->'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''<!-- image -->''},
+      {''fact_id'': ''bf67416a-6b59-4c31-9c16-9d11ec0e8910'', ''text'': ''## Ethiopia
+      has a clear vision for industrialization that builds off of its rapid growth'',
+      ''entity_refs'': [''d759a5b7-605c-4db6-a9b6-0fe8e8ccad24''], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''## Ethiopia has a clear vision for
+      industrialization that builds off of its rapid growth''}, {''fact_id'': ''4daf5008-9b86-4330-8dcc-63e50b1f0c78'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''26fb7a42-83d6-4d5a-ac8d-7c8e412e7e80'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''8330ce86-0a5e-4332-b654-d8141875206f'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''bc74b9be-f3fa-4c2c-8688-c55aa573285a'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''8192fac2-1b70-44dd-b775-719c97bb160f'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''76442e64-100d-4e7a-9a64-5c784c088ce9'',
+      ''text'': ''One of the fastest growing economies with 9.68% average growth over
+      the past 10 years.'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''One of the fastest growing economies with 9.68% average
+      growth over the past 10 years.''}, {''fact_id'': ''7ef791bb-bc44-479f-9bcc-527e94a25930'',
+      ''text'': ''One of the top destinations for foreign direct investment standing
+      5 th in Africa.'', ''entity_refs'': [''0b647443-05e6-42df-a2ed-774e6651c1ca''],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''One of the top destinations
+      for foreign direct investment standing 5 th in Africa.''}, {''fact_id'': ''7f4d78b5-c498-478f-bfb2-e9cecc8656ed'',
+      ''text'': ''Productive labor force with more than 60% of its population between
+      the ages of 15 - 65.'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''Productive labor force with more than 60% of its population
+      between the ages of 15 - 65.''}, {''fact_id'': ''af64cb96-9b63-4bef-9bdd-5f01cc00f9be'',
+      ''text'': ''Dedicated leadership with a vision to become a manufacturing hub
+      in Africa by 2025.'', ''entity_refs'': [''0b647443-05e6-42df-a2ed-774e6651c1ca''],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Dedicated leadership
+      with a vision to become a manufacturing hub in Africa by 2025.''}, {''fact_id'':
+      ''41b107ce-e4b2-49e1-8c51-06ae35faf5d6'', ''text'': ''Member of preferential
+      trade agreements and bilateral investment treaties - COMESA, AGOA, etc.'', ''entity_refs'':
+      [''cbce3388-dafd-405f-a149-d792e4612b26'', ''76d76a40-c230-4a6d-935e-7c8e4006acbb''],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Member of preferential
+      trade agreements and bilateral investment treaties - COMESA, AGOA, etc.''},
+      {''fact_id'': ''44daf4dc-522d-4488-a8f3-ca453ab55465'', ''text'': ''<!-- image
+      -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''0aa78c02-5cef-41b1-83e6-9f20124c08f5'',
+      ''text'': ''## Strategic sectors have been identified for investment including
+      pharmaceutical and textile manufacturing'', ''entity_refs'': [''80517cf7-d4e6-4680-bab7-44be99762036''],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''## Strategic sectors
+      have been identified for investment including pharmaceutical and textile manufacturing''},
+      {''fact_id'': ''c772c8ec-5447-4284-9b7c-d54a06062c0a'', ''text'': ''<!-- image
+      -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''93372aad-7962-4436-a16b-b04f2a0a487d'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''75a03416-2e5d-441f-9204-175551c442a3'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''f59b5d64-3017-415f-b9fd-77b906b18834'',
+      ''text'': ''## Investment - Why do business in Ethiopia?'', ''entity_refs'':
+      [''7fdbdfc5-1519-49dd-aa2d-b8c3bb7b8f50''], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''## Investment - Why do business in Ethiopia?''}, {''fact_id'':
+      ''e8ff5096-1b4f-4327-834b-3c09e00de8ed'', ''text'': ''<!-- image -->'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''<!-- image -->''},
+      {''fact_id'': ''3ae2e2bf-2557-46c9-8a85-ffe5d7536b2f'', ''text'': ''Growing
+      Economy, dynamic market with access to East African market'', ''entity_refs'':
+      [''2a4063c3-f622-4ccd-be50-1629f7a98a0f'', ''8b48cbf3-b1a7-4ab5-9410-53ac2662c209'',
+      ''b5a9c6f6-ee64-40cd-81d6-9b816582fad2''], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''Growing Economy, dynamic market with access to East
+      African market''}, {''fact_id'': ''ff5dc51a-fc44-4ae4-bfd3-014d8183ca03'', ''text'':
+      ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''705edc94-8dff-417f-8056-1615a1d8a28b'',
+      ''text'': ''Opportunities to invest in high value pharmaceutical sector'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Opportunities
+      to invest in high value pharmaceutical sector''}, {''fact_id'': ''2f7faeff-3cde-4ad9-980c-de868b529fb6'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''f2e00d58-212d-4b6c-9a73-c9bac834735a'',
+      ''text'': ''Benefit based on tailored enabling environment including specialized
+      parks'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Benefit based on tailored enabling environment including specialized parks''},
+      {''fact_id'': ''23d2d7b0-cf21-4bfb-a008-287d05542e9b'', ''text'': ''<!-- image
+      -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''1dc3bb2a-4535-48a4-9a36-b76a3399a68f'',
+      ''text'': ''## Pharmaceutical manufacturing sectors is nascent with a potential
+      for growth'', ''entity_refs'': [''fa310f29-352f-46a9-9741-4cddf2057620''], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''## Pharmaceutical manufacturing
+      sectors is nascent with a potential for growth''}, {''fact_id'': ''f33410cd-07d9-4101-8991-ebeb2fc2cc70'',
+      ''text'': "Ethiopia''s pharmaceutical sector market size", ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': "Ethiopia''s pharmaceutical
+      sector market size"}, {''fact_id'': ''71678ae6-bda9-45f1-99d8-c58d8bc7f55f'',
+      ''text'': ''## Mainly driven by:'', ''entity_refs'': [], ''confidence'': 0.9,
+      ''page_ref'': 1, ''source_excerpt'': ''## Mainly driven by:''}, {''fact_id'':
+      ''ec028bd7-f587-4971-9e37-9756c48c21ce'', ''text'': ''<!-- image -->'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''<!-- image -->''},
+      {''fact_id'': ''0f3fb52f-e99a-4ff4-86f4-58daef54f3d7'', ''text'': ''<!-- image
+      -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''6d341f8a-8b0a-4adc-ab6b-84e91735b0c6'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''7e7bc80f-5c09-42be-97a8-884d592a3aae'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''91c6d10d-5493-4e0b-9e12-5eb355083cb5'',
+      ''text'': ''Import'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''Import''}, {''fact_id'': ''1b7a8f69-81be-41e7-be52-aff6036c82ae'',
+      ''text'': ''12% of GDP to health (75% on essential medicines &amp; services)'',
+      ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''12% of GDP to health (75% on essential medicines &amp; services)''}, {''fact_id'':
+      ''73d1d281-e4d6-4043-a83a-b342e35fd504'', ''text'': ''Out of pocket expenditure
+      (46% of total expenditure)'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''Out of pocket expenditure (46% of total expenditure)''},
+      {''fact_id'': ''596c9108-ffa3-4010-b78b-33907ad43026'', ''text'': ''Government
+      10 years expenditure for the sector (15B USD )'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Government 10 years expenditure
+      for the sector (15B USD )''}, {''fact_id'': ''be45df18-4526-4c74-9616-1cf35d3e0bd5'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''a3767aa9-3258-4702-944f-04bd6bf2af9f'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''11aea0f1-af23-469f-823b-1e9fa3288a23'',
+      ''text'': ''- One of the first African countries to develop a national strategy
+      for pharmaceutical manufacturing - Strong investment policy focused on pharmaceuticals
+      including tax exemptions, one-stop-shop services and price preference in public
+      procurement - Potential to serve &gt;$20 billion pharmaceutical market in Africa'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''- One of the first African countries to develop a national strategy for pharmaceutical
+      manufacturing - Strong investment policy focused on pharmaceuticals including
+      tax exemptions, one-stop-shop servi''}, {''fact_id'': ''c0300d03-5244-4f24-9d69-b85f3b5f40b9'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''f5eec932-584a-4852-add5-853434871336'',
+      ''text'': ''## Ethiopian pharmaceutical market has been growing at 15% per year
+      and is predicted to reach $905 million by 2020'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''## Ethiopian pharmaceutical market
+      has been growing at 15% per year and is predicted to reach $905 million by 2020''},
+      {''fact_id'': ''1c5155d7-1b9f-4ff7-802a-9b1cf711451f'', ''text'': ''<!-- image
+      -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''0df1aef9-af92-4d67-8a00-48ef1846f687'',
+      ''text'': ''Note:'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''Note:''}, {''fact_id'': ''1f9793a1-e288-44ba-a320-2961e42b1082'',
+      ''text'': ''*Forecast'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''*Forecast''}, {''fact_id'': ''ba2c5649-4080-4623-95ea-4f44a55582e2'',
+      ''text'': ''Source'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''Source''}, {''fact_id'': ''da6df8d9-a1c6-4c9d-8912-25f3a8d2725f'',
+      ''text'': '': Frost &amp; Sullivan, World Bank, National Strategy and Plan of
+      Action for Pharmaceutical Manufacturing'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': '': Frost &amp; Sullivan, World Bank,
+      National Strategy and Plan of Action for Pharmaceutical Manufacturing''}, {''fact_id'':
+      ''73fb9b14-b548-49ed-9a55-ef875ed0805e'', ''text'': ''- Local market has been
+      growing steadily at an average of 15% per year - With growing population, increased
+      access to health services and a growing middle-class , demand is projected to
+      grow exponentially &amp; reach &gt;3.6 billion by 2030 - Ethiopia currently
+      imports ~85% of its pharmaceutical needs -a big gap that is yet to be fulfilled
+      by manufacturing locally'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''- Local market has been growing steadily at an average
+      of 15% per year - With growing population, increased access to health services
+      and a growing middle-class , demand is projected to grow exponenti''}, {''fact_id'':
+      ''9219bd37-1d16-497e-a640-8cb73f6119ce'', ''text'': ''<!-- image -->'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''<!-- image -->''},
+      {''fact_id'': ''a007f089-32a2-4208-b445-57626f75240a'', ''text'': ''## Large
+      &amp; growing population and rising health care coverage make pharmaceutical
+      manufacturing an attractive endeavor'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''## Large &amp; growing population
+      and rising health care coverage make pharmaceutical manufacturing an attractive
+      endeavor''}, {''fact_id'': ''9c7438ff-f27a-4e75-8d94-7b437c4b3104'', ''text'':
+      ''## Key drivers of pharmaceutical demand in Ethiopia'', ''entity_refs'': [],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''## Key drivers of
+      pharmaceutical demand in Ethiopia''}, {''fact_id'': ''8abd6227-60e3-4f02-944d-377b127a31ac'',
+      ''text'': "- Second-largest population in Africa (&gt;100M, ~8.5% of Africa''s
+      population ); growth of 2.3% per year is expected - With average economic growth
+      of &gt;10% per year, increase in disposable income will influence spending on
+      pharmaceutical products - Increasing healthcare coverage by government to the
+      large rural population creates growing demand for pharmaceutical products. -
+      Primary health care service coverage reached 100% in 2015 - Awareness, diagnosis
+      and treatment are increasing - High bu", ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': "- Second-largest population in Africa
+      (&gt;100M, ~8.5% of Africa''s population ); growth of 2.3% per year is expected
+      - With average economic growth of &gt;10% per year, increase in disposable income
+      w"}, {''fact_id'': ''d70a048d-bded-4b92-a114-f93c0ec2e928'', ''text'': ''<!--
+      image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''d5abd200-4394-4f11-abe3-49aae0569897'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''7308dbb8-0866-404f-b9e6-250de2e83ba7'',
+      ''text'': "## Ethiopia''s textile and garment industry presents unique opportunities
+      to investors", ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      "## Ethiopia''s textile and garment industry presents unique opportunities to
+      investors"}, {''fact_id'': ''68d31add-1fc9-4990-8c59-6ab426ad515c'', ''text'':
+      ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''db866050-72b6-408e-9939-648cc7f4ff48'',
+      ''text'': ''- -Booming industry which has grown 7 fold since 2008 - -Emerging
+      as a regional hub for sourcing /contract manufacturers - -Managed to attract
+      leading global brands such as PVH, H&amp;M, Wuxi and Sunshine, - -More than
+      2.7 million hectare of suitable land availability for cotton cultivation - -Reliable
+      green energy supply with an estimated cost of 0.04 USD/kWh. - -Market access
+      to USA and EU through free trade agreements - -Textile manufacturing: producing
+      any goods prepared by weaving, knitting'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''- -Booming industry which has grown
+      7 fold since 2008 - -Emerging as a regional hub for sourcing /contract manufacturers
+      - -Managed to attract leading global brands such as PVH, H&amp;M, Wuxi and Suns''},
+      {''fact_id'': ''ce6187d0-5201-4f7a-93bc-caa0fc74fe76'', ''text'': ''<!-- image
+      -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''0b33d54d-49ee-4649-a26e-d2a8ff36b5dd'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''e1610a96-2b6e-452c-8b11-e105ba1b3e84'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''14d945e1-6504-4401-bc24-e7604cd5f755'',
+      ''text'': ''## Investment - Why do business in Ethiopia?'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''## Investment
+      - Why do business in Ethiopia?''}, {''fact_id'': ''e2ddc8c0-f971-4ef6-9d20-88aefcf481d3'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''b7e42d10-5c69-4802-9be5-36db4b564e13'',
+      ''text'': ''Growing Economy, dynamic market with access to East African market'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Growing Economy, dynamic market with access to East African market''}, {''fact_id'':
+      ''9175afbe-44c6-4187-82ed-2e86634de671'', ''text'': ''<!-- image -->'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''<!-- image -->''},
+      {''fact_id'': ''54f4f032-43d5-495f-b4b3-b49fddf02533'', ''text'': ''Opportunities
+      to invest in high value pharmaceutical sector'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Opportunities to invest in high
+      value pharmaceutical sector''}, {''fact_id'': ''2fd22c16-e8d6-4d38-9d0f-a126284682f3'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''80a0ef3b-c470-4f4b-8153-658b1be6874c'',
+      ''text'': ''Benefit based on tailored enabling environment'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Benefit based
+      on tailored enabling environment''}, {''fact_id'': ''6b4231a8-370b-4cd7-bbd0-2945a928e93e'',
+      ''text'': ''11'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1,
+      ''source_excerpt'': ''11''}, {''fact_id'': ''cbb2c6a0-d25f-4508-9ed6-da40b9a76484'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''6a9c1495-ea80-42eb-9851-48c507eb19eb'',
+      ''text'': ''## Kilinto Industrial Park is the first IP specializing in pharmaceuticals'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''## Kilinto Industrial Park is the first IP specializing in pharmaceuticals''},
+      {''fact_id'': ''ce7b146f-7a0e-492e-9989-f97c06ffe4b1'', ''text'': ''<!-- image
+      -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''abc55487-a6d1-4c6f-8ea9-b41a2411228b'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''26ab4e40-8a0b-49a6-82c6-daa9701b6226'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''36cb5aed-60cf-4f28-b2b5-dffd4012e8f5'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''4aa851c0-1e0b-4e51-9e96-24938f8b7d49'',
+      ''text'': ''## Location'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''## Location''}, {''fact_id'': ''4bd28dfe-7dfa-414e-b462-f8316b109139'',
+      ''text'': ''- Addis Ababa; 25 km from city center, 863 Km from Djibouti port
+      and 10 minutes drive from Bole International Airport'', ''entity_refs'': [],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''- Addis Ababa; 25
+      km from city center, 863 Km from Djibouti port and 10 minutes drive from Bole
+      International Airport''}, {''fact_id'': ''f9c4d6a6-b1ea-4d25-bb8a-1e8bd308cb5b'',
+      ''text'': ''## Population and employment'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''## Population and employment''},
+      {''fact_id'': ''c2523f9d-0499-4511-8297-5c8f849a9d55'', ''text'': ''- +4 million
+      people live in the city - Accessible to skilled labour'', ''entity_refs'': [],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''- +4 million people
+      live in the city - Accessible to skilled labour''}, {''fact_id'': ''50de24bb-77eb-4b96-bc80-b3358314f580'',
+      ''text'': ''## Industrial park area'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''## Industrial park area''}, {''fact_id'':
+      ''b3ffe175-cf9d-4f2e-a1c7-ec505867d43c'', ''text'': ''- Established on 279 ha
+      of land - 177 ha service land for manufacturing - Land is available at reasonable
+      lease prices'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''- Established on 279 ha of land - 177 ha service land for manufacturing -
+      Land is available at reasonable lease prices''}, {''fact_id'': ''1840019a-0597-4689-a17c-b17886649130'',
+      ''text'': ''## Industrial park facilities'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''## Industrial park facilities''},
+      {''fact_id'': ''34a6cb1e-6d79-4831-a7e9-1fe998e6c85c'', ''text'': ''- Health
+      Center'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''- Health Center''}, {''fact_id'': ''2e55dbe6-a997-44fb-91ff-3982832cbb88'',
+      ''text'': ''- Police Station'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''- Police Station''}, {''fact_id'': ''d0be0628-5a20-4009-b812-0d453e49b41a'',
+      ''text'': ''- One-Stop Shop Services'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''- One-Stop Shop Services''}, {''fact_id'':
+      ''a61c6a73-9cbb-4f97-8733-52612160160a'', ''text'': ''- Commercial Building'',
+      ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''- Commercial Building''}, {''fact_id'': ''6766b11e-0b97-4152-b08c-277292b3c2f0'',
+      ''text'': ''- Fire Brigade &amp; 24/7 Security Services'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''- Fire Brigade
+      &amp; 24/7 Security Services''}, {''fact_id'': ''7db79c4a-18f9-45fc-8226-0cd5948ad171'',
+      ''text'': ''- Waste Treatment Facilities'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''- Waste Treatment Facilities''},
+      {''fact_id'': ''c51cb9aa-e7de-49ae-8c9c-ac40709b4498'', ''text'': ''<!-- image
+      -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''e06464b0-ec00-441b-90e6-debc5c52a459'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''a11a4bb1-d29c-43db-a72c-df846a90cab6'',
+      ''text'': ''## Industrial park key characteristics'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''## Industrial park key characteristics''},
+      {''fact_id'': ''b5e76521-85c0-494e-b709-9d62d73efd34'', ''text'': ''<!-- image
+      -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''f7c27ce1-b6db-4667-9f25-19b3f447afb8'',
+      ''text'': ''SECTOR SPECIALIZATION'', ''entity_refs'': [], ''confidence'': 0.92,
+      ''page_ref'': 1, ''source_excerpt'': ''SECTOR SPECIALIZATION''}, {''fact_id'':
+      ''40108cfe-bab6-468e-9805-6c501050bb47'', ''text'': ''<!-- image -->'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''<!-- image -->''},
+      {''fact_id'': ''9edb5ee9-b6b1-4071-84bc-87bd0ba073b7'', ''text'': ''<!-- image
+      -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''34a424c5-57de-4a0d-bbcc-003319b9bd0a'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''485b1c62-e4a0-4efc-a56e-bc1790e3bd76'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''997c1bb6-2aad-4065-b083-4484e5fc79dd'',
+      ''text'': ''EXPORT ORINTED'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''EXPORT ORINTED''}, {''fact_id'': ''f9f5260c-021e-4e4f-8a6c-648baffa8cf0'',
+      ''text'': ''VERTICALY INTEGERATED'', ''entity_refs'': [], ''confidence'': 0.92,
+      ''page_ref'': 1, ''source_excerpt'': ''VERTICALY INTEGERATED''}, {''fact_id'':
+      ''d869ddbb-03b1-4f2e-becc-4f85f3e71a94'', ''text'': ''SUSTAINABILITY'', ''entity_refs'':
+      [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''SUSTAINABILITY''},
+      {''fact_id'': ''9d7e5b9d-c815-4b30-84e5-5d96ab71bbb1'', ''text'': ''SKILL DEVELOPMENT'',
+      ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''SKILL DEVELOPMENT''}, {''fact_id'': ''73e143c1-b5bc-4b8f-9619-80b3ab3485fd'',
+      ''text'': ''…….'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1,
+      ''source_excerpt'': ''…….''}, {''fact_id'': ''38f89235-900c-4c44-8a18-9cafbca78d44'',
+      ''text'': ''Located along strategic economic corridors, connected to ports by
+      electric driven railway lines and asphalt roads with Close proximity to abundant
+      labor force'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Located along strategic economic corridors, connected to ports by electric
+      driven railway lines and asphalt roads with Close proximity to abundant labor
+      force''}, {''fact_id'': ''09de6a2b-efa8-4a5d-a4d7-924c49956ce3'', ''text'':
+      ''Ready for plug-and-play , equipped with all the necessary infrastructure including
+      waste water treatment plants with joint calibration'', ''entity_refs'': [],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Ready for plug-and-play
+      , equipped with all the necessary infrastructure including waste water treatment
+      plants with joint calibration''}, {''fact_id'': ''beee57a4-80e3-4a8a-be79-e38d2f9e4dab'',
+      ''text'': ''Dedicated power with own sub-station and state of the art waste
+      treatment facilities with a dedicated park administration and support system'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Dedicated power with own sub-station and state of the art waste treatment
+      facilities with a dedicated park administration and support system''}, {''fact_id'':
+      ''83f54df4-a976-459f-80e8-3952f138a9a9'', ''text'': ''Health stations, fire
+      brigade, expats accommodation and 24 hours security services'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Health stations,
+      fire brigade, expats accommodation and 24 hours security services''}, {''fact_id'':
+      ''6d0558a4-f87e-40df-a8af-588f9816d383'', ''text'': ''One Stop Services (OSS)
+      including processing &amp; issuance of permits, licenses, registration certificates,
+      agreements, tax identification number, customs clearance, banking services.'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''One Stop Services (OSS) including processing &amp; issuance of permits, licenses,
+      registration certificates, agreements, tax identification number, customs clearance,
+      banking services.''}, {''fact_id'': ''0304ce27-f9e7-4887-9106-b0b451521cb8'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''d83de2b9-0c3b-48dd-9e30-07ef471eb370'',
+      ''text'': ''## Proactive business environment - tailored incentives and support'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''## Proactive business environment - tailored incentives and support''}, {''fact_id'':
+      ''3231209c-cf19-42e4-990e-731a48485026'', ''text'': ''<!-- image -->'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''<!-- image -->''},
+      {''fact_id'': ''ebff81af-3d43-442d-9a57-b3a9f60f5967'', ''text'': ''## Fiscal
+      Incentives tailored to investment'', ''entity_refs'': [], ''confidence'': 0.9,
+      ''page_ref'': 1, ''source_excerpt'': ''## Fiscal Incentives tailored to investment''},
+      {''fact_id'': ''825c1467-75e3-46aa-9ffe-c56f1974890d'', ''text'': ''Exemption
+      from income tax up to 15 years for Industry Park Developer,'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Exemption from
+      income tax up to 15 years for Industry Park Developer,''}, {''fact_id'': ''f52a0cf4-2ca5-4af3-9f9a-43ea244bd625'',
+      ''text'': ''Exemption from income tax up to 8 - 10 years for enterprises inside
+      IPs,'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Exemption from income tax up to 8 - 10 years for enterprises inside IPs,''},
+      {''fact_id'': ''881684f2-e3fb-400f-af3b-7735c2fec8ae'', ''text'': ''Exemption
+      from duties and other taxes on imports of machinery, equipment, construction
+      materials, spare parts, raw materials and vehicles'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Exemption from duties and other
+      taxes on imports of machinery, equipment, construction materials, spare parts,
+      raw materials and vehicles''}, {''fact_id'': ''a8f43b0b-4083-4278-845f-7b7bf94f7f10'',
+      ''text'': ''Loss carry forward'', ''entity_refs'': [], ''confidence'': 0.9,
+      ''page_ref'': 1, ''source_excerpt'': ''Loss carry forward''}, {''fact_id'':
+      ''fb22566e-8114-4d37-b73a-00f8ae7a12cb'', ''text'': ''Full export duty exemption'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Full export duty exemption''}, {''fact_id'': ''7569dd57-e07f-45bd-bb69-121365b31c26'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''3c484fd3-0d6d-433c-b692-648119e6e7e6'',
+      ''text'': ''## Non-fiscal Incentives tailored to investment'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''## Non-fiscal
+      Incentives tailored to investment''}, {''fact_id'': ''bbd45f8f-8d91-4d18-b33c-8f6b2790e412'',
+      ''text'': ''Customs facilitation through bonded export factory and similar other
+      schemes'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Customs facilitation through bonded export factory and similar other schemes''},
+      {''fact_id'': ''621eda5a-3caf-40fa-b6fd-c6aed143e8a2'', ''text'': ''Guarantee
+      against expropriation'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''Guarantee against expropriation''}, {''fact_id'': ''4a99e90e-dc90-413f-9d0d-cf68497b1c08'',
+      ''text'': ''Guarantee for repatriation of funds'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Guarantee for repatriation of funds''},
+      {''fact_id'': ''c4177134-3f08-4193-8f22-387100ffe2d0'', ''text'': ''Relaxed
+      Industrial park land regime - 60-80 years charge-free lease for IP Developers,
+      discounted lease rate for IP Enterprises'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Relaxed Industrial park land regime
+      - 60-80 years charge-free lease for IP Developers, discounted lease rate for
+      IP Enterprises''}, {''fact_id'': ''d9936227-25af-4201-a858-9a7eb7773381'', ''text'':
+      ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''d7c82a81-d93e-4b50-8552-bcb91f1cd644'',
+      ''text'': ''## Industry support targeting manufacturers'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''## Industry
+      support targeting manufacturers''}, {''fact_id'': ''29cf3278-ce2a-41bd-b7ae-6d0c731c1231'',
+      ''text'': ''Public procurement: 25% price preference and 30% prepayment for
+      firms manufacturing in Ethiopia,'', ''entity_refs'': [], ''confidence'': 0.9,
+      ''page_ref'': 1, ''source_excerpt'': ''Public procurement: 25% price preference
+      and 30% prepayment for firms manufacturing in Ethiopia,''}, {''fact_id'': ''eb99b120-f273-4e92-b639-077d76262351'',
+      ''text'': ''Potential for long term procurement guarantee.'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Potential for
+      long term procurement guarantee.''}, {''fact_id'': ''b2f2a1bb-ee81-4671-9ca6-9a21bcb1a4b0'',
+      ''text'': ''Fast-track medicine registration'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Fast-track medicine registration''},
+      {''fact_id'': ''8edf66c9-63ae-4fcc-9c0e-419fae858235'', ''text'': ''Regional
+      regulatory harmonization underway to catalyze regional trade'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Regional regulatory
+      harmonization underway to catalyze regional trade''}, {''fact_id'': ''00ee2b02-13b9-4494-814a-f97458fa130e'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''440b525a-479f-4f95-9f5e-712d14915576'',
+      ''text'': ''Miscellaneous'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''Miscellaneous''}, {''fact_id'': ''2104b64f-146b-4dca-8b09-20159fc25f65'',
+      ''text'': ''Expedited visa procedure expedited procedure of securing entry,
+      work permit and certificate of residency'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Expedited visa procedure expedited
+      procedure of securing entry, work permit and certificate of residency''}, {''fact_id'':
+      ''b5903565-d1d6-470f-8267-db99b10b75e5'', ''text'': ''Multiple entry visas for
+      share holders and general managers'', ''entity_refs'': [], ''confidence'': 0.9,
+      ''page_ref'': 1, ''source_excerpt'': ''Multiple entry visas for share holders
+      and general managers''}, {''fact_id'': ''04c4e313-3bb2-4575-9e03-d58267a335ec'',
+      ''text'': ''Facilitation of market linkages'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Facilitation of market linkages''},
+      {''fact_id'': ''60b7efd9-b359-4da2-9442-d1ecc5c9bbb5'', ''text'': ''One-Stop
+      Shop Service under the EIC - including pre-establishment licensing and registration
+      and post-establishment after-care services'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''One-Stop Shop Service under the
+      EIC - including pre-establishment licensing and registration and post-establishment
+      after-care services''}, {''fact_id'': ''d942ce31-0f05-4c92-86b5-eee114dfbb24'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''e6013935-2fa2-4bac-9947-125025ca3f0f'',
+      ''text'': ''## 10 minutes drive from Addis Ababa International Airport.'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''## 10 minutes
+      drive from Addis Ababa International Airport.''}, {''fact_id'': ''229a9eb1-d362-4656-9daa-c3887056d751'',
+      ''text'': ''ptns'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''ptns''}, {''fact_id'': ''f271a060-f262-41a7-915c-2db89ddd40a6'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''1183785f-4a79-4807-92c9-b2ebf320550c'',
+      ''text'': ''AERSK'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''AERSK''}, {''fact_id'': ''53941b70-d1e6-4055-a702-459e24f70bcb'',
+      ''text'': ''M3'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1,
+      ''source_excerpt'': ''M3''}, {''fact_id'': ''232cc9d1-f0b1-4e78-99a1-a7bbf85b6a2b'',
+      ''text'': ''35 minutes drive to Modjo dry port through expressway.'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''35 minutes drive
+      to Modjo dry port through expressway.''}]'
+    - '[{''fact_id'': ''ea54cc7f-98c6-4c8c-9a49-39c3407a456f'', ''text'': "INDEPENDENT
+      AUDITOR''S REPORT AND FINANCIAL STATEMENTS", ''entity_refs'': [''40aa0950-94a2-41f3-b7d7-f57d94720e9d'',
+      ''1160138f-7bc6-404a-8530-8dee690a3cbd'', ''4c52721d-6826-4e5a-a77a-c6bfa1a480e6''],
+      ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': "INDEPENDENT AUDITOR''S
+      REPORT AND FINANCIAL STATEMENTS"}, {''fact_id'': ''94594b6b-c606-48bb-b2fb-70f8f55103ad'',
+      ''text'': ''30 JUNE 2023'', ''entity_refs'': [''7d2324e8-45a5-4ba0-ae83-d8fad4a292bd''],
+      ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': ''30 JUNE 2023''},
+      {''fact_id'': ''1c152b8b-338d-4bdd-b8cc-12b35ae4a3d9'', ''text'': ''DEVELOPMENT
+      BANK OF ETHIOPIA'', ''entity_refs'': [''0f99d341-a677-4848-af65-001587df6225'',
+      ''81c49002-a489-44aa-8465-16f7849793d7''], ''confidence'': 0.87, ''page_ref'':
+      1, ''source_excerpt'': ''DEVELOPMENT BANK OF ETHIOPIA''}, {''fact_id'': ''b812aaf5-2d1f-4b45-89b5-788abd632b24'',
+      ''text'': ''Your Development partner!'', ''entity_refs'': [''06e29125-d7d8-4a6f-ab73-a30b16383983''],
+      ''confidence'': 0.85, ''page_ref'': 1, ''source_excerpt'': ''Your Development
+      partner!''}, {''fact_id'': ''8b0d2391-fae6-4074-bee1-a1e2fdb049bf'', ''text'':
+      "INDEPENDENT AUDITOR''S REPORT", ''entity_refs'': [''40aa0950-94a2-41f3-b7d7-f57d94720e9d''],
+      ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': "INDEPENDENT AUDITOR''S
+      REPORT"}, {''fact_id'': ''801be71c-00c3-413e-aeab-017bb22b87f6'', ''text'':
+      ''AND'', ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'':
+      ''AND''}, {''fact_id'': ''8fbb0260-1466-42b2-8555-b0d9b3068b07'', ''text'':
+      ''FINANCIAL STATEMENTS'', ''entity_refs'': [''4c52721d-6826-4e5a-a77a-c6bfa1a480e6''],
+      ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': ''FINANCIAL STATEMENTS''},
+      {''fact_id'': ''8673d3c6-0e77-446e-82cb-0989bc249340'', ''text'': ''30 JUNE
+      2023'', ''entity_refs'': [''7d2324e8-45a5-4ba0-ae83-d8fad4a292bd''], ''confidence'':
+      0.87, ''page_ref'': 1, ''source_excerpt'': ''30 JUNE 2023''}, {''fact_id'':
+      ''fa882b82-caaa-4840-9e36-fcb0172e7c5d'', ''text'': ''DEVELOPMENT BANK OF ETHIOPIA'',
+      ''entity_refs'': [''0f99d341-a677-4848-af65-001587df6225'', ''81c49002-a489-44aa-8465-16f7849793d7''],
+      ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': ''DEVELOPMENT BANK
+      OF ETHIOPIA''}, {''fact_id'': ''23bd02c0-a88e-4ab6-8b91-d361b19ea864'', ''text'':
+      ''Your Development partner!'', ''entity_refs'': [''06e29125-d7d8-4a6f-ab73-a30b16383983''],
+      ''confidence'': 0.85, ''page_ref'': 1, ''source_excerpt'': ''Your Development
+      partner!''}]'
+    - '[{''fact_id'': ''3bb2dbc4-3f86-4902-9cf3-dbb37cdf1de0'', ''text'': ''CONTENTS'',
+      ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'':
+      ''CONTENTS''}, {''fact_id'': ''509ab5f1-f413-4695-bb94-f3f88590d4e1'', ''text'':
+      "PROFILE ii VISION ii MISSION ii MOTTO ii VALUES ii-iii PERFORMANCE HIGHLIGHTS
+      iv-v BOARD OF DIRECTORS vi-vii CBE NOOR SHARI''AH ADVISORY COMMITTEE viii EXECUTIVE
+      MANAGEMENT ix-xi", ''entity_refs'': [''16db3df4-0091-4b89-9e44-fd7d27f66a3d'',
+      ''4dbd345a-1ec1-45f9-9249-10b753077b56'', ''a2b0233e-c6a5-4fc4-b63e-98372034ab8e''],
+      ''confidence'': 0.85, ''page_ref'': 1, ''source_excerpt'': "PROFILE ii VISION
+      ii MISSION ii MOTTO ii VALUES ii-iii PERFORMANCE HIGHLIGHTS iv-v BOARD OF DIRECTORS
+      vi-vii CBE NOOR SHARI''AH ADVISORY COMMITTEE viii EXECUTIVE MANAGEMENT ix-xi"},
+      {''fact_id'': ''bdd23518-a8eb-4d66-b28d-b35d6d06d40c'', ''text'': "PRESIDENT''S
+      MESSAGE XII", ''entity_refs'': [''3fd3e867-b9ae-49a1-8440-2dba2d2b2852''], ''confidence'':
+      0.87, ''page_ref'': 1, ''source_excerpt'': "PRESIDENT''S MESSAGE XII"}, {''fact_id'':
+      ''7edd4589-d79e-42a9-ad99-dc029685d299'', ''text'': ''SHARIÁ ADVISORY COMMITTEE
+      (SAC) STATEMENT FOR THE FISCAL YEAR ENDED JUNE 30 2022 1-2'', ''entity_refs'':
+      [''dc797ce0-7763-4772-8a8d-58dc0e3e3438'', ''9db41735-9ad1-4329-9a1d-d52f9f0b2830'',
+      ''18ae26ef-c138-45ac-8f51-69d60adefbf2''], ''confidence'': 0.85, ''page_ref'':
+      1, ''source_excerpt'': ''SHARIÁ ADVISORY COMMITTEE (SAC) STATEMENT FOR THE FISCAL
+      YEAR ENDED JUNE 30 2022 1-2''}, {''fact_id'': ''3774ff07-54ea-464a-abf4-53f428c755d7'',
+      ''text'': ''1. HIGHLIGHTS OF GLOBAL AND DOMESTIC ECONOMIES'', ''entity_refs'':
+      [''19edb78b-874e-41c7-a348-1ae35676ca74'', ''891617e6-aafd-4eaa-ae61-2c86fdac3b36'',
+      ''cb2d4850-e408-4d8b-8f3f-93fa668a28b4''], ''confidence'': 0.87, ''page_ref'':
+      1, ''source_excerpt'': ''1. HIGHLIGHTS OF GLOBAL AND DOMESTIC ECONOMIES''},
+      {''fact_id'': ''d73879e2-7a0b-4e43-af9b-18fca4793b3e'', ''text'': ''1.1 The
+      Global Economy 3'', ''entity_refs'': [''891617e6-aafd-4eaa-ae61-2c86fdac3b36'',
+      ''7d88c737-1736-4057-b536-579f775b4ee3''], ''confidence'': 0.87, ''page_ref'':
+      1, ''source_excerpt'': ''1.1 The Global Economy 3''}, {''fact_id'': ''0ab744fc-58e8-4dfc-b17c-1093ca5e40c2'',
+      ''text'': ''1.2 The Ethiopian Economy 3'', ''entity_refs'': [''33e329df-1f00-4d01-9a9d-7b7d641eb98d'',
+      ''7d88c737-1736-4057-b536-579f775b4ee3''], ''confidence'': 0.87, ''page_ref'':
+      1, ''source_excerpt'': ''1.2 The Ethiopian Economy 3''}, {''fact_id'': ''90f9bdbc-a92e-4b49-94e6-12876d104767'',
+      ''text'': "2 HIGHLIGHTS OF CBE''S FINANCIAL STATEMENTS", ''entity_refs'': [''19edb78b-874e-41c7-a348-1ae35676ca74'',
+      ''59923878-6586-4e1b-b49e-30f4f5eaffd4'', ''d302ebe4-2288-4b9f-afc9-6c347cd60956''],
+      ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': "2 HIGHLIGHTS OF
+      CBE''S FINANCIAL STATEMENTS"}, {''fact_id'': ''0b2ffeb5-672e-424f-9d72-e7f7be325c46'',
+      ''text'': ''2.1 Income Statement 5'', ''entity_refs'': [''ae2e7bd1-6afd-4941-ada2-64494e116806'',
+      ''18ae26ef-c138-45ac-8f51-69d60adefbf2''], ''confidence'': 0.87, ''page_ref'':
+      1, ''source_excerpt'': ''2.1 Income Statement 5''}, {''fact_id'': ''fcd6a391-ee2a-4734-9b2e-bdbefaeee199'',
+      ''text'': ''2.1.1 Income 5'', ''entity_refs'': [''ae2e7bd1-6afd-4941-ada2-64494e116806''],
+      ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': ''2.1.1 Income 5''},
+      {''fact_id'': ''9ea09371-b067-46e0-b83e-1dd2d3d0a802'', ''text'': ''2.1.2 Expense
+      6'', ''entity_refs'': [''b614c6da-e76b-478b-bbd4-b1291dcb49c2''], ''confidence'':
+      0.87, ''page_ref'': 1, ''source_excerpt'': ''2.1.2 Expense 6''}, {''fact_id'':
+      ''9de5cd66-ba54-4597-b947-0971d34a7742'', ''text'': ''2.1.3 Profit 6'', ''entity_refs'':
+      [''923cb9a1-3415-4851-831f-bed921741a84''], ''confidence'': 0.87, ''page_ref'':
+      1, ''source_excerpt'': ''2.1.3 Profit 6''}, {''fact_id'': ''a5955aba-7368-4075-b148-ea17e8173a42'',
+      ''text'': ''2.2 Balance Sheet 7'', ''entity_refs'': [''5c1c17a1-93f2-4a26-a28b-1728fd159705'',
+      ''f466ef2d-6c43-4f59-b5c6-56948a837788''], ''confidence'': 0.87, ''page_ref'':
+      1, ''source_excerpt'': ''2.2 Balance Sheet 7''}, {''fact_id'': ''16d064be-a242-4d5a-91d8-c3f6bb697b8e'',
+      ''text'': ''2.2.1 Assets 7'', ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'':
+      1, ''source_excerpt'': ''2.2.1 Assets 7''}, {''fact_id'': ''83a8a280-8f41-4c6a-abfc-49a34fb2969c'',
+      ''text'': ''2.2.2 Liabilities 8'', ''entity_refs'': [], ''confidence'': 0.87,
+      ''page_ref'': 1, ''source_excerpt'': ''2.2.2 Liabilities 8''}, {''fact_id'':
+      ''e87cbd08-5de5-4c58-8909-24815f5e8939'', ''text'': ''2.2.3 Capital and Reserves
+      8'', ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'':
+      ''2.2.3 Capital and Reserves 8''}, {''fact_id'': ''49a1f436-335f-41dd-b800-10b61899e5e3'',
+      ''text'': ''3 HIGHLIGHTS OF NON-FINANCIAL DEVELOPMENTS'', ''entity_refs'': [],
+      ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': ''3 HIGHLIGHTS OF
+      NON-FINANCIAL DEVELOPMENTS''}, {''fact_id'': ''73532449-bee4-444d-b670-6607a9a30baf'',
+      ''text'': ''3.1 Customer Base Expansion and Use of Digital Channels 8'', ''entity_refs'':
+      [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': ''3.1 Customer
+      Base Expansion and Use of Digital Channels 8''}, {''fact_id'': ''73d16e94-3a9e-428a-93a3-0109098877ae'',
+      ''text'': ''3.2 Accessibility 8'', ''entity_refs'': [], ''confidence'': 0.87,
+      ''page_ref'': 1, ''source_excerpt'': ''3.2 Accessibility 8''}, {''fact_id'':
+      ''08af00f4-89bb-4277-aca3-7029997c7418'', ''text'': ''3.3 Human Resource Development
+      8'', ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'':
+      ''3.3 Human Resource Development 8''}, {''fact_id'': ''10221089-4af7-48cf-bb62-bccc787d927d'',
+      ''text'': "ANNEX: 2022/23 AUDITOR''S REPORT AND FINANCIAL STATEMENTS 10-144",
+      ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'':
+      "ANNEX: 2022/23 AUDITOR''S REPORT AND FINANCIAL STATEMENTS 10-144"}, {''fact_id'':
+      ''57e901d9-ed6c-4200-9989-ce14f74a0a6a'', ''text'': ''145'', ''entity_refs'':
+      [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': ''145''}, {''fact_id'':
+      ''5247731b-72fa-4215-ac28-0c0be4c212a8'', ''text'': ''CONTENTS OF THE ANNEX'',
+      ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'':
+      ''CONTENTS OF THE ANNEX''}, {''fact_id'': ''c1125d89-f2c4-434d-9ecf-b9ac8c8a22bc'',
+      ''text'': ''CONTENTS'', ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'':
+      1, ''source_excerpt'': ''CONTENTS''}, {''fact_id'': ''04cdd2e1-f4aa-4851-9fab-73414afc2a63'',
+      ''text'': "PROFILE ii VISION ii MISSION ii MOTTO ii VALUES ii-iii PERFORMANCE
+      HIGHLIGHTS iv-v BOARD OF DIRECTORS vi-vii CBE NOOR SHARI''AH ADVISORY COMMITTEE
+      viii EXECUTIVE MANAGEMENT ix-xi", ''entity_refs'': [], ''confidence'': 0.85,
+      ''page_ref'': 1, ''source_excerpt'': "PROFILE ii VISION ii MISSION ii MOTTO
+      ii VALUES ii-iii PERFORMANCE HIGHLIGHTS iv-v BOARD OF DIRECTORS vi-vii CBE NOOR
+      SHARI''AH ADVISORY COMMITTEE viii EXECUTIVE MANAGEMENT ix-xi"}, {''fact_id'':
+      ''406aba23-76f0-4eb1-a95f-9d83b52c29a1'', ''text'': "PRESIDENT''S MESSAGE XII",
+      ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'':
+      "PRESIDENT''S MESSAGE XII"}, {''fact_id'': ''766e80f7-4db6-4bfa-83bc-76d5a061be96'',
+      ''text'': ''SHARIÁ ADVISORY COMMITTEE (SAC) STATEMENT FOR THE FISCAL YEAR ENDED
+      JUNE 30 2022 1-2'', ''entity_refs'': [], ''confidence'': 0.85, ''page_ref'':
+      1, ''source_excerpt'': ''SHARIÁ ADVISORY COMMITTEE (SAC) STATEMENT FOR THE FISCAL
+      YEAR ENDED JUNE 30 2022 1-2''}, {''fact_id'': ''577fd5fa-50c2-4858-8eb4-79f47fa1c6c2'',
+      ''text'': ''1. HIGHLIGHTS OF GLOBAL AND DOMESTIC ECONOMIES'', ''entity_refs'':
+      [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': ''1. HIGHLIGHTS
+      OF GLOBAL AND DOMESTIC ECONOMIES''}, {''fact_id'': ''eae4b71d-36e5-4721-9ad8-45daac91dd0a'',
+      ''text'': ''1.1 The Global Economy 3'', ''entity_refs'': [], ''confidence'':
+      0.87, ''page_ref'': 1, ''source_excerpt'': ''1.1 The Global Economy 3''}, {''fact_id'':
+      ''e4aac8b6-648c-48f5-8233-29693258f5e8'', ''text'': ''1.2 The Ethiopian Economy
+      3'', ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'':
+      ''1.2 The Ethiopian Economy 3''}, {''fact_id'': ''50c7736f-2eb5-47af-8b1a-53573ad64b14'',
+      ''text'': "2 HIGHLIGHTS OF CBE''S FINANCIAL STATEMENTS", ''entity_refs'': [],
+      ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': "2 HIGHLIGHTS OF
+      CBE''S FINANCIAL STATEMENTS"}, {''fact_id'': ''cbad0c69-10d7-4d0d-82bd-4428e8dcc8ea'',
+      ''text'': ''2.1 Income Statement 5'', ''entity_refs'': [], ''confidence'': 0.87,
+      ''page_ref'': 1, ''source_excerpt'': ''2.1 Income Statement 5''}, {''fact_id'':
+      ''14879a00-0091-47c4-880f-e41d4b96f753'', ''text'': ''2.1.1 Income 5'', ''entity_refs'':
+      [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': ''2.1.1 Income
+      5''}, {''fact_id'': ''4e2bcfa0-883f-4619-a5bf-d249ccf5ee24'', ''text'': ''2.1.2
+      Expense 6'', ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'':
+      ''2.1.2 Expense 6''}, {''fact_id'': ''42a68c7a-7180-47ff-8c6f-108a545408c4'',
+      ''text'': ''2.1.3 Profit 6'', ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'':
+      1, ''source_excerpt'': ''2.1.3 Profit 6''}, {''fact_id'': ''9bd9741f-5795-4011-ac86-f62a62055978'',
+      ''text'': ''2.2 Balance Sheet 7'', ''entity_refs'': [], ''confidence'': 0.87,
+      ''page_ref'': 1, ''source_excerpt'': ''2.2 Balance Sheet 7''}, {''fact_id'':
+      ''562d9ed8-2c74-4144-b994-8efc7da21dae'', ''text'': ''2.2.1 Assets 7'', ''entity_refs'':
+      [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': ''2.2.1 Assets
+      7''}, {''fact_id'': ''2544953a-cd56-4b5a-818a-ba18d32f49d1'', ''text'': ''2.2.2
+      Liabilities 8'', ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'': 1,
+      ''source_excerpt'': ''2.2.2 Liabilities 8''}, {''fact_id'': ''8a69d792-6201-47bf-84a1-f0c806461025'',
+      ''text'': ''2.2.3 Capital and Reserves 8'', ''entity_refs'': [], ''confidence'':
+      0.87, ''page_ref'': 1, ''source_excerpt'': ''2.2.3 Capital and Reserves 8''},
+      {''fact_id'': ''d72ffa24-2fb0-4cb6-a246-e8d5b48e3ddc'', ''text'': ''3 HIGHLIGHTS
+      OF NON-FINANCIAL DEVELOPMENTS'', ''entity_refs'': [], ''confidence'': 0.87,
+      ''page_ref'': 1, ''source_excerpt'': ''3 HIGHLIGHTS OF NON-FINANCIAL DEVELOPMENTS''},
+      {''fact_id'': ''2d7ea866-59d9-4c1e-a3ab-ff68f3581b0a'', ''text'': ''3.1 Customer
+      Base Expansion and Use of Digital Channels 8'', ''entity_refs'': [], ''confidence'':
+      0.87, ''page_ref'': 1, ''source_excerpt'': ''3.1 Customer Base Expansion and
+      Use of Digital Channels 8''}, {''fact_id'': ''01b780fe-7e88-491e-bd91-083b9672a560'',
+      ''text'': ''3.2 Accessibility 8'', ''entity_refs'': [], ''confidence'': 0.87,
+      ''page_ref'': 1, ''source_excerpt'': ''3.2 Accessibility 8''}, {''fact_id'':
+      ''de75e8f9-598e-4cac-98a6-66d97eda0669'', ''text'': ''3.3 Human Resource Development
+      8'', ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'':
+      ''3.3 Human Resource Development 8''}, {''fact_id'': ''853a1e98-078a-4855-94b3-5a1a729cffbf'',
+      ''text'': "ANNEX: 2022/23 AUDITOR''S REPORT AND FINANCIAL STATEMENTS 10-144",
+      ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'':
+      "ANNEX: 2022/23 AUDITOR''S REPORT AND FINANCIAL STATEMENTS 10-144"}, {''fact_id'':
+      ''7c2d7d52-f2f5-4778-8aaa-19796782e9bb'', ''text'': ''145'', ''entity_refs'':
+      [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'': ''145''}, {''fact_id'':
+      ''f4c9dc29-ab07-46cf-b9fc-d2fc1353533c'', ''text'': ''CONTENTS OF THE ANNEX'',
+      ''entity_refs'': [], ''confidence'': 0.87, ''page_ref'': 1, ''source_excerpt'':
+      ''CONTENTS OF THE ANNEX''}]'
+    - '[{''fact_id'': ''c05ef55f-e4c7-4e7b-a295-91a448cef270'', ''text'': ''Content'',
+      ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''Content''}, {''fact_id'': ''0c89d83e-751e-4ad3-b777-ba8ddfbb7190'', ''text'':
+      ''ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'',
+      ''a81637b0-0b55-4887-b8ce-81e14181ce10''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''ETHIOPIAN STATISTICAL SERVICE''}, {''fact_id'': ''f806d64c-af7b-46c2-a586-3f76f15fccf3'',
+      ''text'': ''Statistical Bulletin'', ''entity_refs'': [''c5eebd7e-9c8f-48ba-a543-81285a743164''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''Statistical Bulletin''},
+      {''fact_id'': ''c0189c8e-ecd9-4586-affc-d94a496ba431'', ''text'': ''MONTHLY
+      NEWS RELEASE INFLATION REPORT ON MARCH, EFY 2017'', ''entity_refs'': [''f138eb3a-60f1-4e7a-baa8-d2ad977d9c51'',
+      ''8054e1b3-730e-4ef1-9abd-e918fd245e03'', ''5c42e1cb-7fff-4cf0-b23e-a693c5e09ce2''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''MONTHLY NEWS RELEASE
+      INFLATION REPORT ON MARCH, EFY 2017''}, {''fact_id'': ''7901fccc-6d12-4891-9c1c-4e7ee5b3dd59'',
+      ''text'': ''1. Summary'', ''entity_refs'': [''ba53a069-db07-48db-b315-0c93f9328baf''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''1. Summary''},
+      {''fact_id'': ''c89465a5-89eb-4dd3-b095-9ded47185ba6'', ''text'': ''2. Food
+      & Non -alcoholic Beverages and Non -Food Inflation (Year -on -Year)'', ''entity_refs'':
+      [''6b9d4b6b-d366-449d-b616-414ef4153f6b'', ''e6470984-ee75-4686-8020-1e5fb4d8b8f5'',
+      ''5c42e1cb-7fff-4cf0-b23e-a693c5e09ce2''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''2. Food & Non -alcoholic Beverages and Non -Food Inflation
+      (Year -on -Year)''}, {''fact_id'': ''554952c9-15ac-466e-9274-53cef783344b'',
+      ''text'': ''Food & Non -alcoholic Beverages index'', ''entity_refs'': [''e6470984-ee75-4686-8020-1e5fb4d8b8f5''],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Food & Non -alcoholic
+      Beverages index''}, {''fact_id'': ''c4d19c4a-ecc6-4867-8885-83061be92347'',
+      ''text'': ''March EFY2017'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''March EFY2017''}, {''fact_id'': ''3dd41de3-559a-4890-91ee-7a78520e71cb'',
+      ''text'': ''Issue No. 21/2017'', ''entity_refs'': [], ''confidence'': 0.92,
+      ''page_ref'': 1, ''source_excerpt'': ''Issue No. 21/2017''}, {''fact_id'': ''2d2d4e87-316e-4d61-8dbc-61c5d68e5451'',
+      ''text'': ''ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'',
+      ''a81637b0-0b55-4887-b8ce-81e14181ce10''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''ETHIOPIAN STATISTICAL SERVICE''}, {''fact_id'': ''0619d754-1422-4707-b1b2-d94e4969d962'',
+      ''text'': ''Statistical Bulletin'', ''entity_refs'': [''c5eebd7e-9c8f-48ba-a543-81285a743164''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''Statistical Bulletin''},
+      {''fact_id'': ''9f34086d-a58e-4625-a8fa-94faa302d2b1'', ''text'': ''ETHIOPIAN
+      STATISTICAL SERVICE'', ''entity_refs'': [''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'',
+      ''a81637b0-0b55-4887-b8ce-81e14181ce10''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''ETHIOPIAN STATISTICAL SERVICE''}, {''fact_id'': ''e6cb57e8-3900-4f95-9565-c898fabe7086'',
+      ''text'': ''Statistical Bulletin'', ''entity_refs'': [''c5eebd7e-9c8f-48ba-a543-81285a743164''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''Statistical Bulletin''},
+      {''fact_id'': ''ce5d163a-a6a4-44f9-850b-1c0d1bc713a6'', ''text'': ''Fig 1: Food
+      and Non - Food Inflation (%, Year - on - Year), March EFY2016 - March EFY2017'',
+      ''entity_refs'': [''6b9d4b6b-d366-449d-b616-414ef4153f6b'', ''5c42e1cb-7fff-4cf0-b23e-a693c5e09ce2'',
+      ''94a626ff-e24f-4a0d-959b-de58a35620de''], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''Fig 1: Food and Non - Food Inflation (%, Year - on
+      - Year), March EFY2016 - March EFY2017''}, {''fact_id'': ''016acd72-5625-4fb5-a90f-ac578d50f3a9'',
+      ''text'': ''Issue No. 21/2017'', ''entity_refs'': [], ''confidence'': 0.92,
+      ''page_ref'': 1, ''source_excerpt'': ''Issue No. 21/2017''}, {''fact_id'': ''9d34e2b7-daa2-44da-96f6-c0316cfc2780'',
+      ''text'': ''Non - Food Inflation and  Alcoholic Beverages (Year - on - Year)'',
+      ''entity_refs'': [''6b9d4b6b-d366-449d-b616-414ef4153f6b'', ''5c42e1cb-7fff-4cf0-b23e-a693c5e09ce2'',
+      ''888e99af-acd6-4f8e-b955-34fb2b4ac1bc''], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''Non - Food Inflation and  Alcoholic Beverages (Year
+      - on - Year)''}, {''fact_id'': ''20c5eba2-ac05-47ea-b492-5a9e9d64d9ce'', ''text'':
+      ''Major sub divisions in the food and non -food commodities (year -on -Year).'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Major sub divisions in the food and non -food commodities (year -on -Year).''},
+      {''fact_id'': ''9d1c4298-ddef-4c79-aa7e-4eb6601bc7e7'', ''text'': ''ETHIOPIAN
+      STATISTICAL SERVICE'', ''entity_refs'': [''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'',
+      ''a81637b0-0b55-4887-b8ce-81e14181ce10''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''ETHIOPIAN STATISTICAL SERVICE''}, {''fact_id'': ''0521ff45-e5c2-4d91-b60b-cf063c84a8c2'',
+      ''text'': ''Statistical Bulletin'', ''entity_refs'': [''c5eebd7e-9c8f-48ba-a543-81285a743164''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''Statistical Bulletin''},
+      {''fact_id'': ''b533c6e5-81f9-4740-bcb1-140d09277daf'', ''text'': ''Month -to
+      -Month Inflation Rate'', ''entity_refs'': [''5c42e1cb-7fff-4cf0-b23e-a693c5e09ce2'',
+      ''4724d719-bf96-4c19-97dc-bc45c21ae222''], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''Month -to -Month Inflation Rate''}, {''fact_id'': ''ba34d7f4-18b7-4b75-a5f6-84d704dc753c'',
+      ''text'': ''ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'',
+      ''a81637b0-0b55-4887-b8ce-81e14181ce10''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''ETHIOPIAN STATISTICAL SERVICE''}, {''fact_id'': ''c3aba009-eac1-4bb1-af3e-228c90b01863'',
+      ''text'': ''Statistical Bulletin'', ''entity_refs'': [''c5eebd7e-9c8f-48ba-a543-81285a743164''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''Statistical Bulletin''},
+      {''fact_id'': ''abd2ab1a-dd16-43db-bce5-710256d38bb6'', ''text'': ''ETHIOPIAN
+      STATISTICAL SERVICE'', ''entity_refs'': [''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'',
+      ''a81637b0-0b55-4887-b8ce-81e14181ce10''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''ETHIOPIAN STATISTICAL SERVICE''}, {''fact_id'': ''ab1d50b1-7b4c-439d-947b-f3dbaea473d9'',
+      ''text'': ''Statistical Bulletin'', ''entity_refs'': [''c5eebd7e-9c8f-48ba-a543-81285a743164''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''Statistical Bulletin''},
+      {''fact_id'': ''0a460e82-1247-41e1-aa88-fdfb7914c0e3'', ''text'': ''ETHIOPIAN
+      STATISTICAL SERVICE'', ''entity_refs'': [''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'',
+      ''a81637b0-0b55-4887-b8ce-81e14181ce10''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''ETHIOPIAN STATISTICAL SERVICE''}, {''fact_id'': ''65d363f7-2c42-432a-959d-8d0f6bea800a'',
+      ''text'': ''Statistical Bulletin'', ''entity_refs'': [''c5eebd7e-9c8f-48ba-a543-81285a743164''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''Statistical Bulletin''},
+      {''fact_id'': ''a46a167f-a440-4aae-9c30-bd53685c5214'', ''text'': ''3:  12 -Month
+      Moving Average General, Food and Non -food Inflation'', ''entity_refs'': [''cf121e7d-32e9-4f12-a622-1d006a0275d1'',
+      ''9c1bdc1b-9ad1-4688-a4af-cd4b4fccb1b5'', ''db785bbb-2420-484b-81f9-e4e851befa89''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''3:  12 -Month Moving
+      Average General, Food and Non -food Inflation''}, {''fact_id'': ''0d8b4696-1031-4c31-81d8-656328a4776d'',
+      ''text'': ''12 -month moving average Food and Non -Food Inflation rate (March
+      EFY2016 -March EFY2017)'', ''entity_refs'': [''6b9d4b6b-d366-449d-b616-414ef4153f6b'',
+      ''5c42e1cb-7fff-4cf0-b23e-a693c5e09ce2''], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''12 -month moving average Food and Non -Food Inflation
+      rate (March EFY2016 -March EFY2017)''}, {''fact_id'': ''a592855b-b724-4330-b312-6a90160773fd'',
+      ''text'': ''ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'',
+      ''a81637b0-0b55-4887-b8ce-81e14181ce10''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''ETHIOPIAN STATISTICAL SERVICE''}, {''fact_id'': ''92852216-03ae-4889-8772-77b2a38d6294'',
+      ''text'': ''Statistical Bulletin'', ''entity_refs'': [''c5eebd7e-9c8f-48ba-a543-81285a743164''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''Statistical Bulletin''},
+      {''fact_id'': ''7a60bd52-d1ee-4ca8-8a01-4307fd47f860'', ''text'': ''ETHIOPIAN
+      STATISTICAL SERVICE'', ''entity_refs'': [''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'',
+      ''a81637b0-0b55-4887-b8ce-81e14181ce10''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''ETHIOPIAN STATISTICAL SERVICE''}, {''fact_id'': ''84ba6f47-a49e-49da-b344-51d9a2d50848'',
+      ''text'': ''Statistical Bulletin'', ''entity_refs'': [''c5eebd7e-9c8f-48ba-a543-81285a743164''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''Statistical Bulletin''},
+      {''fact_id'': ''e39b3263-3b39-49ab-ba1b-17a9b615079e'', ''text'': ''4. Annual
+      Inflation trend'', ''entity_refs'': [''27418ff8-1b5c-40c1-9428-5b49754b528b'',
+      ''5c42e1cb-7fff-4cf0-b23e-a693c5e09ce2''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''4. Annual Inflation trend''}, {''fact_id'': ''4fbdef9f-d3bc-4866-9c17-1b760dc00129'',
+      ''text'': ''ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'',
+      ''a81637b0-0b55-4887-b8ce-81e14181ce10''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''ETHIOPIAN STATISTICAL SERVICE''}, {''fact_id'': ''d3b47619-ff30-4f6f-947e-6fc4c8349443'',
+      ''text'': ''Statistical Bulletin'', ''entity_refs'': [''c5eebd7e-9c8f-48ba-a543-81285a743164''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''Statistical Bulletin''},
+      {''fact_id'': ''c585cd57-f5c3-4b7e-a324-78f1f4b0a8e3'', ''text'': ''Issue No.
+      21/2017'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''Issue No. 21/2017''}, {''fact_id'': ''ffb21079-efbb-4df4-b6f7-0b4c40ce9d07'',
+      ''text'': ''ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'',
+      ''a81637b0-0b55-4887-b8ce-81e14181ce10''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''ETHIOPIAN STATISTICAL SERVICE''}, {''fact_id'': ''dc88e975-344d-4b5d-9bdf-33b46982baa8'',
+      ''text'': ''Statistical Bulletin'', ''entity_refs'': [''c5eebd7e-9c8f-48ba-a543-81285a743164''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''Statistical Bulletin''},
+      {''fact_id'': ''1e688da3-ffbf-44ad-b232-b7d27441c85d'', ''text'': ''Issue No.
+      21/2017'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''Issue No. 21/2017''}, {''fact_id'': ''b6c582e1-bfc6-4db3-bf9f-63ff18d92a86'',
+      ''text'': ''Enquiries'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''Enquiries''}, {''fact_id'': ''eb4a0303-a629-4377-a575-8b0b5c367502'',
+      ''text'': ''ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'',
+      ''a81637b0-0b55-4887-b8ce-81e14181ce10''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''ETHIOPIAN STATISTICAL SERVICE''}, {''fact_id'': ''5c8c62d9-5aff-4535-a783-cda1edf4b056'',
+      ''text'': ''Statistical Bulletin'', ''entity_refs'': [''c5eebd7e-9c8f-48ba-a543-81285a743164''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''Statistical Bulletin''},
+      {''fact_id'': ''c3219836-4bd4-423c-8100-b055d4fd26c9'', ''text'': ''5.  GLOSSARY'',
+      ''entity_refs'': [''25bd4e80-e06c-4bbb-98d1-26dd4dcbb8ee''], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''5.  GLOSSARY''}, {''fact_id'':
+      ''47bd55a0-805b-4389-a91d-d976ae859006'', ''text'': ''<!-- image -->'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''<!-- image -->''},
+      {''fact_id'': ''a1e94705-002e-4b5e-b905-f6bf49912c50'', ''text'': ''## Content'',
+      ''entity_refs'': [''59de2e6b-e12a-490d-97ed-3966664da0af''], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''## Content''}, {''fact_id'': ''7d87a844-c936-4416-adb5-2d4e2fc0e47b'',
+      ''text'': ''- Summary'', ''entity_refs'': [''ba53a069-db07-48db-b315-0c93f9328baf''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''- Summary''}, {''fact_id'':
+      ''75c7eb43-26bf-46e8-b438-53ade594e5cd'', ''text'': ''- Year -on -Year General,
+      Food &amp; Non -food Infla- - Month -on -Month General, Food &amp; Non -food
+      Inflation - 12 -Month Moving Average General, Food and Non -food Inflation -
+      Annual Inflation trend'', ''entity_refs'': [''94a626ff-e24f-4a0d-959b-de58a35620de'',
+      ''db785bbb-2420-484b-81f9-e4e851befa89'', ''6b9d4b6b-d366-449d-b616-414ef4153f6b''],
+      ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''- Year -on -Year
+      General, Food &amp; Non -food Infla- - Month -on -Month General, Food &amp;
+      Non -food Inflation - 12 -Month Moving Average General, Food and Non -food Inflation
+      - Annual Inflation tre''}, {''fact_id'': ''235ae0c9-4330-4a10-9822-d5f050f0a97c'',
+      ''text'': ''- Glossary'', ''entity_refs'': [''25bd4e80-e06c-4bbb-98d1-26dd4dcbb8ee''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''- Glossary''},
+      {''fact_id'': ''347d3be6-adb0-4616-b6b6-7135ea63c2b2'', ''text'': ''## ETHIOPIAN
+      STATISTICAL SERVICE'', ''entity_refs'': [''8f03ea8c-26e6-4ae5-b206-e1fe9fac8887'',
+      ''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'', ''a81637b0-0b55-4887-b8ce-81e14181ce10''],
+      ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''## ETHIOPIAN STATISTICAL
+      SERVICE''}, {''fact_id'': ''4e91b4eb-3228-417d-b356-4924376f81c7'', ''text'':
+      ''## Statistical Bulletin'', ''entity_refs'': [''cfea58ff-5bfe-466e-b64f-2abfb68ca86f'',
+      ''c5eebd7e-9c8f-48ba-a543-81285a743164''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''## Statistical Bulletin''}, {''fact_id'': ''20878cd9-e3a0-4bd7-b00c-085201a34473'',
+      ''text'': ''## MONTHLY NEWS RELEASE INFLATION REPORT ON MARCH, EFY 2017'', ''entity_refs'':
+      [''f138eb3a-60f1-4e7a-baa8-d2ad977d9c51'', ''8054e1b3-730e-4ef1-9abd-e918fd245e03'',
+      ''5c42e1cb-7fff-4cf0-b23e-a693c5e09ce2''], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''## MONTHLY NEWS RELEASE INFLATION REPORT ON MARCH,
+      EFY 2017''}, {''fact_id'': ''9c50c65f-ad15-4beb-adc5-1e85e93160c3'', ''text'':
+      ''Issue No. 21/2017'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''Issue No. 21/2017''}, {''fact_id'': ''f4f2a29c-155a-4056-afc6-a499da209d3e'',
+      ''text'': ''## 1. Summary'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''## 1. Summary''}, {''fact_id'': ''3d286a71-933e-4df8-8645-952aea1b35eb'',
+      ''text'': ''The  Consumer  Price  Index  (CPI),  a  key  economic  statistics,  is  surveyed,  analyzed,  and
+      made available to data users on a monthly basis.'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''The  Consumer  Price  Index  (CPI),  a  key  economic  statistics,  is  surveyed,  analyzed,  and
+      made available to data users on a monthly basis.''}, {''fact_id'': ''270ac274-a5e3-48f6-9087-e323b3e8057e'',
+      ''text'': ''The year -on -year, general inflation rate (annual percentage change)
+      in the country stood at 13.6 percent for the month of March EFY2017. A year
+      earlier (in March EFY2016), the rate was 26.2 percent. The month -on -month
+      general inflation rate increased by 2.7 percent for the month of March -EFY2017.
+      It was 4.0 percent in March EFY2016.'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''The year -on -year, general inflation
+      rate (annual percentage change) in the country stood at 13.6 percent for the
+      month of March EFY2017. A year earlier (in March EFY2016), the rate was 26.2
+      percent.''}, {''fact_id'': ''b3bbc88f-a8b6-4071-a55b-891eec864652'', ''text'':
+      ''General inflation encompasses of two main divisions and twenty -one groups
+      of expenditures.  These divisions registered the following price changes during
+      the month of March EFY2017 compared with March EFY2016.'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''General inflation
+      encompasses of two main divisions and twenty -one groups of expenditures.  These
+      divisions registered the following price changes during the month of March EFY2017
+      compared with Marc''}, {''fact_id'': ''4963035e-021c-49af-a921-001daace6915'',
+      ''text'': ''## 2. Food &amp; Non -alcoholic Beverages and Non -Food Inflation
+      (Year -on -Year)'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''## 2. Food &amp; Non -alcoholic Beverages and Non -Food
+      Inflation (Year -on -Year)''}, {''fact_id'': ''59bbc80b-100e-45e8-ad9c-d23edd2c8cbc'',
+      ''text'': ''The year -on -year inflation and the month -to -month inflation
+      rates helps to gauge the current inflation trajectory, as they capture short
+      -term fluctuations in prices and provides an immediate indicator of inflationary
+      pressures. Particularly, the month -to -month is also crucial  for  monitoring  changes  in  consumer  prices  and  identifying  any  sudden  spikes  or  declines
+      in inflation.'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1,
+      ''source_excerpt'': ''The year -on -year inflation and the month -to -month
+      inflation rates helps to gauge the current inflation trajectory, as they capture
+      short -term fluctuations in prices and provides an immediate indi''}, {''fact_id'':
+      ''437c351d-6f1a-4529-982f-2c01b5f46034'', ''text'': ''## Food &amp; Non -alcoholic
+      Beverages index'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1,
+      ''source_excerpt'': ''## Food &amp; Non -alcoholic Beverages index''}, {''fact_id'':
+      ''1c6ad75b-51ba-4473-bd4a-2acb281ff423'', ''text'': ''The year -on -year  inflation  rate,  also  known  as  the  annual  inflation  rate,  measures  the  percentage
+      change in overall price levels from one year to the same month in the previous
+      year. Accordingly, the year -on -year inflation rate of the Food and Non -alcoholic
+      component of the CPI, for the month of March  2017 EFY stood at 11.9%. This
+      implies that the CPI of Food and Non -Alcoholic Beverages has, on average, increased
+      by 11.9% compared to March EFY2016. The major contributing facto'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''The year -on
+      -year  inflation  rate,  also  known  as  the  annual  inflation  rate,  measures  the  percentage
+      change in overall price levels from one year to the same month in the previous
+      year. Acc''}, {''fact_id'': ''f08481ea-4842-405a-9d02-7e17e2e9b2b8'', ''text'':
+      ''## March EFY2017'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''## March EFY2017''}, {''fact_id'': ''8bb7c905-36e0-43b0-a54f-ccf4fd9ece96'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''742fb0e2-1495-4b1d-b2a0-64add0d6fea8'',
+      ''text'': ''## Issue No. 21/2017'', ''entity_refs'': [], ''confidence'': 0.92,
+      ''page_ref'': 1, ''source_excerpt'': ''## Issue No. 21/2017''}, {''fact_id'':
+      ''3c91443f-b1b5-45ad-9b92-47e4bb0cd751'', ''text'': ''Page 2'', ''entity_refs'':
+      [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'': ''Page 2''},
+      {''fact_id'': ''f15e974e-6bd5-40d3-9861-588f23565e47'', ''text'': ''Beginning
+      from March -EFY 2016 the magnitude of the inflation rate steadily declined up
+      to March -EFY 2017.  In  March  EFY -2017  General  inflation  was  13.6%  as  compared  to  the  one  observed  in  March
+      -EFY2016.'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Beginning from March -EFY 2016 the magnitude of the inflation rate steadily
+      declined up to March -EFY 2017.  In  March  EFY -2017  General  inflation  was  13.6%  as  compared  to  the  one  observed
+      ''}, {''fact_id'': ''134cca10-1294-483d-b9ca-766f6455e339'', ''text'': ''| Month/Year                   |   General
+      |   Food |   Non - Food |'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''| Month/Year                   |   General |   Food
+      |   Non - Food |''}, {''fact_id'': ''4c354cd4-b723-4316-9df4-72923c822e7e'',
+      ''text'': ''|------------------------------|-----------|--------|--------------|
+      | March EFY2009 - June EFY2010 |      14.4 |   13.4 |         15.9 | | March
+      EFY 2010 - JuneEFY2011 |      12.6 |   13.1 |         11.9 | | March EFY2011
+      - June EFY2012 |      19.9 |   23.3 |         15.9 | | March EFY2012 - June
+      EFY2013 |      20.2 |   23.2 |         16.4 | | March EFY2013 - June EFY2014
+      |      33.8 |   40.3 |         25.2 | | March EFY2014 - June EFY2015 |      32.5
+      |   31.7 |         33.9 | | March EFY2015 -'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''|------------------------------|-----------|--------|--------------|
+      | March EFY2009 - June EFY2010 |      14.4 |   13.4 |         15.9 | | March
+      EFY 2010 - JuneEFY2011 |      12.6 |   13.1 |         ''}, {''fact_id'': ''ec4261c1-aa07-4f42-9860-c97f90fc3c01'',
+      ''text'': ''| April                        |      23.3 |   27   |         18   |'',
+      ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''| April                        |      23.3 |   27   |         18   |''}, {''fact_id'':
+      ''9153e246-72ae-4691-9553-bc78906d0ce7'', ''text'': ''| May                          |      23.3
+      |   25.5 |         20   |'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''| May                          |      23.3 |   25.5
+      |         20   |''}, {''fact_id'': ''2ebb0687-8e34-407e-8990-229e24add8e4'',
+      ''text'': ''| June                         |      19.9 |   22.7 |         15.8
+      |'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''| June                         |      19.9 |   22.7 |         15.8 |''}, {''fact_id'':
+      ''5e5cbbef-6842-4211-a023-bfa8af260682'', ''text'': ''| July                         |      18.6
+      |   20.6 |         15.6 |'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''| July                         |      18.6 |   20.6
+      |         15.6 |''}, {''fact_id'': ''993126a8-3b65-4d0f-8298-fb24083fd580'',
+      ''text'': ''| August                       |      17.2 |   18.8 |         14.7
+      |'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''| August                       |      17.2 |   18.8 |         14.7 |''}, {''fact_id'':
+      ''5546e8c3-9f5f-42bd-b7cb-9475c8800a5f'', ''text'': ''| September                    |      17.5
+      |   19.6 |         14.3 |'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''| September                    |      17.5 |   19.6
+      |         14.3 |''}, {''fact_id'': ''9e025d85-fb61-433f-a706-3e4a723fce8d'',
+      ''text'': ''| October                      |      16.1 |   19.2 |         11.6
+      |'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''| October                      |      16.1 |   19.2 |         11.6 |''}, {''fact_id'':
+      ''397477bf-e807-4a74-8e92-6eff1598f834'', ''text'': ''| November                     |      16.9
+      |   18.5 |         14.4 |'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''| November                     |      16.9 |   18.5
+      |         14.4 |''}, {''fact_id'': ''5d134087-b886-4565-9e2e-7ede067bd011'',
+      ''text'': ''| December                     |      17   |   18.7 |         14.4
+      |'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''| December                     |      17   |   18.7 |         14.4 |''}, {''fact_id'':
+      ''c58fa3ab-b91b-4fb9-b1b8-ac47899b0954'', ''text'': ''| January                      |      15.5
+      |   15.8 |         15   |'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''| January                      |      15.5 |   15.8
+      |         15   |''}, {''fact_id'': ''ebb89100-1dad-445e-9c6e-d1376ec17f7b'',
+      ''text'': ''| February                     |      15   |   14.6 |         15.6
+      |'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''| February                     |      15   |   14.6 |         15.6 |''}, {''fact_id'':
+      ''7c19ca6d-11d9-48b0-9aba-19c6b6f100fc'', ''text'': ''| March - EFY 2017             |      13.6
+      |   11.9 |         16.2 |'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''| March - EFY 2017             |      13.6 |   11.9
+      |         16.2 |''}, {''fact_id'': ''94904d8c-ccbe-48f5-bd79-38f1250981d0'',
+      ''text'': ''## ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''## ETHIOPIAN STATISTICAL SERVICE''},
+      {''fact_id'': ''24f19ce2-0413-4945-abdc-6aedaf107fb1'', ''text'': ''## Statistical
+      Bulletin'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''## Statistical Bulletin''}, {''fact_id'': ''36c95e5e-f33c-4517-bd16-8bf772f12473'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''d9ee247b-1017-4ccf-bd6f-0fcdd0c93e55'',
+      ''text'': ''## ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''## ETHIOPIAN STATISTICAL SERVICE''},
+      {''fact_id'': ''8afb1e43-3dc4-4a38-afab-b309fec11a41'', ''text'': ''## Statistical
+      Bulletin'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''## Statistical Bulletin''}, {''fact_id'': ''7ee4a399-82df-4b11-9c42-844726332bdc'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''4263637b-2e96-4b58-a528-515b60114f09'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''fa39d7d3-4bf4-443f-9786-af9e9f35d19e'',
+      ''text'': ''Issue No. 21/2017'', ''entity_refs'': [], ''confidence'': 0.92,
+      ''page_ref'': 1, ''source_excerpt'': ''Issue No. 21/2017''}, {''fact_id'': ''7de8b65e-bcff-4440-8b30-c765108dd06d'',
+      ''text'': ''## Major sub divisions in the food and non -food commodities (year
+      -on -Year).'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''## Major sub divisions in the food and non -food commodities (year -on -Year).''},
+      {''fact_id'': ''a4d9b9ac-a53c-4aab-91fd-024f4b6610e8'', ''text'': ''When we
+      look at major division of food and non -food commodities, which holds large
+      share in the commodity basket, the magnitude of inflation rate at March EFY2017
+      showed a declining situation for Food as compared to the previous month.  From
+      Food and Non -Alcoholic Beverage aspect, the highest weight is hold by Bread
+      and Cereals, Vegetables, Other -Food products, Non -Alcoholic Beverage, and
+      Meat; whose inflation at March EFY2017 is recorded  an increase for Bread &amp;
+      Cereals (1.2%);  Vegetab'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''When we look at major division of food and non -food
+      commodities, which holds large share in the commodity basket, the magnitude
+      of inflation rate at March EFY2017 showed a declining situation for Foo''},
+      {''fact_id'': ''0cc99897-fab7-40c0-95d8-85c0d85aaec2'', ''text'': ''Similarly,
+      during March 2017 EFY the year -on -year inflation rate of the major Non -Food
+      items of Housing, Water, Electricity, Gas, &amp; Other Fuels (17.4%) ; Restaurants
+      and Hotels (18.3%) ; Alcoholic  Beverages  &amp;  Tobacco (15.2%) ;  Furnishings,  Household  Equipment  &amp;  Routine  Household
+      Maintenance of the House (15.4%) and Clothing and Footwear (8.7%).'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Similarly, during
+      March 2017 EFY the year -on -year inflation rate of the major Non -Food items
+      of Housing, Water, Electricity, Gas, &amp; Other Fuels (17.4%) ; Restaurants
+      and Hotels (18.3%) ; Alcoho''}, {''fact_id'': ''45272ded-e11a-4949-b670-c1075b62b856'',
+      ''text'': ''Table 2. Major sub divisions in the food and non -food commodities
+      (year -on -Year).'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''Table 2. Major sub divisions in the food and non -food
+      commodities (year -on -Year).''}, {''fact_id'': ''648c5e46-448c-46b6-bee0-0aad2f7521ee'',
+      ''text'': ''| CPI Items                                                             |   Items
+      Wight in CPI (%) |   %change on Year - on - Year Inflation March EFY2016 compared
+      with March EFY2017 |   %change in Month - to - Month inflation July EFY2017
+      compared to March EFY2017 | |-----------------------------------------------------------------------|--------------------------|-----------------------------------------------------------------------------------|------------------------------------------------'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''| CPI Items                                                             |   Items
+      Wight in CPI (%) |   %change on Year - on - Year Inflation March EFY2016 compared
+      with March EFY2017 |   %change in Mo''}, {''fact_id'': ''b73c7c51-451b-485e-aaa2-d00bd04c5ada'',
+      ''text'': ''## ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''## ETHIOPIAN STATISTICAL SERVICE''},
+      {''fact_id'': ''3d5993da-48a3-4b17-9654-5c453717963d'', ''text'': ''## Statistical
+      Bulletin'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''## Statistical Bulletin''}, {''fact_id'': ''7ebe33a0-4641-460a-8bfe-c1962a5ba29e'',
+      ''text'': ''Page 4'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''Page 4''}, {''fact_id'': ''a5220ccd-917f-4def-8713-942b03a095f9'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''3f3f39b3-184b-432f-8794-601b77cd13aa'',
+      ''text'': ''Issue No. 21/2017'', ''entity_refs'': [], ''confidence'': 0.92,
+      ''page_ref'': 1, ''source_excerpt'': ''Issue No. 21/2017''}, {''fact_id'': ''f6da4904-4e11-441b-924d-5ef73f6141dd'',
+      ''text'': ''## Month -to -Month Inflation Rate'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''## Month -to -Month Inflation Rate''},
+      {''fact_id'': ''7be5dd35-69d6-4efe-9294-8b08230ef0b3'', ''text'': ''The month
+      -to -month general inflation rate for March EFY2017 has increased by 2.7 percent
+      compared to what was observed in February EFY2017. During the same month, the
+      food and non -alcoholic component of the inflation increased by 2.5 percent
+      whereas the non -food component for its part increased by 3.2 percent.'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''The month -to
+      -month general inflation rate for March EFY2017 has increased by 2.7 percent
+      compared to what was observed in February EFY2017. During the same month, the
+      food and non -alcoholic compone''}, {''fact_id'': ''d0e34c69-ba55-48dc-a135-73ade1f3b800'',
+      ''text'': ''Table 3: General Inflation Rate (%, Month -to -Month), March EFY2016
+      -March EFY2017'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1,
+      ''source_excerpt'': ''Table 3: General Inflation Rate (%, Month -to -Month),
+      March EFY2016 -March EFY2017''}, {''fact_id'': ''e2891ca7-34ff-4b51-bd57-c6a022394d51'',
+      ''text'': ''| Month            | General month-to-month inflation   | |------------------|------------------------------------|
+      | March EFY 2016   | 4.0                                |'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''| Month            |
+      General month-to-month inflation   | |------------------|------------------------------------|
+      | March EFY 2016   | 4.0                                |''}, {''fact_id'':
+      ''7965cf17-b5ed-4755-a4ee-8297a9888862'', ''text'': ''| April            | -
+      0.7                              |'', ''entity_refs'': [], ''confidence'': 0.92,
+      ''page_ref'': 1, ''source_excerpt'': ''| April            | - 0.7                              |''},
+      {''fact_id'': ''afcc1baf-0d46-41ba-a1e2-2a242b6ad0d6'', ''text'': ''| May              |
+      0.5                                |'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''| May              | 0.5                                |''},
+      {''fact_id'': ''79bc814f-61ae-47b9-b059-7990dc988ee9'', ''text'': ''| June             |
+      0.9                                |'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''| June             | 0.9                                |''},
+      {''fact_id'': ''d2d6884b-7b93-4d3e-b070-2b87e9d231fb'', ''text'': ''| July             |
+      1.5                                |'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''| July             | 1.5                                |''},
+      {''fact_id'': ''9f6053aa-6d8b-4236-ab18-d83441a03104'', ''text'': ''| August           |
+      1.2                                |'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''| August           | 1.2                                |''},
+      {''fact_id'': ''063bd93c-d9a8-4076-b68e-efe6c1696754'', ''text'': ''| September        |
+      2.4                                |'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''| September        | 2.4                                |''},
+      {''fact_id'': ''76575a71-bb06-4763-8dfb-269690db80bd'', ''text'': ''| October          |
+      0.9                                |'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''| October          | 0.9                                |''},
+      {''fact_id'': ''6aa008d9-831d-48ff-9e1c-25185556f0d8'', ''text'': ''| November         |
+      - 0.8                              |'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''| November         | - 0.8                              |''},
+      {''fact_id'': ''70731914-1e58-437e-8bfa-9c849e9e92e7'', ''text'': ''| December         |
+      0.8                                |'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''| December         | 0.8                                |''},
+      {''fact_id'': ''cc88beca-4432-4430-9458-4c165e09dea2'', ''text'': ''| January          |
+      0.6                                |'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''| January          | 0.6                                |''},
+      {''fact_id'': ''ed31956d-43e2-4c24-9979-76baaa1c9735'', ''text'': ''| February         |
+      0.5                                |'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''| February         | 0.5                                |''},
+      {''fact_id'': ''5e00717b-a1c6-4e97-9d2d-9f30ef3e7954'', ''text'': ''| March
+      - EFY 2017 | 2.7                                |'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''| March - EFY 2017 | 2.7                                |''},
+      {''fact_id'': ''2265c69b-3d75-4633-9c5d-29145a71d6e4'', ''text'': ''Month -to
+      -Month Inflation of Food and Non -Food categories: In March EFY2017, among the
+      food components of the CPI, Meat increased by (1.4%), Fish and sea food increased
+      by (0.9%), Milk, Cheese and Eggs increased by (5.7%), Oils and Fats increased
+      by (7.5%),  Food products n.e.c increased by (3.0%),   Non -Alcoholic beverages
+      and coffee increased by (6.4%) on the month to month basis.'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Month -to -Month
+      Inflation of Food and Non -Food categories: In March EFY2017, among the food
+      components of the CPI, Meat increased by (1.4%), Fish and sea food increased
+      by (0.9%), Milk, Cheese and E''}, {''fact_id'': ''36fb42a1-51ea-42b8-85bc-8873df4079e1'',
+      ''text'': ''## ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''## ETHIOPIAN STATISTICAL SERVICE''},
+      {''fact_id'': ''eb2d2455-3d96-4e4b-ad5a-bae4ad1443f8'', ''text'': ''## Statistical
+      Bulletin'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''## Statistical Bulletin''}, {''fact_id'': ''6863fd80-87e9-4bad-b63c-5abe6fe8e9e4'',
+      ''text'': ''Page 5'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''Page 5''}, {''fact_id'': ''9e5ff466-9518-4213-bf63-e00cc63733ed'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''4041b819-2e6d-433c-92e6-13be3db29eb2'',
+      ''text'': ''Issue No. 21/2017'', ''entity_refs'': [], ''confidence'': 0.92,
+      ''page_ref'': 1, ''source_excerpt'': ''Issue No. 21/2017''}, {''fact_id'': ''76b4472f-9b49-450d-9a6f-e323fda0d8b1'',
+      ''text'': ''Page 6'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''Page 6''}, {''fact_id'': ''44fbf4a4-0885-4bad-8e08-4fd3a514f64a'',
+      ''text'': ''Looking at non -food items, the increase in month -to -month comparison
+      was observed for Alcoholic beverages and tobacco increased by (2.4%), Clothing
+      and Footwear (2.8%), Furniture, Furnishing, household equipment and routine
+      maintenance of the house  increased by (4.1%), Housing, water, Electricity,
+      gas and other fuels increased by (2.5%), Transport increased by (1.3%), Recreation
+      and culture increased by (3.1%), and Hotel and Restaurants (4.7%), Health increased
+      by (6.4%), Communication incre'', ''entity_refs'': [], ''confidence'': 0.9,
+      ''page_ref'': 1, ''source_excerpt'': ''Looking at non -food items, the increase
+      in month -to -month comparison was observed for Alcoholic beverages and tobacco
+      increased by (2.4%), Clothing and Footwear (2.8%), Furniture, Furnishing, house''},
+      {''fact_id'': ''865e6515-626a-4e33-81d6-27817aca167d'', ''text'': ''Fig 2: Food
+      and Non -Food Inflation (%, Month -to -Month), March EFY2016 -March EFY2017'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Fig 2: Food and Non -Food Inflation (%, Month -to -Month), March EFY2016 -March
+      EFY2017''}, {''fact_id'': ''13c1ba7f-bf45-4176-bb9e-e2ecdfa5d03a'', ''text'':
+      ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''2cb42daf-f12f-4ae2-9218-1801ca865e03'',
+      ''text'': ''## ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''## ETHIOPIAN STATISTICAL SERVICE''},
+      {''fact_id'': ''7f888bb6-4009-4ad5-ad5c-793e9256472f'', ''text'': ''## Statistical
+      Bulletin'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''## Statistical Bulletin''}, {''fact_id'': ''1361f3ab-38a1-4ee7-878a-0c4afc3c5c2e'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''1f4430e7-fe1d-409a-be0f-9d65c9ec0450'',
+      ''text'': ''## ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''## ETHIOPIAN STATISTICAL SERVICE''},
+      {''fact_id'': ''69c9af62-5d7a-43d5-b645-235da28d1362'', ''text'': ''## Statistical
+      Bulletin'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''## Statistical Bulletin''}, {''fact_id'': ''d678ee89-4560-422b-9756-d777c399fd64'',
+      ''text'': ''Page 7'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''Page 7''}, {''fact_id'': ''a679cd70-95bf-4144-ac6e-ecf90ba85f3c'',
+      ''text'': ''## 3:  12 -Month Moving Average General, Food and Non -food Inflation'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''## 3:  12 -Month Moving Average General, Food and Non -food Inflation''},
+      {''fact_id'': ''4b91c097-bacd-465b-9a19-e24988b947c7'', ''text'': ''The 12 -month
+      moving average figures provides a broader perspective on inflation trends over
+      a longer period. As it  is  indicated  in  Table  below  the  country  level  overall  inflation  rate  (annual  change  based  on
+      12  months Moving Average) was 17.9 percent in March EFY2017 as compared to
+      the one observed in a similar period a year ago. Since March -EFY2016 inflation
+      has been relatively eased in the country.'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''The 12 -month moving average figures
+      provides a broader perspective on inflation trends over a longer period. As
+      it  is  indicated  in  Table  below  the  country  level  overall  inflation  rate  (an''},
+      {''fact_id'': ''11f29a6b-58e7-4699-aacb-31b63b8bad42'', ''text'': ''Table 4.
+      Overall CPI and 12 -month moving average Overall Inflation rate March  EEFY2017'',
+      ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Table 4. Overall CPI and 12 -month moving average Overall Inflation rate March  EEFY2017''},
+      {''fact_id'': ''87dcba21-e8b9-46ff-982a-0557f11097d2'', ''text'': ''| Month           |   12
+      Months moving Average Overall CPI |   12 - Month Moving Average overall Inflation
+      | |-----------------|----------------------------------------|-----------------------------------------------|
+      | March - EFY2016 |                                  406.9 |                                          28.9
+      | | April           |                                  414   |                                          28.1
+      | | May             |                                  421.1 |    '', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''| Month           |   12
+      Months moving Average Overall CPI |   12 - Month Moving Average overall Inflation
+      | |-----------------|----------------------------------------|-------------------------------''},
+      {''fact_id'': ''b32ccec0-b3a2-4bf6-ac8a-7b25c3a04b01'', ''text'': ''<!-- image
+      -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''b903f279-46ea-4653-a1fd-8aedf64112aa'',
+      ''text'': ''Issue No. 21/2017'', ''entity_refs'': [], ''confidence'': 0.92,
+      ''page_ref'': 1, ''source_excerpt'': ''Issue No. 21/2017''}, {''fact_id'': ''cbfdce2a-8794-4cb0-953a-148ceddff39f'',
+      ''text'': ''Page 8'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''Page 8''}, {''fact_id'': ''090a4276-3d7e-4118-aff6-bda250eec723'',
+      ''text'': ''## 12 -month moving average Food and Non -Food Inflation rate (March
+      EFY2016 -March EFY2017)'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''## 12 -month moving average Food and Non -Food Inflation
+      rate (March EFY2016 -March EFY2017)''}, {''fact_id'': ''f3cc51b9-85f0-436c-bd31-fd1044264e14'',
+      ''text'': ''Dis -aggregated, 12 -month moving average food inflation increased
+      by 19.3 percent as compared to the  one  observed  a  year  ago  and  non -food  inflation  rate  increased  by  15.7  percent  in  March
+      EFY2017 as compared to the one observed in March EFY2016.'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''Dis -aggregated,
+      12 -month moving average food inflation increased by 19.3 percent as compared
+      to the  one  observed  a  year  ago  and  non -food  inflation  rate  increased  by  15.7  percent  in  M''},
+      {''fact_id'': ''c7e3c419-56e6-4551-ae79-7600241b5de8'', ''text'': ''Table 5:
+      12 -month moving average Food and Non -Food Inflation rate (March EFY2016 -March  EFY2017)
+      Baseline: Dec, EFY2009= 100'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''Table 5: 12 -month moving average Food and Non -Food
+      Inflation rate (March EFY2016 -March  EFY2017) Baseline: Dec, EFY2009= 100''},
+      {''fact_id'': ''ca6e7724-14df-4173-aad8-a7247a1e022f'', ''text'': ''| Month           |   12
+      - month moving average Food Inflation |   12 - month moving average Non - Food
+      Inflation | |-----------------|--------------------------------------------|--------------------------------------------------|
+      | March - EFY2016 |                                       29.3 |                                             28.4
+      | | April           |                                       28.9 |                                             26.9
+      | | May             |                 '', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''| Month           |   12 - month
+      moving average Food Inflation |   12 - month moving average Non - Food Inflation
+      | |-----------------|--------------------------------------------|--------------------''},
+      {''fact_id'': ''b13a6624-1e23-4be0-9c10-050f987b70ae'', ''text'': ''## ETHIOPIAN
+      STATISTICAL SERVICE'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''## ETHIOPIAN STATISTICAL SERVICE''}, {''fact_id'':
+      ''bbd73d82-98bd-4b80-870a-40f54b36cdbf'', ''text'': ''## Statistical Bulletin'',
+      ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''## Statistical Bulletin''}, {''fact_id'': ''8fa48710-88d8-44fc-8c86-cf9b544ece54'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''d13fc929-46f0-4a41-b336-187bebfeb2ce'',
+      ''text'': ''## ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''## ETHIOPIAN STATISTICAL SERVICE''},
+      {''fact_id'': ''14eab14e-d30e-4443-8ce3-f8b1135ea3af'', ''text'': ''## Statistical
+      Bulletin'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''## Statistical Bulletin''}, {''fact_id'': ''5a597506-4c69-4b04-acd5-ea7671f53ae2'',
+      ''text'': ''Issue No. 21/2017'', ''entity_refs'': [], ''confidence'': 0.92,
+      ''page_ref'': 1, ''source_excerpt'': ''Issue No. 21/2017''}, {''fact_id'': ''937f4eca-d022-49b3-b76e-0fde96ff7aed'',
+      ''text'': ''## 4. Annual Inflation trend'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''## 4. Annual Inflation trend''},
+      {''fact_id'': ''9afaa14a-caa2-46f1-bc55-8372c7191be5'', ''text'': ''Relatively  low  and  reduction  in  inflation  rate  was  observed  between  2005  and  2009.  Since
+      EFY2010 inflation rate stick to double digit.'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Relatively  low  and  reduction  in  inflation  rate  was  observed  between  2005  and  2009.  Since
+      EFY2010 inflation rate stick to double digit.''}, {''fact_id'': ''518ba171-8690-48ae-be3c-cf765d1ff4cb'',
+      ''text'': ''Fig 3: Average Annual General inflation in Ethiopia since Ethiopian
+      EFY2005 (Year -on -Year)'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''Fig 3: Average Annual General inflation in Ethiopia
+      since Ethiopian EFY2005 (Year -on -Year)''}, {''fact_id'': ''239b4f7d-6b9e-4334-87de-a22e410527f7'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''829e0da0-cb3e-4adb-83df-fa1bfe1f9918'',
+      ''text'': ''The average annual general inflation rate for the country stood
+      at (26.6 %) in EFY2016 compared to (32.6 %) in EFY2015. The past five years
+      are unfavorable for the households, due to high inflation in the country. Specially,
+      in the year EFY2014 and EFY2016, the inflation rate has been over 30 percent
+      for most months. Internal and external factors forced the inflation to be at
+      higher level; COVID19, internal conflict, and Russia -Ukraine War were the major
+      factors.'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''The average annual general inflation rate for the country stood at (26.6 %)
+      in EFY2016 compared to (32.6 %) in EFY2015. The past five years are unfavorable
+      for the households, due to high inflation in''}, {''fact_id'': ''f6f4d3d8-bfe6-45fb-88f6-0ca285ff0b20'',
+      ''text'': ''Page 9'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''Page 9''}, {''fact_id'': ''16ef4a6e-50f5-44e1-9181-e0931e6cd397'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''803876b0-915d-47d4-a444-e56e1940f369'',
+      ''text'': ''## ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''## ETHIOPIAN STATISTICAL SERVICE''},
+      {''fact_id'': ''26856c38-ecf9-4392-aa02-1ec84d40c6c1'', ''text'': ''## Statistical
+      Bulletin'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''## Statistical Bulletin''}, {''fact_id'': ''cfdc4d89-77d6-4f2e-b7e1-0960cfdddd35'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''4c27d410-ef25-4c49-a392-2a193c833a51'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''d10a9b3e-4bc3-496f-906f-9e3c36c0d261'',
+      ''text'': ''## ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''## ETHIOPIAN STATISTICAL SERVICE''},
+      {''fact_id'': ''3219932c-4320-4081-9ec7-a45da63ee646'', ''text'': ''## Statistical
+      Bulletin'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''## Statistical Bulletin''}, {''fact_id'': ''5416a074-069a-42d5-9d3f-12e4ca5ad93d'',
+      ''text'': ''<!-- image -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''<!-- image -->''}, {''fact_id'': ''f9ffab82-284e-4cf3-a55b-e4e04b320ebb'',
+      ''text'': ''Page 11'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''Page 11''}, {''fact_id'': ''39e9eae9-76f2-4b35-b7bf-ed50498befa9'',
+      ''text'': ''The average annual non -food inflation rate for the country stood
+      at (24.3 %) in EFY2016 compared to (33.8 %) in EFY2015. Non -food inflation
+      movement, the past ten year divided into two. Between 2005 and 2009 non -food
+      inflation showed reduction and since then the rate demonstrate increasing trend.
+      This is could be attached to Birr devaluation against USD, Russia -Ukraine War,
+      and increase of international price of gasoline, as most of non -food items
+      are imported or utilize imported raw materi'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''The average annual non -food inflation
+      rate for the country stood at (24.3 %) in EFY2016 compared to (33.8 %) in EFY2015.
+      Non -food inflation movement, the past ten year divided into two. Between 2005''},
+      {''fact_id'': ''62054209-1b52-4d47-a067-d568a31445e2'', ''text'': ''<!-- image
+      -->'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''<!-- image -->''}, {''fact_id'': ''d8d55f65-bb93-4d36-b4fa-55e13b4fa2d1'',
+      ''text'': ''## Enquiries'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''## Enquiries''}, {''fact_id'': ''0563165a-2102-4bac-a4f9-9b81d485a5c7'',
+      ''text'': ''Telephone number +251 111 568464'', ''entity_refs'': [], ''confidence'':
+      0.9, ''page_ref'': 1, ''source_excerpt'': ''Telephone number +251 111 568464''},
+      {''fact_id'': ''50ae6e4a-6d86-4db3-9333-b7c4977fe286'', ''text'': ''Email: alemteferig@gmail.com
+      alemayehu.teferi@ess.gov.et'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'':
+      1, ''source_excerpt'': ''Email: alemteferig@gmail.com alemayehu.teferi@ess.gov.et''},
+      {''fact_id'': ''6a8b6fa5-0aaa-4a3d-aa20-a5ecea91fd1b'', ''text'': ''Postal address
+      : 1143'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''Postal address : 1143''}, {''fact_id'': ''7330604f-9b88-4bd7-96ac-48ba2ae6d3dd'',
+      ''text'': ''You can visit us on the Website at: http://www.ess.gov.et/'', ''entity_refs'':
+      [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'': ''You can visit
+      us on the Website at: http://www.ess.gov.et/''}, {''fact_id'': ''b79dd0fd-9d8c-4722-8326-61982f4823b7'',
+      ''text'': ''## ETHIOPIAN STATISTICAL SERVICE'', ''entity_refs'': [], ''confidence'':
+      0.92, ''page_ref'': 1, ''source_excerpt'': ''## ETHIOPIAN STATISTICAL SERVICE''},
+      {''fact_id'': ''31c9740c-8fc5-4c35-8e45-95075392a06b'', ''text'': ''## Statistical
+      Bulletin'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''## Statistical Bulletin''}, {''fact_id'': ''8edbc983-5fa5-412a-8701-546871057a98'',
+      ''text'': ''Issue No. 21/2017'', ''entity_refs'': [], ''confidence'': 0.92,
+      ''page_ref'': 1, ''source_excerpt'': ''Issue No. 21/2017''}, {''fact_id'': ''a34a5cad-8cb1-456e-96fd-ce96bd4c1299'',
+      ''text'': ''## 5.  GLOSSARY'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'':
+      1, ''source_excerpt'': ''## 5.  GLOSSARY''}, {''fact_id'': ''1e729071-0aec-4eeb-bf40-69bdcae96136'',
+      ''text'': ''- General Inflation: The highest level of aggregation of inflation
+      which covers all the items within the scope of the inflation. - Food  Inflation:  inflation  which  covers  all  food  items
+      within the scope of the inflation. - Non -food  Inflation:  inflation  which  covers  all  non
+      -food items within the scope of the inflation. - Year -on -Year  percentage  change:  The  Yearly  percentage
+      change is the change in the index of the relevant  month  of  the  current  year  compared  with  the
+      i'', ''entity_refs'': [], ''confidence'': 0.9, ''page_ref'': 1, ''source_excerpt'':
+      ''- General Inflation: The highest level of aggregation of inflation which covers
+      all the items within the scope of the inflation. - Food  Inflation:  inflation  which  covers  all  food  items
+      within t''}, {''fact_id'': ''b7d35c20-c21d-4459-831f-c0004f5d6459'', ''text'':
+      ''Page 12'', ''entity_refs'': [], ''confidence'': 0.92, ''page_ref'': 1, ''source_excerpt'':
+      ''Page 12''}, {''fact_id'': ''c787bbb6-6a48-4d83-8721-bbb7cc30698c'', ''text'':
+      ''Month/Year | General | Food | Non - Food\nMarch EFY2009 - June EFY2010 | 14.4
+      | 13.4 | 15.9\nMarch EFY 2010 - JuneEFY2011 | 12.6 | 13.1 | 11.9\nMarch EFY2011
+      - June EFY2012 | 19.9 | 23.3 | 15.9\nMarch EFY2012 - June EFY2013 | 20.2 | 23.2
+      | 16.4\nMarch EFY2013 - June EFY2014 | 33.8 | 40.3 | 25.2\nMarch EFY2014 - June
+      EFY2015 | 32.5 | 31.7 | 33.9\nMarch EFY2015 - June EFY2016 | 26.6 | 28.1 | 24.3\nMarch
+      - EFY 2016 | 26.2 | 29.0 | 22.0\nApril | 23.3 | 27.0 | 18.0\nMay | 23.3 | 25.5
+      | 20.0\nJune | 19.9 | 22.7 '', ''entity_refs'': [], ''confidence'': 0.85, ''page_ref'':
+      1, ''source_excerpt'': ''Month/Year | General | Food | Non - Food\nMarch EFY2009
+      - June EFY2010 | 14.4 | 13.4 | 15.9\nMarch EFY 2010 - JuneEFY2011 | 12.6 | 13.1
+      | 11.9\nMarch EFY2011 - June EFY2012 | 19.9 | 23.3 | 15.9\nMarch EFY''}, {''fact_id'':
+      ''51d635bd-fa2e-4c8a-a807-94b300d37b48'', ''text'': ''CPI Items | Items Wight
+      in CPI (%) | %change on Year - on - Year Inflation March EFY2016 compared with
+      March EFY2017 | %change in Month - to - Month inflation July EFY2017 compared
+      to March EFY2017\nMajor Food and Non - Alcoholic Bever- age components | 53.5
+      | 11.9 | 2.5\nBread and Cereals | 17.1 | 1.2 | 1.4\nVegetables | 12.3 | 6.1
+      | 0.5\nOther - Food products | 5.6 | 26.7 | 3.0\nNon - Alcoholic Beverage |
+      5.1 | 50.2 | 6.4\nMeat | 4.1 | 17.8 | 1.4\nMajor Non - Food Components | 46.5
+      | 16.2 | 3.2\nHousi'', ''entity_refs'': [], ''confidence'': 0.85, ''page_ref'':
+      1, ''source_excerpt'': ''CPI Items | Items Wight in CPI (%) | %change on Year
+      - on - Year Inflation March EFY2016 compared with March EFY2017 | %change in
+      Month - to - Month inflation July EFY2017 compared to March EFY2017\nMa''},
+      {''fact_id'': ''512ab8e8-c7da-4c71-8713-5d478d22f06d'', ''text'': ''Month |
+      General month-to-month inflation\nMarch EFY 2016 | 4.0\nApril | - 0.7\nMay |
+      0.5\nJune | 0.9\nJuly | 1.5\nAugust | 1.2\nSeptember | 2.4\nOctober | 0.9\nNovember
+      | - 0.8\nDecember | 0.8\nJanuary | 0.6\nFebruary | 0.5\nMarch - EFY 2017 | 2.7'',
+      ''entity_refs'': [], ''confidence'': 0.85, ''page_ref'': 1, ''source_excerpt'':
+      ''Month | General month-to-month inflation\nMarch EFY 2016 | 4.0\nApril | -
+      0.7\nMay | 0.5\nJune | 0.9\nJuly | 1.5\nAugust | 1.2\nSeptember | 2.4\nOctober
+      | 0.9\nNovember | - 0.8\nDecember | 0.8\nJanuary | 0.6\nFeb''}, {''fact_id'':
+      ''5b607ced-f5d8-4a58-ab53-8fdc623e368f'', ''text'': ''Month | 12 Months moving
+      Average Overall CPI | 12 - Month Moving Average overall Inflation\nMarch - EFY2016
+      | 406.9 | 28.9\nApril | 414.0 | 28.1\nMay | 421.1 | 27.4\nJune | 427.2 | 26.6\nJuly
+      | 433.2 | 25.6\nAugust | 438.9 | 24.7\nSeptember | 444.9 | 23.8\nOctober | 450.4
+      | 22.6\nNovember | 457.4 | 22.0\nDecember | 463.5 | 21.0\nJanuary | 469.0 |
+      19.9\nFebruary | 474.4 | 18.9\nMarch - EFY2017 | 479.6 | 17.9'', ''entity_refs'':
+      [], ''confidence'': 0.85, ''page_ref'': 1, ''source_excerpt'': ''Month | 12
+      Months moving Average Overall CPI | 12 - Month Moving Average overall Inflation\nMarch
+      - EFY2016 | 406.9 | 28.9\nApril | 414.0 | 28.1\nMay | 421.1 | 27.4\nJune | 427.2
+      | 26.6\nJuly | 433.2 | 25.''}, {''fact_id'': ''683b5c0f-bcd3-4c60-90e5-18d1fee7d159'',
+      ''text'': ''Month | 12 - month moving average Food Inflation | 12 - month moving
+      average Non - Food Inflation\nMarch - EFY2016 | 29.3 | 28.4\nApril | 28.9 |
+      26.9\nMay | 28.6 | 25.7\nJune | 28.1 | 24.3\nJuly | 27.5 | 23.0\nAugust | 26.7
+      | 21.7\nSeptember | 26.1 | 20.4\nOctober | 25.1 | 19.0\nNovember | 24.4 | 18.4\nDecember
+      | 23.5 | 17.5\nJanuary | 22.1 | 16.7\nFebruary | 20.8 | 16.1\nMarch - EFY2017
+      | 19.3 | 15.7'', ''entity_refs'': [], ''confidence'': 0.85, ''page_ref'': 1,
+      ''source_excerpt'': ''Month | 12 - month moving average Food Inflation | 12
+      - month moving average Non - Food Inflation\nMarch - EFY2016 | 29.3 | 28.4\nApril
+      | 28.9 | 26.9\nMay | 28.6 | 25.7\nJune | 28.1 | 24.3\nJuly | 27.5 | 2''}]'
+    downstream_consumers:
+    - outputs/traces/runs.jsonl (LangSmith traces)
+    - contracts/runner.py (ValidationRunner)
+    profiler: ydata-profiling
+  - name: extraction_model
+    type: string
+    description: Name of the AI model used to extract facts from the document.
+    required: true
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 3
+    sample_values:
+    - gemini-1.5-flash
+    - claude-3-5-sonnet-20241022
+    - claude-3-haiku-20240307
+    downstream_consumers:
+    - outputs/traces/runs.jsonl (LangSmith traces)
+    - contracts/runner.py (ValidationRunner)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: processing_time_ms
+    type: integer
+    description: The processing time in milliseconds for each data extraction.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 46
+    sample_values:
+    - '0'
+    - '271188'
+    - '6406'
+    - '25465'
+    - '139775'
+    downstream_consumers:
+    - outputs/traces/runs.jsonl (LangSmith traces)
+    - contracts/runner.py (ValidationRunner)
+    statistics:
+      min: 0
+      max: 271188
+      mean: 15558.26
+      p25: 1429.5
+      p50: 1604.0
+      p75: 4267.0
+      p95: 99127.85
+      p99: 222266.89
+      stddev: 47904.968873
+    profiler: ydata-profiling
+  - name: source_hash
+    type: string
+    description: The source_hash column stores unique hashes for data extraction sources.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 50
+    sample_values:
+    - aa0fdb0206a7f3e82bebfa31aa168d193018976113d06e881b7f207a6b94a89c
+    - 90d1af421f88af38634caacafd380983fb8702d2e349a420886919c364047a2a
+    - 4d2e431cddf81a92fb7a49bf1872094c73d2e66439f8c2ef38c6735ee947e4de
+    - 8d4bbc9146ca4b5fae25420590724c6006d1db666901063213129d0ab5c37b86
+    - bcd203921d35761b47ce70d4765746bff685175b7ec475351c8190f2e4619cd0
+    downstream_consumers:
+    - outputs/traces/runs.jsonl (LangSmith traces)
+    - contracts/runner.py (ValidationRunner)
+    char_pattern: sha256-hex
+    profiler: ydata-profiling
+  - name: source_path
+    type: string
+    description: The source_path column contains file paths for various business reports.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 45
+    sample_values:
+    - 2018_Audited_Financial_Statement_Report.pdf
+    - 20191010_Pharmaceutical-Manufacturing-Opportunites-in-Ethiopia_VF.pdf
+    - Audit Report - 2023.pdf
+    - CBE Annual Report 2009-10.pdf
+    - CBE Annual Report 2015-16_1.pdf
+    downstream_consumers:
+    - outputs/traces/runs.jsonl (LangSmith traces)
+    - contracts/runner.py (ValidationRunner)
+    char_pattern: path-like
+    profiler: ydata-profiling
+  - name: token_count.input
+    type: integer
+    description: The number of tokens in the input text, represented as an integer.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 9
+    sample_values:
+    - '100'
+    - '2621'
+    - '464'
+    - '4530'
+    - '4768'
+    downstream_consumers:
+    - outputs/traces/runs.jsonl (LangSmith traces)
+    - contracts/runner.py (ValidationRunner)
+    statistics:
+      min: 100
+      max: 44879
+      mean: 1768.48
+      p25: 200.0
+      p50: 200.0
+      p75: 200.0
+      p95: 4660.9
+      p99: 33391.44
+      stddev: 6887.771745
+    profiler: ydata-profiling
+  - name: token_count.output
+    type: integer
+    description: The token_count.output column represents the number of tokens extracted
+      from a text source.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 11
+    sample_values:
+    - '50'
+    - '4625'
+    - '250'
+    - '1150'
+    - '4475'
+    downstream_consumers:
+    - outputs/traces/runs.jsonl (LangSmith traces)
+    - contracts/runner.py (ValidationRunner)
+    statistics:
+      min: 50
+      max: 39550
+      mean: 1543.16
+      p25: 140.0
+      p50: 140.0
+      p75: 140.0
+      p95: 4557.5
+      p99: 28659.75
+      stddev: 6004.609371
+    profiler: ydata-profiling
+quality:
+  type: SodaChecks
+  specification:
+    checks for extractions:
+    - missing_count(doc_id) = 0
+    - duplicate_count(doc_id) = 0
+    - row_count >= 1
+    - missing_count(extracted_facts) = 0
+    - missing_count(extraction_model) = 0
+quality_extended:
+- type: not_null
+  description: Required fields must never be null. Nulls indicate a failed or partial
+    migration.
+  fields:
+  - doc_id
+  - extracted_facts
+  - extraction_model
+- type: unique
+  description: Primary key fields must be unique. Duplicates indicate an idempotency
+    violation.
+  fields:
+  - doc_id
+- type: accepted_values
+  description: schema_version must follow MAJOR.MINOR semantic versioning.
+  field: schema_version
+  pattern: ^\d+\.\d+$
+- type: custom
+  name: created_at_not_future
+  description: created_at must not be a future timestamp.
+  rule: created_at <= NOW()
+  breaking_if_violated: false
+- type: custom
+  name: statistical_bounds_processing_time_ms
+  description: 'Statistical profile for ''processing_time_ms'': mean=15558.26, p95=99127.85,
+    p99=222266.89, stddev=47904.968873. Values beyond mean ± 3σ trigger an anomaly
+    alert.'
+  field: processing_time_ms
+  observed_profile:
+    min: 0
+    max: 271188
+    mean: 15558.26
+    p25: 1429.5
+    p50: 1604.0
+    p75: 4267.0
+    p95: 99127.85
+    p99: 222266.89
+    stddev: 47904.968873
+  rule: mean - 3*stddev <= value <= mean + 3*stddev
+- type: custom
+  name: statistical_bounds_token_count_input
+  description: 'Statistical profile for ''token_count.input'': mean=1768.48, p95=4660.9,
+    p99=33391.44, stddev=6887.771745. Values beyond mean ± 3σ trigger an anomaly alert.'
+  field: token_count.input
+  observed_profile:
+    min: 100
+    max: 44879
+    mean: 1768.48
+    p25: 200.0
+    p50: 200.0
+    p75: 200.0
+    p95: 4660.9
+    p99: 33391.44
+    stddev: 6887.771745
+  rule: mean - 3*stddev <= value <= mean + 3*stddev
+- type: ai_extension
+  name: llm_output_schema_enforcement
+  description: LLM outputs must contain required keys with correct types.
+  required_output_keys:
+  - facts_extracted
+  - avg_confidence
+  - extraction_model
+  output_schema:
+    facts_extracted:
+      type: integer
+      minimum: 0
+    avg_confidence:
+      type: number
+      minimum: 0.0
+      maximum: 1.0
+    extraction_model:
+      type: string
+- type: ai_extension
+  name: prompt_input_validation
+  description: Prompt inputs must supply doc_id and source_path as non-empty strings.
+    Empty inputs cause the LLM to hallucinate document content.
+  required_input_keys:
+  - doc_id
+  - source_path
+  validation_rules:
+    doc_id:
+      type: string
+      minLength: 1
+    source_path:
+      type: string
+      minLength: 1
+llm_annotations:
+- column: doc_id
+  description: Unique identifier for the source document being processed.
+  business_rule: IS NOT NULL AND matches UUID-v4 pattern
+  cross_column_relationship: doc_id links extracted_facts to their source document
+- column: entities
+  description: The 'entities' column contains an array of named entities extracted
+    from text data.
+  business_rule: The 'entities' column must be a non-null array, and each entity object
+    must have 'entity_id', 'name', 'type', and 'canonical_value' fields.
+  cross_column_relationship: The 'entities' column is related to the 'doc_id', 'extracted_at',
+    and 'extracted_facts' columns, as the entities are extracted from the text data
+    in the dataset.
+- column: extracted_at
+  description: The extracted_at column contains timestamps of when the document extractions
+    occurred.
+  business_rule: extracted_at MUST be a valid ISO 8601 timestamp in the UTC timezone
+  cross_column_relationship: None
+- column: extracted_facts
+  description: Array of fact objects extracted from the document, each with text,
+    entities, and confidence.
+  business_rule: len(value) >= 1 (non-empty array)
+  cross_column_relationship: extracted_facts[*].confidence must equal avg_confidence
+    when averaged
+- column: extraction_model
+  description: Name of the AI model used to extract facts from the document.
+  business_rule: matches pattern ^(claude|gpt)-
+  cross_column_relationship: extraction_model determines the valid range of confidence
+    scores
+- column: processing_time_ms
+  description: The processing time in milliseconds for each data extraction.
+  business_rule: processing_time_ms >= 0
+  cross_column_relationship: None
+- column: source_hash
+  description: The source_hash column stores unique hashes for data extraction sources.
+  business_rule: source_hash MUST be a non-empty string of at least 64 characters,
+    consisting only of hexadecimal digits (0-9, a-f, A-F).
+  cross_column_relationship: None
+- column: source_path
+  description: The source_path column contains file paths for various business reports.
+  business_rule: source_path LIKE '%.pdf' AND LENGTH(source_path) < 100
+  cross_column_relationship: None
+- column: token_count.input
+  description: The number of tokens in the input text, represented as an integer.
+  business_rule: token_count.input > 0
+  cross_column_relationship: The token_count.input should match the token_count.output
+    column.
+- column: token_count.output
+  description: The token_count.output column represents the number of tokens extracted
+    from a text source.
+  business_rule: token_count.output >= 0
+  cross_column_relationship: token_count.output should be greater than or equal to
+    token_count.input
+lineage:
+  upstream:
+  - outputs/week3/NormalizedOutput/ (Week 3 Document Refinery)
+  downstream:
+  - id: outputs-traces-runs-jsonl
+    description: outputs/traces/runs.jsonl (LangSmith traces)
+    fields_consumed:
+    - extracted_facts
+    - extraction_model
+    - doc_id
+    breaking_if_changed:
+    - doc_id
+  - id: contracts-runner-py
+    description: contracts/runner.py (ValidationRunner)
+    fields_consumed:
+    - extracted_facts
+    - extraction_model
+    - doc_id
+    breaking_if_changed:
+    - doc_id
+contacts:
+  owner: Yakob
+  team: 10 Academy TenX Week 7
+  email: yakob@10academy.org
+  channel: week7-data-contracts
+tags:
+- week7
+- data-contract
+- document-extraction
+- extractions

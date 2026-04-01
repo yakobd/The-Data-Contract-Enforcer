@@ -1,0 +1,54 @@
+version: 2
+models:
+- name: verdicts
+  description: Canonical verdicts records from the Week 7 Data Contract Enforcer.
+  columns:
+  - name: confidence
+    description: Confidence score in [0.0, 1.0] expressing certainty of this extraction
+      or classification.
+    tests:
+    - dbt_utils.accepted_range:
+        min_value: 0.0
+        max_value: 1.0
+        inclusive: true
+  - name: evaluated_at
+    description: The evaluated_at column should be a valid timestamp with millisecond
+      precision.
+  - name: overall_score
+    description: Aggregate audit quality score on a 0.0–5.0 scale.
+    tests:
+    - not_null
+  - name: overall_verdict
+    description: The overall verdict should be either 'PASS' or 'FAIL' based on the
+      evaluation.
+  - name: rubric_id
+    description: The rubric_id column uniquely identifies a set of scores and overall
+      verdict for a data quality assessment.
+  - name: rubric_version
+    description: The rubric_version column should be a valid version string in the
+      format X.Y.Z.
+  - name: scores.architecture_design
+    description: The scores.architecture_design column contains a JSON object with
+      score, evidence, and notes for the architecture design criterion.
+  - name: scores.code_quality
+    description: The scores.code_quality column contains a JSON object with a score,
+      evidence, and notes.
+  - name: scores.documentation
+    description: The 'scores.documentation' column contains an object with score,
+      evidence, and notes for documentation quality.
+  - name: scores.implementation_correctness
+    description: The 'scores.implementation_correctness' column contains scores and
+      related evidence for the implementation correctness criterion.
+  - name: scores.test_coverage
+    description: The scores.test_coverage column contains test coverage scores as
+      JSON objects with score, evidence, and notes fields.
+  - name: target_ref
+    description: Ensure that the target_ref column contains valid GitHub repository
+      URLs
+    tests:
+    - not_null
+  - name: verdict_id
+    description: Unique identifier for an audit verdict record.
+    tests:
+    - not_null
+    - unique

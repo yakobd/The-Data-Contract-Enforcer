@@ -1,0 +1,36 @@
+version: 2
+models:
+- name: extractions
+  description: Canonical extractions records from the Week 7 Data Contract Enforcer.
+  columns:
+  - name: doc_id
+    description: Unique identifier for the source document being processed.
+    tests:
+    - not_null
+    - unique
+  - name: entities
+    description: The 'entities' column contains an array of named entities extracted
+      from text data.
+  - name: extracted_at
+    description: The extracted_at column contains timestamps of when the document
+      extractions occurred.
+  - name: extracted_facts
+    description: Array of fact objects extracted from the document, each with text,
+      entities, and confidence.
+    tests:
+    - not_null
+  - name: extraction_model
+    description: Name of the AI model used to extract facts from the document.
+    tests:
+    - not_null
+  - name: processing_time_ms
+    description: The processing time in milliseconds for each data extraction.
+  - name: source_hash
+    description: The source_hash column stores unique hashes for data extraction sources.
+  - name: source_path
+    description: The source_path column contains file paths for various business reports.
+  - name: token_count.input
+    description: The number of tokens in the input text, represented as an integer.
+  - name: token_count.output
+    description: The token_count.output column represents the number of tokens extracted
+      from a text source.

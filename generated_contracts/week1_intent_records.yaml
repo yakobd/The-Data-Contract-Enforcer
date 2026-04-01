@@ -1,0 +1,235 @@
+kind: DataContract
+apiVersion: v3.0.0
+id: 68d33c73-bbe7-5068-8dfd-a531e0f73ef6
+info:
+  title: Week 7 — Intent Records Data Contract
+  version: 1.0.0
+  owner: yakob@10academy.org
+  description: 'One record per intent records entry. Generated from 2 records on 2026-04-01.
+    Quality floor: 100.0%.'
+servers:
+  local:
+    type: local
+    path: outputs/week1/intent_records.jsonl
+    format: jsonl
+terms:
+  usage: Internal inter-system data contract. Do not publish.
+  limitations: All required fields must remain non-null across schema versions.
+generatedAt: '2026-04-01T17:42:09.870593+00:00'
+generatedBy: contracts/generator.py
+recordCount: 2
+qualityFloor: 100.0
+tenant: 10academy
+domain: intent-correlation
+status: active
+schema:
+  fields:
+  - name: code_refs
+    type: array
+    description: The code_refs column stores an array of code references associated
+      with each intent record.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 0
+    sample_values:
+    - '[{''file'': ''src/core/tools/WriteToFileTool.ts'', ''line_start'': 1, ''line_end'':
+      1, ''symbol'': ''write_file'', ''confidence'': 0.87}]'
+    - '[{''file'': ''src/core/assistant-message/presentAssistantMessage.ts'', ''line_start'':
+      1, ''line_end'': 1, ''symbol'': ''apply_patch'', ''confidence'': 0.82}]'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - contracts/attributor.py (ViolationAttributor)
+    profiler: ydata-profiling
+  - name: created_at
+    type: string (timestamp)
+    description: ISO 8601 UTC timestamp when this record was created.
+    required: true
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 2
+    sample_values:
+    - '2026-02-21T20:41:12.120000+00:00'
+    - '2026-02-21T20:52:45.918000+00:00'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - contracts/attributor.py (ViolationAttributor)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: description
+    type: string
+    description: The description column contains free-text descriptions of software
+      development activities.
+    required: true
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 2
+    sample_values:
+    - 'Intent INT-001: feature evolution — agent modified ''WriteToFileTool.ts'' via
+      write_to_file operation.'
+    - 'Intent INT-001: code refactoring — agent modified ''presentAssistantMessage.ts''
+      via apply_patch operation.'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - contracts/attributor.py (ViolationAttributor)
+    char_pattern: free-text
+    profiler: ydata-profiling
+  - name: governance_tags
+    type: array
+    description: Ensure governance_tags is an array of strings with no more than two
+      unique values.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 0
+    sample_values:
+    - '[''evolution'', ''feature'']'
+    - '[''refactor'']'
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - contracts/attributor.py (ViolationAttributor)
+    profiler: ydata-profiling
+  - name: intent_id
+    type: string
+    description: Unique identifier for a developer intent event.
+    required: true
+    primaryKey: true
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 1
+    sample_values:
+    - INT-001
+    downstream_consumers:
+    - contracts/runner.py (ValidationRunner)
+    - contracts/attributor.py (ViolationAttributor)
+    - intent_records (via FK intent_id → intent_id)
+    char_pattern: path-like
+    profiler: ydata-profiling
+quality:
+  type: SodaChecks
+  specification:
+    checks for intent_records:
+    - missing_count(intent_id) = 0
+    - duplicate_count(intent_id) = 0
+    - row_count >= 1
+    - missing_count(created_at) = 0
+    - missing_count(description) = 0
+quality_extended:
+- type: not_null
+  description: Required fields must never be null. Nulls indicate a failed or partial
+    migration.
+  fields:
+  - created_at
+  - description
+  - intent_id
+- type: unique
+  description: Primary key fields must be unique. Duplicates indicate an idempotency
+    violation.
+  fields:
+  - intent_id
+- type: accepted_values
+  description: schema_version must follow MAJOR.MINOR semantic versioning.
+  field: schema_version
+  pattern: ^\d+\.\d+$
+- type: custom
+  name: created_at_not_future
+  description: created_at must not be a future timestamp.
+  rule: created_at <= NOW()
+  breaking_if_violated: false
+- type: custom
+  name: array_fields_non_empty
+  description: Array fields must not be empty lists. Empty arrays indicate a failed
+    extraction.
+  fields:
+  - code_refs
+  - governance_tags
+  rule: len(value) >= 1
+  breaking_if_violated: true
+- type: custom
+  name: timestamp_iso8601_format
+  description: All timestamp fields must be valid ISO 8601 UTC strings.
+  fields:
+  - created_at
+  rule: 'regex: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.*$'
+  breaking_if_violated: true
+- type: custom
+  name: minimum_record_count_6
+  description: Dataset must contain at least 1 record.
+  rule: COUNT(*) >= 1
+  breaking_if_violated: true
+- type: custom
+  name: minimum_record_count_7
+  description: Dataset must contain at least 1 record.
+  rule: COUNT(*) >= 1
+  breaking_if_violated: true
+llm_annotations:
+- column: code_refs
+  description: The code_refs column stores an array of code references associated
+    with each intent record.
+  business_rule: The code_refs array must not be empty and each element must contain
+    valid file, line, symbol, and confidence fields.
+  cross_column_relationship: The code_refs column is related to the description column,
+    as the code references may provide more context about the intent record.
+- column: created_at
+  description: ISO 8601 UTC timestamp when this record was created.
+  business_rule: IS NOT NULL AND created_at <= NOW()
+  cross_column_relationship: created_at must be <= recorded_at for event records
+- column: description
+  description: The description column contains free-text descriptions of software
+    development activities.
+  business_rule: description MUST NOT be NULL AND length(description) <= 100 characters
+  cross_column_relationship: The description column is related to the intent_id column,
+    which uniquely identifies each software development activity.
+- column: governance_tags
+  description: Ensure governance_tags is an array of strings with no more than two
+    unique values.
+  business_rule: LENGTH(governance_tags) <= 2 AND ALL(item IN governance_tags IS STRING)
+  cross_column_relationship: None
+- column: intent_id
+  description: Unique identifier for a developer intent event.
+  business_rule: IS NOT NULL AND UNIQUE
+  cross_column_relationship: intent_id groups related code_refs under a single developer
+    goal
+lineage:
+  upstream:
+  - outputs/week1/agent_trace.jsonl (Week 1 Intent Correlator)
+  downstream:
+  - id: contracts-runner-py
+    description: contracts/runner.py (ValidationRunner)
+    fields_consumed:
+    - created_at
+    - intent_id
+    - confidence
+    - description
+    breaking_if_changed:
+    - intent_id
+    - confidence
+  - id: contracts-attributor-py
+    description: contracts/attributor.py (ViolationAttributor)
+    fields_consumed:
+    - created_at
+    - intent_id
+    - confidence
+    - description
+    breaking_if_changed:
+    - intent_id
+    - confidence
+contacts:
+  owner: Yakob
+  team: 10 Academy TenX Week 7
+  email: yakob@10academy.org
+  channel: week7-data-contracts
+tags:
+- week7
+- data-contract
+- intent-correlation
+- intent_records

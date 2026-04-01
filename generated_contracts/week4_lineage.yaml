@@ -1,0 +1,982 @@
+kind: DataContract
+apiVersion: v3.0.0
+id: ac05d9a1-5507-5e4a-bff1-d5f9f9b577cd
+info:
+  title: Week 7 — Lineage Snapshots Data Contract
+  version: 1.0.0
+  owner: yakob@10academy.org
+  description: 'One record per lineage snapshots entry. Generated from 2 records on
+    2026-04-01. Quality floor: 100.0%.'
+servers:
+  local:
+    type: local
+    path: outputs/week4/lineage_snapshots.jsonl
+    format: jsonl
+terms:
+  usage: Internal inter-system data contract. Do not publish.
+  limitations: All required fields must remain non-null across schema versions.
+generatedAt: '2026-04-01T17:42:50.440016+00:00'
+generatedBy: contracts/generator.py
+recordCount: 2
+qualityFloor: 100.0
+tenant: 10academy
+domain: lineage-cartography
+status: active
+schema:
+  fields:
+  - name: captured_at
+    type: string (timestamp)
+    description: The timestamp when the lineage snapshot was captured.
+    required: true
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 2
+    sample_values:
+    - '2026-03-25T11:09:26.648055+00:00'
+    - '2026-04-01T11:09:26.648055+00:00'
+    downstream_consumers:
+    - contracts/generator.py (lineage injection)
+    - contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
+    char_pattern: iso-8601-timestamp
+    profiler: ydata-profiling
+  - name: codebase_root
+    type: string
+    description: Field 'codebase_root' of type string.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 1
+    sample_values:
+    - C:\Users\Yakob\Desktop\10 Academy\Week-4\brownfield-cartographer
+    downstream_consumers:
+    - contracts/generator.py (lineage injection)
+    - contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
+    char_pattern: free-text
+    profiler: ydata-profiling
+  - name: edges
+    type: array
+    description: Field 'edges' of type array.
+    required: true
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 0
+    sample_values:
+    - '[{''source'': ''file::jaffle-shop/models/marts/customers.sql'', ''target'':
+      ''file::jaffle-shop/models/staging/stg_customers.sql'', ''relationship'': ''IMPORTS'',
+      ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/customers.sql'',
+      ''target'': ''file::jaffle-shop/models/marts/orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/customers.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/locations.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_locations.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/locations.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/locations.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/orders.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/orders.sql'',
+      ''target'': ''file::jaffle-shop/models/marts/order_items.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_customers.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/order_items.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_order_items.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_products.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_supplies.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_supplies.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_products.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_order_items.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/order_items.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/products.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_products.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/products.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/products.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/supplies.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_supplies.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/supplies.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/supplies.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/staging/stg_order_items.yml'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::customers'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::customer_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::customer_name'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::count_lifetime_orders'', ''relationship'': ''PRODUCES'',
+      ''confidence'': 0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::first_ordered_at'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::last_ordered_at'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::lifetime_spend_pretax'', ''relationship'': ''PRODUCES'',
+      ''confidence'': 0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::lifetime_tax_paid'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::lifetime_spend'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::customer_type'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::orders'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::order_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::customer_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::order_total'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::ordered_at'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::order_cost'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::is_food_order'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::is_drink_order'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''table::order_items'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''table::order_item_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''table::order_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_customers.yml'',
+      ''target'': ''table::stg_customers'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_customers.yml'',
+      ''target'': ''table::customer_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_locations.yml'',
+      ''target'': ''table::stg_locations'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_locations.yml'',
+      ''target'': ''table::location_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_orders.yml'',
+      ''target'': ''table::stg_orders'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_orders.yml'',
+      ''target'': ''table::order_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_order_items.yml'',
+      ''target'': ''table::stg_order_items'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_order_items.yml'',
+      ''target'': ''table::order_item_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_order_items.yml'',
+      ''target'': ''table::order_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_products.yml'',
+      ''target'': ''table::stg_products'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_products.yml'',
+      ''target'': ''table::product_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_supplies.yml'',
+      ''target'': ''table::stg_supplies'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_supplies.yml'',
+      ''target'': ''table::supply_uuid'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''external::ecom'', ''target'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/__sources.yml'',
+      ''relationship'': ''READS'', ''confidence'': 0.9}]'
+    - '[{''source'': ''file::jaffle-shop/models/marts/customers.sql'', ''target'':
+      ''file::jaffle-shop/models/staging/stg_customers.sql'', ''relationship'': ''IMPORTS'',
+      ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/customers.sql'',
+      ''target'': ''file::jaffle-shop/models/marts/orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/customers.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/locations.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_locations.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/locations.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/locations.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/orders.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/orders.sql'',
+      ''target'': ''file::jaffle-shop/models/marts/order_items.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_customers.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/order_items.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_order_items.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_products.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_supplies.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_supplies.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_products.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_order_items.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/order_items.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/products.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_products.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/products.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/products.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/supplies.sql'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_supplies.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/marts/supplies.yml'',
+      ''target'': ''file::jaffle-shop/models/marts/supplies.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::jaffle-shop/models/staging/stg_order_items.yml'',
+      ''target'': ''file::jaffle-shop/models/staging/stg_orders.sql'', ''relationship'':
+      ''IMPORTS'', ''confidence'': 0.95}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::customers'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::customer_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::customer_name'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::count_lifetime_orders'', ''relationship'': ''PRODUCES'',
+      ''confidence'': 0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::first_ordered_at'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::last_ordered_at'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::lifetime_spend_pretax'', ''relationship'': ''PRODUCES'',
+      ''confidence'': 0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::lifetime_tax_paid'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::lifetime_spend'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/customers.yml'',
+      ''target'': ''table::customer_type'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::orders'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::order_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::customer_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::order_total'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::ordered_at'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::order_cost'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::is_food_order'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/orders.yml'',
+      ''target'': ''table::is_drink_order'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''table::order_items'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''table::order_item_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/marts/order_items.yml'',
+      ''target'': ''table::order_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_customers.yml'',
+      ''target'': ''table::stg_customers'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_customers.yml'',
+      ''target'': ''table::customer_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_locations.yml'',
+      ''target'': ''table::stg_locations'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_locations.yml'',
+      ''target'': ''table::location_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_orders.yml'',
+      ''target'': ''table::stg_orders'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_orders.yml'',
+      ''target'': ''table::order_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_order_items.yml'',
+      ''target'': ''table::stg_order_items'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_order_items.yml'',
+      ''target'': ''table::order_item_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_order_items.yml'',
+      ''target'': ''table::order_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_products.yml'',
+      ''target'': ''table::stg_products'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_products.yml'',
+      ''target'': ''table::product_id'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_supplies.yml'',
+      ''target'': ''table::stg_supplies'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/stg_supplies.yml'',
+      ''target'': ''table::supply_uuid'', ''relationship'': ''PRODUCES'', ''confidence'':
+      0.9}, {''source'': ''external::ecom'', ''target'': ''file::10 Academy/Week-4/cloned_repo_2/jaffle-shop/models/staging/__sources.yml'',
+      ''relationship'': ''READS'', ''confidence'': 0.9}, {''source'': ''file::brownfield-cartographer/src/orchestrator.py'',
+      ''target'': ''service::week7-data-contract-enforcer/contracts/runner.py'', ''relationship'':
+      ''PRODUCES'', ''confidence'': 0.88}]'
+    downstream_consumers:
+    - contracts/generator.py (lineage injection)
+    - contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
+    profiler: ydata-profiling
+  - name: git_commit
+    type: string
+    description: Git commit SHA at which this snapshot was captured.
+    required: false
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 2
+    sample_values:
+    - 4ef409981a9aec4cbb805dccd7bf395d82ef797a
+    - 4ef409981a9aec4cbb805dccd7bf395d82ef7971
+    downstream_consumers:
+    - contracts/generator.py (lineage injection)
+    - contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
+    char_pattern: sha1-hex
+    profiler: ydata-profiling
+  - name: nodes
+    type: array
+    description: Ensure all YAML configuration files have a 'purpose' metadata field
+      describing their use.
+    required: true
+    primaryKey: false
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 0
+    sample_values:
+    - '[{''node_id'': ''file::jaffle-shop/.pre-commit-config.yaml'', ''type'': ''FILE'',
+      ''label'': ''.pre-commit-config.yaml'', ''metadata'': {''path'': ''jaffle-shop/.pre-commit-config.yaml'',
+      ''language'': ''yaml'', ''purpose'': ''Configuration module for .pre-commit-config
+      runtime parameters.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      1, ''file_size'': 402}}, {''node_id'': ''file::jaffle-shop/dbt_project.yml'',
+      ''type'': ''FILE'', ''label'': ''dbt_project.yml'', ''metadata'': {''path'':
+      ''jaffle-shop/dbt_project.yml'', ''language'': ''yaml'', ''purpose'': ''YAML
+      configuration for dbt project pipeline or model definitions.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 720}}, {''node_id'':
+      ''file::jaffle-shop/package-lock.yml'', ''type'': ''FILE'', ''label'': ''package-lock.yml'',
+      ''metadata'': {''path'': ''jaffle-shop/package-lock.yml'', ''language'': ''yaml'',
+      ''purpose'': ''YAML configuration for package-lock pipeline or model definitions.'',
+      ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'':
+      289}}, {''node_id'': ''file::jaffle-shop/packages.yml'', ''type'': ''FILE'',
+      ''label'': ''packages.yml'', ''metadata'': {''path'': ''jaffle-shop/packages.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for packages pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      1, ''file_size'': 202}}, {''node_id'': ''file::jaffle-shop/Taskfile.yml'', ''type'':
+      ''FILE'', ''label'': ''Taskfile.yml'', ''metadata'': {''path'': ''jaffle-shop/Taskfile.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for Taskfile pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 988}}, {''node_id'': ''file::jaffle-shop/.github/workflows/cd_prod.yml'',
+      ''type'': ''FILE'', ''label'': ''cd_prod.yml'', ''metadata'': {''path'': ''jaffle-shop/.github/workflows/cd_prod.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for cd prod pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 2219}}, {''node_id'': ''file::jaffle-shop/.github/workflows/cd_staging.yml'',
+      ''type'': ''FILE'', ''label'': ''cd_staging.yml'', ''metadata'': {''path'':
+      ''jaffle-shop/.github/workflows/cd_staging.yml'', ''language'': ''yaml'', ''purpose'':
+      ''YAML configuration for cd staging pipeline or model definitions.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 2243}}, {''node_id'':
+      ''file::jaffle-shop/.github/workflows/ci.yml'', ''type'': ''FILE'', ''label'':
+      ''ci.yml'', ''metadata'': {''path'': ''jaffle-shop/.github/workflows/ci.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for ci pipeline or
+      model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 2468}}, {''node_id'': ''file::jaffle-shop/.github/workflows/scripts/dbt_cloud_run_job.py'',
+      ''type'': ''FILE'', ''label'': ''dbt_cloud_run_job.py'', ''metadata'': {''path'':
+      ''jaffle-shop/.github/workflows/scripts/dbt_cloud_run_job.py'', ''language'':
+      ''py'', ''purpose'': ''Module implementing dbt cloud run job functionality.'',
+      ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'':
+      4035}}, {''node_id'': ''file::jaffle-shop/macros/cents_to_dollars.sql'', ''type'':
+      ''TABLE'', ''label'': ''cents_to_dollars.sql'', ''metadata'': {''path'': ''jaffle-shop/macros/cents_to_dollars.sql'',
+      ''language'': ''sql'', ''purpose'': ''Data model — cents to dollars transformation
+      or staging layer.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 696}}, {''node_id'': ''file::jaffle-shop/macros/generate_schema_name.sql'',
+      ''type'': ''TABLE'', ''label'': ''generate_schema_name.sql'', ''metadata'':
+      {''path'': ''jaffle-shop/macros/generate_schema_name.sql'', ''language'': ''sql'',
+      ''purpose'': ''Data model — generate schema name transformation or staging layer.'',
+      ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'':
+      837}}, {''node_id'': ''file::jaffle-shop/models/marts/customers.sql'', ''type'':
+      ''TABLE'', ''label'': ''customers.sql'', ''metadata'': {''path'': ''jaffle-shop/models/marts/customers.sql'',
+      ''language'': ''sql'', ''purpose'': ''Data model — customers transformation
+      or staging layer.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 1332}}, {''node_id'': ''file::jaffle-shop/models/marts/customers.yml'',
+      ''type'': ''FILE'', ''label'': ''customers.yml'', ''metadata'': {''path'': ''jaffle-shop/models/marts/customers.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for customers pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 3611}}, {''node_id'': ''file::jaffle-shop/models/marts/locations.sql'',
+      ''type'': ''TABLE'', ''label'': ''locations.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/marts/locations.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — locations transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 104}}, {''node_id'':
+      ''file::jaffle-shop/models/marts/locations.yml'', ''type'': ''FILE'', ''label'':
+      ''locations.yml'', ''metadata'': {''path'': ''jaffle-shop/models/marts/locations.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for locations pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 647}}, {''node_id'': ''file::jaffle-shop/models/marts/metricflow_time_spine.sql'',
+      ''type'': ''TABLE'', ''label'': ''metricflow_time_spine.sql'', ''metadata'':
+      {''path'': ''jaffle-shop/models/marts/metricflow_time_spine.sql'', ''language'':
+      ''sql'', ''purpose'': ''Data model — metricflow time spine transformation or
+      staging layer.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 311}}, {''node_id'': ''file::jaffle-shop/models/marts/orders.sql'',
+      ''type'': ''TABLE'', ''label'': ''orders.sql'', ''metadata'': {''path'': ''jaffle-shop/models/marts/orders.sql'',
+      ''language'': ''sql'', ''purpose'': ''Data model — orders transformation or
+      staging layer.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 1527}}, {''node_id'': ''file::jaffle-shop/models/marts/orders.yml'',
+      ''type'': ''FILE'', ''label'': ''orders.yml'', ''metadata'': {''path'': ''jaffle-shop/models/marts/orders.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for orders pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 5534}}, {''node_id'': ''file::jaffle-shop/models/marts/order_items.sql'',
+      ''type'': ''TABLE'', ''label'': ''order_items.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/marts/order_items.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — order items transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 1009}}, {''node_id'':
+      ''file::jaffle-shop/models/marts/order_items.yml'', ''type'': ''FILE'', ''label'':
+      ''order_items.yml'', ''metadata'': {''path'': ''jaffle-shop/models/marts/order_items.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for order items pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 5495}}, {''node_id'': ''file::jaffle-shop/models/marts/products.sql'',
+      ''type'': ''TABLE'', ''label'': ''products.sql'', ''metadata'': {''path'': ''jaffle-shop/models/marts/products.sql'',
+      ''language'': ''sql'', ''purpose'': ''Data model — products transformation or
+      staging layer.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 101}}, {''node_id'': ''file::jaffle-shop/models/marts/products.yml'',
+      ''type'': ''FILE'', ''label'': ''products.yml'', ''metadata'': {''path'': ''jaffle-shop/models/marts/products.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for products pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 888}}, {''node_id'': ''file::jaffle-shop/models/marts/supplies.sql'',
+      ''type'': ''TABLE'', ''label'': ''supplies.sql'', ''metadata'': {''path'': ''jaffle-shop/models/marts/supplies.sql'',
+      ''language'': ''sql'', ''purpose'': ''Data model — supplies transformation or
+      staging layer.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 101}}, {''node_id'': ''file::jaffle-shop/models/marts/supplies.yml'',
+      ''type'': ''FILE'', ''label'': ''supplies.yml'', ''metadata'': {''path'': ''jaffle-shop/models/marts/supplies.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for supplies pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 849}}, {''node_id'': ''file::jaffle-shop/models/staging/stg_customers.sql'',
+      ''type'': ''TABLE'', ''label'': ''stg_customers.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/staging/stg_customers.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — stg customers transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 278}}, {''node_id'':
+      ''file::jaffle-shop/models/staging/stg_customers.yml'', ''type'': ''FILE'',
+      ''label'': ''stg_customers.yml'', ''metadata'': {''path'': ''jaffle-shop/models/staging/stg_customers.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for stg customers
+      pipeline or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'',
+      ''change_frequency'': 0, ''file_size'': 296}}, {''node_id'': ''file::jaffle-shop/models/staging/stg_locations.sql'',
+      ''type'': ''TABLE'', ''label'': ''stg_locations.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/staging/stg_locations.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — stg locations transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 424}}, {''node_id'':
+      ''file::jaffle-shop/models/staging/stg_locations.yml'', ''type'': ''FILE'',
+      ''label'': ''stg_locations.yml'', ''metadata'': {''path'': ''jaffle-shop/models/staging/stg_locations.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for stg locations
+      pipeline or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'',
+      ''change_frequency'': 0, ''file_size'': 1249}}, {''node_id'': ''file::jaffle-shop/models/staging/stg_orders.sql'',
+      ''type'': ''TABLE'', ''label'': ''stg_orders.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/staging/stg_orders.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — stg orders transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 704}}, {''node_id'':
+      ''file::jaffle-shop/models/staging/stg_orders.yml'', ''type'': ''FILE'', ''label'':
+      ''stg_orders.yml'', ''metadata'': {''path'': ''jaffle-shop/models/staging/stg_orders.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for stg orders pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 396}}, {''node_id'': ''file::jaffle-shop/models/staging/stg_order_items.sql'',
+      ''type'': ''TABLE'', ''label'': ''stg_order_items.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/staging/stg_order_items.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — stg order items transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 264}}, {''node_id'':
+      ''file::jaffle-shop/models/staging/stg_order_items.yml'', ''type'': ''FILE'',
+      ''label'': ''stg_order_items.yml'', ''metadata'': {''path'': ''jaffle-shop/models/staging/stg_order_items.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for stg order items
+      pipeline or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'',
+      ''change_frequency'': 0, ''file_size'': 529}}, {''node_id'': ''file::jaffle-shop/models/staging/stg_products.sql'',
+      ''type'': ''TABLE'', ''label'': ''stg_products.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/staging/stg_products.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — stg products transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 598}}, {''node_id'':
+      ''file::jaffle-shop/models/staging/stg_products.yml'', ''type'': ''FILE'', ''label'':
+      ''stg_products.yml'', ''metadata'': {''path'': ''jaffle-shop/models/staging/stg_products.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for stg products pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 334}}, {''node_id'': ''file::jaffle-shop/models/staging/stg_supplies.sql'',
+      ''type'': ''TABLE'', ''label'': ''stg_supplies.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/staging/stg_supplies.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — stg supplies transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 543}}, {''node_id'':
+      ''file::jaffle-shop/models/staging/stg_supplies.yml'', ''type'': ''FILE'', ''label'':
+      ''stg_supplies.yml'', ''metadata'': {''path'': ''jaffle-shop/models/staging/stg_supplies.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for stg supplies pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 471}}, {''node_id'': ''file::jaffle-shop/models/staging/__sources.yml'',
+      ''type'': ''FILE'', ''label'': ''__sources.yml'', ''metadata'': {''path'': ''jaffle-shop/models/staging/__sources.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for   sources pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 713}}, {''node_id'': ''table::customers'', ''type'': ''TABLE'',
+      ''label'': ''customers'', ''metadata'': {''path'': ''customers'', ''language'':
+      ''sql'', ''purpose'': ''table — customers'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::customer_id'', ''type'': ''TABLE'', ''label'': ''customer_id'',
+      ''metadata'': {''path'': ''customer_id'', ''language'': ''sql'', ''purpose'':
+      ''table — customer_id'', ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'':
+      ''table::customer_name'', ''type'': ''TABLE'', ''label'': ''customer_name'',
+      ''metadata'': {''path'': ''customer_name'', ''language'': ''sql'', ''purpose'':
+      ''table — customer_name'', ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'':
+      ''table::count_lifetime_orders'', ''type'': ''TABLE'', ''label'': ''count_lifetime_orders'',
+      ''metadata'': {''path'': ''count_lifetime_orders'', ''language'': ''sql'', ''purpose'':
+      ''table — count_lifetime_orders'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::first_ordered_at'', ''type'': ''TABLE'', ''label'': ''first_ordered_at'',
+      ''metadata'': {''path'': ''first_ordered_at'', ''language'': ''sql'', ''purpose'':
+      ''table — first_ordered_at'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::last_ordered_at'', ''type'': ''TABLE'', ''label'': ''last_ordered_at'',
+      ''metadata'': {''path'': ''last_ordered_at'', ''language'': ''sql'', ''purpose'':
+      ''table — last_ordered_at'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::lifetime_spend_pretax'', ''type'': ''TABLE'', ''label'':
+      ''lifetime_spend_pretax'', ''metadata'': {''path'': ''lifetime_spend_pretax'',
+      ''language'': ''sql'', ''purpose'': ''table — lifetime_spend_pretax'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::lifetime_tax_paid'', ''type'':
+      ''TABLE'', ''label'': ''lifetime_tax_paid'', ''metadata'': {''path'': ''lifetime_tax_paid'',
+      ''language'': ''sql'', ''purpose'': ''table — lifetime_tax_paid'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::lifetime_spend'', ''type'':
+      ''TABLE'', ''label'': ''lifetime_spend'', ''metadata'': {''path'': ''lifetime_spend'',
+      ''language'': ''sql'', ''purpose'': ''table — lifetime_spend'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::customer_type'', ''type'':
+      ''TABLE'', ''label'': ''customer_type'', ''metadata'': {''path'': ''customer_type'',
+      ''language'': ''sql'', ''purpose'': ''table — customer_type'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::orders'', ''type'': ''TABLE'',
+      ''label'': ''orders'', ''metadata'': {''path'': ''orders'', ''language'': ''sql'',
+      ''purpose'': ''table — orders'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::order_id'', ''type'': ''TABLE'', ''label'': ''order_id'',
+      ''metadata'': {''path'': ''order_id'', ''language'': ''sql'', ''purpose'': ''table
+      — order_id'', ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::order_total'',
+      ''type'': ''TABLE'', ''label'': ''order_total'', ''metadata'': {''path'': ''order_total'',
+      ''language'': ''sql'', ''purpose'': ''table — order_total'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::ordered_at'', ''type'': ''TABLE'',
+      ''label'': ''ordered_at'', ''metadata'': {''path'': ''ordered_at'', ''language'':
+      ''sql'', ''purpose'': ''table — ordered_at'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::order_cost'', ''type'': ''TABLE'', ''label'': ''order_cost'',
+      ''metadata'': {''path'': ''order_cost'', ''language'': ''sql'', ''purpose'':
+      ''table — order_cost'', ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'':
+      ''table::is_food_order'', ''type'': ''TABLE'', ''label'': ''is_food_order'',
+      ''metadata'': {''path'': ''is_food_order'', ''language'': ''sql'', ''purpose'':
+      ''table — is_food_order'', ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'':
+      ''table::is_drink_order'', ''type'': ''TABLE'', ''label'': ''is_drink_order'',
+      ''metadata'': {''path'': ''is_drink_order'', ''language'': ''sql'', ''purpose'':
+      ''table — is_drink_order'', ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'':
+      ''table::order_items'', ''type'': ''TABLE'', ''label'': ''order_items'', ''metadata'':
+      {''path'': ''order_items'', ''language'': ''sql'', ''purpose'': ''table — order_items'',
+      ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::order_item_id'',
+      ''type'': ''TABLE'', ''label'': ''order_item_id'', ''metadata'': {''path'':
+      ''order_item_id'', ''language'': ''sql'', ''purpose'': ''table — order_item_id'',
+      ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::stg_customers'',
+      ''type'': ''TABLE'', ''label'': ''stg_customers'', ''metadata'': {''path'':
+      ''stg_customers'', ''language'': ''sql'', ''purpose'': ''table — stg_customers'',
+      ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::stg_locations'',
+      ''type'': ''TABLE'', ''label'': ''stg_locations'', ''metadata'': {''path'':
+      ''stg_locations'', ''language'': ''sql'', ''purpose'': ''table — stg_locations'',
+      ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::location_id'',
+      ''type'': ''TABLE'', ''label'': ''location_id'', ''metadata'': {''path'': ''location_id'',
+      ''language'': ''sql'', ''purpose'': ''table — location_id'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::stg_orders'', ''type'': ''TABLE'',
+      ''label'': ''stg_orders'', ''metadata'': {''path'': ''stg_orders'', ''language'':
+      ''sql'', ''purpose'': ''table — stg_orders'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::stg_order_items'', ''type'': ''TABLE'', ''label'': ''stg_order_items'',
+      ''metadata'': {''path'': ''stg_order_items'', ''language'': ''sql'', ''purpose'':
+      ''table — stg_order_items'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::stg_products'', ''type'': ''TABLE'', ''label'': ''stg_products'',
+      ''metadata'': {''path'': ''stg_products'', ''language'': ''sql'', ''purpose'':
+      ''table — stg_products'', ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'':
+      ''table::product_id'', ''type'': ''TABLE'', ''label'': ''product_id'', ''metadata'':
+      {''path'': ''product_id'', ''language'': ''sql'', ''purpose'': ''table — product_id'',
+      ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::stg_supplies'',
+      ''type'': ''TABLE'', ''label'': ''stg_supplies'', ''metadata'': {''path'': ''stg_supplies'',
+      ''language'': ''sql'', ''purpose'': ''table — stg_supplies'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::supply_uuid'', ''type'':
+      ''TABLE'', ''label'': ''supply_uuid'', ''metadata'': {''path'': ''supply_uuid'',
+      ''language'': ''sql'', ''purpose'': ''table — supply_uuid'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''external::ecom'', ''type'': ''EXTERNAL'',
+      ''label'': ''ecom'', ''metadata'': {''path'': ''ecom'', ''language'': ''unknown'',
+      ''purpose'': ''external — ecom'', ''last_modified'': ''2026-01-15T09:00:00Z''}}]'
+    - '[{''node_id'': ''file::jaffle-shop/.pre-commit-config.yaml'', ''type'': ''FILE'',
+      ''label'': ''.pre-commit-config.yaml'', ''metadata'': {''path'': ''jaffle-shop/.pre-commit-config.yaml'',
+      ''language'': ''yaml'', ''purpose'': ''Configuration module for .pre-commit-config
+      runtime parameters.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      1, ''file_size'': 402}}, {''node_id'': ''file::jaffle-shop/dbt_project.yml'',
+      ''type'': ''FILE'', ''label'': ''dbt_project.yml'', ''metadata'': {''path'':
+      ''jaffle-shop/dbt_project.yml'', ''language'': ''yaml'', ''purpose'': ''YAML
+      configuration for dbt project pipeline or model definitions.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 720}}, {''node_id'':
+      ''file::jaffle-shop/package-lock.yml'', ''type'': ''FILE'', ''label'': ''package-lock.yml'',
+      ''metadata'': {''path'': ''jaffle-shop/package-lock.yml'', ''language'': ''yaml'',
+      ''purpose'': ''YAML configuration for package-lock pipeline or model definitions.'',
+      ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'':
+      289}}, {''node_id'': ''file::jaffle-shop/packages.yml'', ''type'': ''FILE'',
+      ''label'': ''packages.yml'', ''metadata'': {''path'': ''jaffle-shop/packages.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for packages pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      1, ''file_size'': 202}}, {''node_id'': ''file::jaffle-shop/Taskfile.yml'', ''type'':
+      ''FILE'', ''label'': ''Taskfile.yml'', ''metadata'': {''path'': ''jaffle-shop/Taskfile.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for Taskfile pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 988}}, {''node_id'': ''file::jaffle-shop/.github/workflows/cd_prod.yml'',
+      ''type'': ''FILE'', ''label'': ''cd_prod.yml'', ''metadata'': {''path'': ''jaffle-shop/.github/workflows/cd_prod.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for cd prod pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 2219}}, {''node_id'': ''file::jaffle-shop/.github/workflows/cd_staging.yml'',
+      ''type'': ''FILE'', ''label'': ''cd_staging.yml'', ''metadata'': {''path'':
+      ''jaffle-shop/.github/workflows/cd_staging.yml'', ''language'': ''yaml'', ''purpose'':
+      ''YAML configuration for cd staging pipeline or model definitions.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 2243}}, {''node_id'':
+      ''file::jaffle-shop/.github/workflows/ci.yml'', ''type'': ''FILE'', ''label'':
+      ''ci.yml'', ''metadata'': {''path'': ''jaffle-shop/.github/workflows/ci.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for ci pipeline or
+      model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 2468}}, {''node_id'': ''file::jaffle-shop/.github/workflows/scripts/dbt_cloud_run_job.py'',
+      ''type'': ''FILE'', ''label'': ''dbt_cloud_run_job.py'', ''metadata'': {''path'':
+      ''jaffle-shop/.github/workflows/scripts/dbt_cloud_run_job.py'', ''language'':
+      ''py'', ''purpose'': ''Module implementing dbt cloud run job functionality.'',
+      ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'':
+      4035}}, {''node_id'': ''file::jaffle-shop/macros/cents_to_dollars.sql'', ''type'':
+      ''TABLE'', ''label'': ''cents_to_dollars.sql'', ''metadata'': {''path'': ''jaffle-shop/macros/cents_to_dollars.sql'',
+      ''language'': ''sql'', ''purpose'': ''Data model — cents to dollars transformation
+      or staging layer.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 696}}, {''node_id'': ''file::jaffle-shop/macros/generate_schema_name.sql'',
+      ''type'': ''TABLE'', ''label'': ''generate_schema_name.sql'', ''metadata'':
+      {''path'': ''jaffle-shop/macros/generate_schema_name.sql'', ''language'': ''sql'',
+      ''purpose'': ''Data model — generate schema name transformation or staging layer.'',
+      ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'':
+      837}}, {''node_id'': ''file::jaffle-shop/models/marts/customers.sql'', ''type'':
+      ''TABLE'', ''label'': ''customers.sql'', ''metadata'': {''path'': ''jaffle-shop/models/marts/customers.sql'',
+      ''language'': ''sql'', ''purpose'': ''Data model — customers transformation
+      or staging layer.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 1332}}, {''node_id'': ''file::jaffle-shop/models/marts/customers.yml'',
+      ''type'': ''FILE'', ''label'': ''customers.yml'', ''metadata'': {''path'': ''jaffle-shop/models/marts/customers.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for customers pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 3611}}, {''node_id'': ''file::jaffle-shop/models/marts/locations.sql'',
+      ''type'': ''TABLE'', ''label'': ''locations.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/marts/locations.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — locations transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 104}}, {''node_id'':
+      ''file::jaffle-shop/models/marts/locations.yml'', ''type'': ''FILE'', ''label'':
+      ''locations.yml'', ''metadata'': {''path'': ''jaffle-shop/models/marts/locations.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for locations pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 647}}, {''node_id'': ''file::jaffle-shop/models/marts/metricflow_time_spine.sql'',
+      ''type'': ''TABLE'', ''label'': ''metricflow_time_spine.sql'', ''metadata'':
+      {''path'': ''jaffle-shop/models/marts/metricflow_time_spine.sql'', ''language'':
+      ''sql'', ''purpose'': ''Data model — metricflow time spine transformation or
+      staging layer.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 311}}, {''node_id'': ''file::jaffle-shop/models/marts/orders.sql'',
+      ''type'': ''TABLE'', ''label'': ''orders.sql'', ''metadata'': {''path'': ''jaffle-shop/models/marts/orders.sql'',
+      ''language'': ''sql'', ''purpose'': ''Data model — orders transformation or
+      staging layer.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 1527}}, {''node_id'': ''file::jaffle-shop/models/marts/orders.yml'',
+      ''type'': ''FILE'', ''label'': ''orders.yml'', ''metadata'': {''path'': ''jaffle-shop/models/marts/orders.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for orders pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 5534}}, {''node_id'': ''file::jaffle-shop/models/marts/order_items.sql'',
+      ''type'': ''TABLE'', ''label'': ''order_items.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/marts/order_items.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — order items transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 1009}}, {''node_id'':
+      ''file::jaffle-shop/models/marts/order_items.yml'', ''type'': ''FILE'', ''label'':
+      ''order_items.yml'', ''metadata'': {''path'': ''jaffle-shop/models/marts/order_items.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for order items pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 5495}}, {''node_id'': ''file::jaffle-shop/models/marts/products.sql'',
+      ''type'': ''TABLE'', ''label'': ''products.sql'', ''metadata'': {''path'': ''jaffle-shop/models/marts/products.sql'',
+      ''language'': ''sql'', ''purpose'': ''Data model — products transformation or
+      staging layer.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 101}}, {''node_id'': ''file::jaffle-shop/models/marts/products.yml'',
+      ''type'': ''FILE'', ''label'': ''products.yml'', ''metadata'': {''path'': ''jaffle-shop/models/marts/products.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for products pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 888}}, {''node_id'': ''file::jaffle-shop/models/marts/supplies.sql'',
+      ''type'': ''TABLE'', ''label'': ''supplies.sql'', ''metadata'': {''path'': ''jaffle-shop/models/marts/supplies.sql'',
+      ''language'': ''sql'', ''purpose'': ''Data model — supplies transformation or
+      staging layer.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 101}}, {''node_id'': ''file::jaffle-shop/models/marts/supplies.yml'',
+      ''type'': ''FILE'', ''label'': ''supplies.yml'', ''metadata'': {''path'': ''jaffle-shop/models/marts/supplies.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for supplies pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 849}}, {''node_id'': ''file::jaffle-shop/models/staging/stg_customers.sql'',
+      ''type'': ''TABLE'', ''label'': ''stg_customers.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/staging/stg_customers.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — stg customers transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 278}}, {''node_id'':
+      ''file::jaffle-shop/models/staging/stg_customers.yml'', ''type'': ''FILE'',
+      ''label'': ''stg_customers.yml'', ''metadata'': {''path'': ''jaffle-shop/models/staging/stg_customers.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for stg customers
+      pipeline or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'',
+      ''change_frequency'': 0, ''file_size'': 296}}, {''node_id'': ''file::jaffle-shop/models/staging/stg_locations.sql'',
+      ''type'': ''TABLE'', ''label'': ''stg_locations.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/staging/stg_locations.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — stg locations transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 424}}, {''node_id'':
+      ''file::jaffle-shop/models/staging/stg_locations.yml'', ''type'': ''FILE'',
+      ''label'': ''stg_locations.yml'', ''metadata'': {''path'': ''jaffle-shop/models/staging/stg_locations.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for stg locations
+      pipeline or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'',
+      ''change_frequency'': 0, ''file_size'': 1249}}, {''node_id'': ''file::jaffle-shop/models/staging/stg_orders.sql'',
+      ''type'': ''TABLE'', ''label'': ''stg_orders.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/staging/stg_orders.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — stg orders transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 704}}, {''node_id'':
+      ''file::jaffle-shop/models/staging/stg_orders.yml'', ''type'': ''FILE'', ''label'':
+      ''stg_orders.yml'', ''metadata'': {''path'': ''jaffle-shop/models/staging/stg_orders.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for stg orders pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 396}}, {''node_id'': ''file::jaffle-shop/models/staging/stg_order_items.sql'',
+      ''type'': ''TABLE'', ''label'': ''stg_order_items.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/staging/stg_order_items.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — stg order items transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 264}}, {''node_id'':
+      ''file::jaffle-shop/models/staging/stg_order_items.yml'', ''type'': ''FILE'',
+      ''label'': ''stg_order_items.yml'', ''metadata'': {''path'': ''jaffle-shop/models/staging/stg_order_items.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for stg order items
+      pipeline or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'',
+      ''change_frequency'': 0, ''file_size'': 529}}, {''node_id'': ''file::jaffle-shop/models/staging/stg_products.sql'',
+      ''type'': ''TABLE'', ''label'': ''stg_products.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/staging/stg_products.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — stg products transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 598}}, {''node_id'':
+      ''file::jaffle-shop/models/staging/stg_products.yml'', ''type'': ''FILE'', ''label'':
+      ''stg_products.yml'', ''metadata'': {''path'': ''jaffle-shop/models/staging/stg_products.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for stg products pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 334}}, {''node_id'': ''file::jaffle-shop/models/staging/stg_supplies.sql'',
+      ''type'': ''TABLE'', ''label'': ''stg_supplies.sql'', ''metadata'': {''path'':
+      ''jaffle-shop/models/staging/stg_supplies.sql'', ''language'': ''sql'', ''purpose'':
+      ''Data model — stg supplies transformation or staging layer.'', ''last_modified'':
+      ''2026-01-15T09:00:00Z'', ''change_frequency'': 0, ''file_size'': 543}}, {''node_id'':
+      ''file::jaffle-shop/models/staging/stg_supplies.yml'', ''type'': ''FILE'', ''label'':
+      ''stg_supplies.yml'', ''metadata'': {''path'': ''jaffle-shop/models/staging/stg_supplies.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for stg supplies pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 471}}, {''node_id'': ''file::jaffle-shop/models/staging/__sources.yml'',
+      ''type'': ''FILE'', ''label'': ''__sources.yml'', ''metadata'': {''path'': ''jaffle-shop/models/staging/__sources.yml'',
+      ''language'': ''yaml'', ''purpose'': ''YAML configuration for   sources pipeline
+      or model definitions.'', ''last_modified'': ''2026-01-15T09:00:00Z'', ''change_frequency'':
+      0, ''file_size'': 713}}, {''node_id'': ''table::customers'', ''type'': ''TABLE'',
+      ''label'': ''customers'', ''metadata'': {''path'': ''customers'', ''language'':
+      ''sql'', ''purpose'': ''table — customers'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::customer_id'', ''type'': ''TABLE'', ''label'': ''customer_id'',
+      ''metadata'': {''path'': ''customer_id'', ''language'': ''sql'', ''purpose'':
+      ''table — customer_id'', ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'':
+      ''table::customer_name'', ''type'': ''TABLE'', ''label'': ''customer_name'',
+      ''metadata'': {''path'': ''customer_name'', ''language'': ''sql'', ''purpose'':
+      ''table — customer_name'', ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'':
+      ''table::count_lifetime_orders'', ''type'': ''TABLE'', ''label'': ''count_lifetime_orders'',
+      ''metadata'': {''path'': ''count_lifetime_orders'', ''language'': ''sql'', ''purpose'':
+      ''table — count_lifetime_orders'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::first_ordered_at'', ''type'': ''TABLE'', ''label'': ''first_ordered_at'',
+      ''metadata'': {''path'': ''first_ordered_at'', ''language'': ''sql'', ''purpose'':
+      ''table — first_ordered_at'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::last_ordered_at'', ''type'': ''TABLE'', ''label'': ''last_ordered_at'',
+      ''metadata'': {''path'': ''last_ordered_at'', ''language'': ''sql'', ''purpose'':
+      ''table — last_ordered_at'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::lifetime_spend_pretax'', ''type'': ''TABLE'', ''label'':
+      ''lifetime_spend_pretax'', ''metadata'': {''path'': ''lifetime_spend_pretax'',
+      ''language'': ''sql'', ''purpose'': ''table — lifetime_spend_pretax'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::lifetime_tax_paid'', ''type'':
+      ''TABLE'', ''label'': ''lifetime_tax_paid'', ''metadata'': {''path'': ''lifetime_tax_paid'',
+      ''language'': ''sql'', ''purpose'': ''table — lifetime_tax_paid'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::lifetime_spend'', ''type'':
+      ''TABLE'', ''label'': ''lifetime_spend'', ''metadata'': {''path'': ''lifetime_spend'',
+      ''language'': ''sql'', ''purpose'': ''table — lifetime_spend'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::customer_type'', ''type'':
+      ''TABLE'', ''label'': ''customer_type'', ''metadata'': {''path'': ''customer_type'',
+      ''language'': ''sql'', ''purpose'': ''table — customer_type'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::orders'', ''type'': ''TABLE'',
+      ''label'': ''orders'', ''metadata'': {''path'': ''orders'', ''language'': ''sql'',
+      ''purpose'': ''table — orders'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::order_id'', ''type'': ''TABLE'', ''label'': ''order_id'',
+      ''metadata'': {''path'': ''order_id'', ''language'': ''sql'', ''purpose'': ''table
+      — order_id'', ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::order_total'',
+      ''type'': ''TABLE'', ''label'': ''order_total'', ''metadata'': {''path'': ''order_total'',
+      ''language'': ''sql'', ''purpose'': ''table — order_total'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::ordered_at'', ''type'': ''TABLE'',
+      ''label'': ''ordered_at'', ''metadata'': {''path'': ''ordered_at'', ''language'':
+      ''sql'', ''purpose'': ''table — ordered_at'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::order_cost'', ''type'': ''TABLE'', ''label'': ''order_cost'',
+      ''metadata'': {''path'': ''order_cost'', ''language'': ''sql'', ''purpose'':
+      ''table — order_cost'', ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'':
+      ''table::is_food_order'', ''type'': ''TABLE'', ''label'': ''is_food_order'',
+      ''metadata'': {''path'': ''is_food_order'', ''language'': ''sql'', ''purpose'':
+      ''table — is_food_order'', ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'':
+      ''table::is_drink_order'', ''type'': ''TABLE'', ''label'': ''is_drink_order'',
+      ''metadata'': {''path'': ''is_drink_order'', ''language'': ''sql'', ''purpose'':
+      ''table — is_drink_order'', ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'':
+      ''table::order_items'', ''type'': ''TABLE'', ''label'': ''order_items'', ''metadata'':
+      {''path'': ''order_items'', ''language'': ''sql'', ''purpose'': ''table — order_items'',
+      ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::order_item_id'',
+      ''type'': ''TABLE'', ''label'': ''order_item_id'', ''metadata'': {''path'':
+      ''order_item_id'', ''language'': ''sql'', ''purpose'': ''table — order_item_id'',
+      ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::stg_customers'',
+      ''type'': ''TABLE'', ''label'': ''stg_customers'', ''metadata'': {''path'':
+      ''stg_customers'', ''language'': ''sql'', ''purpose'': ''table — stg_customers'',
+      ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::stg_locations'',
+      ''type'': ''TABLE'', ''label'': ''stg_locations'', ''metadata'': {''path'':
+      ''stg_locations'', ''language'': ''sql'', ''purpose'': ''table — stg_locations'',
+      ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::location_id'',
+      ''type'': ''TABLE'', ''label'': ''location_id'', ''metadata'': {''path'': ''location_id'',
+      ''language'': ''sql'', ''purpose'': ''table — location_id'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::stg_orders'', ''type'': ''TABLE'',
+      ''label'': ''stg_orders'', ''metadata'': {''path'': ''stg_orders'', ''language'':
+      ''sql'', ''purpose'': ''table — stg_orders'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::stg_order_items'', ''type'': ''TABLE'', ''label'': ''stg_order_items'',
+      ''metadata'': {''path'': ''stg_order_items'', ''language'': ''sql'', ''purpose'':
+      ''table — stg_order_items'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''table::stg_products'', ''type'': ''TABLE'', ''label'': ''stg_products'',
+      ''metadata'': {''path'': ''stg_products'', ''language'': ''sql'', ''purpose'':
+      ''table — stg_products'', ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'':
+      ''table::product_id'', ''type'': ''TABLE'', ''label'': ''product_id'', ''metadata'':
+      {''path'': ''product_id'', ''language'': ''sql'', ''purpose'': ''table — product_id'',
+      ''last_modified'': ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::stg_supplies'',
+      ''type'': ''TABLE'', ''label'': ''stg_supplies'', ''metadata'': {''path'': ''stg_supplies'',
+      ''language'': ''sql'', ''purpose'': ''table — stg_supplies'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''table::supply_uuid'', ''type'':
+      ''TABLE'', ''label'': ''supply_uuid'', ''metadata'': {''path'': ''supply_uuid'',
+      ''language'': ''sql'', ''purpose'': ''table — supply_uuid'', ''last_modified'':
+      ''2026-01-15T09:00:00Z''}}, {''node_id'': ''external::ecom'', ''type'': ''EXTERNAL'',
+      ''label'': ''ecom'', ''metadata'': {''path'': ''ecom'', ''language'': ''unknown'',
+      ''purpose'': ''external — ecom'', ''last_modified'': ''2026-01-15T09:00:00Z''}},
+      {''node_id'': ''service::week7-data-contract-enforcer/contracts/runner.py'',
+      ''type'': ''SERVICE'', ''label'': ''runner.py'', ''metadata'': {''path'': ''week7-data-contract-enforcer/contracts/runner.py'',
+      ''language'': ''python'', ''purpose'': ''ValidationRunner — enforces data contracts
+      against live snapshots.'', ''last_modified'': ''2026-04-01T11:09:26.648055+00:00'',
+      ''change_frequency'': 3, ''file_size'': 4200}}]'
+    downstream_consumers:
+    - contracts/generator.py (lineage injection)
+    - contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
+    profiler: ydata-profiling
+  - name: snapshot_id
+    type: string (uuid)
+    description: Unique identifier for this lineage graph snapshot.
+    required: true
+    primaryKey: true
+    pii: false
+    classification: internal
+    null_fraction: 0.0
+    cardinality: 2
+    sample_values:
+    - 8ab0387d-7bc7-4755-a376-5a833a7f2a66
+    - efe93490-f86e-4f75-92be-6842e80deb51
+    downstream_consumers:
+    - contracts/generator.py (lineage injection)
+    - contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
+    - lineage_snapshots (via FK snapshot_id → snapshot_id)
+    char_pattern: uuid-v4
+    profiler: ydata-profiling
+quality:
+  type: SodaChecks
+  specification:
+    checks for lineage_snapshots:
+    - missing_count(snapshot_id) = 0
+    - duplicate_count(snapshot_id) = 0
+    - row_count >= 1
+    - missing_count(captured_at) = 0
+    - missing_count(edges) = 0
+    - missing_count(nodes) = 0
+quality_extended:
+- type: not_null
+  description: Required fields must never be null. Nulls indicate a failed or partial
+    migration.
+  fields:
+  - captured_at
+  - edges
+  - nodes
+  - snapshot_id
+- type: unique
+  description: Primary key fields must be unique. Duplicates indicate an idempotency
+    violation.
+  fields:
+  - snapshot_id
+- type: accepted_values
+  description: schema_version must follow MAJOR.MINOR semantic versioning.
+  field: schema_version
+  pattern: ^\d+\.\d+$
+- type: custom
+  name: created_at_not_future
+  description: created_at must not be a future timestamp.
+  rule: created_at <= NOW()
+  breaking_if_violated: false
+- type: custom
+  name: array_fields_non_empty
+  description: Array fields must not be empty lists. Empty arrays indicate a failed
+    extraction.
+  fields:
+  - edges
+  - nodes
+  rule: len(value) >= 1
+  breaking_if_violated: true
+- type: custom
+  name: timestamp_iso8601_format
+  description: All timestamp fields must be valid ISO 8601 UTC strings.
+  fields:
+  - captured_at
+  rule: 'regex: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.*$'
+  breaking_if_violated: true
+- type: custom
+  name: lineage_no_orphan_edges
+  description: Every edge source/target must reference a valid node id.
+  rule: edge.source IN nodes[*].id AND edge.target IN nodes[*].id
+  breaking_if_violated: true
+- type: custom
+  name: minimum_record_count_7
+  description: Dataset must contain at least 1 record.
+  rule: COUNT(*) >= 1
+  breaking_if_violated: true
+llm_annotations:
+- column: captured_at
+  description: The timestamp when the lineage snapshot was captured.
+  business_rule: captured_at MUST be a valid ISO 8601 timestamp with timezone
+  cross_column_relationship: None
+- column: codebase_root
+  description: Field 'codebase_root' of type string.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
+- column: edges
+  description: Field 'edges' of type array.
+  business_rule: len(value) >= 0
+  cross_column_relationship: No known cross-column relationship.
+- column: git_commit
+  description: Git commit SHA at which this snapshot was captured.
+  business_rule: matches regex ^[0-9a-f]{7,40}$
+  cross_column_relationship: git_commit ties lineage snapshots to source code state
+- column: nodes
+  description: Ensure all YAML configuration files have a 'purpose' metadata field
+    describing their use.
+  business_rule: ALL node_id WHERE type = 'FILE' AND metadata->'purpose' IS NULL SHOULD
+    HAVE metadata->'purpose' FILLED OUT
+  cross_column_relationship: None
+- column: snapshot_id
+  description: Unique identifier for this lineage graph snapshot.
+  business_rule: IS NOT NULL AND UNIQUE
+  cross_column_relationship: snapshot_id is referenced by contract lineageSnapshotRef
+lineage:
+  upstream:
+  - outputs/week4/.cartography/ (Week 4 Cartographer)
+  downstream:
+  - id: contracts-generator-py
+    description: contracts/generator.py (lineage injection)
+    fields_consumed:
+    - edges
+    - snapshot_id
+    - nodes
+    - captured_at
+    breaking_if_changed:
+    - snapshot_id
+  - id: contracts-schema-analyzer-py
+    description: contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
+    fields_consumed:
+    - edges
+    - snapshot_id
+    - nodes
+    - captured_at
+    breaking_if_changed:
+    - snapshot_id
+contacts:
+  owner: Yakob
+  team: 10 Academy TenX Week 7
+  email: yakob@10academy.org
+  channel: week7-data-contracts
+tags:
+- week7
+- data-contract
+- lineage-cartography
+- lineage_snapshots

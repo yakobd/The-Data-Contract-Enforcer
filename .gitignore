@@ -7,5 +7,4 @@ venv/
 *.egg-info/
 .DS_Store
 *.npz
-outputs/traces/
-schema_snapshots/embedding_baselines.npz
+
