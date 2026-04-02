@@ -1,0 +1,164 @@
+# contract_registry/subscriptions.yaml
+# ──────────────────────────────────────────────────────────────────────────────
+# This file is manually maintained.
+# Every inter-system data dependency must be listed here.
+# A subscription is a consumer's formal declaration of dependency.
+#
+# validation_mode values:
+#   ENFORCE  — block pipeline on violation (production critical path)
+#   AUDIT    — log violation, do not block (monitoring / observability)
+# ──────────────────────────────────────────────────────────────────────────────
+
+subscriptions:
+
+  # ── Subscription 1: Week 3 → Week 4 ────────────────────────────────────────
+  - contract_id: week3-document-refinery-extractions
+    subscriber_id: week4-cartographer
+    subscriber_team: week4
+    fields_consumed:
+      - doc_id
+      - extracted_facts
+      - extraction_model
+    breaking_fields:
+      - field: extracted_facts.confidence
+        reason: >
+          Used for node ranking and edge-weight computation in the lineage graph.
+          A scale change (0.0–1.0 → 0–100) silently corrupts every edge weight
+          and every downstream confidence threshold check.
+      - field: doc_id
+        reason: >
+          Primary key for node identity in the lineage graph. Removal or rename
+          breaks all foreign-key joins across Weeks 4–7.
+      - field: extracted_facts
+        reason: >
+          Array structure consumed wholesale; field removal or type narrowing
+          causes KeyError at cartographer ingestion time.
+    validation_mode: ENFORCE
+    registered_at: "2025-01-10T09:00:00Z"
+    contact: week4-team@tenx.academy
+
+  # ── Subscription 2: Week 4 → Week 7 (Enforcer) ─────────────────────────────
+  - contract_id: week4-cartographer-lineage
+    subscriber_id: week7-enforcer
+    subscriber_team: week7
+    fields_consumed:
+      - node_id
+      - node_type
+      - edges
+      - source_file
+    breaking_fields:
+      - field: node_id
+        reason: >
+          ViolationAttributor uses node_id as the BFS traversal key.
+          Any rename or format change breaks graph traversal and produces
+          empty blame chains.
+      - field: edges
+        reason: >
+          BFS upstream/downstream traversal depends on the edges array structure.
+          Removing or restructuring edges silently truncates blast radius
+          computation.
+      - field: source_file
+        reason: >
+          Git blame integration maps node_id → source_file for git log queries.
+          Removal causes all blame chains to fall back to heuristic-only mode.
+    validation_mode: ENFORCE
+    registered_at: "2025-01-10T09:00:00Z"
+    contact: week7-team@tenx.academy
+
+  # ── Subscription 3: Week 5 → Week 7 (Enforcer) ─────────────────────────────
+  - contract_id: week5-ledger-events
+    subscriber_id: week7-enforcer
+    subscriber_team: week7
+    fields_consumed:
+      - event_id
+      - aggregate_type
+      - aggregate_id
+      - occurred_at
+      - recorded_at
+      - event_version
+    breaking_fields:
+      - field: occurred_at
+        reason: >
+          Temporal ordering check (recorded_at >= occurred_at) requires both
+          fields to be present and in ISO 8601 format. Type change or removal
+          causes 100% check failures across all 100 event records.
+      - field: aggregate_type
+        reason: >
+          Accepted-values check enforces the enum. Undeclared values (e.g. Agent)
+          cause HIGH-severity failures and corrupt aggregate roll-up dashboards.
+      - field: event_id
+        reason: >
+          Uniqueness check primary key. Duplicate event_ids indicate broken
+          idempotency in the event emitter.
+    validation_mode: ENFORCE
+    registered_at: "2025-01-10T09:00:00Z"
+    contact: week7-team@tenx.academy
+
+  # ── Subscription 4: LangSmith → Week 7 (Enforcer) ──────────────────────────
+  - contract_id: langsmith-traces
+    subscriber_id: week7-enforcer
+    subscriber_team: week7
+    fields_consumed:
+      - run_id
+      - run_type
+      - start_time
+      - end_time
+      - inputs
+      - outputs
+      - completion_tokens
+    breaking_fields:
+      - field: start_time
+        reason: >
+          Temporal ordering check (end_time > start_time) requires both fields
+          populated in chronological order. Currently 150/150 records violate
+          this — any further schema change to these fields will mask the root
+          cause and make the violation undetectable.
+      - field: run_id
+        reason: >
+          Primary key for trace correlation. Uniqueness violation here propagates
+          to duplicate SLA calculations in downstream dashboards.
+      - field: completion_tokens
+        reason: >
+          Statistical bounds check (mean ± 3σ baseline). Type change from int
+          to float would silently break the statistical drift rule.
+    validation_mode: ENFORCE
+    registered_at: "2025-01-10T09:00:00Z"
+    contact: week7-team@tenx.academy
+
+  # ── Subscription 5: Week 3 → Week 7 AI Extensions ──────────────────────────
+  - contract_id: week3-document-refinery-extractions
+    subscriber_id: week7-ai-extensions
+    subscriber_team: week7
+    fields_consumed:
+      - extracted_facts.confidence
+      - doc_id
+    breaking_fields:
+      - field: extracted_facts.confidence
+        reason: >
+          Embedding drift baseline is computed from extracted_facts[*].text.
+          A scale change on confidence (0.0–1.0 → 0–100) invalidates the
+          centroid baseline and causes false PASS on drift detection.
+      - field: doc_id
+        reason: >
+          Prompt input schema validation requires doc_id (minLength: 36).
+          Removal quarantines 100% of records and halts the AI extension pipeline.
+    validation_mode: AUDIT
+    registered_at: "2025-01-10T09:00:00Z"
+    contact: week7-team@tenx.academy
+
+  # ── Subscription 6: Week 2 → Week 7 AI Extensions ──────────────────────────
+  - contract_id: week2-automaton-verdicts
+    subscriber_id: week7-ai-extensions
+    subscriber_team: week7
+    fields_consumed:
+      - verdict_id
+      - overall_verdict
+    breaking_fields:
+      - field: overall_verdict
+        reason: >
+          LLM output schema violation rate tracks overall_verdict not in
+          {PASS, FAIL, WARN}. Renaming any accepted value or adding an
+          undeclared value raises the violation rate and triggers WARN/FAIL.
+    validation_mode: AUDIT
+    registered_at: "2025-01-10T09:00:00Z"
+    contact: week7-team@tenx.academy
