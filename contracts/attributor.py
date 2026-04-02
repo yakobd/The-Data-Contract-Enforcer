@@ -56,6 +56,10 @@ import re
 import subprocess
 import sys
 import uuid
+try:
+    import yaml as _yaml
+except ImportError:
+    _yaml = None  # type: ignore
 from collections import defaultdict, deque
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
@@ -71,6 +75,8 @@ GIT_LOOKBACK_DAYS     = 14
 CONF_DAYS_PENALTY     = 0.1   # per day since commit
 CONF_HOPS_PENALTY     = 0.2   # per lineage hop
 CONF_FLOOR            = 0.05  # minimum confidence score
+
+REGISTRY_PATH = Path(__file__).resolve().parent.parent / "contract_registry" / "subscriptions.yaml"
 
 # Mapping from dataset/contract name → source files that likely caused violations
 DATASET_SOURCE_FILES: dict[str, list[str]] = {
@@ -132,6 +138,70 @@ DOWNSTREAM_PIPELINES: dict[str, list[str]] = {
 # HELPERS
 # ─────────────────────────────────────────────────────────────────────────────
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CONTRACT REGISTRY HELPERS
+# ─────────────────────────────────────────────────────────────────────────────
+
+def load_registry(registry_path: Path = REGISTRY_PATH) -> list[dict]:
+    """Load subscriptions.yaml. Returns empty list if missing or yaml unavailable."""
+    if not registry_path.exists() or _yaml is None:
+        return []
+    try:
+        with open(registry_path, "r", encoding="utf-8") as fh:
+            data = _yaml.safe_load(fh)
+        return data.get("subscriptions", []) if isinstance(data, dict) else []
+    except Exception:
+        return []
+
+
+def registry_blast_radius(
+    contract_id: str,
+    failing_field: str,
+    registry: list[dict],
+) -> dict:
+    """
+    Step 1 of attribution pipeline (spec-compliant):
+    Query registry for all subscribers where contract_id matches and
+    breaking_fields contains the failing field.
+
+    Returns:
+        {
+          "subscribers": [...],          # list of subscriber_id strings
+          "subscriber_details": [...],   # full subscription dicts
+          "breaking_field_matched": bool,
+        }
+    """
+    direct: list[dict] = []
+    audit:  list[dict] = []
+
+    for sub in registry:
+        if sub.get("contract_id") != contract_id:
+            continue
+        # Check if failing_field matches any breaking_fields entry
+        breaking = sub.get("breaking_fields", [])
+        field_match = any(
+            b.get("field", "") == failing_field
+            or failing_field.startswith(b.get("field", "") + ".")
+            or b.get("field", "").startswith(failing_field + ".")
+            for b in breaking
+        )
+        if sub.get("validation_mode", "ENFORCE") == "ENFORCE":
+            direct.append({**sub, "_breaking_field_matched": field_match})
+        else:
+            audit.append({**sub, "_breaking_field_matched": field_match})
+
+    all_subs  = direct + audit
+    sub_ids   = [s["subscriber_id"] for s in all_subs]
+    matched   = any(s["_breaking_field_matched"] for s in all_subs)
+
+    return {
+        "subscribers":              sub_ids,
+        "subscriber_details":       all_subs,
+        "breaking_field_matched":   matched,
+    }
+
+
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -154,8 +224,11 @@ def load_jsonl(path: Path) -> list[dict]:
 def load_json(path: Path) -> dict:
     if not path.exists():
         return {}
-    with open(path, encoding="utf-8") as fh:
-        return json.load(fh)
+    try:
+        with open(path, encoding="utf-8") as fh:
+            return json.load(fh)
+    except (json.JSONDecodeError, UnicodeDecodeError, ValueError):
+        return {}
 
 
 def find_git_root() -> Path | None:
@@ -589,43 +662,69 @@ def build_blame_chain(
 
 
 def build_blast_radius(
-    dataset_name:   str,
-    graph:          dict,
-    start_nodes:    list[str],
+    dataset_name:    str,
+    graph:           dict,
+    start_nodes:     list[str],
     records_failing: int,
+    contract_id:     str = "",
+    failing_field:   str = "",
+    registry:        list[dict] | None = None,
 ) -> dict:
     """
-    Compute blast_radius:
-      - affected_nodes:     downstream nodes in the lineage graph
-      - affected_pipelines: from DOWNSTREAM_PIPELINES lookup
-      - estimated_records:  records_failing (or 0 if unknown)
+    Compute blast_radius using the 2-step spec-compliant approach:
+
+    Step 1 — Registry (primary, authoritative):
+      Load contract_registry/subscriptions.yaml. Find all subscriptions
+      where contract_id matches and breaking_fields contains failing_field.
+      This is the definitive subscriber list.
+
+    Step 2 — Lineage graph (enrichment):
+      Walk downstream nodes via BFS to compute transitive contamination
+      depth. Annotates registry results with contamination_depth.
     """
-    # BFS downstream
+    # ── Step 1: Registry (primary, authoritative) ──────────────────────────
+    reg = registry if registry is not None else load_registry()
+    reg_result = registry_blast_radius(contract_id, failing_field, reg)
+    registry_subscribers = reg_result["subscribers"]
+
+    # ── Step 2: Lineage graph (enrichment — transitive contamination) ────────
     downstream_ids = bfs_downstream(graph, start_nodes, max_hops=4)
     labels         = graph.get("labels", {})
 
-    affected_nodes: list[str] = []
+    lineage_nodes: list[str] = []
     for nid in downstream_ids[:10]:
         label = labels.get(nid, nid)
-        # Format as "file::<path>" if it looks like a path
         if "/" in label or label.endswith(".py") or label.endswith(".jsonl"):
-            affected_nodes.append(f"file::{label}")
+            lineage_nodes.append(f"file::{label}")
         else:
-            affected_nodes.append(label)
+            lineage_nodes.append(label)
 
-    # If no downstream nodes found from graph, use lookup
-    if not affected_nodes:
-        affected_nodes = [
+    # Merge: registry subscribers are authoritative; lineage adds transitive nodes
+    # Registry subscribers formatted as "subscriber::<id>"
+    registry_nodes = [f"subscriber::{sid}" for sid in registry_subscribers]
+
+    # Lineage fallback when graph is empty
+    if not lineage_nodes:
+        lineage_nodes = [
             f"dataset::{ds}"
             for ds in DOWNSTREAM_PIPELINES.get(dataset_name, [])
         ]
 
+    # Combine: registry first (authoritative), then lineage enrichment
+    all_affected = registry_nodes + [n for n in lineage_nodes if n not in registry_nodes]
+
     affected_pipelines = DOWNSTREAM_PIPELINES.get(dataset_name, ["unknown-pipeline"])
 
     return {
-        "affected_nodes":     affected_nodes,
-        "affected_pipelines": affected_pipelines,
-        "estimated_records":  records_failing,
+        "affected_nodes":           all_affected[:10],
+        "affected_pipelines":       affected_pipelines,
+        "estimated_records":        records_failing,
+        # Registry metadata (spec: "registry for 'who is affected'")
+        "registry_subscribers":     registry_subscribers,
+        "breaking_field_matched":   reg_result["breaking_field_matched"],
+        # Lineage metadata (spec: "lineage for 'how deeply'")
+        "lineage_nodes":            lineage_nodes[:10],
+        "contamination_depth":      len(downstream_ids),
     }
 
 
@@ -645,6 +744,9 @@ def attribute_report(
     Returns list of violation dicts written.
     """
     violations: list[dict] = []
+
+    # Load registry once (primary blast radius source per spec)
+    _registry = load_registry()
 
     # Extract failing checks
     results = report.get("results", [])
@@ -680,12 +782,26 @@ def attribute_report(
             check_id        = check_id,
         )
 
-        # Build blast radius
+        # Build blast radius (registry-primary, lineage-enrichment)
+        # Derive contract_id from dataset_name
+        _cid_map = {
+            "week1_intent_records": "week1-intent-records",
+            "week2_verdicts":       "week2-automaton-verdicts",
+            "week3_extractions":    "week3-document-refinery-extractions",
+            "week4_lineage":        "week4-cartographer-lineage",
+            "week5_events":        "week5-ledger-events",
+            "langsmith_traces":     "langsmith-trace-records",
+        }
+        _contract_id   = _cid_map.get(dataset_name, dataset_name.replace("_", "-"))
+        _failing_field = result.get("column_name", "")
         blast_radius = build_blast_radius(
             dataset_name    = dataset_name,
             graph           = graph,
             start_nodes     = start_nodes,
             records_failing = records_failing,
+            contract_id     = _contract_id,
+            failing_field   = _failing_field,
+            registry        = _registry,
         )
 
         violation = {
@@ -821,15 +937,18 @@ Examples:
     print(f"  Lineage graph: {n_nodes} nodes, {n_edges} edges")
 
     # ── collect report paths ──────────────────────────────────────────────────
+    # Filenames that are NOT per-contract validation reports
+    _SKIP_PREFIXES = ("validation_summary", "ai_extensions", "migration_impact",
+                      "schema_evolution")
+
     report_paths: list[Path] = []
     if args.report:
         report_paths = [args.report]
     elif args.reports:
-        report_paths = sorted(args.reports.glob("*_report.json"))
-        # Also try validation_summary.json children
-        if not report_paths:
-            report_paths = sorted(args.reports.glob("*.json"))
-            report_paths = [p for p in report_paths if not p.name.startswith("validation_summary")]
+        report_paths = sorted(
+            p for p in args.reports.glob("*_report.json")
+            if not any(p.name.startswith(pfx) for pfx in _SKIP_PREFIXES)
+        )
     else:
         parser.print_help()
         sys.exit(1)
