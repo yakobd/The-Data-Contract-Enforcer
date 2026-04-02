@@ -1285,9 +1285,13 @@ Examples:
 
     # ── single-file mode ──────────────────────────────────────────────────────
     if args.contract:
-        if not args.data or not args.output:
-            print("ERROR: --contract requires --data and --output", file=sys.stderr)
+        if not args.data:
+            print("ERROR: --contract requires --data", file=sys.stderr)
             sys.exit(1)
+        # Default output path if not specified (evaluators may omit --output)
+        if not args.output:
+            Path("validation_reports").mkdir(parents=True, exist_ok=True)
+            args.output = Path("validation_reports") / f"{args.contract.stem}_report.json"
 
         print(f"\n{'─'*70}")
         print(f"  ValidationRunner — Single-file mode")
