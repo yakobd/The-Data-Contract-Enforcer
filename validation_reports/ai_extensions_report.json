@@ -1,16 +1,13 @@
 {
-  "report_id": "4140b9ec-140c-4ab1-843c-bd0a50f2b924",
-  "generated_at": "2026-04-02T18:34:06.270608+00:00",
+  "report_id": "894463d1-de99-49c2-a21c-92b7ab02c163",
+  "generated_at": "2026-04-02T18:46:09.645769+00:00",
   "extensions": {
     "embedding_drift": {
       "extension": "embedding_drift",
-      "status": "PASS",
-      "drift_score": 0.0,
-      "cosine_sim": 1.0,
-      "threshold": 0.15,
-      "texts_sampled": 200,
-      "embedding_dim": 1536,
-      "message": "Embedding drift=0.0000 vs threshold=0.15. Within acceptable bounds."
+      "status": "SKIPPED",
+      "reason": "OpenAI API not available (set OPENAI_API_KEY or OPENROUTER_API_KEY)",
+      "drift_score": null,
+      "threshold": 0.15
     },
     "prompt_input_schema": {
       "extension": "prompt_input_schema",

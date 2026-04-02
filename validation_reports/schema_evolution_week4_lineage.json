@@ -1,9 +1,9 @@
 {
-  "report_id": "fca4364f-868a-4478-939f-d3672d481344",
-  "generated_at": "2026-04-02T18:33:35.618703+00:00",
+  "report_id": "716e2cb2-5d98-4f79-a011-5eb7020df2f8",
+  "generated_at": "2026-04-02T18:45:52.950351+00:00",
   "contract_id": "week4-lineage-graph-lineage",
   "contract_stem": "week4_lineage",
-  "since": "2026-03-26T18:33:35.400137+00:00",
+  "since": "2026-03-26T18:45:52.450923+00:00",
   "snapshots_found": 3,
   "diffs": [],
   "summary": {

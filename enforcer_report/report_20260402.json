@@ -36,7 +36,7 @@
         "change_type": "ADD_NULLABLE_COLUMN",
         "verdict": "COMPATIBLE",
         "severity": "INFO",
-        "period": "2026-04-02 06:50 \u2192 2026-04-02 06:50",
+        "period": "2026-04-02 06:59 \u2192 2026-04-02 06:50",
         "plain_summary": "field 'review_notes' added (nullable)  -  no action needed",
         "required_action": "None. Downstream consumers can ignore the new column."
       },
@@ -79,9 +79,9 @@
     "extensions": [
       {
         "extension": "Embedding Drift",
-        "status": "PASS",
+        "status": "SKIPPED",
         "risk": "LOW",
-        "detail": "Cosine distance from baseline centroid: 0.0000. Within acceptable range."
+        "detail": "SKIPPED"
       },
       {
         "extension": "Prompt Input Schema",

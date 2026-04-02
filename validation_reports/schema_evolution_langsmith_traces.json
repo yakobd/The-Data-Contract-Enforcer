@@ -1,9 +1,9 @@
 {
-  "report_id": "6f32c293-288c-48f0-ba8e-970546b62d91",
-  "generated_at": "2026-04-02T18:33:35.954869+00:00",
+  "report_id": "8b71e04c-5390-45c8-bd9d-22a5892c9c59",
+  "generated_at": "2026-04-02T18:45:54.036493+00:00",
   "contract_id": "langsmith-observability-traces",
   "contract_stem": "langsmith_traces",
-  "since": "2026-03-26T18:33:35.400137+00:00",
+  "since": "2026-03-26T18:45:52.450923+00:00",
   "snapshots_found": 3,
   "diffs": [],
   "summary": {

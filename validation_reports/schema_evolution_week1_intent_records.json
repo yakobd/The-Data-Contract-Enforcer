@@ -1,9 +1,9 @@
 {
-  "report_id": "55da30c5-ce1f-4031-8e0a-a2fc204fa2c1",
-  "generated_at": "2026-04-02T18:33:35.431937+00:00",
+  "report_id": "2dbb217c-3684-404f-b14c-8e3858e03ce1",
+  "generated_at": "2026-04-02T18:45:52.536260+00:00",
   "contract_id": "week1-intent-correlation-intent-records",
   "contract_stem": "week1_intent_records",
-  "since": "2026-03-26T18:33:35.400137+00:00",
+  "since": "2026-03-26T18:45:52.450923+00:00",
   "snapshots_found": 3,
   "diffs": [],
   "summary": {
