@@ -1,0 +1,15 @@
+{
+  "report_id": "4e87d313-184a-44e1-b585-b684dfeb0b55",
+  "generated_at": "2026-04-02T11:22:10.811794+00:00",
+  "contract_id": "week2-verdict-pipeline-verdicts",
+  "contract_stem": "week2_verdicts",
+  "since": "2026-03-03T11:22:10.734746+00:00",
+  "snapshots_found": 2,
+  "diffs": [],
+  "summary": {
+    "total_changes": 0,
+    "breaking_changes": 0,
+    "compatible_changes": 0,
+    "overall_verdict": "STABLE"
+  }
+}

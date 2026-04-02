@@ -1,0 +1,15 @@
+{
+  "report_id": "efaf4e33-b9e4-4abc-a093-2c05521ad5d3",
+  "generated_at": "2026-04-02T11:22:10.901372+00:00",
+  "contract_id": "week4-lineage-graph-lineage",
+  "contract_stem": "week4_lineage",
+  "since": "2026-03-03T11:22:10.734746+00:00",
+  "snapshots_found": 2,
+  "diffs": [],
+  "summary": {
+    "total_changes": 0,
+    "breaking_changes": 0,
+    "compatible_changes": 0,
+    "overall_verdict": "STABLE"
+  }
+}

@@ -1,0 +1,71 @@
+contract_id: ea609135-913c-51f3-861f-33272d40246f
+contract_stem: week3_extractions
+fields:
+  doc_id:
+    enum_values: null
+    null_fraction: 0.0
+    nullable: false
+    required: true
+    type: string
+  entities:
+    enum_values: null
+    null_fraction: 0.0
+    nullable: true
+    required: false
+    type: array
+  extracted_at:
+    enum_values: null
+    null_fraction: 0.0
+    nullable: true
+    required: false
+    type: string (timestamp)
+  extracted_facts:
+    enum_values: null
+    null_fraction: 0.0
+    nullable: false
+    required: true
+    type: array
+  extraction_model:
+    enum_values: null
+    null_fraction: 0.0
+    nullable: false
+    required: true
+    type: string
+  processing_time_ms:
+    enum_values: null
+    null_fraction: 0.0
+    nullable: true
+    required: false
+    type: integer
+  review_notes:
+    enum_values: null
+    null_fraction: 1.0
+    nullable: true
+    required: false
+    type: string
+  source_hash:
+    enum_values: null
+    null_fraction: 0.0
+    nullable: true
+    required: false
+    type: string
+  source_path:
+    enum_values: null
+    null_fraction: 0.0
+    nullable: true
+    required: false
+    type: string
+  token_count.input:
+    enum_values: null
+    null_fraction: 0.0
+    nullable: true
+    required: false
+    type: integer
+  token_count.output:
+    enum_values: null
+    null_fraction: 0.0
+    nullable: true
+    required: false
+    type: integer
+record_count: 50
+snapshot_at: '2026-04-02T06:50:29.688856+00:00'

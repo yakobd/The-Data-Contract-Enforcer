@@ -1,0 +1,65 @@
+contract_id: ea609135-913c-51f3-861f-33272d40246f
+contract_stem: week3_extractions
+snapshot_at: '2026-04-02T06:50:11.421876+00:00'
+record_count: 50
+fields:
+  doc_id:
+    type: string
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  entities:
+    type: array
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  extracted_at:
+    type: string (timestamp)
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  extracted_facts:
+    type: array
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  extraction_model:
+    type: string
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  processing_time_ms:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  source_hash:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  source_path:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  token_count.input:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  token_count.output:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null

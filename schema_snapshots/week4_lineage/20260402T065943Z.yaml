@@ -1,0 +1,41 @@
+contract_id: ac05d9a1-5507-5e4a-bff1-d5f9f9b577cd
+contract_stem: week4_lineage
+snapshot_at: '2026-04-02T06:59:43.799726+00:00'
+record_count: 2
+fields:
+  captured_at:
+    type: string (timestamp)
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  codebase_root:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  edges:
+    type: array
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  git_commit:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  nodes:
+    type: array
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  snapshot_id:
+    type: string (uuid)
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null

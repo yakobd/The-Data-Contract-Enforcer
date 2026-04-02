@@ -1,0 +1,15 @@
+{
+  "report_id": "da66e9b7-8467-44dc-8f37-cdc92c1c4501",
+  "generated_at": "2026-04-02T11:22:11.884640+00:00",
+  "contract_id": "langsmith-observability-traces",
+  "contract_stem": "langsmith_traces",
+  "since": "2026-03-03T11:22:10.734746+00:00",
+  "snapshots_found": 2,
+  "diffs": [],
+  "summary": {
+    "total_changes": 0,
+    "breaking_changes": 0,
+    "compatible_changes": 0,
+    "overall_verdict": "STABLE"
+  }
+}

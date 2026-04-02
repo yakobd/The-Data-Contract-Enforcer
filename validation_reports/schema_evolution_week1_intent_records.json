@@ -1,0 +1,15 @@
+{
+  "report_id": "8ca0e79d-242f-420b-8731-30fd6c4c4570",
+  "generated_at": "2026-04-02T11:22:10.769034+00:00",
+  "contract_id": "week1-intent-correlation-intent-records",
+  "contract_stem": "week1_intent_records",
+  "since": "2026-03-03T11:22:10.734746+00:00",
+  "snapshots_found": 2,
+  "diffs": [],
+  "summary": {
+    "total_changes": 0,
+    "breaking_changes": 0,
+    "compatible_changes": 0,
+    "overall_verdict": "STABLE"
+  }
+}

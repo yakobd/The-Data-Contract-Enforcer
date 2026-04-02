@@ -1,0 +1,533 @@
+contract_id: 1c73fe05-0e07-5737-bebc-0e89d65b369d
+contract_stem: week5_events
+snapshot_at: '2026-04-02T07:02:14.175167+00:00'
+record_count: 100
+fields:
+  aggregate_id:
+    type: string (uuid)
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  aggregate_type:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  event_id:
+    type: string (uuid)
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  event_type:
+    type: string
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  metadata.causation_id:
+    type: string (uuid)
+    required: false
+    nullable: true
+    null_fraction: 0.13
+    enum_values: null
+  metadata.correlation_id:
+    type: string (uuid)
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  metadata.source_service:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  metadata.user_id:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  occurred_at:
+    type: string
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  payload.added_at:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.76
+    enum_values: null
+  payload.agent_id:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.agent_type:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.92
+    enum_values: null
+  payload.anomalies:
+    type: array
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.applicant_id:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.88
+    enum_values: null
+  payload.application_id:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.36
+    enum_values: null
+  payload.application_reference:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.88
+    enum_values: null
+  payload.assessed_at:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.auditor_notes:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.called_at:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.98
+    enum_values: null
+  payload.completed_at:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.98
+    enum_values: null
+  payload.contact_email:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.88
+    enum_values: null
+  payload.contact_name:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.88
+    enum_values: null
+  payload.context_source:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.context_token_count:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.created_at:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.88
+    enum_values: null
+  payload.critical_missing_fields:
+    type: array
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.deadline:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.88
+    enum_values: null
+  payload.detected_format:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.98
+    enum_values: null
+  payload.document_format:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.52
+    enum_values: null
+  payload.document_id:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.45
+    enum_values: null
+  payload.document_type:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.46
+    enum_values: null
+  payload.documents_processed:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.duration_ms:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.97
+    enum_values: null
+  payload.events_written:
+    type: array
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.executed_at:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.97
+    enum_values: null
+  payload.extraction_model:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.98
+    enum_values: null
+  payload.facts:
+    type: object
+    required: false
+    nullable: true
+    null_fraction: 0.98
+    enum_values: null
+  payload.file_hash:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.52
+    enum_values: null
+  payload.file_path:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.76
+    enum_values: null
+  payload.file_size_bytes:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.76
+    enum_values: null
+  payload.filename:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.76
+    enum_values: null
+  payload.fiscal_year:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.82
+    enum_values: null
+  payload.has_quality_flags:
+    type: boolean
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.input_keys:
+    type: array
+    required: false
+    nullable: true
+    null_fraction: 0.97
+    enum_values: null
+  payload.inputs_validated:
+    type: array
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.is_coherent:
+    type: boolean
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.langgraph_graph_version:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.llm_called:
+    type: boolean
+    required: false
+    nullable: true
+    null_fraction: 0.97
+    enum_values: null
+  payload.llm_cost_usd:
+    type: number
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.llm_tokens_input:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.llm_tokens_output:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.loan_purpose:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.88
+    enum_values: null
+  payload.loan_term_months:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.88
+    enum_values: null
+  payload.model_version:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.node_name:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.97
+    enum_values: null
+  payload.node_sequence:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.97
+    enum_values: null
+  payload.output_keys:
+    type: array
+    required: false
+    nullable: true
+    null_fraction: 0.97
+    enum_values: null
+  payload.output_summary:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.overall_confidence:
+    type: number
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.package_id:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.56
+    enum_values: null
+  payload.page_count:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.98
+    enum_values: null
+  payload.pipeline_version:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.98
+    enum_values: null
+  payload.processing_ms:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.98
+    enum_values: null
+  payload.quality_flag_count:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.raw_text_length:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.98
+    enum_values: null
+  payload.ready_at:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.reextraction_recommended:
+    type: boolean
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.requested_amount_usd:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.88
+    enum_values: null
+  payload.requested_by:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.88
+    enum_values: null
+  payload.required_document_types:
+    type: array
+    required: false
+    nullable: true
+    null_fraction: 0.88
+    enum_values: null
+  payload.required_documents:
+    type: array
+    required: false
+    nullable: true
+    null_fraction: 0.88
+    enum_values: null
+  payload.session_id:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.92
+    enum_values: null
+  payload.started_at:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.97
+    enum_values: null
+  payload.submission_channel:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.88
+    enum_values: null
+  payload.submitted_at:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.88
+    enum_values: null
+  payload.tables_extracted:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.98
+    enum_values: null
+  payload.tool_duration_ms:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.98
+    enum_values: null
+  payload.tool_input_summary:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.98
+    enum_values: null
+  payload.tool_name:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.98
+    enum_values: null
+  payload.tool_output_summary:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.98
+    enum_values: null
+  payload.uploaded_at:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.76
+    enum_values: null
+  payload.uploaded_by:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.76
+    enum_values: null
+  payload.validated_at:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.97
+    enum_values: null
+  payload.validation_duration_ms:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  payload.written_at:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.99
+    enum_values: null
+  recorded_at:
+    type: string
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  schema_version:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  sequence_number:
+    type: integer
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null

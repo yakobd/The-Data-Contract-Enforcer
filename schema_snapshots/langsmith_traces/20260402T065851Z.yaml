@@ -1,0 +1,149 @@
+contract_id: 74587fc4-f1d9-5af1-b7a6-a02302d7e15b
+contract_stem: langsmith_traces
+snapshot_at: '2026-04-02T06:58:51.200739+00:00'
+record_count: 150
+fields:
+  completion_tokens:
+    type: integer
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  end_time:
+    type: string (timestamp)
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  error:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 1.0
+    enum_values: null
+  id:
+    type: string (uuid)
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  inputs.doc_id:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.3333
+    enum_values: null
+  inputs.source_path:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.3333
+    enum_values: null
+  inputs.strategy:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.6667
+    enum_values: null
+  inputs.texts:
+    type: array
+    required: false
+    nullable: true
+    null_fraction: 0.6667
+    enum_values: null
+  name:
+    type: string
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  outputs.avg_confidence:
+    type: number
+    required: false
+    nullable: true
+    null_fraction: 0.6667
+    enum_values: null
+  outputs.embedding_dim:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.6667
+    enum_values: null
+  outputs.extraction_model:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.6667
+    enum_values: null
+  outputs.facts_count:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.6667
+    enum_values: null
+  outputs.facts_extracted:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.6667
+    enum_values: null
+  outputs.status:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.6667
+    enum_values: null
+  outputs.vectors_created:
+    type: integer
+    required: false
+    nullable: true
+    null_fraction: 0.6667
+    enum_values: null
+  parent_run_id:
+    type: string (uuid)
+    required: false
+    nullable: true
+    null_fraction: 0.3333
+    enum_values: null
+  prompt_tokens:
+    type: integer
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  run_type:
+    type: string
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  session_id:
+    type: string (uuid)
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  start_time:
+    type: string (timestamp)
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  tags:
+    type: array
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  total_cost:
+    type: number
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  total_tokens:
+    type: integer
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null

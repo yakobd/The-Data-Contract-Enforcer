@@ -1,0 +1,68 @@
+{
+  "report_id": "9f1a319c-dc5f-4419-8133-b62a426cb556",
+  "generated_at": "2026-04-02T11:22:10.866929+00:00",
+  "contract_id": "week3-document-refinery-extractions",
+  "contract_stem": "week3_extractions",
+  "since": "2026-03-03T11:22:10.734746+00:00",
+  "snapshots_found": 4,
+  "diffs": [
+    {
+      "from_snapshot": "2026-04-02T06:59:31.477261+00:00",
+      "to_snapshot": "2026-04-02T06:50:29.688856+00:00",
+      "changes": [
+        {
+          "field": "review_notes",
+          "change_type": "ADD_NULLABLE_COLUMN",
+          "old_value": null,
+          "new_value": {
+            "enum_values": null,
+            "null_fraction": 1.0,
+            "nullable": true,
+            "required": false,
+            "type": "string"
+          },
+          "detail": "Field 'review_notes' added (nullable).",
+          "backward_compatible": true,
+          "severity": "INFO",
+          "required_action": "None. Downstream consumers can ignore the new column.",
+          "sprint_notice": 0,
+          "blast_radius_required": false
+        }
+      ],
+      "breaking_count": 0,
+      "compatible_count": 1
+    },
+    {
+      "from_snapshot": "2026-04-02T06:50:29.688856+00:00",
+      "to_snapshot": "2026-04-02T06:50:29.746495+00:00",
+      "changes": [
+        {
+          "field": "doc_id",
+          "change_type": "REMOVE_COLUMN",
+          "old_value": {
+            "enum_values": null,
+            "null_fraction": 0.0,
+            "nullable": false,
+            "required": true,
+            "type": "string"
+          },
+          "new_value": null,
+          "detail": "Field 'doc_id' was removed.",
+          "backward_compatible": false,
+          "severity": "ERROR",
+          "required_action": "Deprecation period mandatory (minimum 2 sprints). Blast radius report required. Each affected consumer must acknowledge removal in writing (JIRA ticket or PR comment).",
+          "sprint_notice": 2,
+          "blast_radius_required": true
+        }
+      ],
+      "breaking_count": 1,
+      "compatible_count": 0
+    }
+  ],
+  "summary": {
+    "total_changes": 2,
+    "breaking_changes": 1,
+    "compatible_changes": 1,
+    "overall_verdict": "BREAKING"
+  }
+}

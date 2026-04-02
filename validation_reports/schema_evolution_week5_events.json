@@ -1,0 +1,15 @@
+{
+  "report_id": "27361957-14bd-494c-8e7c-a846d845373e",
+  "generated_at": "2026-04-02T11:22:11.471090+00:00",
+  "contract_id": "week5-event-stream-events",
+  "contract_stem": "week5_events",
+  "since": "2026-03-03T11:22:10.734746+00:00",
+  "snapshots_found": 2,
+  "diffs": [],
+  "summary": {
+    "total_changes": 0,
+    "breaking_changes": 0,
+    "compatible_changes": 0,
+    "overall_verdict": "STABLE"
+  }
+}
