@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Data Contract Enforcer -- Report 20260402</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px;
+         color: #222; background: #fff; padding: 32px 40px; }
+  h1 { font-size: 1.6em; color: #1a1a2e; margin-bottom: 4px; }
+  h2 { font-size: 1.15em; color: #2c3e50; margin: 28px 0 10px;
+       padding-bottom: 6px; border-bottom: 2px solid #e8e8f0; }
+  h3 { font-size: 1em; color: #34495e; margin-bottom: 8px; }
+  .meta { color:#888; font-size:0.9em; margin-bottom:32px; }
+  .score-box { display:inline-block; padding:20px 36px; border-radius:12px;
+               background:#c0392b15; border:2px solid #c0392b;
+               text-align:center; margin-bottom:16px; }
+  .score-num { font-size:2.8em; font-weight:900; color:#c0392b; line-height:1; }
+  .score-label { font-size:0.85em; color:#555; margin-top:4px; }
+  .narrative { font-size:1em; color:#333; line-height:1.7;
+               background:#f4f8ff; padding:12px 16px; border-radius:6px;
+               border-left:4px solid #c0392b; margin-bottom:6px; }
+  table { width:100%; border-collapse:collapse; margin-top:8px; }
+  th { background:#f0f0f8; text-align:left; padding:8px 10px;
+        font-size:0.88em; color:#444; }
+  td { padding:7px 10px; border-bottom:1px solid #eee; vertical-align:top;
+        line-height:1.5; }
+  tr:last-child td { border-bottom:none; }
+  code { background:#f0f0f0; padding:1px 5px; border-radius:3px; font-size:0.9em; }
+  ul { padding-left:20px; }
+  li { line-height:1.65; }
+  .section { margin-bottom:32px; }
+  .stat-grid { display:flex; gap:24px; flex-wrap:wrap; margin-bottom:16px; }
+  .stat-card { flex:1; min-width:100px; text-align:center; padding:14px;
+               border-radius:8px; background:#f8f8fc; border:1px solid #e8e8f0; }
+  .stat-val { font-size:1.8em; font-weight:800; color:#2c3e50; }
+  .stat-lbl { font-size:0.8em; color:#888; margin-top:2px; }
+  @media print {
+    body { padding: 20px; }
+    h2 { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Data Contract Enforcer &mdash; Weekly Report</h1>
+<div class="meta">
+  Generated: 20260402 &nbsp;|&nbsp;
+  Pipeline: TenX Academy Week 7 &nbsp;|&nbsp;
+  Contracts validated: 6 &nbsp;|&nbsp;
+  Total checks: 96
+</div>
+
+<!-- section 1 -->
+<div class="section">
+<h2>1 &middot; Data Health Score</h2>
+<div class="score-box">
+  <div class="score-num">30</div>
+  <div class="score-label">/ 100</div>
+</div>
+
+<div class="stat-grid">
+  <div class="stat-card"><div class="stat-val" style="color:#27ae60">86</div><div class="stat-lbl">Passed</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:#c0392b">7</div><div class="stat-lbl">Failed</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:#f39c12">3</div><div class="stat-lbl">Warned</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:#c0392b">3</div><div class="stat-lbl">Critical (-20 each)</div></div>
+</div>
+
+<div class="narrative">Pipeline health is critically low at 30/100 (3 critical violation(s) active); the pipeline should be halted until root causes are resolved.</div>
+<p style="color:#888;font-size:0.85em;margin-top:8px">
+  Formula: base = 89.6 (86/96 x 100)
+  &minus; 3 x 20 = <strong>30</strong>
+</p>
+</div>
+
+<!-- section 2 -->
+<div class="section">
+<h2>2 &middot; Violations This Week</h2>
+<div style="display:flex;gap:32px;flex-wrap:wrap;margin-bottom:16px">
+  <div>
+    <h3>Count by Severity</h3>
+    <table style="width:220px">
+      <tr><th>Severity</th><th>Count</th></tr>
+      <tr><td><span style="background:#c0392b;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:700">CRITICAL</span></td><td style='text-align:center'>3</td></tr><tr><td><span style="background:#e67e22;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:700">HIGH</span></td><td style='text-align:center'>1</td></tr><tr><td><span style="background:#f1c40f;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:700">MEDIUM</span></td><td style='text-align:center'>3</td></tr><tr><td><span style="background:#e67e22;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:700">WARNING</span></td><td style='text-align:center'>3</td></tr>
+    </table>
+  </div>
+  <div style="flex:1;min-width:260px">
+    <h3>Top 3 Failing Checks</h3>
+    <ul><li style='margin-bottom:8px'>[CRITICAL] LangSmith Traces &mdash; end_time > start_time: 150/150 violations. Affects 150 record(s). Impact: downstream time-series analytics and SLA calculations will produce incorrect results. Detail: 150 records violate 'end_time > start_time'.</li><li style='margin-bottom:8px'>[CRITICAL] Week 1 – Intent Records &mdash; intent_id: 1 duplicates in 2 values. Affects 1 record(s). Impact: downstream consumers may surface incorrect data. Detail: 'intent_id' has 1 duplicate values. Duplicates indicate an idempotency violation in the pipeline.</li><li style='margin-bottom:8px'>[CRITICAL] Week 5 – Events &mdash; recorded_at >= occurred_at: 100/100 violations. Affects 100 record(s). Impact: downstream time-series analytics and SLA calculations will produce incorrect results. Detail: 100 records violate 'recorded_at >= occurred_at'.</li></ul>
+  </div>
+</div>
+</div>
+
+<!-- section 3 -->
+<div class="section">
+<h2>3 &middot; Schema Changes Detected (Past 7 Days)</h2>
+<p style='margin-bottom:10px'><strong>4</strong> change(s) detected &mdash; <span style='color:#c0392b;font-weight:700'>2 breaking</span>, <span style='color:#27ae60;font-weight:700'>2 compatible</span>.</p><table><tr><th>Dataset</th><th>Field</th><th>Change Type</th><th>Verdict</th><th>Plain Summary</th><th>Required Action</th></tr><tr><td>Week 3 – Extractions</td><td><code>review_notes</code></td><td>ADD_NULLABLE_COLUMN</td><td><span style="background:#27ae60;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:700">COMPATIBLE</span></td><td>field 'review_notes' added (nullable) &mdash; no action needed</td><td style='font-size:0.85em'>None. Downstream consumers can ignore the new column.</td></tr><tr><td>Week 3 – Extractions</td><td><code>doc_id</code></td><td>REMOVE_COLUMN</td><td><span style="background:#c0392b;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:700">BREAKING</span></td><td>field 'doc_id' removed &mdash; any consumer reading this field will break</td><td style='font-size:0.85em'>Deprecation period mandatory (minimum 2 sprints). Blast radius report required. Each affected consumer must acknowledge removal in writing (JIRA ticket or PR comment).</td></tr><tr><td>Week 3 – Extractions</td><td><code>review_notes</code></td><td>ADD_NULLABLE_COLUMN</td><td><span style="background:#27ae60;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:700">COMPATIBLE</span></td><td>field 'review_notes' added (nullable) &mdash; no action needed</td><td style='font-size:0.85em'>None. Downstream consumers can ignore the new column.</td></tr><tr><td>Week 3 – Extractions</td><td><code>doc_id</code></td><td>REMOVE_COLUMN</td><td><span style="background:#c0392b;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:700">BREAKING</span></td><td>field 'doc_id' removed &mdash; any consumer reading this field will break</td><td style='font-size:0.85em'>Deprecation period mandatory (minimum 2 sprints). Blast radius report required. Each affected consumer must acknowledge removal in writing (JIRA ticket or PR comment).</td></tr></table>
+</div>
+
+<!-- section 4 -->
+<div class="section">
+<h2>4 &middot; AI System Risk Assessment</h2>
+<div style='margin-bottom:14px;padding:10px 14px;border-radius:6px;background:#f0fdf4;border:1px solid #a0ddb8'><strong>Overall AI Risk: LOW</strong> &mdash; Overall AI system risk: LOW. AI pipeline is operating within acceptable parameters.</div>
+<div style='margin-bottom:12px;padding:10px 14px;border-left:4px solid #27ae60;background:#fafafa;border-radius:0 6px 6px 0'><strong>&#x1F7E2; Embedding Drift</strong> <span style='color:#555;font-size:0.9em'>[BASELINE_SET]</span><br><span style='color:#333;font-size:0.92em'>Cosine distance from baseline centroid: 0.0000. Baseline set for future runs.</span></div><div style='margin-bottom:12px;padding:10px 14px;border-left:4px solid #27ae60;background:#fafafa;border-radius:0 6px 6px 0'><strong>&#x1F7E2; Prompt Input Schema</strong> <span style='color:#555;font-size:0.9em'>[PASS]</span><br><span style='color:#333;font-size:0.92em'>0/50 records quarantined (0.0%). Prompt inputs are well-formed.</span></div><div style='margin-bottom:12px;padding:10px 14px;border-left:4px solid #27ae60;background:#fafafa;border-radius:0 6px 6px 0'><strong>&#x1F7E2; output_schema_violations</strong> <span style='color:#555;font-size:0.9em'>[PASS]</span><br><span style='color:#333;font-size:0.92em'>Violation rate=0.0% (threshold=2.0%). Trend vs baseline: stable. Rate within acceptable bounds.</span></div>
+</div>
+
+<!-- section 5 -->
+<div class="section">
+<h2>5 &middot; Recommended Actions</h2>
+<div style='margin-bottom:16px;padding:12px 16px;border:1px solid #dde;border-radius:6px;background:#f9f9ff'><div style='display:flex;gap:8px;align-items:center;margin-bottom:6px'><span style='background:#2c3e50;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8em;font-weight:700'>#1</span><span style="background:#c0392b;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:700">CRITICAL</span><code style='font-size:0.82em;color:#555'>src/langsmith/ingest.py</code></div><p style='margin:0;color:#222;line-height:1.6'>Fix LangSmith trace ingestion to populate end_time correctly: update src/langsmith/ingest.py to set end_time = run.end_time (not null). All 150 traces currently have end_time ≤ start_time, breaking SLA dashboards.</p></div><div style='margin-bottom:16px;padding:12px 16px;border:1px solid #dde;border-radius:6px;background:#f9f9ff'><div style='display:flex;gap:8px;align-items:center;margin-bottom:6px'><span style='background:#2c3e50;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8em;font-weight:700'>#2</span><span style="background:#c0392b;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:700">CRITICAL</span><code style='font-size:0.82em;color:#555'>src/week5/event_emitter.py</code></div><p style='margin:0;color:#222;line-height:1.6'>Fix event timestamp population in the Week 5 event emitter: update src/week5/event_emitter.py so recorded_at is set after occurred_at (currently 100/100 events violate this constraint), or swap the field assignment to use UTC clock at emit time.</p></div><div style='margin-bottom:16px;padding:12px 16px;border:1px solid #dde;border-radius:6px;background:#f9f9ff'><div style='display:flex;gap:8px;align-items:center;margin-bottom:6px'><span style='background:#2c3e50;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8em;font-weight:700'>#3</span><span style="background:#c0392b;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:700">CRITICAL</span><code style='font-size:0.82em;color:#555'>src/week1/intent_router.py</code></div><p style='margin:0;color:#222;line-height:1.6'>Resolve duplicate intent_id in Week 1 intent records: update src/week1/intent_router.py to generate a new UUID per record instead of reusing 'INT-001'. Duplicate IDs break idempotency guarantees for downstream deduplication.</p></div>
+</div>
+
+<hr style="border:none;border-top:1px solid #eee;margin-top:32px"/>
+<p style="color:#aaa;font-size:0.78em;margin-top:8px">
+  Generated by contracts/report_generator.py &middot; Data Contract Enforcer v1.0 &middot;
+  TenX Academy Week 7 &middot; 20260402
+</p>
+
+</body>
+</html>

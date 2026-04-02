@@ -1358,11 +1358,56 @@ def process_source(
     dbt_path   = output_dir / f"{output_stem}_dbt.yml"
     write_yaml(dbt_schema, dbt_path)
 
+    # ── Phase 3: write timestamped schema snapshot ────────────────────────
+    contract_id   = contract.get("id", output_stem)
+    snapshot      = _build_schema_snapshot(contract_id, output_stem, structural, contract)
+    snap_ts       = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    snap_dir      = Path("schema_snapshots") / output_stem
+    snap_dir.mkdir(parents=True, exist_ok=True)
+    snap_path     = snap_dir / f"{snap_ts}.yaml"
+    write_yaml(snapshot, snap_path)
+
     if verbose:
         print(f"          → {contract_path}")
         print(f"          → {dbt_path}")
+        print(f"          → {snap_path}  [schema snapshot]")
 
     return contract_path
+
+
+def _build_schema_snapshot(
+    contract_id: str,
+    contract_stem: str,
+    structural: dict,
+    contract: dict,
+) -> dict:
+    """Build a lean, diffable snapshot of the schema for SchemaEvolutionAnalyzer."""
+    fields_snap = {}
+    for field_meta in contract.get("schema", {}).get("fields", []):
+        fname = field_meta.get("name", "")
+        if not fname:
+            continue
+        # collect enum/accepted values from quality clauses
+        enum_values = None
+        for clause in contract.get("quality_extended", []):
+            if clause.get("column") == fname and clause.get("type") == "accepted_values":
+                enum_values = sorted(clause.get("values", []))
+                break
+        fields_snap[fname] = {
+            "type":        field_meta.get("type", "string"),
+            "required":    field_meta.get("required", False),
+            "nullable":    not field_meta.get("required", False),
+            "null_fraction": field_meta.get("null_fraction", 0.0),
+            "enum_values": enum_values,
+        }
+
+    return {
+        "contract_id":   contract_id,
+        "contract_stem": contract_stem,
+        "snapshot_at":   datetime.now(timezone.utc).isoformat(),
+        "record_count":  contract.get("recordCount", 0),
+        "fields":        fields_snap,
+    }
 
 
 # ─────────────────────────────────────────────────────────────────────────────

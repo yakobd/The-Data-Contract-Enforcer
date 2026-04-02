@@ -5,7 +5,7 @@ info:
   title: Week 7 — Extractions Data Contract
   version: 1.0.0
   owner: yakob@10academy.org
-  description: 'One record per extractions entry. Generated from 50 records on 2026-04-01.
+  description: 'One record per extractions entry. Generated from 50 records on 2026-04-02.
     Quality floor: 100.0%.'
 servers:
   local:
@@ -15,7 +15,7 @@ servers:
 terms:
   usage: Internal inter-system data contract. Do not publish.
   limitations: All required fields must remain non-null across schema versions.
-generatedAt: '2026-04-01T17:42:37.284596+00:00'
+generatedAt: '2026-04-02T06:59:18.899191+00:00'
 generatedBy: contracts/generator.py
 recordCount: 50
 qualityFloor: 100.0
@@ -47,8 +47,8 @@ schema:
     profiler: ydata-profiling
   - name: entities
     type: array
-    description: The 'entities' column contains an array of named entities extracted
-      from text data.
+    description: The 'entities' column contains an array of extracted entities with
+      metadata about each entity.
     required: false
     primaryKey: false
     pii: false
@@ -167,8 +167,8 @@ schema:
     profiler: ydata-profiling
   - name: extracted_at
     type: string (timestamp)
-    description: The extracted_at column contains timestamps of when the document
-      extractions occurred.
+    description: The extracted_at column represents the timestamp when data was extracted
+      from a source.
     required: false
     primaryKey: false
     pii: false
@@ -1624,7 +1624,7 @@ schema:
     profiler: ydata-profiling
   - name: processing_time_ms
     type: integer
-    description: The processing time in milliseconds for each data extraction.
+    description: The processing time for data extractions, measured in milliseconds.
     required: false
     primaryKey: false
     pii: false
@@ -1653,7 +1653,8 @@ schema:
     profiler: ydata-profiling
   - name: source_hash
     type: string
-    description: The source_hash column stores unique hashes for data extraction sources.
+    description: The source_hash column contains hashed values that uniquely identify
+      each data extraction.
     required: false
     primaryKey: false
     pii: false
@@ -1673,7 +1674,8 @@ schema:
     profiler: ydata-profiling
   - name: source_path
     type: string
-    description: The source_path column contains file paths for various business reports.
+    description: The source_path column contains file paths of various financial and
+      audit reports.
     required: false
     primaryKey: false
     pii: false
@@ -1693,7 +1695,8 @@ schema:
     profiler: ydata-profiling
   - name: token_count.input
     type: integer
-    description: The number of tokens in the input text, represented as an integer.
+    description: The token_count.input column represents the number of tokens extracted
+      from a source.
     required: false
     primaryKey: false
     pii: false
@@ -1723,7 +1726,7 @@ schema:
   - name: token_count.output
     type: integer
     description: The token_count.output column represents the number of tokens extracted
-      from a text source.
+      from the source_path.
     required: false
     primaryKey: false
     pii: false
@@ -1851,17 +1854,17 @@ llm_annotations:
   business_rule: IS NOT NULL AND matches UUID-v4 pattern
   cross_column_relationship: doc_id links extracted_facts to their source document
 - column: entities
-  description: The 'entities' column contains an array of named entities extracted
-    from text data.
-  business_rule: The 'entities' column must be a non-null array, and each entity object
-    must have 'entity_id', 'name', 'type', and 'canonical_value' fields.
+  description: The 'entities' column contains an array of extracted entities with
+    metadata about each entity.
+  business_rule: The 'entities' column must be a non-null array of JSON objects, where
+    each object has the keys 'entity_id', 'name', 'type', and 'canonical_value'.
   cross_column_relationship: The 'entities' column is related to the 'doc_id', 'extracted_at',
-    and 'extracted_facts' columns, as the entities are extracted from the text data
-    in the dataset.
+    and 'extracted_facts' columns, as it contains extracted information about the
+    text in those columns.
 - column: extracted_at
-  description: The extracted_at column contains timestamps of when the document extractions
-    occurred.
-  business_rule: extracted_at MUST be a valid ISO 8601 timestamp in the UTC timezone
+  description: The extracted_at column represents the timestamp when data was extracted
+    from a source.
+  business_rule: extracted_at MUST be a valid timestamp in the format 'YYYY-MM-DDThh:mm:ss.ssssss+00:00'
   cross_column_relationship: None
 - column: extracted_facts
   description: Array of fact objects extracted from the document, each with text,
@@ -1875,29 +1878,30 @@ llm_annotations:
   cross_column_relationship: extraction_model determines the valid range of confidence
     scores
 - column: processing_time_ms
-  description: The processing time in milliseconds for each data extraction.
+  description: The processing time for data extractions, measured in milliseconds.
   business_rule: processing_time_ms >= 0
   cross_column_relationship: None
 - column: source_hash
-  description: The source_hash column stores unique hashes for data extraction sources.
-  business_rule: source_hash MUST be a non-empty string of at least 64 characters,
-    consisting only of hexadecimal digits (0-9, a-f, A-F).
+  description: The source_hash column contains hashed values that uniquely identify
+    each data extraction.
+  business_rule: source_hash SHOULD be a 64-character hexadecimal string
   cross_column_relationship: None
 - column: source_path
-  description: The source_path column contains file paths for various business reports.
-  business_rule: source_path LIKE '%.pdf' AND LENGTH(source_path) < 100
+  description: The source_path column contains file paths of various financial and
+    audit reports.
+  business_rule: source_path LIKE '%.pdf'
   cross_column_relationship: None
 - column: token_count.input
-  description: The number of tokens in the input text, represented as an integer.
-  business_rule: token_count.input > 0
-  cross_column_relationship: The token_count.input should match the token_count.output
-    column.
+  description: The token_count.input column represents the number of tokens extracted
+    from a source.
+  business_rule: token_count.input >= 1
+  cross_column_relationship: token_count.input should be less than or equal to token_count.output
 - column: token_count.output
   description: The token_count.output column represents the number of tokens extracted
-    from a text source.
-  business_rule: token_count.output >= 0
-  cross_column_relationship: token_count.output should be greater than or equal to
-    token_count.input
+    from the source_path.
+  business_rule: token_count.output >= 0 AND token_count.output <= 5000
+  cross_column_relationship: token_count.input should be greater than or equal to
+    token_count.output
 lineage:
   upstream:
   - outputs/week3/NormalizedOutput/ (Week 3 Document Refinery)
@@ -1906,16 +1910,16 @@ lineage:
     description: outputs/traces/runs.jsonl (LangSmith traces)
     fields_consumed:
     - extracted_facts
-    - extraction_model
     - doc_id
+    - extraction_model
     breaking_if_changed:
     - doc_id
   - id: contracts-runner-py
     description: contracts/runner.py (ValidationRunner)
     fields_consumed:
     - extracted_facts
-    - extraction_model
     - doc_id
+    - extraction_model
     breaking_if_changed:
     - doc_id
 contacts:

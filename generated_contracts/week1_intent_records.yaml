@@ -5,7 +5,7 @@ info:
   title: Week 7 — Intent Records Data Contract
   version: 1.0.0
   owner: yakob@10academy.org
-  description: 'One record per intent records entry. Generated from 2 records on 2026-04-01.
+  description: 'One record per intent records entry. Generated from 2 records on 2026-04-02.
     Quality floor: 100.0%.'
 servers:
   local:
@@ -15,7 +15,7 @@ servers:
 terms:
   usage: Internal inter-system data contract. Do not publish.
   limitations: All required fields must remain non-null across schema versions.
-generatedAt: '2026-04-01T17:42:09.870593+00:00'
+generatedAt: '2026-04-02T06:58:53.184985+00:00'
 generatedBy: contracts/generator.py
 recordCount: 2
 qualityFloor: 100.0
@@ -26,8 +26,8 @@ schema:
   fields:
   - name: code_refs
     type: array
-    description: The code_refs column stores an array of code references associated
-      with each intent record.
+    description: The code_refs column contains an array of objects with information
+      about referenced code
     required: false
     primaryKey: false
     pii: false
@@ -62,8 +62,7 @@ schema:
     profiler: ydata-profiling
   - name: description
     type: string
-    description: The description column contains free-text descriptions of software
-      development activities.
+    description: Descriptions of code changes and operations performed by agents.
     required: true
     primaryKey: false
     pii: false
@@ -82,8 +81,8 @@ schema:
     profiler: ydata-profiling
   - name: governance_tags
     type: array
-    description: Ensure governance_tags is an array of strings with no more than two
-      unique values.
+    description: Ensure the 'governance_tags' column contains valid tags for data
+      governance.
     required: false
     primaryKey: false
     pii: false
@@ -173,26 +172,23 @@ quality_extended:
   breaking_if_violated: true
 llm_annotations:
 - column: code_refs
-  description: The code_refs column stores an array of code references associated
-    with each intent record.
-  business_rule: The code_refs array must not be empty and each element must contain
-    valid file, line, symbol, and confidence fields.
-  cross_column_relationship: The code_refs column is related to the description column,
-    as the code references may provide more context about the intent record.
+  description: The code_refs column contains an array of objects with information
+    about referenced code
+  business_rule: code_refs must be a non-empty array and each object must have 'file',
+    'line_start', 'line_end', 'symbol', and 'confidence' keys
+  cross_column_relationship: None
 - column: created_at
   description: ISO 8601 UTC timestamp when this record was created.
   business_rule: IS NOT NULL AND created_at <= NOW()
   cross_column_relationship: created_at must be <= recorded_at for event records
 - column: description
-  description: The description column contains free-text descriptions of software
-    development activities.
-  business_rule: description MUST NOT be NULL AND length(description) <= 100 characters
-  cross_column_relationship: The description column is related to the intent_id column,
-    which uniquely identifies each software development activity.
+  description: Descriptions of code changes and operations performed by agents.
+  business_rule: description LIKE '%operation%'
+  cross_column_relationship: intent_id
 - column: governance_tags
-  description: Ensure governance_tags is an array of strings with no more than two
-    unique values.
-  business_rule: LENGTH(governance_tags) <= 2 AND ALL(item IN governance_tags IS STRING)
+  description: Ensure the 'governance_tags' column contains valid tags for data governance.
+  business_rule: ARRAY_LENGTH(governance_tags) >= 1 AND ARRAY_CONTAINS(governance_tags,
+    ['evolution', 'feature', 'refactor'])
   cross_column_relationship: None
 - column: intent_id
   description: Unique identifier for a developer intent event.
@@ -206,20 +202,20 @@ lineage:
   - id: contracts-runner-py
     description: contracts/runner.py (ValidationRunner)
     fields_consumed:
-    - created_at
-    - intent_id
     - confidence
     - description
+    - intent_id
+    - created_at
     breaking_if_changed:
     - intent_id
     - confidence
   - id: contracts-attributor-py
     description: contracts/attributor.py (ViolationAttributor)
     fields_consumed:
-    - created_at
-    - intent_id
     - confidence
     - description
+    - intent_id
+    - created_at
     breaking_if_changed:
     - intent_id
     - confidence

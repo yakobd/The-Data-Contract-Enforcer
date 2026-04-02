@@ -5,7 +5,7 @@ info:
   title: Week 7 — Verdicts Data Contract
   version: 1.0.0
   owner: yakob@10academy.org
-  description: 'One record per verdicts entry. Generated from 7 records on 2026-04-01.
+  description: 'One record per verdicts entry. Generated from 7 records on 2026-04-02.
     Quality floor: 100.0%.'
 servers:
   local:
@@ -15,7 +15,7 @@ servers:
 terms:
   usage: Internal inter-system data contract. Do not publish.
   limitations: confidence must remain in 0.0–1.0 float range.
-generatedAt: '2026-04-01T17:42:18.754489+00:00'
+generatedAt: '2026-04-02T06:58:59.397564+00:00'
 generatedBy: contracts/generator.py
 recordCount: 7
 qualityFloor: 100.0
@@ -57,8 +57,8 @@ schema:
     profiler: ydata-profiling
   - name: evaluated_at
     type: string (timestamp)
-    description: The evaluated_at column should be a valid timestamp with millisecond
-      precision.
+    description: The evaluated_at column contains timestamps for when verdicts were
+      made.
     required: false
     primaryKey: false
     pii: false
@@ -107,8 +107,7 @@ schema:
     profiler: ydata-profiling
   - name: overall_verdict
     type: string
-    description: The overall verdict should be either 'PASS' or 'FAIL' based on the
-      evaluation.
+    description: The overall verdict must be either 'PASS' or 'FAIL'.
     required: false
     primaryKey: false
     pii: false
@@ -125,8 +124,7 @@ schema:
     profiler: ydata-profiling
   - name: rubric_id
     type: string
-    description: The rubric_id column uniquely identifies a set of scores and overall
-      verdict for a data quality assessment.
+    description: The rubric_id column contains unique identifiers for assessment rubrics.
     required: false
     primaryKey: false
     pii: false
@@ -146,8 +144,8 @@ schema:
     profiler: ydata-profiling
   - name: rubric_version
     type: string
-    description: The rubric_version column should be a valid version string in the
-      format X.Y.Z.
+    description: The rubric_version column identifies the version of the rubric used
+      for the verdict.
     required: false
     primaryKey: false
     pii: false
@@ -163,8 +161,8 @@ schema:
     profiler: ydata-profiling
   - name: scores.architecture_design
     type: object
-    description: The scores.architecture_design column contains a JSON object with
-      score, evidence, and notes for the architecture design criterion.
+    description: The scores.architecture_design column contains JSON objects with
+      scores and related metadata.
     required: false
     primaryKey: false
     pii: false
@@ -190,8 +188,8 @@ schema:
     profiler: ydata-profiling
   - name: scores.code_quality
     type: object
-    description: The scores.code_quality column contains a JSON object with a score,
-      evidence, and notes.
+    description: The 'scores.code_quality' column contains a JSON object with score,
+      evidence, and notes for code quality assessment.
     required: false
     primaryKey: false
     pii: false
@@ -217,8 +215,8 @@ schema:
     profiler: ydata-profiling
   - name: scores.documentation
     type: object
-    description: The 'scores.documentation' column contains an object with score,
-      evidence, and notes for documentation quality.
+    description: The scores.documentation column contains detailed documentation scores
+      and evidence for each audited product.
     required: false
     primaryKey: false
     pii: false
@@ -245,7 +243,7 @@ schema:
   - name: scores.implementation_correctness
     type: object
     description: The 'scores.implementation_correctness' column contains scores and
-      related evidence for the implementation correctness criterion.
+      related information for implementation correctness.
     required: false
     primaryKey: false
     pii: false
@@ -274,8 +272,8 @@ schema:
     profiler: ydata-profiling
   - name: scores.test_coverage
     type: object
-    description: The scores.test_coverage column contains test coverage scores as
-      JSON objects with score, evidence, and notes fields.
+    description: The 'scores.test_coverage' column contains a JSON object with score,
+      evidence, and notes about test coverage.
     required: false
     primaryKey: false
     pii: false
@@ -301,8 +299,7 @@ schema:
     profiler: ydata-profiling
   - name: target_ref
     type: string
-    description: Ensure that the target_ref column contains valid GitHub repository
-      URLs
+    description: Ensure the target_ref column contains valid GitHub repository URLs
     required: true
     primaryKey: false
     pii: false
@@ -418,65 +415,62 @@ llm_annotations:
   business_rule: 0.0 <= value <= 1.0
   cross_column_relationship: confidence correlates positively with token_count.output
 - column: evaluated_at
-  description: The evaluated_at column should be a valid timestamp with millisecond
-    precision.
-  business_rule: evaluated_at SHOULD be a valid timestamp in the format 'YYYY-MM-DDThh:mm:ss.fffZ'
+  description: The evaluated_at column contains timestamps for when verdicts were
+    made.
+  business_rule: evaluated_at MUST be a valid timestamp in the format 'YYYY-MM-DDThh:mm:ss.ssssss+00:00'
   cross_column_relationship: None
 - column: overall_score
   description: Aggregate audit quality score on a 0.0–5.0 scale.
   business_rule: 0.0 <= value <= 5.0
   cross_column_relationship: overall_score < 2.0 implies audit_verdict IN ('WARN','FAIL')
 - column: overall_verdict
-  description: The overall verdict should be either 'PASS' or 'FAIL' based on the
-    evaluation.
+  description: The overall verdict must be either 'PASS' or 'FAIL'.
   business_rule: overall_verdict IN ('PASS', 'FAIL')
   cross_column_relationship: None
 - column: rubric_id
-  description: The rubric_id column uniquely identifies a set of scores and overall
-    verdict for a data quality assessment.
-  business_rule: rubric_id is a 64-character hexadecimal string
+  description: The rubric_id column contains unique identifiers for assessment rubrics.
+  business_rule: rubric_id IS NOT NULL AND LENGTH(rubric_id) = 64 AND rubric_id LIKE
+    '[0-9a-f]{64}'
   cross_column_relationship: None
 - column: rubric_version
-  description: The rubric_version column should be a valid version string in the format
-    X.Y.Z.
-  business_rule: rubric_version LIKE '[0-9]+.[0-9]+.[0-9]+'
+  description: The rubric_version column identifies the version of the rubric used
+    for the verdict.
+  business_rule: rubric_version LIKE '%.%.%'
   cross_column_relationship: None
 - column: scores.architecture_design
-  description: The scores.architecture_design column contains a JSON object with score,
-    evidence, and notes for the architecture design criterion.
-  business_rule: scores.architecture_design.score BETWEEN 1 AND 5
-  cross_column_relationship: scores.code_quality, scores.documentation
-- column: scores.code_quality
-  description: The scores.code_quality column contains a JSON object with a score,
-    evidence, and notes.
-  business_rule: scores.code_quality.score BETWEEN 1 AND 5
-  cross_column_relationship: scores.code_quality, scores.architecture_design, scores.documentation,
-    scores.implementation_correctness are related as part of a common rubric
-- column: scores.documentation
-  description: The 'scores.documentation' column contains an object with score, evidence,
-    and notes for documentation quality.
-  business_rule: SELECT * FROM verdicts WHERE scores.documentation.score BETWEEN 1
-    AND 5
+  description: The scores.architecture_design column contains JSON objects with scores
+    and related metadata.
+  business_rule: scores.architecture_design is not null AND scores.architecture_design.score
+    is between 1 and 5
   cross_column_relationship: None
+- column: scores.code_quality
+  description: The 'scores.code_quality' column contains a JSON object with score,
+    evidence, and notes for code quality assessment.
+  business_rule: scores.code_quality['score'] BETWEEN 1 AND 5
+  cross_column_relationship: None
+- column: scores.documentation
+  description: The scores.documentation column contains detailed documentation scores
+    and evidence for each audited product.
+  business_rule: scores.documentation must be a valid JSON object with keys 'score',
+    'evidence', and 'notes'
+  cross_column_relationship: The scores.documentation column is related to the other
+    'scores' columns, which likely represent different aspects of the product being
+    audited.
 - column: scores.implementation_correctness
   description: The 'scores.implementation_correctness' column contains scores and
-    related evidence for the implementation correctness criterion.
-  business_rule: scores.implementation_correctness should be an object with keys 'score',
-    'evidence', and 'notes'
-  cross_column_relationship: The scores in this column should be related to the scores
-    in the 'scores.code_quality', 'scores.documentation', and 'scores.test_coverage'
-    columns.
+    related information for implementation correctness.
+  business_rule: scores.implementation_correctness['score'] must be an integer between
+    1 and 5 inclusive
+  cross_column_relationship: None
 - column: scores.test_coverage
-  description: The scores.test_coverage column contains test coverage scores as JSON
-    objects with score, evidence, and notes fields.
-  business_rule: scores.test_coverage SHOULD contain valid JSON objects with 'score',
-    'evidence', and 'notes' fields
+  description: The 'scores.test_coverage' column contains a JSON object with score,
+    evidence, and notes about test coverage.
+  business_rule: scores.test_coverage is not null and scores.test_coverage.score is
+    between 1 and 5
   cross_column_relationship: None
 - column: target_ref
-  description: Ensure that the target_ref column contains valid GitHub repository
-    URLs
-  business_rule: SELECT * FROM verdicts WHERE target_ref LIKE 'https://github.com/%'
-    AND target_ref LIKE '%.git'
+  description: Ensure the target_ref column contains valid GitHub repository URLs
+  business_rule: target_ref LIKE 'https://github.com/%/.git'
   cross_column_relationship: None
 - column: verdict_id
   description: Unique identifier for an audit verdict record.
@@ -490,18 +484,18 @@ lineage:
     description: contracts/runner.py (ValidationRunner)
     fields_consumed:
     - verdict_id
-    - audit_verdict
     - overall_score
     - target_ref
+    - audit_verdict
     breaking_if_changed:
     - verdict_id
   - id: enforcer-report
     description: enforcer_report/ (EnforcerReport)
     fields_consumed:
     - verdict_id
-    - audit_verdict
     - overall_score
     - target_ref
+    - audit_verdict
     breaking_if_changed:
     - verdict_id
 contacts:

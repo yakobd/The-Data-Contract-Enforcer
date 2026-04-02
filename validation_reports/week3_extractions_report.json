@@ -1,10 +1,10 @@
 {
-  "report_id": "6d510c37-5c0d-4e9a-9c3a-079ab8d7b515",
+  "report_id": "05e4e875-abd7-4c5f-9983-abbf6bc61721",
   "contract_id": "ea609135-913c-51f3-861f-33272d40246f",
   "contract_file": "generated_contracts\\week3_extractions.yaml",
   "data_file": "outputs\\week3\\extractions.jsonl",
   "snapshot_id": "05ff8b85f14ed9b19bd5cb660d33eef54c6dded036dcf519e437b4a4892f10da",
-  "run_timestamp": "2026-04-02T00:37:15.610011+00:00",
+  "run_timestamp": "2026-04-02T11:21:55.040105+00:00",
   "total_records": 50,
   "total_checks": 14,
   "passed": 10,

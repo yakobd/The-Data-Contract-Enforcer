@@ -1,10 +1,10 @@
 {
-  "report_id": "a45381ea-b06c-4a47-bbb2-eb4182916259",
+  "report_id": "9aec6745-b432-4aa5-be46-032dffe1a742",
   "contract_id": "ac05d9a1-5507-5e4a-bff1-d5f9f9b577cd",
   "contract_file": "generated_contracts\\week4_lineage.yaml",
   "data_file": "outputs\\week4\\lineage_snapshots.jsonl",
   "snapshot_id": "9c64d904f2c0fa2529d0a70aadd09ccda1ff263305b5ef8d515cac27ef8021e9",
-  "run_timestamp": "2026-04-01T18:17:43.751453+00:00",
+  "run_timestamp": "2026-04-02T11:21:56.140596+00:00",
   "total_records": 2,
   "total_checks": 12,
   "passed": 12,

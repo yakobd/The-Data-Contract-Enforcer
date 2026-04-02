@@ -1,10 +1,10 @@
 {
-  "report_id": "527d40e9-16ec-4f6a-b057-bc6b06549c23",
+  "report_id": "96d1551d-344b-4947-8502-b02cf7aba06b",
   "contract_id": "1c73fe05-0e07-5737-bebc-0e89d65b369d",
   "contract_file": "generated_contracts\\week5_events.yaml",
   "data_file": "outputs\\week5\\events.jsonl",
   "snapshot_id": "8569a78f758cfa68c8ae5634ed565e011077d2eaf3659fa0d079c73fbd1e61dd",
-  "run_timestamp": "2026-04-01T18:17:44.786594+00:00",
+  "run_timestamp": "2026-04-02T11:21:57.822881+00:00",
   "total_records": 100,
   "total_checks": 20,
   "passed": 18,
@@ -210,60 +210,60 @@
       "column_name": "_source.original_event_version",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "baseline established: mean=1.0, stddev=0.0",
-      "expected": "baseline",
+      "actual_value": "mean=1.0 (baseline constant)",
+      "expected": "=1.0",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "Statistical baseline established for '_source.original_event_version'. Future runs will compare against mean=1.0 \u00b1 \u03c3=0.0."
+      "message": "'_source.original_event_version' remains constant at 1.0."
     },
     {
       "check_id": "week5_events.payload.file_size_bytes.drift",
       "column_name": "payload.file_size_bytes",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "baseline established: mean=217365.166667, stddev=101764.495654",
-      "expected": "baseline",
+      "actual_value": "mean=217365.166667 (z=0.0\u03c3, within 2\u03c3)",
+      "expected": "z < 2\u03c3 (baseline mean=217365.166667)",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "Statistical baseline established for 'payload.file_size_bytes'. Future runs will compare against mean=217365.166667 \u00b1 \u03c3=101764.495654."
+      "message": "'payload.file_size_bytes' within normal range (z=0.0\u03c3)."
     },
     {
       "check_id": "week5_events.payload.fiscal_year.drift",
       "column_name": "payload.fiscal_year",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "baseline established: mean=2024.0, stddev=0.0",
-      "expected": "baseline",
+      "actual_value": "mean=2024.0 (baseline constant)",
+      "expected": "=2024.0",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "Statistical baseline established for 'payload.fiscal_year'. Future runs will compare against mean=2024.0 \u00b1 \u03c3=0.0."
+      "message": "'payload.fiscal_year' remains constant at 2024.0."
     },
     {
       "check_id": "week5_events.payload.loan_term_months.drift",
       "column_name": "payload.loan_term_months",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "baseline established: mean=40.0, stddev=12.877041",
-      "expected": "baseline",
+      "actual_value": "mean=40.0 (z=0.0\u03c3, within 2\u03c3)",
+      "expected": "z < 2\u03c3 (baseline mean=40.0)",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "Statistical baseline established for 'payload.loan_term_months'. Future runs will compare against mean=40.0 \u00b1 \u03c3=12.877041."
+      "message": "'payload.loan_term_months' within normal range (z=0.0\u03c3)."
     },
     {
       "check_id": "week5_events.sequence_number.drift",
       "column_name": "sequence_number",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "baseline established: mean=5.92, stddev=4.244259",
-      "expected": "baseline",
+      "actual_value": "mean=5.92 (z=0.0\u03c3, within 2\u03c3)",
+      "expected": "z < 2\u03c3 (baseline mean=5.92)",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "Statistical baseline established for 'sequence_number'. Future runs will compare against mean=5.92 \u00b1 \u03c3=4.244259."
+      "message": "'sequence_number' within normal range (z=0.0\u03c3)."
     }
   ]
 }

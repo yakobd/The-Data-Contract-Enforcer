@@ -4,20 +4,22 @@ models:
   description: Canonical lineage_snapshots records from the Week 7 Data Contract Enforcer.
   columns:
   - name: captured_at
-    description: The timestamp when the lineage snapshot was captured.
+    description: Timestamp column representing the time a lineage snapshot was captured.
     tests:
     - not_null
   - name: codebase_root
-    description: Field codebase_root.
+    description: The codebase_root column captures the local file path of the git
+      repository.
   - name: edges
-    description: Field edges.
+    description: The `edges` column contains a list of related data models and their
+      import relationships.
     tests:
     - not_null
   - name: git_commit
     description: Git commit SHA at which this snapshot was captured.
   - name: nodes
-    description: Ensure all YAML configuration files have a 'purpose' metadata field
-      describing their use.
+    description: Ensure the 'last_modified' field is less than or equal to the present
+      date.
     tests:
     - not_null
   - name: snapshot_id

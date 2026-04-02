@@ -12,39 +12,36 @@ models:
         max_value: 1.0
         inclusive: true
   - name: evaluated_at
-    description: The evaluated_at column should be a valid timestamp with millisecond
-      precision.
+    description: The evaluated_at column contains timestamps for when verdicts were
+      made.
   - name: overall_score
     description: Aggregate audit quality score on a 0.0–5.0 scale.
     tests:
     - not_null
   - name: overall_verdict
-    description: The overall verdict should be either 'PASS' or 'FAIL' based on the
-      evaluation.
+    description: The overall verdict must be either 'PASS' or 'FAIL'.
   - name: rubric_id
-    description: The rubric_id column uniquely identifies a set of scores and overall
-      verdict for a data quality assessment.
+    description: The rubric_id column contains unique identifiers for assessment rubrics.
   - name: rubric_version
-    description: The rubric_version column should be a valid version string in the
-      format X.Y.Z.
+    description: The rubric_version column identifies the version of the rubric used
+      for the verdict.
   - name: scores.architecture_design
-    description: The scores.architecture_design column contains a JSON object with
-      score, evidence, and notes for the architecture design criterion.
+    description: The scores.architecture_design column contains JSON objects with
+      scores and related metadata.
   - name: scores.code_quality
-    description: The scores.code_quality column contains a JSON object with a score,
-      evidence, and notes.
+    description: The 'scores.code_quality' column contains a JSON object with score,
+      evidence, and notes for code quality assessment.
   - name: scores.documentation
-    description: The 'scores.documentation' column contains an object with score,
-      evidence, and notes for documentation quality.
+    description: The scores.documentation column contains detailed documentation scores
+      and evidence for each audited product.
   - name: scores.implementation_correctness
     description: The 'scores.implementation_correctness' column contains scores and
-      related evidence for the implementation correctness criterion.
+      related information for implementation correctness.
   - name: scores.test_coverage
-    description: The scores.test_coverage column contains test coverage scores as
-      JSON objects with score, evidence, and notes fields.
+    description: The 'scores.test_coverage' column contains a JSON object with score,
+      evidence, and notes about test coverage.
   - name: target_ref
-    description: Ensure that the target_ref column contains valid GitHub repository
-      URLs
+    description: Ensure the target_ref column contains valid GitHub repository URLs
     tests:
     - not_null
   - name: verdict_id

@@ -5,7 +5,7 @@ info:
   title: Week 7 — Runs Data Contract
   version: 1.0.0
   owner: yakob@10academy.org
-  description: 'One record per runs entry. Generated from 150 records on 2026-04-01.
+  description: 'One record per runs entry. Generated from 150 records on 2026-04-02.
     Quality floor: 100.0%.'
 servers:
   local:
@@ -15,7 +15,7 @@ servers:
 terms:
   usage: Internal inter-system data contract. Do not publish.
   limitations: confidence must remain in 0.0–1.0 float range.
-generatedAt: '2026-04-01T17:41:40.224602+00:00'
+generatedAt: '2026-04-02T06:58:23.987923+00:00'
 generatedBy: contracts/generator.py
 recordCount: 150
 qualityFloor: 100.0
@@ -27,7 +27,7 @@ schema:
   - name: completion_tokens
     type: integer
     description: The completion_tokens column represents the number of tokens used
-      during a run.
+      in a run.
     required: true
     primaryKey: false
     pii: false
@@ -76,8 +76,8 @@ schema:
     profiler: ydata-profiling
   - name: error
     type: string
-    description: 'The error column should contain one of the values: ''none'' or another
-      string value.'
+    description: The 'error' column should only contain the string 'none' if no errors
+      occurred during the run.
     required: false
     primaryKey: false
     pii: false
@@ -132,8 +132,7 @@ schema:
     profiler: ydata-profiling
   - name: inputs.source_path
     type: string
-    description: The source path of the input files should be a valid file name with
-      a .pdf extension.
+    description: The source path column stores the file names of various documents.
     required: false
     primaryKey: false
     pii: false
@@ -153,8 +152,8 @@ schema:
     profiler: ydata-profiling
   - name: inputs.strategy
     type: string
-    description: The 'inputs.strategy' column contains the strategy used for a document
-      processing run.
+    description: The 'inputs.strategy' column stores the strategy used for the data
+      run.
     required: false
     primaryKey: false
     pii: false
@@ -172,8 +171,7 @@ schema:
     profiler: ydata-profiling
   - name: inputs.texts
     type: array
-    description: The 'inputs.texts' column contains an array of extracted text from
-      various documents.
+    description: The 'inputs.texts' column stores text extracted from various documents.
     required: false
     primaryKey: false
     pii: false
@@ -193,7 +191,7 @@ schema:
     profiler: ydata-profiling
   - name: name
     type: string
-    description: A table containing the names of text extraction and embedding models.
+    description: A table of data processing runs, with input text and output metadata.
     required: true
     primaryKey: false
     pii: false
@@ -213,8 +211,8 @@ schema:
     profiler: ydata-profiling
   - name: outputs.avg_confidence
     type: number
-    description: The average confidence score for the output of a text extraction
-      model.
+    description: The average confidence score of the text extraction process for each
+      run.
     required: false
     primaryKey: false
     pii: false
@@ -244,8 +242,7 @@ schema:
     profiler: ydata-profiling
   - name: outputs.embedding_dim
     type: integer
-    description: The embedding dimension for the model outputs, which should be a
-      positive integer.
+    description: The embedding dimension of the model outputs, an integer value.
     required: false
     primaryKey: false
     pii: false
@@ -288,7 +285,7 @@ schema:
     profiler: ydata-profiling
   - name: outputs.facts_count
     type: integer
-    description: The number of facts extracted from the run, an integer value.
+    description: The number of facts extracted from the input data.
     required: false
     primaryKey: false
     pii: false
@@ -317,7 +314,7 @@ schema:
     profiler: ydata-profiling
   - name: outputs.facts_extracted
     type: integer
-    description: The number of facts extracted from the run, as an integer value.
+    description: The number of facts extracted during the run, an integer value.
     required: false
     primaryKey: false
     pii: false
@@ -346,7 +343,8 @@ schema:
     profiler: ydata-profiling
   - name: outputs.status
     type: string
-    description: The 'outputs.status' column should be 'SUCCESS' for all rows.
+    description: The status of a run must be 'SUCCESS' and the associated counts and
+      IDs must be non-negative integers.
     required: false
     primaryKey: false
     pii: false
@@ -362,8 +360,7 @@ schema:
     profiler: ydata-profiling
   - name: outputs.vectors_created
     type: integer
-    description: The number of vectors created during the run of a data processing
-      task.
+    description: The number of vectors created during the run process.
     required: false
     primaryKey: false
     pii: false
@@ -392,8 +389,8 @@ schema:
     profiler: ydata-profiling
   - name: parent_run_id
     type: string (uuid)
-    description: The parent_run_id column stores a unique identifier for the parent
-      run of the current run.
+    description: The parent_run_id column stores the unique identifier for parent
+      runs.
     required: false
     primaryKey: false
     pii: false
@@ -414,8 +411,8 @@ schema:
     profiler: ydata-profiling
   - name: prompt_tokens
     type: integer
-    description: The 'prompt_tokens' column represents the number of tokens in the
-      prompt for a run.
+    description: The prompt_tokens column represents the number of tokens used in
+      a given run.
     required: true
     primaryKey: false
     pii: false
@@ -468,7 +465,7 @@ schema:
     profiler: ydata-profiling
   - name: session_id
     type: string (uuid)
-    description: A unique identifier for each run session of a data processing job.
+    description: A unique identifier for each session run in the system.
     required: false
     primaryKey: false
     pii: false
@@ -509,8 +506,7 @@ schema:
     profiler: ydata-profiling
   - name: tags
     type: array
-    description: The tags column contains an array of strings describing the purpose
-      of each run.
+    description: The tags column contains an array of text tags describing the run.
     required: false
     primaryKey: false
     pii: false
@@ -690,7 +686,7 @@ quality_extended:
   observed_avg_prompt_tokens: 521.0
 llm_annotations:
 - column: completion_tokens
-  description: The completion_tokens column represents the number of tokens used during
+  description: The completion_tokens column represents the number of tokens used in
     a run.
   business_rule: completion_tokens >= 0
   cross_column_relationship: None
@@ -699,9 +695,9 @@ llm_annotations:
   business_rule: end_time > start_time
   cross_column_relationship: end_time - start_time = run duration in milliseconds
 - column: error
-  description: 'The error column should contain one of the values: ''none'' or another
-    string value.'
-  business_rule: error IN ('none', '^[a-zA-Z0-9]+$')
+  description: The 'error' column should only contain the string 'none' if no errors
+    occurred during the run.
+  business_rule: error IN ('none')
   cross_column_relationship: None
 - column: id
   description: Unique identifier for this LangSmith trace run.
@@ -712,34 +708,33 @@ llm_annotations:
   business_rule: IS NOT NULL AND matches UUID-v4 pattern
   cross_column_relationship: doc_id links extracted_facts to their source document
 - column: inputs.source_path
-  description: The source path of the input files should be a valid file name with
-    a .pdf extension.
-  business_rule: inputs.source_path LIKE '%.pdf'
+  description: The source path column stores the file names of various documents.
+  business_rule: inputs.source_path IS NOT NULL AND inputs.source_path <> ''
   cross_column_relationship: None
 - column: inputs.strategy
-  description: The 'inputs.strategy' column contains the strategy used for a document
-    processing run.
+  description: The 'inputs.strategy' column stores the strategy used for the data
+    run.
   business_rule: inputs.strategy IN ('VISION', 'LAYOUT', 'FASTTEXT')
   cross_column_relationship: None
 - column: inputs.texts
-  description: The 'inputs.texts' column contains an array of extracted text from
-    various documents.
-  business_rule: CHECK(length(inputs.texts) > 0 AND inputs.texts[1] IS NOT NULL)
-  cross_column_relationship: The 'inputs.source_path' column likely contains the file
-    paths for the documents from which the text was extracted.
+  description: The 'inputs.texts' column stores text extracted from various documents.
+  business_rule: LENGTH(inputs.texts) > 0 AND inputs.texts IS NOT NULL
+  cross_column_relationship: inputs.source_path, inputs.strategy, and outputs.avg_confidence
+    are related to the text in the 'inputs.texts' column.
 - column: name
-  description: A table containing the names of text extraction and embedding models.
-  business_rule: name LIKE '%Chain' OR name LIKE '%-%'
-  cross_column_relationship: The columns `inputs.strategy`, `inputs.texts`, `outputs.avg_confidence`,
-    and `outputs.embedding_dim` are likely related to the model names in the `name`
-    column.
+  description: A table of data processing runs, with input text and output metadata.
+  business_rule: name LIKE '%Chain' OR name LIKE '%sonnet%'
+  cross_column_relationship: outputs.embedding_dim is related to the text processing
+    model used in the run.
 - column: outputs.avg_confidence
-  description: The average confidence score for the output of a text extraction model.
-  business_rule: outputs.avg_confidence BETWEEN 0 AND 1
-  cross_column_relationship: outputs.embedding_dim should match the dimension of outputs.extraction_model
+  description: The average confidence score of the text extraction process for each
+    run.
+  business_rule: outputs.avg_confidence >= 0 AND outputs.avg_confidence <= 1.0
+  cross_column_relationship: The outputs.avg_confidence column is likely related to
+    the outputs.extraction_model column, as the extraction model's performance would
+    impact the average confidence score.
 - column: outputs.embedding_dim
-  description: The embedding dimension for the model outputs, which should be a positive
-    integer.
+  description: The embedding dimension of the model outputs, an integer value.
   business_rule: outputs.embedding_dim > 0
   cross_column_relationship: None
 - column: outputs.extraction_model
@@ -748,38 +743,39 @@ llm_annotations:
   cross_column_relationship: extraction_model determines the valid range of confidence
     scores
 - column: outputs.facts_count
-  description: The number of facts extracted from the run, an integer value.
-  business_rule: outputs.facts_count >= 0
-  cross_column_relationship: outputs.facts_extracted
+  description: The number of facts extracted from the input data.
+  business_rule: outputs.facts_count >= 0 AND outputs.facts_count <= 200
+  cross_column_relationship: outputs.facts_extracted = outputs.facts_count
 - column: outputs.facts_extracted
-  description: The number of facts extracted from the run, as an integer value.
+  description: The number of facts extracted during the run, an integer value.
   business_rule: outputs.facts_extracted >= 0
-  cross_column_relationship: The number of facts extracted (outputs.facts_extracted)
-    should be less than or equal to the number of facts counted (outputs.facts_count).
+  cross_column_relationship: outputs.facts_extracted should be less than or equal
+    to outputs.facts_count
 - column: outputs.status
-  description: The 'outputs.status' column should be 'SUCCESS' for all rows.
-  business_rule: outputs.status = 'SUCCESS'
+  description: The status of a run must be 'SUCCESS' and the associated counts and
+    IDs must be non-negative integers.
+  business_rule: outputs.status = 'SUCCESS' AND outputs.facts_count >= 0 AND outputs.facts_extracted
+    >= 0 AND outputs.vectors_created >= 0 AND parent_run_id >= 0
   cross_column_relationship: None
 - column: outputs.vectors_created
-  description: The number of vectors created during the run of a data processing task.
+  description: The number of vectors created during the run process.
   business_rule: outputs.vectors_created >= 0
   cross_column_relationship: None
 - column: parent_run_id
-  description: The parent_run_id column stores a unique identifier for the parent
-    run of the current run.
-  business_rule: parent_run_id MUST be a valid UUID
+  description: The parent_run_id column stores the unique identifier for parent runs.
+  business_rule: parent_run_id should be a valid UUID format
   cross_column_relationship: None
 - column: prompt_tokens
-  description: The 'prompt_tokens' column represents the number of tokens in the prompt
-    for a run.
-  business_rule: prompt_tokens >= 0
+  description: The prompt_tokens column represents the number of tokens used in a
+    given run.
+  business_rule: prompt_tokens >= 0 AND prompt_tokens <= 100000
   cross_column_relationship: None
 - column: run_type
   description: 'LangSmith run classification: llm, chain, tool, retriever, or embedding.'
   business_rule: IN ('llm', 'chain', 'tool', 'retriever', 'embedding')
   cross_column_relationship: run_type = 'llm' implies total_tokens > 0
 - column: session_id
-  description: A unique identifier for each run session of a data processing job.
+  description: A unique identifier for each session run in the system.
   business_rule: session_id MUST be a valid UUID format
   cross_column_relationship: None
 - column: start_time
@@ -787,9 +783,8 @@ llm_annotations:
   business_rule: start_time < end_time
   cross_column_relationship: end_time - start_time = run duration in milliseconds
 - column: tags
-  description: The tags column contains an array of strings describing the purpose
-    of each run.
-  business_rule: CHECK (array_length(tags) >= 1 AND array_length(tags) <= 5)
+  description: The tags column contains an array of text tags describing the run.
+  business_rule: tags IS NOT NULL AND array_length(tags, 1) > 0 AND all(tags) IS STRING
   cross_column_relationship: None
 - column: total_cost
   description: Estimated USD cost for this run based on per-token pricing.
@@ -807,21 +802,21 @@ lineage:
   - id: contracts-ai-extensions-py
     description: contracts/ai_extensions.py (AI Contract Extensions)
     fields_consumed:
-    - end_time
     - id
-    - prompt_tokens
+    - completion_tokens
     - run_type
-    - name
+    - prompt_tokens
+    - start_time
     breaking_if_changed:
     - id
   - id: enforcer-report
     description: enforcer_report/ (EnforcerReport)
     fields_consumed:
-    - end_time
     - id
-    - prompt_tokens
+    - completion_tokens
     - run_type
-    - name
+    - prompt_tokens
+    - start_time
     breaking_if_changed:
     - id
 contacts:

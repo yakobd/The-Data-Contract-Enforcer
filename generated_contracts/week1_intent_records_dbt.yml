@@ -4,20 +4,19 @@ models:
   description: Canonical intent_records records from the Week 7 Data Contract Enforcer.
   columns:
   - name: code_refs
-    description: The code_refs column stores an array of code references associated
-      with each intent record.
+    description: The code_refs column contains an array of objects with information
+      about referenced code
   - name: created_at
     description: ISO 8601 UTC timestamp when this record was created.
     tests:
     - not_null
   - name: description
-    description: The description column contains free-text descriptions of software
-      development activities.
+    description: Descriptions of code changes and operations performed by agents.
     tests:
     - not_null
   - name: governance_tags
-    description: Ensure governance_tags is an array of strings with no more than two
-      unique values.
+    description: Ensure the 'governance_tags' column contains valid tags for data
+      governance.
   - name: intent_id
     description: Unique identifier for a developer intent event.
     tests:

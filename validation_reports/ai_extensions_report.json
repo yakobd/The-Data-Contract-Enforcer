@@ -1,0 +1,41 @@
+{
+  "report_id": "ee8e11d3-2bfd-495a-85a3-bb1f88332880",
+  "generated_at": "2026-04-02T11:22:38.990258+00:00",
+  "extensions": {
+    "embedding_drift": {
+      "extension": "embedding_drift",
+      "status": "PASS",
+      "drift_score": 0.0,
+      "cosine_sim": 1.0,
+      "threshold": 0.15,
+      "texts_sampled": 200,
+      "embedding_dim": 1536,
+      "message": "Embedding drift=0.0000 vs threshold=0.15. Within acceptable bounds."
+    },
+    "prompt_input_schema": {
+      "extension": "prompt_input_schema",
+      "status": "PASS",
+      "total_records": 50,
+      "passed": 50,
+      "quarantined": 0,
+      "quarantine_rate": 0.0,
+      "quarantine_file": null,
+      "schema_used": "PROMPT_INPUT_SCHEMA (doc_id, source_path, content_preview)",
+      "message": "All 50 records passed prompt input schema validation.",
+      "sample_errors": []
+    },
+    "output_schema_violations": {
+      "extension": "output_schema_violation_rate",
+      "status": "PASS",
+      "total_outputs": 7,
+      "schema_violations": 0,
+      "violation_rate": 0.0,
+      "warn_threshold": 0.02,
+      "baseline_rate": 0.0,
+      "trend": "stable",
+      "sample_violations": [],
+      "message": "Violation rate=0.0% (threshold=2.0%). Trend vs baseline: stable. Rate within acceptable bounds."
+    }
+  },
+  "overall_status": "PASS"
+}

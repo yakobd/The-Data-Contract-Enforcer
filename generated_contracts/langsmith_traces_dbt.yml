@@ -5,7 +5,7 @@ models:
   columns:
   - name: completion_tokens
     description: The completion_tokens column represents the number of tokens used
-      during a run.
+      in a run.
     tests:
     - not_null
   - name: end_time
@@ -13,8 +13,8 @@ models:
     tests:
     - not_null
   - name: error
-    description: 'The error column should contain one of the values: ''none'' or another
-      string value.'
+    description: The 'error' column should only contain the string 'none' if no errors
+      occurred during the run.
   - name: id
     description: Unique identifier for this LangSmith trace run.
     tests:
@@ -27,50 +27,47 @@ models:
         to: ref('extractions')
         field: doc_id
   - name: inputs.source_path
-    description: The source path of the input files should be a valid file name with
-      a .pdf extension.
+    description: The source path column stores the file names of various documents.
   - name: inputs.strategy
-    description: The 'inputs.strategy' column contains the strategy used for a document
-      processing run.
+    description: The 'inputs.strategy' column stores the strategy used for the data
+      run.
   - name: inputs.texts
-    description: The 'inputs.texts' column contains an array of extracted text from
-      various documents.
+    description: The 'inputs.texts' column stores text extracted from various documents.
   - name: name
-    description: A table containing the names of text extraction and embedding models.
+    description: A table of data processing runs, with input text and output metadata.
     tests:
     - not_null
   - name: outputs.avg_confidence
-    description: The average confidence score for the output of a text extraction
-      model.
+    description: The average confidence score of the text extraction process for each
+      run.
     tests:
     - dbt_utils.accepted_range:
         min_value: 0.0
         max_value: 1.0
         inclusive: true
   - name: outputs.embedding_dim
-    description: The embedding dimension for the model outputs, which should be a
-      positive integer.
+    description: The embedding dimension of the model outputs, an integer value.
   - name: outputs.extraction_model
     description: Name of the AI model used to extract facts from the document.
   - name: outputs.facts_count
-    description: The number of facts extracted from the run, an integer value.
+    description: The number of facts extracted from the input data.
   - name: outputs.facts_extracted
-    description: The number of facts extracted from the run, as an integer value.
+    description: The number of facts extracted during the run, an integer value.
   - name: outputs.status
-    description: The 'outputs.status' column should be 'SUCCESS' for all rows.
+    description: The status of a run must be 'SUCCESS' and the associated counts and
+      IDs must be non-negative integers.
   - name: outputs.vectors_created
-    description: The number of vectors created during the run of a data processing
-      task.
+    description: The number of vectors created during the run process.
   - name: parent_run_id
-    description: The parent_run_id column stores a unique identifier for the parent
-      run of the current run.
+    description: The parent_run_id column stores the unique identifier for parent
+      runs.
     tests:
     - relationships:
         to: ref('runs')
         field: id
   - name: prompt_tokens
-    description: The 'prompt_tokens' column represents the number of tokens in the
-      prompt for a run.
+    description: The prompt_tokens column represents the number of tokens used in
+      a given run.
     tests:
     - not_null
   - name: run_type
@@ -85,7 +82,7 @@ models:
         - retriever
         - embedding
   - name: session_id
-    description: A unique identifier for each run session of a data processing job.
+    description: A unique identifier for each session run in the system.
     tests:
     - relationships:
         to: ref('runs')
@@ -95,8 +92,7 @@ models:
     tests:
     - not_null
   - name: tags
-    description: The tags column contains an array of strings describing the purpose
-      of each run.
+    description: The tags column contains an array of text tags describing the run.
   - name: total_cost
     description: Estimated USD cost for this run based on per-token pricing.
   - name: total_tokens
