@@ -15,7 +15,7 @@ servers:
 terms:
   usage: Internal inter-system data contract. Do not publish.
   limitations: All required fields must remain non-null across schema versions.
-generatedAt: '2026-04-02T06:58:53.184985+00:00'
+generatedAt: '2026-04-02T18:23:30.457760+00:00'
 generatedBy: contracts/generator.py
 recordCount: 2
 qualityFloor: 100.0
@@ -26,8 +26,8 @@ schema:
   fields:
   - name: code_refs
     type: array
-    description: The code_refs column contains an array of objects with information
-      about referenced code
+    description: The code_refs column contains an array of code references with associated
+      metadata.
     required: false
     primaryKey: false
     pii: false
@@ -62,7 +62,7 @@ schema:
     profiler: ydata-profiling
   - name: description
     type: string
-    description: Descriptions of code changes and operations performed by agents.
+    description: Describes the intent behind code changes to the application.
     required: true
     primaryKey: false
     pii: false
@@ -81,7 +81,7 @@ schema:
     profiler: ydata-profiling
   - name: governance_tags
     type: array
-    description: Ensure the 'governance_tags' column contains valid tags for data
+    description: The governance_tags column stores an array of tags related to data
       governance.
     required: false
     primaryKey: false
@@ -172,23 +172,26 @@ quality_extended:
   breaking_if_violated: true
 llm_annotations:
 - column: code_refs
-  description: The code_refs column contains an array of objects with information
-    about referenced code
-  business_rule: code_refs must be a non-empty array and each object must have 'file',
-    'line_start', 'line_end', 'symbol', and 'confidence' keys
-  cross_column_relationship: None
+  description: The code_refs column contains an array of code references with associated
+    metadata.
+  business_rule: The code_refs array must contain at least one element and each element
+    must have a 'file', 'line_start', 'line_end', 'symbol', and 'confidence' property.
+  cross_column_relationship: The code_refs column is related to the created_at and
+    description columns, as it provides additional context and information about the
+    intent records.
 - column: created_at
   description: ISO 8601 UTC timestamp when this record was created.
   business_rule: IS NOT NULL AND created_at <= NOW()
   cross_column_relationship: created_at must be <= recorded_at for event records
 - column: description
-  description: Descriptions of code changes and operations performed by agents.
-  business_rule: description LIKE '%operation%'
+  description: Describes the intent behind code changes to the application.
+  business_rule: description MUST NOT be empty and SHOULD be less than 200 characters.
   cross_column_relationship: intent_id
 - column: governance_tags
-  description: Ensure the 'governance_tags' column contains valid tags for data governance.
-  business_rule: ARRAY_LENGTH(governance_tags) >= 1 AND ARRAY_CONTAINS(governance_tags,
-    ['evolution', 'feature', 'refactor'])
+  description: The governance_tags column stores an array of tags related to data
+    governance.
+  business_rule: governance_tags MUST be a non-empty array containing at least one
+    valid tag (e.g., 'evolution', 'refactor', 'feature')
   cross_column_relationship: None
 - column: intent_id
   description: Unique identifier for a developer intent event.
@@ -202,9 +205,9 @@ lineage:
   - id: contracts-runner-py
     description: contracts/runner.py (ValidationRunner)
     fields_consumed:
-    - confidence
-    - description
     - intent_id
+    - description
+    - confidence
     - created_at
     breaking_if_changed:
     - intent_id
@@ -212,9 +215,9 @@ lineage:
   - id: contracts-attributor-py
     description: contracts/attributor.py (ViolationAttributor)
     fields_consumed:
-    - confidence
-    - description
     - intent_id
+    - description
+    - confidence
     - created_at
     breaking_if_changed:
     - intent_id

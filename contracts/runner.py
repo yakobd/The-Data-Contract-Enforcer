@@ -1052,9 +1052,9 @@ def run_contract(
     Execute all clauses in a single contract against the data JSONL.
     Returns the full validation report dict.
     """
-    # ── load contract ─────────────────────────────────────────────────────────
-    with open(contract_path, encoding="utf-8") as fh:
-        contract = yaml.safe_load(fh)
+    # ── load contract (strip null bytes that Windows can embed) ───────────────
+    with open(contract_path, encoding="utf-8", errors="replace") as fh:
+        contract = yaml.safe_load(fh.read().replace("\x00", ""))
 
     contract_id   = contract.get("id", contract_path.stem)
     dataset_name  = contract.get("info", {}).get("title", contract_path.stem)
@@ -1230,6 +1230,43 @@ def find_data_path(
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# ENFORCEMENT MODE
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _apply_enforcement_mode(mode: str, results: list[dict]) -> None:
+    """
+    Apply enforcement mode logic and exit with code 1 if the mode demands it.
+
+    AUDIT   — never block (always exit 0).
+    WARN    — block (exit 1) only when at least one CRITICAL violation exists.
+    ENFORCE — block (exit 1) when at least one CRITICAL or HIGH violation exists.
+
+    Blocking violations are printed to stderr so CI logs are clear about the cause.
+    """
+    if mode == "AUDIT":
+        return  # never block in AUDIT mode
+
+    blocking_severities = {"CRITICAL"} if mode == "WARN" else {"CRITICAL", "HIGH"}
+
+    blocking = [
+        r for r in results
+        if r.get("status") == "FAIL"
+        and r.get("severity", "").upper() in blocking_severities
+    ]
+
+    if not blocking:
+        return
+
+    print(f"\n  ⛔  PIPELINE BLOCKED — mode={mode}", file=sys.stderr)
+    for r in blocking:
+        print(
+            f"       [{r['severity']}] {r['check_id']}: {r['message'][:120]}",
+            file=sys.stderr,
+        )
+    sys.exit(1)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # CLI
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -1280,6 +1317,17 @@ Examples:
         action="store_true",
         help="Print each check result",
     )
+    parser.add_argument(
+        "--mode",
+        choices=["AUDIT", "WARN", "ENFORCE"],
+        default="AUDIT",
+        help=(
+            "Enforcement mode (default: AUDIT). "
+            "AUDIT  — run all checks, log everything, never block the pipeline. "
+            "WARN   — block (exit 1) only if CRITICAL violations are found. "
+            "ENFORCE — block (exit 1) if CRITICAL or HIGH violations are found."
+        ),
+    )
 
     args = parser.parse_args()
 
@@ -1314,6 +1362,10 @@ Examples:
                     print(f"         message : {r['message']}")
 
         print(f"\n  Report written → {args.output}")
+        print(f"  Enforcement mode : {args.mode}")
+
+        # ── mode-aware exit for single-file ──────────────────────────────────
+        _apply_enforcement_mode(args.mode, report["results"])
         return
 
     # ── batch mode ────────────────────────────────────────────────────────────
@@ -1336,6 +1388,7 @@ Examples:
     print(f"  Outputs   : {outputs_dir}")
     print(f"  Reports   : {report_dir}")
     print(f"  Baselines : {args.baselines}")
+    print(f"  Mode      : {args.mode}")
     print(f"{'═'*70}\n")
 
     all_reports: list[dict] = []
@@ -1347,8 +1400,8 @@ Examples:
             continue
 
         try:
-            with open(cpath, encoding="utf-8") as fh:
-                contract_yaml = yaml.safe_load(fh)
+            with open(cpath, encoding="utf-8", errors="replace") as fh:
+                contract_yaml = yaml.safe_load(fh.read().replace("\x00", ""))
         except Exception as exc:
             print(f"  ⚠️  Cannot load {cpath.name}: {exc}")
             continue
@@ -1422,6 +1475,11 @@ Examples:
     with open(summary_path, "w") as fh:
         json.dump(summary, fh, indent=2)
     print(f"\n  Summary written → {summary_path}")
+    print(f"  Enforcement mode : {args.mode}")
+
+    # ── mode-aware exit for batch ─────────────────────────────────────────────
+    all_results_flat = [r for rep in all_reports for r in rep.get("results", [])]
+    _apply_enforcement_mode(args.mode, all_results_flat)
 
 
 if __name__ == "__main__":

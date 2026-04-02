@@ -1,0 +1,74 @@
+{
+  "report_id": "5c91eb31-9519-428b-b5db-987d31a67c98",
+  "generated_at": "2026-04-02T18:33:35.580363+00:00",
+  "contract_id": "week3-document-refinery-extractions",
+  "contract_stem": "week3_extractions",
+  "old_snapshot_at": "2026-04-02T06:50:29.746495+00:00",
+  "new_snapshot_at": "2026-04-02T18:24:08.876066+00:00",
+  "compatibility_verdict": "BREAKING",
+  "severity_summary": {
+    "CRITICAL": 0,
+    "ERROR": 2,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "human_readable_diff": "  \u2717 [REMOVE_COLUMN] field='review_notes'  severity=ERROR  |  Field 'review_notes' was removed.\n  \u2717 [ADD_NONNULLABLE_COLUMN] field='doc_id'  severity=ERROR  |  Field 'doc_id' added (required/non-nullable).",
+  "changes": [
+    {
+      "field": "review_notes",
+      "change_type": "REMOVE_COLUMN",
+      "old_value": {
+        "enum_values": null,
+        "null_fraction": 1.0,
+        "nullable": true,
+        "required": false,
+        "type": "string"
+      },
+      "new_value": null,
+      "detail": "Field 'review_notes' was removed.",
+      "backward_compatible": false,
+      "severity": "ERROR",
+      "required_action": "Deprecation period mandatory (minimum 2 sprints). Blast radius report required. Each affected consumer must acknowledge removal in writing (JIRA ticket or PR comment).",
+      "sprint_notice": 2,
+      "blast_radius_required": true
+    },
+    {
+      "field": "doc_id",
+      "change_type": "ADD_NONNULLABLE_COLUMN",
+      "old_value": null,
+      "new_value": {
+        "type": "string",
+        "required": true,
+        "nullable": false,
+        "null_fraction": 0.0,
+        "enum_values": null
+      },
+      "detail": "Field 'doc_id' added (required/non-nullable).",
+      "backward_compatible": false,
+      "severity": "ERROR",
+      "required_action": "Coordinate with all producers. Provide a default or migration script. Block deployment until all producers updated.",
+      "sprint_notice": 1,
+      "blast_radius_required": true
+    }
+  ],
+  "blast_radius": {
+    "affected_nodes": [],
+    "affected_pipelines": [],
+    "total_downstream": 0
+  },
+  "per_consumer_failure_analysis": [],
+  "migration_checklist": [
+    "1. Freeze deployments to all affected pipelines until migration plan is approved.",
+    "2. Add alias column for 'review_notes'; schedule hard removal in 2 sprint(s). Collect consumer ACKs (JIRA/PR).",
+    "3. Provide DEFAULT or backfill for 'doc_id'; update all producers before deployment.",
+    "4. Re-run validation runner after migration and confirm 100% PASS.",
+    "5. Archive this report to the team lead and close the migration ticket."
+  ],
+  "rollback_plan": [
+    "a. Restore schema from snapshot taken at: 2026-04-02T06:50:29.746495+00:00",
+    "b. Run: git checkout -- generated_contracts/  to restore previous contract YAML.",
+    "c. Re-run validation runner against old contract: confirm all checks PASS.",
+    "d. Notify all downstream consumers that rollback is in effect.",
+    "e. Re-open migration planning ticket with root-cause analysis before reattempting."
+  ]
+}

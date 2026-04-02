@@ -1,10 +1,10 @@
 {
-  "report_id": "6fc060db-1cb4-460a-bf19-b6d72f20afac",
+  "report_id": "9bc460cd-b412-4196-99fb-833f94d8ef25",
   "contract_id": "ea609135-913c-51f3-861f-33272d40246f",
-  "contract_file": "generated_contracts\\week3_extractions.yaml",
-  "data_file": "outputs\\week3\\extractions.jsonl",
+  "contract_file": "generated_contracts/week3_extractions.yaml",
+  "data_file": "outputs/week3/extractions.jsonl",
   "snapshot_id": "05ff8b85f14ed9b19bd5cb660d33eef54c6dded036dcf519e437b4a4892f10da",
-  "run_timestamp": "2026-04-02T12:11:23.521130+00:00",
+  "run_timestamp": "2026-04-02T18:31:47.758834+00:00",
   "total_records": 50,
   "total_checks": 14,
   "passed": 10,
@@ -143,48 +143,48 @@
       "column_name": "_source.ldu_count",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "mean=220.615385 (z=0.0\u03c3, within 2\u03c3)",
-      "expected": "z < 2\u03c3 (baseline mean=220.615385)",
+      "actual_value": "baseline established: mean=220.615385, stddev=451.018761",
+      "expected": "baseline",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "'_source.ldu_count' within normal range (z=0.0\u03c3)."
+      "message": "Statistical baseline established for '_source.ldu_count'. Future runs will compare against mean=220.615385 \u00b1 \u03c3=451.018761."
     },
     {
       "check_id": "week3_extractions.processing_time_ms.drift",
       "column_name": "processing_time_ms",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "mean=15558.26 (z=0.0\u03c3, within 2\u03c3)",
-      "expected": "z < 2\u03c3 (baseline mean=15558.26)",
+      "actual_value": "baseline established: mean=15558.26, stddev=48391.326204",
+      "expected": "baseline",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "'processing_time_ms' within normal range (z=0.0\u03c3)."
+      "message": "Statistical baseline established for 'processing_time_ms'. Future runs will compare against mean=15558.26 \u00b1 \u03c3=48391.326204."
     },
     {
       "check_id": "week3_extractions.token_count.input.drift",
       "column_name": "token_count.input",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "mean=1768.48 (z=0.0\u03c3, within 2\u03c3)",
-      "expected": "z < 2\u03c3 (baseline mean=1768.48)",
+      "actual_value": "baseline established: mean=1768.48, stddev=6957.700154",
+      "expected": "baseline",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "'token_count.input' within normal range (z=0.0\u03c3)."
+      "message": "Statistical baseline established for 'token_count.input'. Future runs will compare against mean=1768.48 \u00b1 \u03c3=6957.700154."
     },
     {
       "check_id": "week3_extractions.token_count.output.drift",
       "column_name": "token_count.output",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "mean=1543.16 (z=0.0\u03c3, within 2\u03c3)",
-      "expected": "z < 2\u03c3 (baseline mean=1543.16)",
+      "actual_value": "baseline established: mean=1543.16, stddev=6065.571435",
+      "expected": "baseline",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "'token_count.output' within normal range (z=0.0\u03c3)."
+      "message": "Statistical baseline established for 'token_count.output'. Future runs will compare against mean=1543.16 \u00b1 \u03c3=6065.571435."
     }
   ]
 }

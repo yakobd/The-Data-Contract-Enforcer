@@ -9,11 +9,11 @@ models:
     - not_null
     - unique
   - name: entities
-    description: The 'entities' column contains an array of extracted entities with
-      metadata about each entity.
+    description: The 'entities' column contains an array of entity objects with various
+      properties.
   - name: extracted_at
-    description: The extracted_at column represents the timestamp when data was extracted
-      from a source.
+    description: The extracted_at column stores timestamp values for data extraction
+      events.
   - name: extracted_facts
     description: Array of fact objects extracted from the document, each with text,
       entities, and confidence.
@@ -24,16 +24,15 @@ models:
     tests:
     - not_null
   - name: processing_time_ms
-    description: The processing time for data extractions, measured in milliseconds.
+    description: Processing time in milliseconds for each data extraction from the
+      source.
   - name: source_hash
-    description: The source_hash column contains hashed values that uniquely identify
-      each data extraction.
+    description: The source_hash column should be a unique identifier for each extraction.
   - name: source_path
-    description: The source_path column contains file paths of various financial and
-      audit reports.
+    description: Store file paths for documents that have been extracted and processed.
   - name: token_count.input
-    description: The token_count.input column represents the number of tokens extracted
-      from a source.
+    description: The token_count.input column contains the number of tokens in the
+      input data.
   - name: token_count.output
     description: The token_count.output column represents the number of tokens extracted
-      from the source_path.
+      from a source.

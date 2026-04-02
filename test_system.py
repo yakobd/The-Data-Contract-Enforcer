@@ -181,7 +181,7 @@ if viol_path.exists():
     try:
         with open(viol_path, encoding="utf-8", errors="replace") as f:
             violations = [json.loads(l.replace("\x00", ""))
-                          for l in f if l.strip()]
+                          for l in f if l.strip() and not l.startswith("#")]
         check(f"At least 1 violation logged", len(violations) >= 1,
               f"{len(violations)} found")
         if violations:

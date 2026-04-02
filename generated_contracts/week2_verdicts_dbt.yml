@@ -12,36 +12,35 @@ models:
         max_value: 1.0
         inclusive: true
   - name: evaluated_at
-    description: The evaluated_at column contains timestamps for when verdicts were
-      made.
+    description: The 'evaluated_at' column should contain unique, chronological timestamps.
   - name: overall_score
     description: Aggregate audit quality score on a 0.0–5.0 scale.
     tests:
     - not_null
   - name: overall_verdict
-    description: The overall verdict must be either 'PASS' or 'FAIL'.
+    description: The overall verdict for a record can only be 'PASS' or 'FAIL'.
   - name: rubric_id
-    description: The rubric_id column contains unique identifiers for assessment rubrics.
+    description: The rubric_id column uniquely identifies a rubric used to evaluate
+      performance.
   - name: rubric_version
-    description: The rubric_version column identifies the version of the rubric used
-      for the verdict.
+    description: The rubric_version column should be a valid semantic version string.
   - name: scores.architecture_design
-    description: The scores.architecture_design column contains JSON objects with
-      scores and related metadata.
+    description: The architecture_design scores are stored as JSON objects with score,
+      evidence, and notes.
   - name: scores.code_quality
-    description: The 'scores.code_quality' column contains a JSON object with score,
+    description: The scores.code_quality column contains dictionaries with score,
       evidence, and notes for code quality assessment.
   - name: scores.documentation
-    description: The scores.documentation column contains detailed documentation scores
-      and evidence for each audited product.
+    description: The 'scores.documentation' column contains scores with supporting
+      evidence and notes for the documentation criteria.
   - name: scores.implementation_correctness
-    description: The 'scores.implementation_correctness' column contains scores and
-      related information for implementation correctness.
+    description: The implementation_correctness score should be an integer between
+      1 and 5, with supporting evidence and notes.
   - name: scores.test_coverage
     description: The 'scores.test_coverage' column contains a JSON object with score,
       evidence, and notes about test coverage.
   - name: target_ref
-    description: Ensure the target_ref column contains valid GitHub repository URLs
+    description: The target_ref column should contain a valid GitHub URL.
     tests:
     - not_null
   - name: verdict_id

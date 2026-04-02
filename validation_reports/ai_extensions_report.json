@@ -1,16 +1,16 @@
 {
-  "report_id": "4a9e6bc6-0788-4799-b347-1bc8d354d362",
-  "generated_at": "2026-04-02T12:11:48.178439+00:00",
+  "report_id": "4140b9ec-140c-4ab1-843c-bd0a50f2b924",
+  "generated_at": "2026-04-02T18:34:06.270608+00:00",
   "extensions": {
     "embedding_drift": {
       "extension": "embedding_drift",
       "status": "PASS",
-      "drift_score": -0.0,
+      "drift_score": 0.0,
       "cosine_sim": 1.0,
       "threshold": 0.15,
       "texts_sampled": 200,
       "embedding_dim": 1536,
-      "message": "Embedding drift=-0.0000 vs threshold=0.15. Within acceptable bounds."
+      "message": "Embedding drift=0.0000 vs threshold=0.15. Within acceptable bounds."
     },
     "prompt_input_schema": {
       "extension": "prompt_input_schema",

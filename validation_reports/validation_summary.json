@@ -1,6 +1,6 @@
 {
-  "summary_report_id": "40683d57-bfd1-44d4-a4d2-7372d0cf6519",
-  "run_timestamp": "2026-04-02T12:11:24.585362+00:00",
+  "summary_report_id": "5a195691-ea45-4726-b3ca-37d861b7e54f",
+  "run_timestamp": "2026-04-02T18:31:49.074700+00:00",
   "contracts_dir": "generated_contracts",
   "outputs_dir": "outputs",
   "total_contracts": 6,
@@ -12,54 +12,54 @@
   "overall_status": "FAIL",
   "contract_reports": [
     {
-      "contract_file": "generated_contracts\\langsmith_traces.yaml",
+      "contract_file": "generated_contracts/langsmith_traces.yaml",
       "overall_status": "FAIL",
-      "report_file": "validation_reports\\langsmith_traces_report.json",
+      "report_file": "validation_reports/langsmith_traces_report.json",
       "checks": 27,
       "passed": 24,
       "failed": 2,
       "warned": 1
     },
     {
-      "contract_file": "generated_contracts\\week1_intent_records.yaml",
+      "contract_file": "generated_contracts/week1_intent_records.yaml",
       "overall_status": "FAIL",
-      "report_file": "validation_reports\\week1_intent_records_report.json",
+      "report_file": "validation_reports/week1_intent_records_report.json",
       "checks": 11,
       "passed": 10,
       "failed": 1,
       "warned": 0
     },
     {
-      "contract_file": "generated_contracts\\week2_verdicts.yaml",
+      "contract_file": "generated_contracts/week2_verdicts.yaml",
       "overall_status": "PASS",
-      "report_file": "validation_reports\\week2_verdicts_report.json",
+      "report_file": "validation_reports/week2_verdicts_report.json",
       "checks": 12,
       "passed": 12,
       "failed": 0,
       "warned": 0
     },
     {
-      "contract_file": "generated_contracts\\week3_extractions.yaml",
+      "contract_file": "generated_contracts/week3_extractions.yaml",
       "overall_status": "FAIL",
-      "report_file": "validation_reports\\week3_extractions_report.json",
+      "report_file": "validation_reports/week3_extractions_report.json",
       "checks": 14,
       "passed": 10,
       "failed": 2,
       "warned": 2
     },
     {
-      "contract_file": "generated_contracts\\week4_lineage.yaml",
+      "contract_file": "generated_contracts/week4_lineage.yaml",
       "overall_status": "PASS",
-      "report_file": "validation_reports\\week4_lineage_report.json",
+      "report_file": "validation_reports/week4_lineage_report.json",
       "checks": 12,
       "passed": 12,
       "failed": 0,
       "warned": 0
     },
     {
-      "contract_file": "generated_contracts\\week5_events.yaml",
+      "contract_file": "generated_contracts/week5_events.yaml",
       "overall_status": "FAIL",
-      "report_file": "validation_reports\\week5_events_report.json",
+      "report_file": "validation_reports/week5_events_report.json",
       "checks": 20,
       "passed": 18,
       "failed": 2,

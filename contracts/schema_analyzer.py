@@ -165,8 +165,8 @@ WIDENING_PAIRS = {
 # ─────────────────────────────────────────────────────────────────────────────
 
 def _load_yaml(path: Path) -> dict:
-    with open(path, encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return yaml.safe_load(f.read().replace("\x00", "")) or {}
 
 
 def _save_json(data: dict, path: Path) -> None:

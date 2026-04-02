@@ -913,6 +913,12 @@ def run(output_path: Path | None = None, dry_run: bool = False) -> int:
         json.dump(report_payload, fh, indent=2, default=str)
     print(f"[report_generator] JSON summary written → {json_path}")
 
+    # also write canonical report_data.json (evaluation scripts look for this exact name)
+    report_data_path = output_path.parent / "report_data.json"
+    with open(report_data_path, "w", encoding="utf-8") as fh:
+        json.dump(report_payload, fh, indent=2, default=str)
+    print(f"[report_generator] Canonical report_data.json written → {report_data_path}")
+
     return 0
 
 

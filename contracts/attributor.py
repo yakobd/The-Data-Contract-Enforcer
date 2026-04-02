@@ -225,8 +225,9 @@ def load_json(path: Path) -> dict:
     if not path.exists():
         return {}
     try:
-        with open(path, encoding="utf-8") as fh:
-            return json.load(fh)
+        with open(path, encoding="utf-8", errors="replace") as fh:
+            raw = fh.read().replace("\x00", "")
+        return json.loads(raw)
     except (json.JSONDecodeError, UnicodeDecodeError, ValueError):
         return {}
 
@@ -738,6 +739,7 @@ def attribute_report(
     git_root:      Path | None,
     output_path:   Path,
     append_mode:   bool = True,
+    registry_path: Path = REGISTRY_PATH,
 ) -> list[dict]:
     """
     Process one validation report dict and write violations to output_path.
@@ -746,7 +748,7 @@ def attribute_report(
     violations: list[dict] = []
 
     # Load registry once (primary blast radius source per spec)
-    _registry = load_registry()
+    _registry = load_registry(registry_path)
 
     # Extract failing checks
     results = report.get("results", [])
@@ -898,6 +900,15 @@ Examples:
         help="Git repository root (auto-detected if omitted)",
     )
     parser.add_argument(
+        "--registry",
+        type=Path,
+        default=REGISTRY_PATH,
+        help=(
+            "Path to contract_registry/subscriptions.yaml "
+            f"(default: {REGISTRY_PATH})"
+        ),
+    )
+    parser.add_argument(
         "--no-git",
         action="store_true",
         help="Skip all git operations (useful if not in a git repo)",
@@ -984,11 +995,12 @@ Examples:
             continue
 
         violations = attribute_report(
-            report       = report,
-            graph        = graph,
-            git_root     = git_root,
-            output_path  = args.output,
-            append_mode  = append_mode,
+            report        = report,
+            graph         = graph,
+            git_root      = git_root,
+            output_path   = args.output,
+            append_mode   = append_mode,
+            registry_path = args.registry,
         )
         append_mode = True   # always append after first file
 

@@ -1,10 +1,10 @@
 {
-  "report_id": "24b0e2d5-e58e-49ec-9595-11f11129085c",
-  "generated_at": "2026-04-02T12:11:25.816510+00:00",
+  "report_id": "afce6687-1d11-40ac-a637-e41a59658840",
+  "generated_at": "2026-04-02T18:33:35.582343+00:00",
   "contract_id": "week3-document-refinery-extractions",
   "contract_stem": "week3_extractions",
-  "since": "2026-03-03T12:11:25.586433+00:00",
-  "snapshots_found": 4,
+  "since": "2026-03-26T18:33:35.400137+00:00",
+  "snapshots_found": 5,
   "diffs": [
     {
       "from_snapshot": "2026-04-02T06:59:31.477261+00:00",
@@ -57,11 +57,55 @@
       ],
       "breaking_count": 1,
       "compatible_count": 0
+    },
+    {
+      "from_snapshot": "2026-04-02T06:50:29.746495+00:00",
+      "to_snapshot": "2026-04-02T18:24:08.876066+00:00",
+      "changes": [
+        {
+          "field": "review_notes",
+          "change_type": "REMOVE_COLUMN",
+          "old_value": {
+            "enum_values": null,
+            "null_fraction": 1.0,
+            "nullable": true,
+            "required": false,
+            "type": "string"
+          },
+          "new_value": null,
+          "detail": "Field 'review_notes' was removed.",
+          "backward_compatible": false,
+          "severity": "ERROR",
+          "required_action": "Deprecation period mandatory (minimum 2 sprints). Blast radius report required. Each affected consumer must acknowledge removal in writing (JIRA ticket or PR comment).",
+          "sprint_notice": 2,
+          "blast_radius_required": true
+        },
+        {
+          "field": "doc_id",
+          "change_type": "ADD_NONNULLABLE_COLUMN",
+          "old_value": null,
+          "new_value": {
+            "type": "string",
+            "required": true,
+            "nullable": false,
+            "null_fraction": 0.0,
+            "enum_values": null
+          },
+          "detail": "Field 'doc_id' added (required/non-nullable).",
+          "backward_compatible": false,
+          "severity": "ERROR",
+          "required_action": "Coordinate with all producers. Provide a default or migration script. Block deployment until all producers updated.",
+          "sprint_notice": 1,
+          "blast_radius_required": true
+        }
+      ],
+      "breaking_count": 2,
+      "compatible_count": 0
     }
   ],
   "summary": {
-    "total_changes": 2,
-    "breaking_changes": 1,
+    "total_changes": 4,
+    "breaking_changes": 3,
     "compatible_changes": 1,
     "overall_verdict": "BREAKING"
   }

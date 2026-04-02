@@ -15,7 +15,7 @@ servers:
 terms:
   usage: Internal inter-system data contract. Do not publish.
   limitations: All required fields must remain non-null across schema versions.
-generatedAt: '2026-04-02T06:59:33.185726+00:00'
+generatedAt: '2026-04-02T18:24:10.346231+00:00'
 generatedBy: contracts/generator.py
 recordCount: 2
 qualityFloor: 100.0
@@ -26,7 +26,8 @@ schema:
   fields:
   - name: captured_at
     type: string (timestamp)
-    description: Timestamp column representing the time a lineage snapshot was captured.
+    description: Timestamp column capturing the date and time when the lineage snapshot
+      was recorded.
     required: true
     primaryKey: false
     pii: false
@@ -43,7 +44,7 @@ schema:
     profiler: ydata-profiling
   - name: codebase_root
     type: string
-    description: The codebase_root column captures the local file path of the git
+    description: The codebase_root column represents the local file path of a code
       repository.
     required: false
     primaryKey: false
@@ -60,8 +61,8 @@ schema:
     profiler: ydata-profiling
   - name: edges
     type: array
-    description: The `edges` column contains a list of related data models and their
-      import relationships.
+    description: Ensure that the 'edges' column contains valid lineage information
+      with high confidence.
     required: true
     primaryKey: false
     pii: false
@@ -338,8 +339,8 @@ schema:
     profiler: ydata-profiling
   - name: nodes
     type: array
-    description: Ensure the 'last_modified' field is less than or equal to the present
-      date.
+    description: The 'change_frequency' metadata field must be an integer value between
+      0 and 5.
     required: true
     primaryKey: false
     pii: false
@@ -925,29 +926,30 @@ quality_extended:
   breaking_if_violated: true
 llm_annotations:
 - column: captured_at
-  description: Timestamp column representing the time a lineage snapshot was captured.
-  business_rule: captured_at MUST be a valid timestamp in the format 'YYYY-MM-DDTHH:mm:ss.SSSSSS+00:00'
+  description: Timestamp column capturing the date and time when the lineage snapshot
+    was recorded.
+  business_rule: captured_at MUST be a valid ISO 8601 timestamp with timezone information
   cross_column_relationship: None
 - column: codebase_root
-  description: The codebase_root column captures the local file path of the git repository.
-  business_rule: codebase_root LIKE 'C:\Users\%' OR codebase_root LIKE 'C:/Users/%'
-  cross_column_relationship: The codebase_root is likely related to the git_commit
-    column, which represents the commit hash of the current state of the repository.
+  description: The codebase_root column represents the local file path of a code repository.
+  business_rule: codebase_root LIKE 'C:\\Users\\%' AND LENGTH(codebase_root) < 200
+  cross_column_relationship: The codebase_root column is likely related to the git_commit
+    column, as it represents the local path of the code repository associated with
+    the git commit.
 - column: edges
-  description: The `edges` column contains a list of related data models and their
-    import relationships.
-  business_rule: The `edges` column should contain a valid JSON array of dictionaries,
-    where each dictionary has the keys `source`, `target`, `relationship`, and `confidence`.
+  description: Ensure that the 'edges' column contains valid lineage information with
+    high confidence.
+  business_rule: SELECT * FROM lineage_snapshots WHERE edges IS NULL OR JSON_EXTRACT(edges,
+    '$.confidence') < 0.9
   cross_column_relationship: None
 - column: git_commit
   description: Git commit SHA at which this snapshot was captured.
   business_rule: matches regex ^[0-9a-f]{7,40}$
   cross_column_relationship: git_commit ties lineage snapshots to source code state
 - column: nodes
-  description: Ensure the 'last_modified' field is less than or equal to the present
-    date.
-  business_rule: SELECT COUNT(*) FROM lineage_snapshots WHERE nodes.metadata.last_modified
-    > CURRENT_TIMESTAMP
+  description: The 'change_frequency' metadata field must be an integer value between
+    0 and 5.
+  business_rule: 0 <= node.metadata.change_frequency <= 5
   cross_column_relationship: None
 - column: snapshot_id
   description: Unique identifier for this lineage graph snapshot.
@@ -960,19 +962,19 @@ lineage:
   - id: contracts-generator-py
     description: contracts/generator.py (lineage injection)
     fields_consumed:
-    - nodes
-    - snapshot_id
-    - edges
     - captured_at
+    - snapshot_id
+    - nodes
+    - edges
     breaking_if_changed:
     - snapshot_id
   - id: contracts-schema-analyzer-py
     description: contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
     fields_consumed:
-    - nodes
-    - snapshot_id
-    - edges
     - captured_at
+    - snapshot_id
+    - nodes
+    - edges
     breaking_if_changed:
     - snapshot_id
 contacts:

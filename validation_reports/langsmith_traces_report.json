@@ -1,10 +1,10 @@
 {
-  "report_id": "8c9cacf4-b5da-44a1-a05c-d89a05077690",
+  "report_id": "3ba96a70-ae3a-4190-97b3-00d15bbd0c50",
   "contract_id": "74587fc4-f1d9-5af1-b7a6-a02302d7e15b",
-  "contract_file": "generated_contracts\\langsmith_traces.yaml",
-  "data_file": "outputs\\traces\\runs.jsonl",
+  "contract_file": "generated_contracts/langsmith_traces.yaml",
+  "data_file": "outputs/traces/runs.jsonl",
   "snapshot_id": "c6649a8b6a421e69cb0f2ea80ac2cbc211cf01281811cbcbc764bc6b5c0f0f86",
-  "run_timestamp": "2026-04-02T12:11:22.085699+00:00",
+  "run_timestamp": "2026-04-02T18:31:46.472542+00:00",
   "total_records": 150,
   "total_checks": 27,
   "passed": 24,
@@ -243,108 +243,108 @@
       "column_name": "completion_tokens",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "mean=514.386667 (z=0.0\u03c3, within 2\u03c3)",
-      "expected": "z < 2\u03c3 (baseline mean=514.386667)",
+      "actual_value": "baseline established: mean=514.386667, stddev=3554.130575",
+      "expected": "baseline",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "'completion_tokens' within normal range (z=0.0\u03c3)."
+      "message": "Statistical baseline established for 'completion_tokens'. Future runs will compare against mean=514.386667 \u00b1 \u03c3=3554.130575."
     },
     {
       "check_id": "langsmith_traces.outputs.avg_confidence.drift",
       "column_name": "outputs.avg_confidence",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "mean=0.799278 (z=0.0\u03c3, within 2\u03c3)",
-      "expected": "z < 2\u03c3 (baseline mean=0.799278)",
+      "actual_value": "baseline established: mean=0.799278, stddev=0.276329",
+      "expected": "baseline",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "'outputs.avg_confidence' within normal range (z=0.0\u03c3)."
+      "message": "Statistical baseline established for 'outputs.avg_confidence'. Future runs will compare against mean=0.799278 \u00b1 \u03c3=0.276329."
     },
     {
       "check_id": "langsmith_traces.outputs.embedding_dim.drift",
       "column_name": "outputs.embedding_dim",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "mean=1536.0 (baseline constant)",
-      "expected": "=1536.0",
+      "actual_value": "baseline established: mean=1536.0, stddev=0.0",
+      "expected": "baseline",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "'outputs.embedding_dim' remains constant at 1536.0."
+      "message": "Statistical baseline established for 'outputs.embedding_dim'. Future runs will compare against mean=1536.0 \u00b1 \u03c3=0.0."
     },
     {
       "check_id": "langsmith_traces.outputs.facts_count.drift",
       "column_name": "outputs.facts_count",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "mean=61.08 (z=0.0\u03c3, within 2\u03c3)",
-      "expected": "z < 2\u03c3 (baseline mean=61.08)",
+      "actual_value": "baseline established: mean=61.08, stddev=242.778882",
+      "expected": "baseline",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "'outputs.facts_count' within normal range (z=0.0\u03c3)."
+      "message": "Statistical baseline established for 'outputs.facts_count'. Future runs will compare against mean=61.08 \u00b1 \u03c3=242.778882."
     },
     {
       "check_id": "langsmith_traces.outputs.facts_extracted.drift",
       "column_name": "outputs.facts_extracted",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "mean=61.08 (z=0.0\u03c3, within 2\u03c3)",
-      "expected": "z < 2\u03c3 (baseline mean=61.08)",
+      "actual_value": "baseline established: mean=61.08, stddev=242.778882",
+      "expected": "baseline",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "'outputs.facts_extracted' within normal range (z=0.0\u03c3)."
+      "message": "Statistical baseline established for 'outputs.facts_extracted'. Future runs will compare against mean=61.08 \u00b1 \u03c3=242.778882."
     },
     {
       "check_id": "langsmith_traces.outputs.vectors_created.drift",
       "column_name": "outputs.vectors_created",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "mean=61.08 (z=0.0\u03c3, within 2\u03c3)",
-      "expected": "z < 2\u03c3 (baseline mean=61.08)",
+      "actual_value": "baseline established: mean=61.08, stddev=242.778882",
+      "expected": "baseline",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "'outputs.vectors_created' within normal range (z=0.0\u03c3)."
+      "message": "Statistical baseline established for 'outputs.vectors_created'. Future runs will compare against mean=61.08 \u00b1 \u03c3=242.778882."
     },
     {
       "check_id": "langsmith_traces.prompt_tokens.drift",
       "column_name": "prompt_tokens",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "mean=763.146667 (z=0.0\u03c3, within 2\u03c3)",
-      "expected": "z < 2\u03c3 (baseline mean=763.146667)",
+      "actual_value": "baseline established: mean=763.146667, stddev=4060.164543",
+      "expected": "baseline",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "'prompt_tokens' within normal range (z=0.0\u03c3)."
+      "message": "Statistical baseline established for 'prompt_tokens'. Future runs will compare against mean=763.146667 \u00b1 \u03c3=4060.164543."
     },
     {
       "check_id": "langsmith_traces.total_cost.drift",
       "column_name": "total_cost",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "mean=0.001588 (z=0.0\u03c3, within 2\u03c3)",
-      "expected": "z < 2\u03c3 (baseline mean=0.001588)",
+      "actual_value": "baseline established: mean=0.001588, stddev=0.007639",
+      "expected": "baseline",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "'total_cost' within normal range (z=0.0\u03c3)."
+      "message": "Statistical baseline established for 'total_cost'. Future runs will compare against mean=0.001588 \u00b1 \u03c3=0.007639."
     },
     {
       "check_id": "langsmith_traces.total_tokens.drift",
       "column_name": "total_tokens",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "mean=1277.533333 (z=0.0\u03c3, within 2\u03c3)",
-      "expected": "z < 2\u03c3 (baseline mean=1277.533333)",
+      "actual_value": "baseline established: mean=1277.533333, stddev=7605.461751",
+      "expected": "baseline",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "'total_tokens' within normal range (z=0.0\u03c3)."
+      "message": "Statistical baseline established for 'total_tokens'. Future runs will compare against mean=1277.533333 \u00b1 \u03c3=7605.461751."
     }
   ]
 }

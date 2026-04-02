@@ -1,10 +1,10 @@
 {
-  "report_id": "0c2d24cf-8834-4c5c-94d4-d80b062dd3da",
-  "generated_at": "2026-04-02T12:11:26.298121+00:00",
+  "report_id": "6d3898db-7d28-4c33-98d0-bf21d45f8433",
+  "generated_at": "2026-04-02T18:33:35.855617+00:00",
   "contract_id": "week5-event-stream-events",
   "contract_stem": "week5_events",
-  "since": "2026-03-03T12:11:25.586433+00:00",
-  "snapshots_found": 2,
+  "since": "2026-03-26T18:33:35.400137+00:00",
+  "snapshots_found": 3,
   "diffs": [],
   "summary": {
     "total_changes": 0,
