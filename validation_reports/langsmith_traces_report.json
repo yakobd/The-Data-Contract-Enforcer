@@ -1,10 +1,10 @@
 {
-  "report_id": "c3b7e732-8892-4690-b0da-bb728d7a4e8f",
+  "report_id": "8c9cacf4-b5da-44a1-a05c-d89a05077690",
   "contract_id": "74587fc4-f1d9-5af1-b7a6-a02302d7e15b",
   "contract_file": "generated_contracts\\langsmith_traces.yaml",
   "data_file": "outputs\\traces\\runs.jsonl",
   "snapshot_id": "c6649a8b6a421e69cb0f2ea80ac2cbc211cf01281811cbcbc764bc6b5c0f0f86",
-  "run_timestamp": "2026-04-02T11:21:53.962564+00:00",
+  "run_timestamp": "2026-04-02T12:11:22.085699+00:00",
   "total_records": 150,
   "total_checks": 27,
   "passed": 24,

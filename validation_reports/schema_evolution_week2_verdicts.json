@@ -1,9 +1,9 @@
 {
-  "report_id": "4e87d313-184a-44e1-b585-b684dfeb0b55",
-  "generated_at": "2026-04-02T11:22:10.811794+00:00",
+  "report_id": "847812fc-fb6a-4318-bfd9-9e60bcf00070",
+  "generated_at": "2026-04-02T12:11:25.697576+00:00",
   "contract_id": "week2-verdict-pipeline-verdicts",
   "contract_stem": "week2_verdicts",
-  "since": "2026-03-03T11:22:10.734746+00:00",
+  "since": "2026-03-03T12:11:25.586433+00:00",
   "snapshots_found": 2,
   "diffs": [],
   "summary": {

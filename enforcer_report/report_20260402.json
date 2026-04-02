@@ -61,7 +61,7 @@
         "extension": "Embedding Drift",
         "status": "PASS",
         "risk": "LOW",
-        "detail": "Cosine distance from baseline centroid: 0.0000. Within acceptable range."
+        "detail": "Cosine distance from baseline centroid: -0.0000. Within acceptable range."
       },
       {
         "extension": "Prompt Input Schema",

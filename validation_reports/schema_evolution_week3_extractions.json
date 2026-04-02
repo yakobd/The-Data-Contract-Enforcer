@@ -1,9 +1,9 @@
 {
-  "report_id": "9f1a319c-dc5f-4419-8133-b62a426cb556",
-  "generated_at": "2026-04-02T11:22:10.866929+00:00",
+  "report_id": "24b0e2d5-e58e-49ec-9595-11f11129085c",
+  "generated_at": "2026-04-02T12:11:25.816510+00:00",
   "contract_id": "week3-document-refinery-extractions",
   "contract_stem": "week3_extractions",
-  "since": "2026-03-03T11:22:10.734746+00:00",
+  "since": "2026-03-03T12:11:25.586433+00:00",
   "snapshots_found": 4,
   "diffs": [
     {
