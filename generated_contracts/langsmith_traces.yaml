@@ -5,7 +5,7 @@ info:
   title: Week 7 — Runs Data Contract
   version: 1.0.0
   owner: yakob@10academy.org
-  description: 'One record per runs entry. Generated from 150 records on 2026-04-02.
+  description: 'One record per runs entry. Generated from 150 records on 2026-04-03.
     Quality floor: 100.0%.'
 servers:
   local:
@@ -15,7 +15,7 @@ servers:
 terms:
   usage: Internal inter-system data contract. Do not publish.
   limitations: confidence must remain in 0.0–1.0 float range.
-generatedAt: '2026-04-02T18:23:02.268730+00:00'
+generatedAt: '2026-04-03T08:32:36.689900+00:00'
 generatedBy: contracts/generator.py
 recordCount: 150
 qualityFloor: 100.0
@@ -26,7 +26,7 @@ schema:
   fields:
   - name: completion_tokens
     type: integer
-    description: The number of tokens used to complete the run, a non-negative integer.
+    description: Field 'completion_tokens' of type integer.
     required: true
     primaryKey: false
     pii: false
@@ -52,7 +52,7 @@ schema:
       p95: 213.1
       p99: 11102.0
       stddev: 3542.263662
-    profiler: ydata-profiling
+    profiler: custom
   - name: end_time
     type: string (timestamp)
     description: ISO 8601 UTC timestamp when this run ended.
@@ -72,11 +72,10 @@ schema:
     - contracts/ai_extensions.py (AI Contract Extensions)
     - enforcer_report/ (EnforcerReport)
     char_pattern: iso-8601-timestamp
-    profiler: ydata-profiling
+    profiler: custom
   - name: error
     type: string
-    description: The 'error' column should only contain the value 'none' for successful
-      runs.
+    description: Field 'error' of type string.
     required: false
     primaryKey: false
     pii: false
@@ -87,7 +86,7 @@ schema:
     downstream_consumers:
     - contracts/ai_extensions.py (AI Contract Extensions)
     - enforcer_report/ (EnforcerReport)
-    profiler: ydata-profiling
+    profiler: custom
   - name: id
     type: string (uuid)
     description: Unique identifier for this LangSmith trace run.
@@ -107,7 +106,7 @@ schema:
     - contracts/ai_extensions.py (AI Contract Extensions)
     - enforcer_report/ (EnforcerReport)
     char_pattern: uuid-v4
-    profiler: ydata-profiling
+    profiler: custom
   - name: inputs.doc_id
     type: string
     description: Unique identifier for the source document being processed.
@@ -128,11 +127,10 @@ schema:
     - enforcer_report/ (EnforcerReport)
     - extractions (via FK doc_id → doc_id)
     char_pattern: uuid-v4
-    profiler: ydata-profiling
+    profiler: custom
   - name: inputs.source_path
     type: string
-    description: The source_path column stores the file names of financial and audit
-      reports.
+    description: Field 'inputs.source_path' of type string.
     required: false
     primaryKey: false
     pii: false
@@ -149,11 +147,10 @@ schema:
     - contracts/ai_extensions.py (AI Contract Extensions)
     - enforcer_report/ (EnforcerReport)
     char_pattern: path-like
-    profiler: ydata-profiling
+    profiler: custom
   - name: inputs.strategy
     type: string
-    description: The 'inputs.strategy' column stores the strategy used for the data
-      run.
+    description: Field 'inputs.strategy' of type string.
     required: false
     primaryKey: false
     pii: false
@@ -168,17 +165,16 @@ schema:
     - contracts/ai_extensions.py (AI Contract Extensions)
     - enforcer_report/ (EnforcerReport)
     char_pattern: PascalCase
-    profiler: ydata-profiling
+    profiler: custom
   - name: inputs.texts
     type: array
-    description: The 'inputs.texts' column contains an array of extracted text from
-      various documents.
+    description: Field 'inputs.texts' of type array.
     required: false
     primaryKey: false
     pii: false
     classification: internal
     null_fraction: 0.6667
-    cardinality: 0
+    cardinality: 50
     sample_values:
     - '[''Extracted text from 2018_Audited_Financial_Statement_Report (chunk 1)'']'
     - '[''Extracted text from 20191010_Pharmaceutical-Manufacturing-Opportunites-in-Ethiopia_VF
@@ -189,10 +185,10 @@ schema:
     downstream_consumers:
     - contracts/ai_extensions.py (AI Contract Extensions)
     - enforcer_report/ (EnforcerReport)
-    profiler: ydata-profiling
+    profiler: custom
   - name: name
     type: string
-    description: The runs table contains names of various data processing models.
+    description: Field 'name' of type string.
     required: true
     primaryKey: false
     pii: false
@@ -209,11 +205,10 @@ schema:
     - contracts/ai_extensions.py (AI Contract Extensions)
     - enforcer_report/ (EnforcerReport)
     char_pattern: path-like
-    profiler: ydata-profiling
+    profiler: custom
   - name: outputs.avg_confidence
     type: number
-    description: The `outputs.avg_confidence` column represents the average confidence
-      of the extraction model.
+    description: Field 'outputs.avg_confidence' of type number.
     required: false
     primaryKey: false
     pii: false
@@ -240,11 +235,10 @@ schema:
       p99: 0.94902
       stddev: 0.273552
     confidenceRangeOk: true
-    profiler: ydata-profiling
+    profiler: custom
   - name: outputs.embedding_dim
     type: integer
-    description: The embedding dimension of the output, which represents the size
-      of the embedding vector.
+    description: Field 'outputs.embedding_dim' of type integer.
     required: false
     primaryKey: false
     pii: false
@@ -266,7 +260,7 @@ schema:
       p95: 1536.0
       p99: 1536.0
       stddev: 0.0
-    profiler: ydata-profiling
+    profiler: custom
   - name: outputs.extraction_model
     type: string
     description: Name of the AI model used to extract facts from the document.
@@ -284,10 +278,10 @@ schema:
     - contracts/ai_extensions.py (AI Contract Extensions)
     - enforcer_report/ (EnforcerReport)
     char_pattern: path-like
-    profiler: ydata-profiling
+    profiler: custom
   - name: outputs.facts_count
     type: integer
-    description: The number of facts extracted from a document during a run.
+    description: Field 'outputs.facts_count' of type integer.
     required: false
     primaryKey: false
     pii: false
@@ -313,11 +307,10 @@ schema:
       p95: 182.3
       p99: 1146.39
       stddev: 240.338831
-    profiler: ydata-profiling
+    profiler: custom
   - name: outputs.facts_extracted
     type: integer
-    description: The number of facts extracted from the input data during the extraction
-      process.
+    description: Field 'outputs.facts_extracted' of type integer.
     required: false
     primaryKey: false
     pii: false
@@ -343,11 +336,10 @@ schema:
       p95: 182.3
       p99: 1146.39
       stddev: 240.338831
-    profiler: ydata-profiling
+    profiler: custom
   - name: outputs.status
     type: string
-    description: The 'outputs.status' column represents the outcome of a data processing
-      run.
+    description: Field 'outputs.status' of type string.
     required: false
     primaryKey: false
     pii: false
@@ -360,11 +352,10 @@ schema:
     - contracts/ai_extensions.py (AI Contract Extensions)
     - enforcer_report/ (EnforcerReport)
     char_pattern: PascalCase
-    profiler: ydata-profiling
+    profiler: custom
   - name: outputs.vectors_created
     type: integer
-    description: The number of vectors created during the run of a data processing
-      task.
+    description: Field 'outputs.vectors_created' of type integer.
     required: false
     primaryKey: false
     pii: false
@@ -390,11 +381,10 @@ schema:
       p95: 182.3
       p99: 1146.39
       stddev: 240.338831
-    profiler: ydata-profiling
+    profiler: custom
   - name: parent_run_id
     type: string (uuid)
-    description: The parent_run_id column holds a unique identifier for each run in
-      the runs table.
+    description: Field 'parent_run_id' of type string (uuid).
     required: false
     primaryKey: false
     pii: false
@@ -412,11 +402,10 @@ schema:
     - enforcer_report/ (EnforcerReport)
     - runs (via FK parent_run_id → id)
     char_pattern: uuid-v4
-    profiler: ydata-profiling
+    profiler: custom
   - name: prompt_tokens
     type: integer
-    description: The prompt_tokens column represents the number of tokens in the model's
-      input prompt for a given run.
+    description: Field 'prompt_tokens' of type integer.
     required: true
     primaryKey: false
     pii: false
@@ -442,7 +431,7 @@ schema:
       p95: 768.65
       p99: 13268.17
       stddev: 4046.608029
-    profiler: ydata-profiling
+    profiler: custom
   - name: run_type
     type: string
     description: 'LangSmith run classification: llm, chain, tool, retriever, or embedding.'
@@ -466,10 +455,10 @@ schema:
     - tool
     - retriever
     - embedding
-    profiler: ydata-profiling
+    profiler: custom
   - name: session_id
     type: string (uuid)
-    description: A unique identifier for each session of the application.
+    description: Field 'session_id' of type string (uuid).
     required: false
     primaryKey: false
     pii: false
@@ -487,7 +476,7 @@ schema:
     - enforcer_report/ (EnforcerReport)
     - runs (via FK session_id → session_id)
     char_pattern: uuid-v4
-    profiler: ydata-profiling
+    profiler: custom
   - name: start_time
     type: string (timestamp)
     description: ISO 8601 UTC timestamp when this run started.
@@ -507,17 +496,16 @@ schema:
     - contracts/ai_extensions.py (AI Contract Extensions)
     - enforcer_report/ (EnforcerReport)
     char_pattern: iso-8601-timestamp
-    profiler: ydata-profiling
+    profiler: custom
   - name: tags
     type: array
-    description: The 'tags' column contains an array of tags describing the nature
-      of each run.
+    description: Field 'tags' of type array.
     required: false
     primaryKey: false
     pii: false
     classification: internal
     null_fraction: 0.0
-    cardinality: 0
+    cardinality: 13
     sample_values:
     - '[''week3'', ''chain'']'
     - '[''week3'', ''extraction'', ''vision'']'
@@ -527,7 +515,7 @@ schema:
     downstream_consumers:
     - contracts/ai_extensions.py (AI Contract Extensions)
     - enforcer_report/ (EnforcerReport)
-    profiler: ydata-profiling
+    profiler: custom
   - name: total_cost
     type: number
     description: Estimated USD cost for this run based on per-token pricing.
@@ -556,7 +544,7 @@ schema:
       p95: 0.006148
       p99: 0.044175
       stddev: 0.007613
-    profiler: ydata-profiling
+    profiler: custom
   - name: total_tokens
     type: integer
     description: Total tokens consumed; must equal prompt_tokens + completion_tokens.
@@ -585,7 +573,7 @@ schema:
       p95: 777.7
       p99: 24180.05
       stddev: 7580.067817
-    profiler: ydata-profiling
+    profiler: custom
 quality:
   type: SodaChecks
   specification:
@@ -691,18 +679,17 @@ quality_extended:
   observed_avg_prompt_tokens: 521.0
 llm_annotations:
 - column: completion_tokens
-  description: The number of tokens used to complete the run, a non-negative integer.
-  business_rule: completion_tokens >= 0
-  cross_column_relationship: None
+  description: Field 'completion_tokens' of type integer.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: end_time
   description: ISO 8601 UTC timestamp when this run ended.
   business_rule: end_time > start_time
   cross_column_relationship: end_time - start_time = run duration in milliseconds
 - column: error
-  description: The 'error' column should only contain the value 'none' for successful
-    runs.
-  business_rule: error IN ('none')
-  cross_column_relationship: None
+  description: Field 'error' of type string.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: id
   description: Unique identifier for this LangSmith trace run.
   business_rule: IS NOT NULL AND UNIQUE
@@ -712,92 +699,74 @@ llm_annotations:
   business_rule: IS NOT NULL AND matches UUID-v4 pattern
   cross_column_relationship: doc_id links extracted_facts to their source document
 - column: inputs.source_path
-  description: The source_path column stores the file names of financial and audit
-    reports.
-  business_rule: inputs.source_path REGEXP '^[0-9]{4}_[A-Za-z_-]+\.pdf$'
-  cross_column_relationship: None
+  description: Field 'inputs.source_path' of type string.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: inputs.strategy
-  description: The 'inputs.strategy' column stores the strategy used for the data
-    run.
-  business_rule: inputs.strategy IN ('VISION', 'LAYOUT', 'FASTTEXT')
-  cross_column_relationship: None
+  description: Field 'inputs.strategy' of type string.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: inputs.texts
-  description: The 'inputs.texts' column contains an array of extracted text from
-    various documents.
-  business_rule: CHECK(LENGTH(inputs.texts) >= 1 AND LENGTH(TRIM(inputs.texts[0]))
-    > 0)
-  cross_column_relationship: None
+  description: Field 'inputs.texts' of type array.
+  business_rule: len(value) >= 0
+  cross_column_relationship: No known cross-column relationship.
 - column: name
-  description: The runs table contains names of various data processing models.
-  business_rule: name LIKE '[a-zA-Z]+[0-9]*(-[0-9]+(.[0-9]+)?)*'
-  cross_column_relationship: None
+  description: Field 'name' of type string.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: outputs.avg_confidence
-  description: The `outputs.avg_confidence` column represents the average confidence
-    of the extraction model.
-  business_rule: outputs.avg_confidence BETWEEN 0 AND 1
-  cross_column_relationship: outputs.embedding_dim and outputs.extraction_model are
-    related to outputs.avg_confidence and provide context for the confidence values.
+  description: Field 'outputs.avg_confidence' of type number.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: outputs.embedding_dim
-  description: The embedding dimension of the output, which represents the size of
-    the embedding vector.
-  business_rule: outputs.embedding_dim > 0 AND outputs.embedding_dim < 10000
-  cross_column_relationship: outputs.avg_confidence, outputs.extraction_model, and
-    outputs.facts_count are related to the embedding dimension of the output.
+  description: Field 'outputs.embedding_dim' of type integer.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: outputs.extraction_model
   description: Name of the AI model used to extract facts from the document.
   business_rule: matches pattern ^(claude|gpt)-
   cross_column_relationship: extraction_model determines the valid range of confidence
     scores
 - column: outputs.facts_count
-  description: The number of facts extracted from a document during a run.
-  business_rule: outputs.facts_count >= 0 AND outputs.facts_count IS NOT NULL
-  cross_column_relationship: outputs.facts_extracted
+  description: Field 'outputs.facts_count' of type integer.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: outputs.facts_extracted
-  description: The number of facts extracted from the input data during the extraction
-    process.
-  business_rule: outputs.facts_extracted >= 0 AND outputs.facts_extracted <= 200
-  cross_column_relationship: The number of facts extracted should be less than or
-    equal to the number of facts counted, as represented in the outputs.facts_count
-    column.
+  description: Field 'outputs.facts_extracted' of type integer.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: outputs.status
-  description: The 'outputs.status' column represents the outcome of a data processing
-    run.
-  business_rule: outputs.status = 'SUCCESS'
-  cross_column_relationship: The values in 'outputs.facts_count', 'outputs.facts_extracted',
-    and 'outputs.vectors_created' should be consistent with a successful run.
+  description: Field 'outputs.status' of type string.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: outputs.vectors_created
-  description: The number of vectors created during the run of a data processing task.
-  business_rule: outputs.vectors_created >= 0
-  cross_column_relationship: None
+  description: Field 'outputs.vectors_created' of type integer.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: parent_run_id
-  description: The parent_run_id column holds a unique identifier for each run in
-    the runs table.
-  business_rule: parent_run_id should be a valid UUID format with no duplicate values
-    within the table.
-  cross_column_relationship: None
+  description: Field 'parent_run_id' of type string (uuid).
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: prompt_tokens
-  description: The prompt_tokens column represents the number of tokens in the model's
-    input prompt for a given run.
-  business_rule: prompt_tokens >= 0 AND prompt_tokens <= 10000
-  cross_column_relationship: None
+  description: Field 'prompt_tokens' of type integer.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: run_type
   description: 'LangSmith run classification: llm, chain, tool, retriever, or embedding.'
   business_rule: IN ('llm', 'chain', 'tool', 'retriever', 'embedding')
   cross_column_relationship: run_type = 'llm' implies total_tokens > 0
 - column: session_id
-  description: A unique identifier for each session of the application.
-  business_rule: session_id should be a valid UUID string of length 36 characters.
-  cross_column_relationship: None
+  description: Field 'session_id' of type string (uuid).
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: start_time
   description: ISO 8601 UTC timestamp when this run started.
   business_rule: start_time < end_time
   cross_column_relationship: end_time - start_time = run duration in milliseconds
 - column: tags
-  description: The 'tags' column contains an array of tags describing the nature of
-    each run.
-  business_rule: tags MUST contain at least one value, and each value MUST be a non-empty
-    string.
-  cross_column_relationship: None
+  description: Field 'tags' of type array.
+  business_rule: len(value) >= 0
+  cross_column_relationship: No known cross-column relationship.
 - column: total_cost
   description: Estimated USD cost for this run based on per-token pricing.
   business_rule: total_cost >= 0.0
@@ -814,21 +783,21 @@ lineage:
   - id: contracts-ai-extensions-py
     description: contracts/ai_extensions.py (AI Contract Extensions)
     fields_consumed:
+    - completion_tokens
+    - end_time
     - run_type
     - id
     - start_time
-    - end_time
-    - prompt_tokens
     breaking_if_changed:
     - id
   - id: enforcer-report
     description: enforcer_report/ (EnforcerReport)
     fields_consumed:
+    - completion_tokens
+    - end_time
     - run_type
     - id
     - start_time
-    - end_time
-    - prompt_tokens
     breaking_if_changed:
     - id
 contacts:

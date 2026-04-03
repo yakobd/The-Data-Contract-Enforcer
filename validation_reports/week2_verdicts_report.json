@@ -1,10 +1,10 @@
 {
-  "report_id": "c762229a-5890-4c17-8977-e75b43ab3a7b",
+  "report_id": "f6b1fe7c-5226-4dc4-8aef-3199aca9b9a9",
   "contract_id": "abc240c9-742a-5bb9-85c1-973b09fbf7ec",
   "contract_file": "generated_contracts/week2_verdicts.yaml",
   "data_file": "outputs/week2/verdicts.jsonl",
   "snapshot_id": "de5c93f75b96f2ea12d4e8185f9c3dc8b086f165ce676a046747cba52e546b48",
-  "run_timestamp": "2026-04-02T18:31:46.911286+00:00",
+  "run_timestamp": "2026-04-03T08:33:17.329790+00:00",
   "total_records": 7,
   "total_checks": 12,
   "passed": 12,
@@ -74,7 +74,7 @@
       "message": "'schema_version' contains only accepted values."
     },
     {
-      "check_id": "week2_verdicts.confidence_range_invariant.confidence",
+      "check_id": "week2_verdicts.confidence_range_invariant",
       "column_name": "confidence",
       "check_type": "range",
       "status": "PASS",
@@ -138,24 +138,24 @@
       "column_name": "confidence",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "baseline established: mean=0.843, stddev=0.050593",
-      "expected": "baseline",
+      "actual_value": "mean=0.843 (z=0.0\u03c3, within 2\u03c3)",
+      "expected": "z < 2\u03c3 (baseline mean=0.843)",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "Statistical baseline established for 'confidence'. Future runs will compare against mean=0.843 \u00b1 \u03c3=0.050593."
+      "message": "'confidence' within normal range (z=0.0\u03c3)."
     },
     {
       "check_id": "week2_verdicts.overall_score.drift",
       "column_name": "overall_score",
       "check_type": "drift",
       "status": "PASS",
-      "actual_value": "baseline established: mean=3.471429, stddev=0.722759",
-      "expected": "baseline",
+      "actual_value": "mean=3.471429 (z=0.0\u03c3, within 2\u03c3)",
+      "expected": "z < 2\u03c3 (baseline mean=3.471429)",
       "severity": "MEDIUM",
       "records_failing": 0,
       "sample_failing": [],
-      "message": "Statistical baseline established for 'overall_score'. Future runs will compare against mean=3.471429 \u00b1 \u03c3=0.722759."
+      "message": "'overall_score' within normal range (z=0.0\u03c3)."
     }
   ]
 }

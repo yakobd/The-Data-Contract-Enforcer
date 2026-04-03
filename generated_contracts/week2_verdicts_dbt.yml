@@ -12,35 +12,29 @@ models:
         max_value: 1.0
         inclusive: true
   - name: evaluated_at
-    description: The 'evaluated_at' column should contain unique, chronological timestamps.
+    description: Field evaluated_at.
   - name: overall_score
     description: Aggregate audit quality score on a 0.0–5.0 scale.
     tests:
     - not_null
   - name: overall_verdict
-    description: The overall verdict for a record can only be 'PASS' or 'FAIL'.
+    description: Field overall_verdict.
   - name: rubric_id
-    description: The rubric_id column uniquely identifies a rubric used to evaluate
-      performance.
+    description: Field rubric_id.
   - name: rubric_version
-    description: The rubric_version column should be a valid semantic version string.
+    description: Field rubric_version.
   - name: scores.architecture_design
-    description: The architecture_design scores are stored as JSON objects with score,
-      evidence, and notes.
+    description: Field scores.architecture_design.
   - name: scores.code_quality
-    description: The scores.code_quality column contains dictionaries with score,
-      evidence, and notes for code quality assessment.
+    description: Field scores.code_quality.
   - name: scores.documentation
-    description: The 'scores.documentation' column contains scores with supporting
-      evidence and notes for the documentation criteria.
+    description: Field scores.documentation.
   - name: scores.implementation_correctness
-    description: The implementation_correctness score should be an integer between
-      1 and 5, with supporting evidence and notes.
+    description: Field scores.implementation_correctness.
   - name: scores.test_coverage
-    description: The 'scores.test_coverage' column contains a JSON object with score,
-      evidence, and notes about test coverage.
+    description: Field scores.test_coverage.
   - name: target_ref
-    description: The target_ref column should contain a valid GitHub URL.
+    description: Field target_ref.
     tests:
     - not_null
   - name: verdict_id

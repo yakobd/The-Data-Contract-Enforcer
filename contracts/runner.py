@@ -150,7 +150,21 @@ def flatten_one_level(records: list[dict]) -> list[dict]:
 
 
 def get_col_values(flat: list[dict], col: str) -> list[Any]:
-    """Pull values for `col` from flat records."""
+    """Pull values for `col` from flat records.
+    Supports nested array paths with [*] notation,
+    e.g. 'extracted_facts[*].confidence' extracts every confidence value
+    from every item in the extracted_facts list across all records.
+    """
+    if "[*]." in col:
+        array_field, nested_field = col.split("[*].", 1)
+        values: list[Any] = []
+        for r in flat:
+            arr = r.get(array_field, [])
+            if isinstance(arr, list):
+                for item in arr:
+                    if isinstance(item, dict):
+                        values.append(item.get(nested_field))
+        return values
     return [r.get(col) for r in flat]
 
 
@@ -540,6 +554,10 @@ def run_custom(
                 return []
             results = []
             for f in target_fields:
+                # Use clean check_id: append field only when multiple fields exist
+                # so a single-field clause like extracted_facts.confidence.range
+                # keeps its name instead of becoming ...range.extracted_facts[*].confidence
+                sub_id = f"{check_id}.{f}" if len(target_fields) > 1 else check_id
                 col  = get_col_values(flat, f)
                 nums = [(i, float(v)) for i, v in enumerate(col)
                         if v is not None and isinstance(v, (int, float))]
@@ -557,7 +575,7 @@ def run_custom(
                 )
                 if n_fail == 0:
                     results.append(check_result(
-                        f"{check_id}.{f}", f, "range", "PASS",
+                        sub_id, f, "range", "PASS",
                         actual, f"{lo} <= value <= {hi}", severity,
                         0, [], f"'{f}' all values in [{lo}, {hi}].",
                     ))
@@ -570,7 +588,7 @@ def run_custom(
                             f"(DOMAIN_NOTES.md §Q2). Breaking change detected."
                         )
                     results.append(check_result(
-                        f"{check_id}.{f}", f, "range", "FAIL",
+                        sub_id, f, "range", "FAIL",
                         actual, f"max<={hi}, min>={lo}", severity,
                         n_fail, sample_failing_ids(flat, mask), msg,
                     ))

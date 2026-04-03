@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   owner: yakob@10academy.org
   description: 'One record per lineage snapshots entry. Generated from 2 records on
-    2026-04-02. Quality floor: 100.0%.'
+    2026-04-03. Quality floor: 100.0%.'
 servers:
   local:
     type: local
@@ -15,7 +15,7 @@ servers:
 terms:
   usage: Internal inter-system data contract. Do not publish.
   limitations: All required fields must remain non-null across schema versions.
-generatedAt: '2026-04-02T18:24:10.346231+00:00'
+generatedAt: '2026-04-03T08:32:40.120899+00:00'
 generatedBy: contracts/generator.py
 recordCount: 2
 qualityFloor: 100.0
@@ -26,8 +26,7 @@ schema:
   fields:
   - name: captured_at
     type: string (timestamp)
-    description: Timestamp column capturing the date and time when the lineage snapshot
-      was recorded.
+    description: Field 'captured_at' of type string (timestamp).
     required: true
     primaryKey: false
     pii: false
@@ -41,11 +40,10 @@ schema:
     - contracts/generator.py (lineage injection)
     - contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
     char_pattern: iso-8601-timestamp
-    profiler: ydata-profiling
+    profiler: custom
   - name: codebase_root
     type: string
-    description: The codebase_root column represents the local file path of a code
-      repository.
+    description: Field 'codebase_root' of type string.
     required: false
     primaryKey: false
     pii: false
@@ -58,17 +56,16 @@ schema:
     - contracts/generator.py (lineage injection)
     - contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
     char_pattern: free-text
-    profiler: ydata-profiling
+    profiler: custom
   - name: edges
     type: array
-    description: Ensure that the 'edges' column contains valid lineage information
-      with high confidence.
+    description: Field 'edges' of type array.
     required: true
     primaryKey: false
     pii: false
     classification: internal
     null_fraction: 0.0
-    cardinality: 0
+    cardinality: 2
     sample_values:
     - '[{''source'': ''file::jaffle-shop/models/marts/customers.sql'', ''target'':
       ''file::jaffle-shop/models/staging/stg_customers.sql'', ''relationship'': ''IMPORTS'',
@@ -319,7 +316,7 @@ schema:
     downstream_consumers:
     - contracts/generator.py (lineage injection)
     - contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
-    profiler: ydata-profiling
+    profiler: custom
   - name: git_commit
     type: string
     description: Git commit SHA at which this snapshot was captured.
@@ -336,17 +333,16 @@ schema:
     - contracts/generator.py (lineage injection)
     - contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
     char_pattern: sha1-hex
-    profiler: ydata-profiling
+    profiler: custom
   - name: nodes
     type: array
-    description: The 'change_frequency' metadata field must be an integer value between
-      0 and 5.
+    description: Field 'nodes' of type array.
     required: true
     primaryKey: false
     pii: false
     classification: internal
     null_fraction: 0.0
-    cardinality: 0
+    cardinality: 2
     sample_values:
     - '[{''node_id'': ''file::jaffle-shop/.pre-commit-config.yaml'', ''type'': ''FILE'',
       ''label'': ''.pre-commit-config.yaml'', ''metadata'': {''path'': ''jaffle-shop/.pre-commit-config.yaml'',
@@ -846,7 +842,7 @@ schema:
     downstream_consumers:
     - contracts/generator.py (lineage injection)
     - contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
-    profiler: ydata-profiling
+    profiler: custom
   - name: snapshot_id
     type: string (uuid)
     description: Unique identifier for this lineage graph snapshot.
@@ -864,7 +860,7 @@ schema:
     - contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
     - lineage_snapshots (via FK snapshot_id → snapshot_id)
     char_pattern: uuid-v4
-    profiler: ydata-profiling
+    profiler: custom
 quality:
   type: SodaChecks
   specification:
@@ -894,6 +890,15 @@ quality_extended:
   field: schema_version
   pattern: ^\d+\.\d+$
 - type: custom
+  name: extracted_facts.confidence.range
+  description: extracted_facts[*].confidence must be a float in [0.0, 1.0]. Values
+    outside this range indicate a 0-100 integer scale bug (DOMAIN_NOTES.md §Q2) —
+    the most dangerous silent-corruption scenario in the pipeline.
+  field: edges[*].confidence
+  rule: 0.0 <= value <= 1.0
+  breaking_if_violated: true
+  unit: probability_float_0_1
+- type: custom
   name: created_at_not_future
   description: created_at must not be a future timestamp.
   rule: created_at <= NOW()
@@ -919,38 +924,27 @@ quality_extended:
   description: Every edge source/target must reference a valid node id.
   rule: edge.source IN nodes[*].id AND edge.target IN nodes[*].id
   breaking_if_violated: true
-- type: custom
-  name: minimum_record_count_7
-  description: Dataset must contain at least 1 record.
-  rule: COUNT(*) >= 1
-  breaking_if_violated: true
 llm_annotations:
 - column: captured_at
-  description: Timestamp column capturing the date and time when the lineage snapshot
-    was recorded.
-  business_rule: captured_at MUST be a valid ISO 8601 timestamp with timezone information
-  cross_column_relationship: None
+  description: Field 'captured_at' of type string (timestamp).
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: codebase_root
-  description: The codebase_root column represents the local file path of a code repository.
-  business_rule: codebase_root LIKE 'C:\\Users\\%' AND LENGTH(codebase_root) < 200
-  cross_column_relationship: The codebase_root column is likely related to the git_commit
-    column, as it represents the local path of the code repository associated with
-    the git commit.
+  description: Field 'codebase_root' of type string.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: edges
-  description: Ensure that the 'edges' column contains valid lineage information with
-    high confidence.
-  business_rule: SELECT * FROM lineage_snapshots WHERE edges IS NULL OR JSON_EXTRACT(edges,
-    '$.confidence') < 0.9
-  cross_column_relationship: None
+  description: Field 'edges' of type array.
+  business_rule: len(value) >= 0
+  cross_column_relationship: No known cross-column relationship.
 - column: git_commit
   description: Git commit SHA at which this snapshot was captured.
   business_rule: matches regex ^[0-9a-f]{7,40}$
   cross_column_relationship: git_commit ties lineage snapshots to source code state
 - column: nodes
-  description: The 'change_frequency' metadata field must be an integer value between
-    0 and 5.
-  business_rule: 0 <= node.metadata.change_frequency <= 5
-  cross_column_relationship: None
+  description: Field 'nodes' of type array.
+  business_rule: len(value) >= 0
+  cross_column_relationship: No known cross-column relationship.
 - column: snapshot_id
   description: Unique identifier for this lineage graph snapshot.
   business_rule: IS NOT NULL AND UNIQUE
@@ -963,18 +957,18 @@ lineage:
     description: contracts/generator.py (lineage injection)
     fields_consumed:
     - captured_at
-    - snapshot_id
-    - nodes
     - edges
+    - nodes
+    - snapshot_id
     breaking_if_changed:
     - snapshot_id
   - id: contracts-schema-analyzer-py
     description: contracts/schema_analyzer.py (SchemaEvolutionAnalyzer)
     fields_consumed:
     - captured_at
-    - snapshot_id
-    - nodes
     - edges
+    - nodes
+    - snapshot_id
     breaking_if_changed:
     - snapshot_id
 contacts:

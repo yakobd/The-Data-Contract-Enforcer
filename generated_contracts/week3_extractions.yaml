@@ -5,7 +5,7 @@ info:
   title: Week 7 — Extractions Data Contract
   version: 1.0.0
   owner: yakob@10academy.org
-  description: 'One record per extractions entry. Generated from 50 records on 2026-04-02.
+  description: 'One record per extractions entry. Generated from 50 records on 2026-04-03.
     Quality floor: 100.0%.'
 servers:
   local:
@@ -15,7 +15,7 @@ servers:
 terms:
   usage: Internal inter-system data contract. Do not publish.
   limitations: All required fields must remain non-null across schema versions.
-generatedAt: '2026-04-02T18:23:58.378548+00:00'
+generatedAt: '2026-04-03T08:33:51.360935+00:00'
 generatedBy: contracts/generator.py
 recordCount: 50
 qualityFloor: 100.0
@@ -44,17 +44,16 @@ schema:
     - contracts/runner.py (ValidationRunner)
     - extractions (via FK doc_id → doc_id)
     char_pattern: uuid-v4
-    profiler: ydata-profiling
+    profiler: custom
   - name: entities
     type: array
-    description: The 'entities' column contains an array of entity objects with various
-      properties.
+    description: Field 'entities' of type array.
     required: false
     primaryKey: false
     pii: false
     classification: internal
     null_fraction: 0.0
-    cardinality: 0
+    cardinality: 37
     sample_values:
     - '[]'
     - '[{''entity_id'': ''7fdbdfc5-1519-49dd-aa2d-b8c3bb7b8f50'', ''name'': ''Investment'',
@@ -164,11 +163,10 @@ schema:
     downstream_consumers:
     - outputs/traces/runs.jsonl (LangSmith traces)
     - contracts/runner.py (ValidationRunner)
-    profiler: ydata-profiling
+    profiler: custom
   - name: extracted_at
     type: string (timestamp)
-    description: The extracted_at column stores timestamp values for data extraction
-      events.
+    description: Field 'extracted_at' of type string (timestamp).
     required: false
     primaryKey: false
     pii: false
@@ -185,7 +183,7 @@ schema:
     - outputs/traces/runs.jsonl (LangSmith traces)
     - contracts/runner.py (ValidationRunner)
     char_pattern: iso-8601-timestamp
-    profiler: ydata-profiling
+    profiler: custom
   - name: extracted_facts
     type: array
     description: Array of fact objects extracted from the document, each with text,
@@ -195,7 +193,7 @@ schema:
     pii: false
     classification: internal
     null_fraction: 0.0
-    cardinality: 0
+    cardinality: 46
     sample_values:
     - '[]'
     - '[{''fact_id'': ''6438f6ad-243c-40c2-92e3-c553a2d56e0a'', ''text'': ''Our Investment
@@ -1603,7 +1601,7 @@ schema:
     downstream_consumers:
     - outputs/traces/runs.jsonl (LangSmith traces)
     - contracts/runner.py (ValidationRunner)
-    profiler: ydata-profiling
+    profiler: custom
   - name: extraction_model
     type: string
     description: Name of the AI model used to extract facts from the document.
@@ -1621,11 +1619,10 @@ schema:
     - outputs/traces/runs.jsonl (LangSmith traces)
     - contracts/runner.py (ValidationRunner)
     char_pattern: path-like
-    profiler: ydata-profiling
+    profiler: custom
   - name: processing_time_ms
     type: integer
-    description: Processing time in milliseconds for each data extraction from the
-      source.
+    description: Field 'processing_time_ms' of type integer.
     required: false
     primaryKey: false
     pii: false
@@ -1651,10 +1648,10 @@ schema:
       p95: 99127.85
       p99: 222266.89
       stddev: 47904.968873
-    profiler: ydata-profiling
+    profiler: custom
   - name: source_hash
     type: string
-    description: The source_hash column should be a unique identifier for each extraction.
+    description: Field 'source_hash' of type string.
     required: false
     primaryKey: false
     pii: false
@@ -1671,10 +1668,10 @@ schema:
     - outputs/traces/runs.jsonl (LangSmith traces)
     - contracts/runner.py (ValidationRunner)
     char_pattern: sha256-hex
-    profiler: ydata-profiling
+    profiler: custom
   - name: source_path
     type: string
-    description: Store file paths for documents that have been extracted and processed.
+    description: Field 'source_path' of type string.
     required: false
     primaryKey: false
     pii: false
@@ -1691,11 +1688,10 @@ schema:
     - outputs/traces/runs.jsonl (LangSmith traces)
     - contracts/runner.py (ValidationRunner)
     char_pattern: path-like
-    profiler: ydata-profiling
+    profiler: custom
   - name: token_count.input
     type: integer
-    description: The token_count.input column contains the number of tokens in the
-      input data.
+    description: Field 'token_count.input' of type integer.
     required: false
     primaryKey: false
     pii: false
@@ -1721,11 +1717,10 @@ schema:
       p95: 4660.9
       p99: 33391.44
       stddev: 6887.771745
-    profiler: ydata-profiling
+    profiler: custom
   - name: token_count.output
     type: integer
-    description: The token_count.output column represents the number of tokens extracted
-      from a source.
+    description: Field 'token_count.output' of type integer.
     required: false
     primaryKey: false
     pii: false
@@ -1751,7 +1746,7 @@ schema:
       p95: 4557.5
       p99: 28659.75
       stddev: 6004.609371
-    profiler: ydata-profiling
+    profiler: custom
 quality:
   type: SodaChecks
   specification:
@@ -1778,6 +1773,15 @@ quality_extended:
   description: schema_version must follow MAJOR.MINOR semantic versioning.
   field: schema_version
   pattern: ^\d+\.\d+$
+- type: custom
+  name: extracted_facts.confidence.range
+  description: extracted_facts[*].confidence must be a float in [0.0, 1.0]. Values
+    outside this range indicate a 0-100 integer scale bug (DOMAIN_NOTES.md §Q2) —
+    the most dangerous silent-corruption scenario in the pipeline.
+  field: extracted_facts[*].confidence
+  rule: 0.0 <= value <= 1.0
+  breaking_if_violated: true
+  unit: probability_float_0_1
 - type: custom
   name: created_at_not_future
   description: created_at must not be a future timestamp.
@@ -1853,16 +1857,13 @@ llm_annotations:
   business_rule: IS NOT NULL AND matches UUID-v4 pattern
   cross_column_relationship: doc_id links extracted_facts to their source document
 - column: entities
-  description: The 'entities' column contains an array of entity objects with various
-    properties.
-  business_rule: The 'entities' column must be an array of objects, where each object
-    has properties 'entity_id', 'name', 'type', and 'canonical_value'.
-  cross_column_relationship: None
+  description: Field 'entities' of type array.
+  business_rule: len(value) >= 0
+  cross_column_relationship: No known cross-column relationship.
 - column: extracted_at
-  description: The extracted_at column stores timestamp values for data extraction
-    events.
-  business_rule: extracted_at should be a valid timestamp in the format 'YYYY-MM-DDThh:mm:ss.ssssss+00:00'
-  cross_column_relationship: None
+  description: Field 'extracted_at' of type string (timestamp).
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: extracted_facts
   description: Array of fact objects extracted from the document, each with text,
     entities, and confidence.
@@ -1875,29 +1876,25 @@ llm_annotations:
   cross_column_relationship: extraction_model determines the valid range of confidence
     scores
 - column: processing_time_ms
-  description: Processing time in milliseconds for each data extraction from the source.
-  business_rule: processing_time_ms >= 0
-  cross_column_relationship: None
+  description: Field 'processing_time_ms' of type integer.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: source_hash
-  description: The source_hash column should be a unique identifier for each extraction.
-  business_rule: source_hash IS NOT NULL AND LENGTH(source_hash) = 128 AND source_hash
-    SIMILAR TO '[a-f0-9]{128}'
-  cross_column_relationship: None
+  description: Field 'source_hash' of type string.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: source_path
-  description: Store file paths for documents that have been extracted and processed.
-  business_rule: source_path LIKE '%.pdf' AND LENGTH(source_path) <= 100
-  cross_column_relationship: None
+  description: Field 'source_path' of type string.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: token_count.input
-  description: The token_count.input column contains the number of tokens in the input
-    data.
-  business_rule: token_count.input >= 0
-  cross_column_relationship: token_count.output should be a function of token_count.input
+  description: Field 'token_count.input' of type integer.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: token_count.output
-  description: The token_count.output column represents the number of tokens extracted
-    from a source.
-  business_rule: token_count.output >= 0
-  cross_column_relationship: token_count.input should be greater than or equal to
-    token_count.output
+  description: Field 'token_count.output' of type integer.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 lineage:
   upstream:
   - outputs/week3/NormalizedOutput/ (Week 3 Document Refinery)
@@ -1905,16 +1902,16 @@ lineage:
   - id: outputs-traces-runs-jsonl
     description: outputs/traces/runs.jsonl (LangSmith traces)
     fields_consumed:
-    - extracted_facts
     - extraction_model
+    - extracted_facts
     - doc_id
     breaking_if_changed:
     - doc_id
   - id: contracts-runner-py
     description: contracts/runner.py (ValidationRunner)
     fields_consumed:
-    - extracted_facts
     - extraction_model
+    - extracted_facts
     - doc_id
     breaking_if_changed:
     - doc_id

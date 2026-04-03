@@ -4,16 +4,14 @@ models:
   description: Canonical events records from the Week 7 Data Contract Enforcer.
   columns:
   - name: aggregate_id
-    description: The `aggregate_id` column uniquely identifies an event within the
-      system.
+    description: Field aggregate_id.
     tests:
     - not_null
     - relationships:
         to: ref('events')
         field: aggregate_id
   - name: aggregate_type
-    description: The aggregate_type column categorizes events into different types
-      such as LoanApplication, Document, or Agent.
+    description: Field aggregate_type.
     tests:
     - accepted_values:
         values:
@@ -32,234 +30,184 @@ models:
     tests:
     - not_null
   - name: metadata.causation_id
-    description: A unique identifier for the causation of the event.
+    description: Field metadata.causation_id.
   - name: metadata.correlation_id
     description: Field metadata.correlation_id.
   - name: metadata.source_service
-    description: The metadata.source_service column should contain one of the approved
-      event source service names.
+    description: Field metadata.source_service.
   - name: metadata.user_id
-    description: The user_id column contains unique identifiers for users, with some
-      system-generated values.
+    description: Field metadata.user_id.
   - name: occurred_at
     description: ISO 8601 UTC timestamp when the domain event occurred (business time).
     tests:
     - not_null
   - name: payload.added_at
-    description: The added_at column represents the timestamp when the event was recorded.
+    description: Field payload.added_at.
   - name: payload.agent_id
-    description: Ensure the agent_id field is a valid string representing a document
-      agent.
+    description: Field payload.agent_id.
   - name: payload.agent_type
-    description: The 'agent_type' column records the type of agent responsible for
-      the event.
+    description: Field payload.agent_type.
   - name: payload.anomalies
-    description: The payload.anomalies column should be an array with at least one
-      element if any adjacent columns have values.
+    description: Field payload.anomalies.
   - name: payload.applicant_id
-    description: The applicant_id column should be a non-empty string with a 'COMP-'
-      prefix and 3 or 4 digits.
+    description: Field payload.applicant_id.
   - name: payload.application_id
-    description: The application_id column should be a string with the prefix 'APEX-'
-      followed by four digits.
+    description: Field payload.application_id.
   - name: payload.application_reference
-    description: 'The application reference should be a string in the format ''APEX-####''
-      where #### is a 4-digit number.'
+    description: Field payload.application_reference.
   - name: payload.assessed_at
-    description: The 'assessed_at' column represents the date and time when an event
-      was assessed.
+    description: Field payload.assessed_at.
   - name: payload.auditor_notes
-    description: Auditor notes field should contain a brief summary of the auditor's
-      findings.
+    description: Field payload.auditor_notes.
   - name: payload.called_at
-    description: The called_at column represents the time an event occurred, in ISO
-      8601 format.
+    description: Field payload.called_at.
   - name: payload.completed_at
-    description: The 'completed_at' column represents the timestamp when an event
-      was completed.
+    description: Field payload.completed_at.
   - name: payload.contact_email
-    description: The contact_email column should contain a valid email address.
+    description: Field payload.contact_email.
   - name: payload.contact_name
-    description: The contact_name column should contain only a person's full name,
-      with no titles or other extraneous information.
+    description: Field payload.contact_name.
   - name: payload.context_source
-    description: The 'context_source' column contains a string identifying the source
-      of the event context.
+    description: Field payload.context_source.
   - name: payload.context_token_count
-    description: The number of tokens in the event context should be a positive integer.
+    description: Field payload.context_token_count.
   - name: payload.created_at
     description: ISO 8601 UTC timestamp when this record was created.
   - name: payload.critical_missing_fields
-    description: The 'critical_missing_fields' column should be an empty array if
-      all required fields are present.
+    description: Field payload.critical_missing_fields.
   - name: payload.deadline
-    description: Validate the deadline column is in the format YYYY-MM-DDTHH:mm:ss.SSSSSS
+    description: Field payload.deadline.
   - name: payload.detected_format
-    description: Ensure the detected format of the event is 'pdf' based on the payload
-      data.
+    description: Field payload.detected_format.
   - name: payload.document_format
-    description: The document format should be either 'pdf' or 'xlsx'.
+    description: Field payload.document_format.
   - name: payload.document_id
-    description: The document_id column stores unique identifiers for documents in
-      the events table.
+    description: Field payload.document_id.
   - name: payload.document_type
-    description: The payload.document_type column represents the type of document
-      being processed, such as an application proposal, income statement, or balance
-      sheet.
+    description: Field payload.document_type.
   - name: payload.documents_processed
-    description: The number of documents processed for a given event.
+    description: Field payload.documents_processed.
   - name: payload.duration_ms
-    description: The duration_ms column represents the duration of events in milliseconds.
+    description: Field payload.duration_ms.
   - name: payload.events_written
-    description: The array 'events_written' contains event details for a data processing
-      pipeline.
+    description: Field payload.events_written.
   - name: payload.executed_at
-    description: The executed_at column contains timestamps for when events were executed.
+    description: Field payload.executed_at.
   - name: payload.extraction_model
     description: Name of the AI model used to extract facts from the document.
   - name: payload.facts
-    description: Ensure the 'total_revenue', 'net_income', and 'total_assets' fields
-      have high confidence scores and reference the correct page and table.
+    description: Field payload.facts.
   - name: payload.file_hash
-    description: The file hash must be a 16-character alphanumeric string.
+    description: Field payload.file_hash.
   - name: payload.file_path
-    description: The file_path column contains file paths for financial documents
-      related to COMP-019 and COMP-078 projects.
+    description: Field payload.file_path.
   - name: payload.file_size_bytes
-    description: The file_size_bytes column represents the size of the uploaded file
-      in bytes.
+    description: Field payload.file_size_bytes.
   - name: payload.filename
-    description: The filename should be in the format APEX-XXXX_document_type.extension
+    description: Field payload.filename.
   - name: payload.fiscal_year
-    description: Validate that the fiscal year is a positive integer representing
-      the current or future year.
+    description: Field payload.fiscal_year.
   - name: payload.has_quality_flags
-    description: The payload.has_quality_flags column indicates whether the event
-      has passed quality checks.
+    description: Field payload.has_quality_flags.
   - name: payload.input_keys
-    description: The input_keys column contains an array of keys for the input data
-      in the payload.
+    description: Field payload.input_keys.
   - name: payload.inputs_validated
-    description: Checks if the event has valid input fields for further processing.
+    description: Field payload.inputs_validated.
   - name: payload.is_coherent
-    description: Indicates whether the event payload is coherent and valid.
+    description: Field payload.is_coherent.
   - name: payload.langgraph_graph_version
-    description: Ensure the langgraph_graph_version value is a semantic version string.
+    description: Field payload.langgraph_graph_version.
   - name: payload.llm_called
-    description: Indicates whether an LLM (Large Language Model) was called for the
-      event.
+    description: Field payload.llm_called.
   - name: payload.llm_cost_usd
-    description: The llm_cost_usd column represents the cost in USD for a language
-      model inference.
+    description: Field payload.llm_cost_usd.
   - name: payload.llm_tokens_input
-    description: The number of input tokens used by the large language model.
+    description: Field payload.llm_tokens_input.
   - name: payload.llm_tokens_output
-    description: The number of tokens output by the language model during the event.
+    description: Field payload.llm_tokens_output.
   - name: payload.loan_purpose
-    description: The loan purpose column identifies the purpose of the loan, such
-      as working capital, acquisition, or expansion.
+    description: Field payload.loan_purpose.
   - name: payload.loan_term_months
-    description: The loan term in months must be a positive integer value.
+    description: Field payload.loan_term_months.
   - name: payload.model_version
-    description: The model version must be in the format 'claude-sonnet-4-YYYYMMDD'
+    description: Field payload.model_version.
   - name: payload.node_name
-    description: The node name column represents the name of the processing step in
-      the data pipeline.
+    description: Field payload.node_name.
   - name: payload.node_sequence
-    description: The node_sequence column represents the sequence of nodes in an event
-      payload.
+    description: Field payload.node_sequence.
   - name: payload.output_keys
-    description: The payload.output_keys column contains an array of keys describing
-      the output of a data processing step.
+    description: Field payload.output_keys.
   - name: payload.output_summary
-    description: Validates the output summary for a package ready for credit analysis.
+    description: Field payload.output_summary.
   - name: payload.overall_confidence
-    description: The overall confidence score for the event, a number between 0 and
-      1.
+    description: Field payload.overall_confidence.
     tests:
     - dbt_utils.accepted_range:
         min_value: 0.0
         max_value: 1.0
         inclusive: true
   - name: payload.package_id
-    description: The package_id column should be a string value starting with 'APEX-'
-      followed by 4 digits.
+    description: Field payload.package_id.
   - name: payload.page_count
-    description: The page_count column represents the number of pages in a document.
+    description: Field payload.page_count.
   - name: payload.pipeline_version
     description: Field payload.pipeline_version.
   - name: payload.processing_ms
-    description: The processing time in milliseconds for each event.
+    description: Field payload.processing_ms.
   - name: payload.quality_flag_count
-    description: The quality_flag_count field represents the number of quality flags
-      for the event.
+    description: Field payload.quality_flag_count.
   - name: payload.raw_text_length
-    description: The raw text length should be a positive integer value.
+    description: Field payload.raw_text_length.
   - name: payload.ready_at
-    description: The 'ready_at' column represents the timestamp when the event was
-      ready for processing.
+    description: Field payload.ready_at.
   - name: payload.reextraction_recommended
-    description: Indicates whether re-extraction of event data is recommended.
+    description: Field payload.reextraction_recommended.
   - name: payload.requested_amount_usd
-    description: The requested amount in USD is a non-negative decimal value.
+    description: Field payload.requested_amount_usd.
   - name: payload.requested_by
-    description: The 'requested_by' column should only contain the value 'system'
-      for valid events.
+    description: Field payload.requested_by.
   - name: payload.required_document_types
-    description: Validate that required document types are present in the payload
+    description: Field payload.required_document_types.
   - name: payload.required_documents
-    description: The 'required_documents' field should contain an array of document
-      types needed for the event.
+    description: Field payload.required_documents.
   - name: payload.session_id
-    description: A unique identifier for each session of the application.
+    description: Field payload.session_id.
     tests:
     - relationships:
         to: ref('runs')
         field: session_id
   - name: payload.started_at
-    description: The started_at column represents the timestamp when the event was
-      initiated.
+    description: Field payload.started_at.
   - name: payload.submission_channel
-    description: The submission_channel column represents the channel through which
-      an event was submitted.
+    description: Field payload.submission_channel.
   - name: payload.submitted_at
     description: Field payload.submitted_at.
   - name: payload.tables_extracted
-    description: The number of tables extracted in the payload should be a positive
-      integer.
+    description: Field payload.tables_extracted.
   - name: payload.tool_duration_ms
-    description: The tool duration in milliseconds for each event should be a non-negative
-      integer.
+    description: Field payload.tool_duration_ms.
   - name: payload.tool_input_summary
-    description: The 'tool_input_summary' column contains a summary of the input data
-      used by a tool.
+    description: Field payload.tool_input_summary.
   - name: payload.tool_name
-    description: The tool_name column stores the name of the tool used in a data processing
-      event.
+    description: Field payload.tool_name.
   - name: payload.tool_output_summary
-    description: The 'payload.tool_output_summary' column contains a summary of the
-      number of financial line items extracted by a tool.
+    description: Field payload.tool_output_summary.
   - name: payload.uploaded_at
-    description: The uploaded_at column contains timestamp data for when the event
-      was uploaded.
+    description: Field payload.uploaded_at.
   - name: payload.uploaded_by
-    description: Ensure the 'uploaded_by' field is not empty and contains only the
-      value 'applicant'.
+    description: Field payload.uploaded_by.
   - name: payload.validated_at
-    description: Ensure the 'validated_at' timestamp is in the expected format and
-      within a valid range.
+    description: Field payload.validated_at.
   - name: payload.validation_duration_ms
-    description: The column 'payload.validation_duration_ms' represents the duration
-      in milliseconds of the validation process.
+    description: Field payload.validation_duration_ms.
   - name: payload.written_at
-    description: Ensure the 'written_at' timestamp is a valid ISO 8601 datetime string.
+    description: Field payload.written_at.
   - name: recorded_at
     description: ISO 8601 UTC timestamp when the event was written to the store.
     tests:
     - not_null
   - name: schema_version
-    description: The schema_version column stores the version of the schema used to
-      record the event.
+    description: Field schema_version.
   - name: sequence_number
     description: Monotonically increasing integer per aggregate_id ensuring strict
       ordering.

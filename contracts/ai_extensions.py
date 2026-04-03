@@ -98,32 +98,58 @@ def _get_openai_client():
     return _openai_module.OpenAI(**kwargs)
 
 
+def _tfidf_embed(texts: list[str], n: int = 200) -> np.ndarray | None:
+    """
+    Local fallback: embed texts using TF-IDF sparse vectors (sklearn).
+    Returns (n, dim) float32 dense array, or None if sklearn unavailable.
+    This produces a real cosine-distance-based drift score without any API key.
+    """
+    try:
+        from sklearn.feature_extraction.text import TfidfVectorizer
+        import scipy.sparse as sp
+        sample = [t for t in (texts[:n] if len(texts) >= n else texts) if t and t.strip()]
+        if len(sample) < 2:
+            return None
+        vec = TfidfVectorizer(max_features=512, sublinear_tf=True)
+        mat = vec.fit_transform(sample)
+        # Convert sparse → dense float32
+        dense = np.asarray(mat.todense(), dtype=np.float32)
+        return dense
+    except ImportError:
+        return None
+    except Exception as exc:
+        print(f"  [tfidf] error: {exc}", file=sys.stderr)
+        return None
+
+
 def embed_sample(texts: list[str], n: int = 200, client=None) -> np.ndarray | None:
     """
-    Embed up to n texts using text-embedding-3-small.
-    Returns (n, dim) float32 array, or None if API unavailable.
+    Embed up to n texts.
+    Primary: text-embedding-3-small via OpenAI/OpenRouter API.
+    Fallback: TF-IDF sparse vectors via sklearn (no API key required).
+    Returns (n, dim) float32 array, or None if both unavailable.
     """
     if client is None:
         client = _get_openai_client()
-    if client is None:
-        return None
 
-    sample = texts[:n] if len(texts) >= n else texts
-    # filter out empty strings
-    sample = [t for t in sample if t and t.strip()]
-    if not sample:
-        return None
+    if client is not None:
+        sample = texts[:n] if len(texts) >= n else texts
+        sample = [t for t in sample if t and t.strip()]
+        if not sample:
+            return None
+        try:
+            resp = client.embeddings.create(
+                model="text-embedding-3-small",
+                input=sample,
+            )
+            vectors = np.array([e.embedding for e in resp.data], dtype=np.float32)
+            return vectors
+        except Exception as exc:
+            print(f"  [embedding] API error: {exc}", file=sys.stderr)
 
-    try:
-        resp = client.embeddings.create(
-            model="text-embedding-3-small",
-            input=sample,
-        )
-        vectors = np.array([e.embedding for e in resp.data], dtype=np.float32)
-        return vectors
-    except Exception as exc:
-        print(f"  [embedding] API error: {exc}", file=sys.stderr)
-        return None
+    # API unavailable — fall back to local TF-IDF
+    print("  [embedding] No API key — using local TF-IDF embeddings (sklearn)", file=sys.stderr)
+    return _tfidf_embed(texts, n)
 
 
 def check_embedding_drift(
@@ -146,7 +172,8 @@ def check_embedding_drift(
         return {
             "extension":    "embedding_drift",
             "status":       "SKIPPED",
-            "reason":       "OpenAI API not available (set OPENAI_API_KEY or OPENROUTER_API_KEY)",
+            "reason":       "Neither OpenAI API nor sklearn TF-IDF available. "
+                            "Install scikit-learn: pip install scikit-learn",
             "drift_score":  None,
             "threshold":    threshold,
         }
@@ -166,8 +193,26 @@ def check_embedding_drift(
                                 f"Drift will be measured on next run.",
         }
 
-    baseline_data    = np.load(str(baseline_path))
+    baseline_data     = np.load(str(baseline_path))
     baseline_centroid = baseline_data["centroid"].astype(np.float32)
+
+    # If dimensions mismatch (e.g. baseline from OpenAI, current from TF-IDF),
+    # reset the baseline so next run measures drift from a consistent starting point.
+    if baseline_centroid.shape != current_centroid.shape:
+        np.savez(str(baseline_path), centroid=current_centroid)
+        return {
+            "extension":     "embedding_drift",
+            "status":        "BASELINE_RESET",
+            "drift_score":   0.0,
+            "threshold":     threshold,
+            "texts_sampled": len(vectors),
+            "embedding_dim": int(current_centroid.shape[0]),
+            "message":       (
+                f"Baseline dimension mismatch ({baseline_centroid.shape[0]}D → "
+                f"{current_centroid.shape[0]}D, embedding method changed). "
+                "Baseline reset. Drift will be measured on next run."
+            ),
+        }
 
     # Cosine similarity → distance
     dot   = float(np.dot(current_centroid, baseline_centroid))

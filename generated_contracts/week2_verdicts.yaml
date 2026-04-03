@@ -5,7 +5,7 @@ info:
   title: Week 7 — Verdicts Data Contract
   version: 1.0.0
   owner: yakob@10academy.org
-  description: 'One record per verdicts entry. Generated from 7 records on 2026-04-02.
+  description: 'One record per verdicts entry. Generated from 7 records on 2026-04-03.
     Quality floor: 100.0%.'
 servers:
   local:
@@ -15,7 +15,7 @@ servers:
 terms:
   usage: Internal inter-system data contract. Do not publish.
   limitations: confidence must remain in 0.0–1.0 float range.
-generatedAt: '2026-04-02T18:23:39.069482+00:00'
+generatedAt: '2026-04-03T08:32:37.311069+00:00'
 generatedBy: contracts/generator.py
 recordCount: 7
 qualityFloor: 100.0
@@ -54,10 +54,10 @@ schema:
       p99: 0.89316
       stddev: 0.04684
     confidenceRangeOk: true
-    profiler: ydata-profiling
+    profiler: custom
   - name: evaluated_at
     type: string (timestamp)
-    description: The 'evaluated_at' column should contain unique, chronological timestamps.
+    description: Field 'evaluated_at' of type string (timestamp).
     required: false
     primaryKey: false
     pii: false
@@ -74,7 +74,7 @@ schema:
     - contracts/runner.py (ValidationRunner)
     - enforcer_report/ (EnforcerReport)
     char_pattern: iso-8601-timestamp
-    profiler: ydata-profiling
+    profiler: custom
   - name: overall_score
     type: number
     description: Aggregate audit quality score on a 0.0–5.0 scale.
@@ -103,10 +103,10 @@ schema:
       p95: 4.14
       p99: 4.188
       stddev: 0.669145
-    profiler: ydata-profiling
+    profiler: custom
   - name: overall_verdict
     type: string
-    description: The overall verdict for a record can only be 'PASS' or 'FAIL'.
+    description: Field 'overall_verdict' of type string.
     required: false
     primaryKey: false
     pii: false
@@ -120,11 +120,10 @@ schema:
     - contracts/runner.py (ValidationRunner)
     - enforcer_report/ (EnforcerReport)
     char_pattern: PascalCase
-    profiler: ydata-profiling
+    profiler: custom
   - name: rubric_id
     type: string
-    description: The rubric_id column uniquely identifies a rubric used to evaluate
-      performance.
+    description: Field 'rubric_id' of type string.
     required: false
     primaryKey: false
     pii: false
@@ -141,10 +140,10 @@ schema:
     - contracts/runner.py (ValidationRunner)
     - enforcer_report/ (EnforcerReport)
     char_pattern: sha256-hex
-    profiler: ydata-profiling
+    profiler: custom
   - name: rubric_version
     type: string
-    description: The rubric_version column should be a valid semantic version string.
+    description: Field 'rubric_version' of type string.
     required: false
     primaryKey: false
     pii: false
@@ -157,17 +156,16 @@ schema:
     - contracts/runner.py (ValidationRunner)
     - enforcer_report/ (EnforcerReport)
     char_pattern: path-like
-    profiler: ydata-profiling
+    profiler: custom
   - name: scores.architecture_design
     type: object
-    description: The architecture_design scores are stored as JSON objects with score,
-      evidence, and notes.
+    description: Field 'scores.architecture_design' of type object.
     required: false
     primaryKey: false
     pii: false
     classification: internal
     null_fraction: 0.0
-    cardinality: 0
+    cardinality: 4
     sample_values:
     - '{''score'': 4, ''evidence'': [''Score extracted from audit report for criterion:
       architecture_design''], ''notes'': ''Migrated from Week 2 Automaton Auditor
@@ -184,17 +182,16 @@ schema:
     downstream_consumers:
     - contracts/runner.py (ValidationRunner)
     - enforcer_report/ (EnforcerReport)
-    profiler: ydata-profiling
+    profiler: custom
   - name: scores.code_quality
     type: object
-    description: The scores.code_quality column contains dictionaries with score,
-      evidence, and notes for code quality assessment.
+    description: Field 'scores.code_quality' of type object.
     required: false
     primaryKey: false
     pii: false
     classification: internal
     null_fraction: 0.0
-    cardinality: 0
+    cardinality: 4
     sample_values:
     - '{''score'': 5, ''evidence'': [''Score extracted from audit report for criterion:
       code_quality''], ''notes'': ''Migrated from Week 2 Automaton Auditor markdown
@@ -211,17 +208,16 @@ schema:
     downstream_consumers:
     - contracts/runner.py (ValidationRunner)
     - enforcer_report/ (EnforcerReport)
-    profiler: ydata-profiling
+    profiler: custom
   - name: scores.documentation
     type: object
-    description: The 'scores.documentation' column contains scores with supporting
-      evidence and notes for the documentation criteria.
+    description: Field 'scores.documentation' of type object.
     required: false
     primaryKey: false
     pii: false
     classification: internal
     null_fraction: 0.0
-    cardinality: 0
+    cardinality: 4
     sample_values:
     - '{''score'': 1, ''evidence'': [''Score extracted from audit report for criterion:
       documentation''], ''notes'': ''Migrated from Week 2 Automaton Auditor markdown
@@ -238,17 +234,16 @@ schema:
     downstream_consumers:
     - contracts/runner.py (ValidationRunner)
     - enforcer_report/ (EnforcerReport)
-    profiler: ydata-profiling
+    profiler: custom
   - name: scores.implementation_correctness
     type: object
-    description: The implementation_correctness score should be an integer between
-      1 and 5, with supporting evidence and notes.
+    description: Field 'scores.implementation_correctness' of type object.
     required: false
     primaryKey: false
     pii: false
     classification: internal
     null_fraction: 0.0
-    cardinality: 0
+    cardinality: 5
     sample_values:
     - '{''score'': 3, ''evidence'': [''Score extracted from audit report for criterion:
       implementation_correctness''], ''notes'': ''Migrated from Week 2 Automaton Auditor
@@ -268,17 +263,16 @@ schema:
     downstream_consumers:
     - contracts/runner.py (ValidationRunner)
     - enforcer_report/ (EnforcerReport)
-    profiler: ydata-profiling
+    profiler: custom
   - name: scores.test_coverage
     type: object
-    description: The 'scores.test_coverage' column contains a JSON object with score,
-      evidence, and notes about test coverage.
+    description: Field 'scores.test_coverage' of type object.
     required: false
     primaryKey: false
     pii: false
     classification: internal
     null_fraction: 0.0
-    cardinality: 0
+    cardinality: 4
     sample_values:
     - '{''score'': 5, ''evidence'': [''Score extracted from audit report for criterion:
       test_coverage''], ''notes'': ''Migrated from Week 2 Automaton Auditor markdown
@@ -295,10 +289,10 @@ schema:
     downstream_consumers:
     - contracts/runner.py (ValidationRunner)
     - enforcer_report/ (EnforcerReport)
-    profiler: ydata-profiling
+    profiler: custom
   - name: target_ref
     type: string
-    description: The target_ref column should contain a valid GitHub URL.
+    description: Field 'target_ref' of type string.
     required: true
     primaryKey: false
     pii: false
@@ -315,7 +309,7 @@ schema:
     - contracts/runner.py (ValidationRunner)
     - enforcer_report/ (EnforcerReport)
     char_pattern: url
-    profiler: ydata-profiling
+    profiler: custom
   - name: verdict_id
     type: string (uuid)
     description: Unique identifier for an audit verdict record.
@@ -336,7 +330,7 @@ schema:
     - enforcer_report/ (EnforcerReport)
     - verdicts (via FK verdict_id → verdict_id)
     char_pattern: uuid-v4
-    profiler: ydata-profiling
+    profiler: custom
 quality:
   type: SodaChecks
   specification:
@@ -414,67 +408,49 @@ llm_annotations:
   business_rule: 0.0 <= value <= 1.0
   cross_column_relationship: confidence correlates positively with token_count.output
 - column: evaluated_at
-  description: The 'evaluated_at' column should contain unique, chronological timestamps.
-  business_rule: SELECT DISTINCT evaluated_at FROM verdicts ORDER BY evaluated_at;
-  cross_column_relationship: None
+  description: Field 'evaluated_at' of type string (timestamp).
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: overall_score
   description: Aggregate audit quality score on a 0.0–5.0 scale.
   business_rule: 0.0 <= value <= 5.0
   cross_column_relationship: overall_score < 2.0 implies audit_verdict IN ('WARN','FAIL')
 - column: overall_verdict
-  description: The overall verdict for a record can only be 'PASS' or 'FAIL'.
-  business_rule: overall_verdict IN ('PASS', 'FAIL')
-  cross_column_relationship: None
+  description: Field 'overall_verdict' of type string.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: rubric_id
-  description: The rubric_id column uniquely identifies a rubric used to evaluate
-    performance.
-  business_rule: rubric_id SHOULD be a 64-character hexadecimal string
-  cross_column_relationship: None
+  description: Field 'rubric_id' of type string.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: rubric_version
-  description: The rubric_version column should be a valid semantic version string.
-  business_rule: rubric_version MATCHES '^[0-9]+\.[0-9]+\.[0-9]+$'
-  cross_column_relationship: None
+  description: Field 'rubric_version' of type string.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: scores.architecture_design
-  description: The architecture_design scores are stored as JSON objects with score,
-    evidence, and notes.
-  business_rule: scores.architecture_design must be a valid JSON object with 'score',
-    'evidence', and 'notes' keys
-  cross_column_relationship: The scores.architecture_design column is related to the
-    scores.code_quality and scores.documentation columns, which are likely stored
-    in the same format.
+  description: Field 'scores.architecture_design' of type object.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: scores.code_quality
-  description: The scores.code_quality column contains dictionaries with score, evidence,
-    and notes for code quality assessment.
-  business_rule: scores.code_quality should be a dictionary with keys 'score', 'evidence',
-    and 'notes'
-  cross_column_relationship: None
+  description: Field 'scores.code_quality' of type object.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: scores.documentation
-  description: The 'scores.documentation' column contains scores with supporting evidence
-    and notes for the documentation criteria.
-  business_rule: scores.documentation.score BETWEEN 1 AND 5 AND scores.documentation.evidence
-    IS NOT NULL AND scores.documentation.notes IS NOT NULL
-  cross_column_relationship: The 'scores.documentation' column is related to the other
-    score columns (scores.architecture_design, scores.code_quality, scores.implementation_correctness,
-    scores.test_coverage) as they all represent different criteria evaluated for the
-    same project or system.
+  description: Field 'scores.documentation' of type object.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: scores.implementation_correctness
-  description: The implementation_correctness score should be an integer between 1
-    and 5, with supporting evidence and notes.
-  business_rule: scores.implementation_correctness['score'] BETWEEN 1 AND 5
-  cross_column_relationship: None
+  description: Field 'scores.implementation_correctness' of type object.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: scores.test_coverage
-  description: The 'scores.test_coverage' column contains a JSON object with score,
-    evidence, and notes about test coverage.
-  business_rule: scores.test_coverage IS NOT NULL AND scores.test_coverage['score']
-    BETWEEN 1 AND 5 AND scores.test_coverage['evidence'] IS NOT EMPTY AND scores.test_coverage['notes']
-    IS NOT EMPTY
-  cross_column_relationship: The 'scores.test_coverage' column is related to the 'scores.documentation'
-    and 'scores.implementation_correctness' columns, as they are all part of the 'scores'
-    object.
+  description: Field 'scores.test_coverage' of type object.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: target_ref
-  description: The target_ref column should contain a valid GitHub URL.
-  business_rule: target_ref LIKE 'https://github.com/%'
-  cross_column_relationship: None
+  description: Field 'target_ref' of type string.
+  business_rule: IS NOT NULL
+  cross_column_relationship: No known cross-column relationship.
 - column: verdict_id
   description: Unique identifier for an audit verdict record.
   business_rule: IS NOT NULL AND UNIQUE
@@ -486,19 +462,19 @@ lineage:
   - id: contracts-runner-py
     description: contracts/runner.py (ValidationRunner)
     fields_consumed:
-    - overall_score
     - verdict_id
     - audit_verdict
     - target_ref
+    - overall_score
     breaking_if_changed:
     - verdict_id
   - id: enforcer-report
     description: enforcer_report/ (EnforcerReport)
     fields_consumed:
-    - overall_score
     - verdict_id
     - audit_verdict
     - target_ref
+    - overall_score
     breaking_if_changed:
     - verdict_id
 contacts:

@@ -793,6 +793,22 @@ def build_clauses(
 
     # 5 — confidence range
     conf_fields = [f for f in structural if "confidence" in f.lower()]
+
+    # Also detect nested confidence fields inside array columns (e.g. extracted_facts[*].confidence)
+    # Probe raw records directly since sample_values are stringified for complex types.
+    nested_conf_fields: list[str] = []
+    _seen_nested: set[str] = set()
+    for record in records[:20]:  # sample first 20 records
+        for field_name, val in record.items():
+            if field_name in _seen_nested:
+                continue
+            if isinstance(val, list) and val:
+                first_item = val[0]
+                if isinstance(first_item, dict) and "confidence" in first_item:
+                    path = f"{field_name}[*].confidence"
+                    nested_conf_fields.append(path)
+                    _seen_nested.add(field_name)
+
     if conf_fields:
         bug = any(not stats.get(f, {}).get("confidence_range_ok", True) for f in conf_fields)
         clauses.append({
@@ -806,6 +822,23 @@ def build_clauses(
             "rule":                "0.0 <= value <= 1.0",
             "breaking_if_violated": True,
             "observed_violation":  bug,
+        })
+
+    # Dedicated extracted_facts[*].confidence range clause (nested array field)
+    for nested_field in nested_conf_fields:
+        clauses.append({
+            "type":        "custom",
+            "name":        "extracted_facts.confidence.range",
+            "description": (
+                "extracted_facts[*].confidence must be a float in [0.0, 1.0]. "
+                "Values outside this range indicate a 0-100 integer scale bug "
+                "(DOMAIN_NOTES.md §Q2) — the most dangerous silent-corruption "
+                "scenario in the pipeline."
+            ),
+            "field":               nested_field,
+            "rule":                "0.0 <= value <= 1.0",
+            "breaking_if_violated": True,
+            "unit":                "probability_float_0_1",
         })
         # add clamping/broken flags from stats
         for f in conf_fields:

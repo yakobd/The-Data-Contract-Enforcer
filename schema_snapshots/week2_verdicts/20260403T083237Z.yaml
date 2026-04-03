@@ -1,0 +1,83 @@
+contract_id: abc240c9-742a-5bb9-85c1-973b09fbf7ec
+contract_stem: week2_verdicts
+snapshot_at: '2026-04-03T08:32:37.475142+00:00'
+record_count: 7
+fields:
+  confidence:
+    type: number
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  evaluated_at:
+    type: string (timestamp)
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  overall_score:
+    type: number
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  overall_verdict:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  rubric_id:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  rubric_version:
+    type: string
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  scores.architecture_design:
+    type: object
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  scores.code_quality:
+    type: object
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  scores.documentation:
+    type: object
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  scores.implementation_correctness:
+    type: object
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  scores.test_coverage:
+    type: object
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  target_ref:
+    type: string
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  verdict_id:
+    type: string (uuid)
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null

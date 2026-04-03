@@ -4,7 +4,7 @@ models:
   description: Canonical runs records from the Week 7 Data Contract Enforcer.
   columns:
   - name: completion_tokens
-    description: The number of tokens used to complete the run, a non-negative integer.
+    description: Field completion_tokens.
     tests:
     - not_null
   - name: end_time
@@ -12,8 +12,7 @@ models:
     tests:
     - not_null
   - name: error
-    description: The 'error' column should only contain the value 'none' for successful
-      runs.
+    description: Field error.
   - name: id
     description: Unique identifier for this LangSmith trace run.
     tests:
@@ -26,52 +25,42 @@ models:
         to: ref('extractions')
         field: doc_id
   - name: inputs.source_path
-    description: The source_path column stores the file names of financial and audit
-      reports.
+    description: Field inputs.source_path.
   - name: inputs.strategy
-    description: The 'inputs.strategy' column stores the strategy used for the data
-      run.
+    description: Field inputs.strategy.
   - name: inputs.texts
-    description: The 'inputs.texts' column contains an array of extracted text from
-      various documents.
+    description: Field inputs.texts.
   - name: name
-    description: The runs table contains names of various data processing models.
+    description: Field name.
     tests:
     - not_null
   - name: outputs.avg_confidence
-    description: The `outputs.avg_confidence` column represents the average confidence
-      of the extraction model.
+    description: Field outputs.avg_confidence.
     tests:
     - dbt_utils.accepted_range:
         min_value: 0.0
         max_value: 1.0
         inclusive: true
   - name: outputs.embedding_dim
-    description: The embedding dimension of the output, which represents the size
-      of the embedding vector.
+    description: Field outputs.embedding_dim.
   - name: outputs.extraction_model
     description: Name of the AI model used to extract facts from the document.
   - name: outputs.facts_count
-    description: The number of facts extracted from a document during a run.
+    description: Field outputs.facts_count.
   - name: outputs.facts_extracted
-    description: The number of facts extracted from the input data during the extraction
-      process.
+    description: Field outputs.facts_extracted.
   - name: outputs.status
-    description: The 'outputs.status' column represents the outcome of a data processing
-      run.
+    description: Field outputs.status.
   - name: outputs.vectors_created
-    description: The number of vectors created during the run of a data processing
-      task.
+    description: Field outputs.vectors_created.
   - name: parent_run_id
-    description: The parent_run_id column holds a unique identifier for each run in
-      the runs table.
+    description: Field parent_run_id.
     tests:
     - relationships:
         to: ref('runs')
         field: id
   - name: prompt_tokens
-    description: The prompt_tokens column represents the number of tokens in the model's
-      input prompt for a given run.
+    description: Field prompt_tokens.
     tests:
     - not_null
   - name: run_type
@@ -86,7 +75,7 @@ models:
         - retriever
         - embedding
   - name: session_id
-    description: A unique identifier for each session of the application.
+    description: Field session_id.
     tests:
     - relationships:
         to: ref('runs')
@@ -96,8 +85,7 @@ models:
     tests:
     - not_null
   - name: tags
-    description: The 'tags' column contains an array of tags describing the nature
-      of each run.
+    description: Field tags.
   - name: total_cost
     description: Estimated USD cost for this run based on per-token pricing.
   - name: total_tokens

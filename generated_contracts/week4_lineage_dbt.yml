@@ -4,23 +4,19 @@ models:
   description: Canonical lineage_snapshots records from the Week 7 Data Contract Enforcer.
   columns:
   - name: captured_at
-    description: Timestamp column capturing the date and time when the lineage snapshot
-      was recorded.
+    description: Field captured_at.
     tests:
     - not_null
   - name: codebase_root
-    description: The codebase_root column represents the local file path of a code
-      repository.
+    description: Field codebase_root.
   - name: edges
-    description: Ensure that the 'edges' column contains valid lineage information
-      with high confidence.
+    description: Field edges.
     tests:
     - not_null
   - name: git_commit
     description: Git commit SHA at which this snapshot was captured.
   - name: nodes
-    description: The 'change_frequency' metadata field must be an integer value between
-      0 and 5.
+    description: Field nodes.
     tests:
     - not_null
   - name: snapshot_id

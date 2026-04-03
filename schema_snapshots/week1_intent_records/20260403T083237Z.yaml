@@ -1,0 +1,35 @@
+contract_id: 68d33c73-bbe7-5068-8dfd-a531e0f73ef6
+contract_stem: week1_intent_records
+snapshot_at: '2026-04-03T08:32:37.280942+00:00'
+record_count: 2
+fields:
+  code_refs:
+    type: array
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  created_at:
+    type: string (timestamp)
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  description:
+    type: string
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
+  governance_tags:
+    type: array
+    required: false
+    nullable: true
+    null_fraction: 0.0
+    enum_values: null
+  intent_id:
+    type: string
+    required: true
+    nullable: false
+    null_fraction: 0.0
+    enum_values: null
